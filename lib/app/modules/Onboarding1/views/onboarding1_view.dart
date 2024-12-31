@@ -124,6 +124,10 @@ class Onboarding1View extends GetView<Onboarding1Controller> {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
+					/*child: Image.network(
+						images[index],
+						fit: BoxFit.cover,
+					),*/
                     child: Image.asset(
                       images[index],
                       fit: BoxFit.cover,

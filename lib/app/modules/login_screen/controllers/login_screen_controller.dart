@@ -8,7 +8,6 @@ import 'package:picturesourcesomerset/config/bottom_navigation.dart';
 import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/services/base_api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-//import 'package:zego_zimkit/zego_zimkit.dart';
 import 'package:picturesourcesomerset/app/modules/home/controllers/home_controller.dart';
 
 
@@ -57,6 +56,8 @@ class LoginScreenController extends GetxController {
 
 	Future<void> login(String username, String password) async {
 	  isLoading.value = true;
+	  //Get.offAll(Bottom());
+	  Get.toNamed(Routes.HOME);
 	  /*final response = await apiService.login(username, password);
 	  isLoading.value = false;
 
@@ -64,21 +65,6 @@ class LoginScreenController extends GetxController {
 		// Save credentials if "Remember Me" is checked
 		await saveCredentials(username, password);
 		saveTokenAndNavigate(response['access_token'], response['message']);
-		
-		//await ZIMKit().connectUser(id: response['user']['email'], name: response['user']['name']);
-		/*try {
-		  await ZIMKit().connectUser(
-			id: response['user']['email'], 
-			name: response['user']['name'],
-		  );
-		  print("ZIMKit User logged in successfully: ${response['user']['email']}");
-		  
-		  final prefs = await SharedPreferences.getInstance();
-		  await prefs.setString('userEmail', response['user']['email']);
-		  await prefs.setString('userName', response['user']['name']);
-		} catch (e) {
-		  print("Login failed: $e");
-		}*/
 	  } else {
 		SnackbarHelper.showErrorSnackbar(
 		  title: Appcontent.snackbarTitleError, 
@@ -123,7 +109,6 @@ class LoginScreenController extends GetxController {
 		  
 		// Load home data after navigation and login verification
 		final homeController = Get.find<HomeController>();
-		homeController.loadInitialDataForCourseUser();
 		homeController.loadInitialDataForFeed();
 			  
 		await Future.delayed(Duration(seconds: 3));

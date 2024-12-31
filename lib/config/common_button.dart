@@ -21,6 +21,22 @@ Widget whiteBgBlackBorderBtn({required String text,void Function()? onPress}){
 		onPressed: onPress,
 		child: Text(text, style: const TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', fontWeight: FontWeight.w600, color: AppColor.black)));
 }
+// Autowidth Search button
+Widget autoWidthSearchBtn({required String text, required double width, void Function()? onPress}){
+	return ElevatedButton(
+		style: ElevatedButton.styleFrom(
+			fixedSize: Size(width, 40), // width set to infinity, height set to 56
+			shape: RoundedRectangleBorder(
+			  borderRadius: BorderRadius.circular(6),
+			),
+			backgroundColor: AppColor.purple,
+			elevation: 0,
+		),
+		onPressed: onPress,
+		child: Text(text, style: const TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', color: AppColor.white)),
+	);
+}
+
 // Profile button
 Widget elevated1({required String text,void Function()? onPress}){
   return ElevatedButton(

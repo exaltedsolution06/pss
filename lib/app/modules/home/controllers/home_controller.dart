@@ -12,36 +12,24 @@ class HomeController extends GetxController {
 	final ApiService apiService;
 	HomeController(this.apiService);
 	
-	var feedData = <dynamic>[].obs;
-	var feedCourseUserData = <dynamic>[].obs;
-	
+	var feedData = <dynamic>[].obs;	
 	// Reset the page number
 	var currentPage = 1.obs;  
-	var currentCourseUserPage = 1.obs;  
 	
 	var isFetchingFeedData = false.obs;
-	var isFetchingCourseUserData = false.obs;
 	
 	// Enable loading more data
 	var hasMoreFeedData = true.obs;
-	var hasMoreCourseUserData = true.obs;
 	
-	/*@override
+	@override
 	void onInit() {
 		super.onInit();
-		loadInitialDataForCourseUser();  // Load data for user
 		loadInitialDataForFeed();  // Load data for user
-	}*/
-	void loadInitialDataForCourseUser() {
-		if (feedCourseUserData.isEmpty) loadMoreCourseUserData();
 	}
 	void loadInitialDataForFeed() {
 		if (feedData.isEmpty) loadMoreFeedData();
 	}
 	// Helper function to determine if more data can be loaded
-	bool canLoadMoreCourseUser() {
-		return hasMoreCourseUserData.value && !isFetchingCourseUserData.value;
-	}
 	bool canLoadMoreFeed() {
 		return hasMoreFeedData.value && !isFetchingFeedData.value;
 	}
@@ -50,9 +38,21 @@ class HomeController extends GetxController {
 		if (!canLoadMoreFeed()) return;
 
 		isFetchingFeedData.value = true;
+		
+		
+				
+				
 		try {
-			var response = await apiService.feed_all_user(currentPage.value, currentCourseUserPage.value);
-			var newFeedData = response['data']['posts'];		  
+			//var response = await apiService.feed_all_user(currentPage.value);
+			final response = {
+			  'data': [
+				  {'image': Appcontent.pss1, 'name': 'Florals'},
+				  {'image': Appcontent.pss2, 'name': 'Photography'},
+				  {'image': Appcontent.pss3, 'name': 'Cityscapes'},
+				  {'image': Appcontent.pss4, 'name': 'Coastal'},
+				],
+			};
+			var newFeedData = response?['data'] ?? [];  
 			if (newFeedData.isEmpty) {
 				hasMoreFeedData.value = false;
 			} else {
@@ -63,34 +63,6 @@ class HomeController extends GetxController {
 			print('Error fetching All loadMoreFeedData - home controller: $e');
 		} finally {
 			isFetchingFeedData.value = false;
-		}
-	}	
-	// Load more course user data
-	Future<void> loadMoreCourseUserData() async {
-		if (!canLoadMoreCourseUser()) return;  // Ensure query is not empty
-
-		isFetchingCourseUserData.value = true;
-		try {
-			var response = await apiService.feed_all_user(currentPage.value, currentCourseUserPage.value);
-			
-
-			var newCourseUserData = response['data']['courses_user_page'];	
-			//print("newCourseUserData: $newCourseUserData");			
-			if (newCourseUserData.isEmpty) {
-				hasMoreCourseUserData.value = false;
-			} else {
-				feedCourseUserData.addAll(newCourseUserData);
-				currentCourseUserPage.value++;
-			}
-		} catch (e) {
-			print('Error fetching All loadMoreCourseUserData - home controller: $e');
-			SnackbarHelper.showErrorSnackbar(
-			  title: Appcontent.snackbarTitleError, 
-			  message: Appcontent.snackbarCatchErrorMsg, 
-			  position: SnackPosition.BOTTOM, // Custom position
-			);
-		} finally {
-			isFetchingCourseUserData.value = false;
 		}
 	}	
 	
@@ -122,47 +94,18 @@ class HomeController extends GetxController {
     }
     update();
   }
-  
-  //for home view emoji in comments
- /* var emojiShowing = false.obs;
-  TextEditingController textEditingController = TextEditingController();
-  ScrollController scrollController = ScrollController();
 
-  void toggleEmojiPicker() {
-    emojiShowing.value = !emojiShowing.value;
+  var selectedIndex = 0.obs;
+
+  void changeTabIndex(int index) {
+    selectedIndex.value = index;
   }
-
-  @override
-  void dispose() {
-    textEditingController.dispose();
-    scrollController.dispose();
-    super.dispose();
-  }*/
-  
-  //send a tip modal
-	var selectedCountry = 'USA'.obs;
-	var selectedState = 'California'.obs;
-
-	void updateCountry(String value) {
-		selectedCountry.value = value;
-	}
-
-	void updateState(String value) {
-		selectedState.value = value;
-	}
-	
-	var isChecked = false.obs;
-
- /* void toggleCCValue() {
-    isChecked.value = !isChecked.value;
-  }*/
-  
   //add card
 
-	
-void toggleCheckbox(bool value) {
-    isChecked.value = value;
-  }
+	var isChecked = false.obs;
+	void toggleCheckbox(bool value) {
+		isChecked.value = value;
+	}
   
   
   

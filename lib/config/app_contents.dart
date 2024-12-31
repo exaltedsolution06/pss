@@ -67,4 +67,6 @@ class Appcontent {
   
   //SignUp Retailer
   static const String signUpRetailerHeading = "Sign Up Retailer";
+  //Home page
+  static const String browse = "Browse";
 }

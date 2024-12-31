@@ -71,6 +71,93 @@ Widget autoWidthTextField({
   );
 }
 
+
+
+Widget textFieldWithIconDynamic({
+  required String text,
+  required double width,
+  IconData? icon,
+  IconData? subicon,
+  IconData? subicone,
+  String? defaultValue,
+  TextEditingController? controller,
+  FormFieldValidator<String>? validator,
+  void Function(String)? onChanged,
+  FocusNode? focusNode,
+  Widget? suffixIcon,
+  bool obscureText = false,
+}) {
+  // Use the provided controller or create a new one if not provided
+  final TextEditingController _controller = controller ?? TextEditingController(text: defaultValue);
+
+  return Container(
+	height: 40,
+    padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+    child: TextFormField(
+      controller: _controller,
+      validator: validator,
+      onChanged: onChanged,
+      focusNode: focusNode,
+      obscureText: obscureText,
+      style: const TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.symmetric(vertical: 0).copyWith(left: 50), // Shift text after icon
+        hintText: text,
+        labelStyle: TextStyle(
+          color: AppColor.black,
+        ),
+        floatingLabelBehavior: FloatingLabelBehavior.auto,
+        // Icon on the left
+        prefixIcon: icon != null
+            ? Container(
+				padding: const EdgeInsets.only(left: 10.0, right: 2.0),
+				margin: const EdgeInsets.only(right: 9.0),
+				decoration: BoxDecoration(
+				  //color: AppColor.Greyscale,
+				  borderRadius: BorderRadius.only(
+					topLeft: Radius.circular(25.7),
+					topRight: Radius.circular(0),
+					bottomLeft: Radius.circular(25.7),
+					bottomRight: Radius.circular(0),
+				  ),
+				),
+				child: Icon(icon, color: Colors.grey.shade700),
+			  )
+            : null,
+        // Custom border when enabled (unfocused)
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(color: Color(0xffE2E8F0)),
+        ),
+        // Custom border when focused
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(color: Color(0xffE2E8F0)),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(color: Colors.red),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(color: Colors.red),
+        ),
+        errorStyle: const TextStyle(
+          color: Colors.red,
+          fontSize: 12,
+        ),
+        // Adjust constraints for the icon to give it space from the label text
+        prefixIconConstraints: BoxConstraints(
+          minWidth: 38, // Ensure the icon area has enough space
+          minHeight: 40,
+        ),
+      ),
+    ),
+  );
+}
+
+///////////////////////////////////////
+
 Widget autoWidthTextFieldForComment({
   required String text,
   required String text1,
@@ -147,96 +234,6 @@ Widget autoWidthTextFieldForComment({
   );
 }
 
-
-Widget textFieldWithIconDynamic({
-  required String text,
-  required String text1,
-  required double width,
-  IconData? icon,
-  IconData? subicon,
-  IconData? subicone,
-  String? defaultValue,
-  TextEditingController? controller,
-  FormFieldValidator<String>? validator,
-  void Function(String)? onChanged,
-  FocusNode? focusNode,
-  Widget? suffixIcon,
-  bool obscureText = false,
-}) {
-  // Use the provided controller or create a new one if not provided
-  final TextEditingController _controller = controller ?? TextEditingController(text: defaultValue);
-
-  return Container(
-	height: 65,
-    padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-    /*decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(35),
-      border: Border.all(color: Color(0xffE2E8F0)),
-    ),*/
-    child: TextFormField(
-      controller: _controller,
-      validator: validator,
-      onChanged: onChanged,
-      focusNode: focusNode,
-      obscureText: obscureText,
-      style: const TextStyle(color: Colors.black),
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(vertical: 0).copyWith(left: 50), // Shift text after icon
-        hintText: text,
-        labelText: text1,
-        labelStyle: TextStyle(
-          color: AppColor.black,
-        ),
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
-        // Icon on the left
-        prefixIcon: icon != null
-            ? Container(
-				padding: const EdgeInsets.only(left: 10.0, right: 12.0),
-				margin: const EdgeInsets.only(right: 9.0),
-				decoration: BoxDecoration(
-				  //color: AppColor.Greyscale,
-				  borderRadius: BorderRadius.only(
-					topLeft: Radius.circular(25.7),
-					topRight: Radius.circular(0),
-					bottomLeft: Radius.circular(25.7),
-					bottomRight: Radius.circular(0),
-				  ),
-				),
-				child: Icon(icon, color: Colors.grey.shade700),
-			  )
-            : null,
-        // Custom border when enabled (unfocused)
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(35),
-          borderSide: const BorderSide(color: Color(0xffE2E8F0)),
-        ),
-        // Custom border when focused
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(35),
-          borderSide: const BorderSide(color: Color(0xffE2E8F0)),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(35),
-          borderSide: const BorderSide(color: Colors.red),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(35),
-          borderSide: const BorderSide(color: Colors.red),
-        ),
-        errorStyle: const TextStyle(
-          color: Colors.red,
-          fontSize: 12,
-        ),
-        // Adjust constraints for the icon to give it space from the label text
-        prefixIconConstraints: BoxConstraints(
-          minWidth: 50, // Ensure the icon area has enough space
-          minHeight: 62,
-        ),
-      ),
-    ),
-  );
-}
 
 
 
