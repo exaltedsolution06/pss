@@ -107,7 +107,7 @@ class SerachScreenView extends StatelessWidget {
     );
   }
 
-Widget buildSearchList(RxList<RxMap<String, dynamic>> data) {
+  Widget buildSearchList(RxList data) {
   return Expanded(
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -134,108 +134,138 @@ Widget buildSearchList(RxList<RxMap<String, dynamic>> data) {
             ),
           );
         }
-
-        // Display grid of images
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Two images per row
-            mainAxisSpacing: 16.0,
-            crossAxisSpacing: 16.0,
-            childAspectRatio: 3 / 2, // Adjust for the image aspect ratio
-          ),
-          itemCount: data.length,
+		
+		return GridView.builder(
+			padding: EdgeInsets.all(16.0),
+			gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+			  crossAxisCount: 2,
+			  crossAxisSpacing: 12.0,
+			  mainAxisSpacing: 12.0,
+			  childAspectRatio: 2.0,
+			),
+			itemCount: items.length,
+			itemBuilder: (context, index) {
+			  final item = items[index];
+			  return GestureDetector(
+				onTap: () {
+				  setState(() {
+					item['selected'] = !item['selected'];
+				  });
+				},
+				child: Stack(
+				  children: [
+					Container(
+					  decoration: BoxDecoration(
+						borderRadius: BorderRadius.circular(12.0),
+						image: DecorationImage(
+						  image: AssetImage(item['image']),
+						  fit: BoxFit.cover,
+						),
+					  ),
+					  child: Align(
+						alignment: Alignment.bottomCenter,
+						child: Container(
+						  padding: EdgeInsets.symmetric(vertical: 8.0),
+						  decoration: BoxDecoration(
+							color: Colors.black54,
+							borderRadius: BorderRadius.vertical(
+							  bottom: Radius.circular(12.0),
+							),
+						  ),
+						  child: Text(
+							item['title'],
+							style: TextStyle(color: Colors.white, fontSize: 16.0),
+							textAlign: TextAlign.center,
+						  ),
+						),
+					  ),
+					),
+					if (item['selected'])
+					  Positioned(
+						top: 8.0,
+						left: 8.0,
+						child: CircleAvatar(
+						  backgroundColor: Colors.white,
+						  radius: 16.0,
+						  child: Icon(
+							Icons.check,
+							color: Colors.green,
+						  ),
+						),
+					  ),
+				  ],
+				),
+			  );
+			},
+		  ),
+		);
+        /*return ListView.separated(
+          controller: _scrollController,
+          itemCount: data.length + 1, // Add 1 to display loading indicator at the end
+          separatorBuilder: (context, index) => const SizedBox(height: 10),
           itemBuilder: (context, index) {
-            // Each item in the list is an observable map
-            final RxMap<String, dynamic> feedData = data[index];
+            if (index == data.length) {
+              // Show loading indicator at the end of the list if more data is being fetched
+              return serachScreenController.isFetchingData.value
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(AppColor.purple),
+                      ),
+                    )
+                  : const SizedBox.shrink();
+            }
 
-            return buildSearchItem(feedData, context);
+            // Cast each item in the list to an observable map
+            final RxMap<String, dynamic> feedData = RxMap<String, dynamic>.from(data[index]);
+
+            return buildSearchItem(feedData, index, context);
           },
-        );
+        );*/
       }),
     ),
   );
 }
 
-Widget buildSearchItem(RxMap<String, dynamic> feedData, BuildContext context) {
-  return Obx(() {
-    final isSelected = feedData['selected']?.value ?? false; // Get the reactive value of selected
 
-    return GestureDetector(
-      onTap: () {
-        feedData['selected']?.value = !(feedData['selected']?.value ?? false); // Toggle selection
-        feedData.refresh(); // Refresh this specific RxMap instance
-        serachScreenController.topData.refresh(); // Refresh the parent RxList if needed
 
-        print("Item selected: ${feedData['selected']?.value}");
-      },
-
-      child: Stack(
-        children: [
-          // Image container
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.0),
-              image: DecorationImage(
-                image: AssetImage(feedData['image']),
-                fit: BoxFit.cover,
-              ),
-            ),
+  // Method to build a single search item
+  Widget buildSearchItem(RxMap<String, dynamic> feedData, int index, BuildContext context) {
+  final double screenWidth = MediaQuery.of(context).size.width;
+  return Container(
+    margin: const EdgeInsets.symmetric(vertical: 8.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // ListTile layout for search item
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          leading: CircleAvatar(
+            radius: 28, // 56px height/width
+           // backgroundImage: NetworkImage(feedData['image']),
+            backgroundImage: AssetImage(feedData['image']),
           ),
-          // Semi-transparent overlay for selected state
-          if (isSelected)
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.0),
-                color: Colors.white.withOpacity(0.4),
-              ),
-            ),
-          // Tick icon
-          if (isSelected)
-            Positioned(
-              top: 8,
-              left: 8,
-              child: Icon(
-                Icons.check_circle,
-                color: Colors.black,
-                size: 24,
-              ),
-            ),
-          // Category name
-          Positioned(
-            bottom: 8,
-            left: 8,
-            right: 8,
-            child: Text(
-              feedData['name'],
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                shadows: [
-                  Shadow(
-                    color: Colors.black,
-                    blurRadius: 4.0,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  feedData['name'],
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Urbanist-medium',
+                    fontWeight: FontWeight.w500,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                ],
+                ),
               ),
-              textAlign: TextAlign.center,
-            ),
+              const SizedBox(width: 10),
+            ],
           ),
-        ],
-      ),
-    );
-  });
+        ),
+      ],
+    ),
+  );
 }
-
-
-
-
-
-
-
-
-
-  
 
 
 

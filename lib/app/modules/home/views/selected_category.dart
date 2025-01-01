@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
+import 'package:get/get.dart';
 import 'package:picturesourcesomerset/config/app_contents.dart';
+import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
+import 'package:picturesourcesomerset/app/modules/home/views/product_view.dart';
 
 class SelectedCategory extends StatelessWidget {
   final String title;
@@ -53,6 +55,10 @@ class SelectedCategory extends StatelessWidget {
               image: item['image']!,
               title: item['title']!,
               description: item['description']!,
+              onTap: () {
+                print("clicked!!!");
+                Get.to(() => ProductView());
+              },
             );
           },
         ),
@@ -66,11 +72,13 @@ class CategoryItemCard extends StatefulWidget {
   final String image;
   final String title;
   final String description;
+  final VoidCallback onTap;
 
   const CategoryItemCard({
     required this.image,
     required this.title,
     required this.description,
+    required this.onTap,
   });
 
   @override
@@ -82,86 +90,88 @@ class _CategoryItemCardState extends State<CategoryItemCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Stack(
-        children: [
-          // Image Section
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12.0),
-            child: Image.asset(
-              widget.image,
-              fit: BoxFit.cover,
-              height: double.infinity,
-              width: double.infinity,
-            ),
-          ),
-          // Gradient Overlay
-          Container(
-            decoration: BoxDecoration(
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: Card(
+        elevation: 4.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        child: Stack(
+          children: [
+            ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
-              gradient: LinearGradient(
-                colors: [Colors.black.withOpacity(0.6), Colors.transparent],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
+              child: Image.asset(
+                widget.image,
+                fit: BoxFit.cover,
+                height: double.infinity,
+                width: double.infinity,
               ),
             ),
-          ),
-          // Text and Wishlist Icon
-          Positioned(
-            bottom: 8.0,
-            left: 8.0,
-            right: 8.0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 4.0),
-                Text(
-                  widget.description,
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: 12.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          // Wishlist Icon with Opacity Background
-          Positioned(
-            top: 8.0,
-            right: 8.0,
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  isWishlisted = !isWishlisted; // Toggle state
-                });
-              },
-              child: Container(
-                padding: const EdgeInsets.all(6.0),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.5), // Semi-transparent background
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  isWishlisted ? Icons.favorite : Icons.favorite_border,
-                  color: isWishlisted ? Colors.red : Colors.white,
-                  size: 24.0,
+            // Gradient Overlay
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12.0),
+                gradient: LinearGradient(
+                  colors: [Colors.black.withOpacity(0.6), Colors.transparent],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
                 ),
               ),
             ),
-          ),
-        ],
+            // Text and Wishlist Icon
+            Positioned(
+              bottom: 8.0,
+              left: 8.0,
+              right: 8.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4.0),
+                  Text(
+                    widget.description,
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 12.0,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Wishlist Icon with Opacity Background
+            Positioned(
+              top: 8.0,
+              right: 8.0,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isWishlisted = !isWishlisted; // Toggle state
+                  });
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(6.0),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.5), // Semi-transparent background
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    isWishlisted ? Icons.favorite : Icons.favorite_border,
+                    color: isWishlisted ? Colors.red : Colors.white,
+                    size: 24.0,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

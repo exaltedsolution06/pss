@@ -19,7 +19,9 @@ class SerachScreenController extends GetxController {
 	var isFetchingData = false.obs;
 	var hasMoreDataTop = true.obs;
 
-	var topData = <dynamic>[].obs;
+	//var topData = <dynamic>[].obs;
+	var topData = <RxMap<String, dynamic>>[].obs;
+
 	
 	// Method to update the query
 	void onSearchQueryChanged(String newQuery) {
@@ -56,10 +58,14 @@ class SerachScreenController extends GetxController {
 		  //var response = await apiService.search(query.value, 1, 0, 0, 0, 0, currentPageTop.value);
 			final response = {
 			  'data': [
-				  {'image': Appcontent.pss1, 'name': 'Florals'},
-				  {'image': Appcontent.pss2, 'name': 'Photography'},
-				  {'image': Appcontent.pss3, 'name': 'Cityscapes'},
-				  {'image': Appcontent.pss4, 'name': 'Coastal'},
+					{'name': 'Cityscapes', 'image': Appcontent.pss1, 'selected': false},
+					{'name': 'Coastal', 'image': Appcontent.pss2, 'selected': false},
+					{'name': 'Figurative', 'image': Appcontent.pss3, 'selected': false},
+					{'name': 'Florals', 'image': Appcontent.pss4, 'selected': false},
+					{'name': 'Landscape', 'image': Appcontent.pss5, 'selected': false},
+					{'name': 'Lodge & Farmhouse', 'image': Appcontent.pss6, 'selected': false},
+					{'name': 'Photography', 'image': Appcontent.pss7, 'selected': false},
+					{'name': 'Somerset Classics', 'image': Appcontent.pss8, 'selected': false},
 				],
 			};
 			print("response: $response");
@@ -67,8 +73,20 @@ class SerachScreenController extends GetxController {
 			if (newData.isEmpty) {
 				hasMoreDataTop.value = false;
 			} else {
-				topData.addAll(newData);
+				//topData.addAll(newData);
+				
+				topData.addAll(newData.map((item) {
+					return RxMap<String, dynamic>.from({
+					  'name': item['name'],
+					  'image': item['image'],
+					  'selected': (item['selected'] ?? false).obs,  // Reactive selected field
+					});
+				}).toList());
+	  
+	  
 				currentPageTop.value++;
+				
+				print("topData: $topData");
 			}
 		} catch (e) {
 			//print('Error fetching All search: $e');
