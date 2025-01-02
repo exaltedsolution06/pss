@@ -10,6 +10,7 @@ import 'package:picturesourcesomerset/config/app_contents.dart';
 class HomeController extends GetxController {
 	//TODO: Implement HomeController
 	final ApiService apiService;
+	var isLoading = false.obs;  // RxBool
 	HomeController(this.apiService);
 	
 	var feedData = <dynamic>[].obs;	
@@ -107,6 +108,9 @@ class HomeController extends GetxController {
 		isChecked.value = value;
 	}
   
-  
+	Future<void> wallPhotoOrder() async {
+	  isLoading.value = true;
+	  Get.toNamed(Routes.WISHLIST_CREATE);
+	}
   
 }

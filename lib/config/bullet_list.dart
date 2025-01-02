@@ -13,7 +13,7 @@ Widget customBulletList({
     padding: EdgeInsets.zero,
     children: items.map((item) {
       return Container(
-        margin: const EdgeInsets.symmetric(vertical: 4.0),
+        margin: const EdgeInsets.symmetric(vertical: 2.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start, // Align items to the start
           children: [

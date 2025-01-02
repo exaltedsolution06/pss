@@ -15,9 +15,13 @@ abstract class Routes {
 	static const RESET_PASSWORD_SCREEN = _Paths.RESET_PASSWORD_SCREEN;
 	static const PROFLIE_SCREEN = _Paths.PROFLIE_SCREEN;
 	static const HOME = _Paths.HOME;
+	static const WALLPHOTO = _Paths.WALLPHOTO;
 	static const SHOP_SCREEN = _Paths.SHOP_SCREEN;	
 	static const SERACH_SCREEN = _Paths.SERACH_SCREEN;
 	static const NOTIFICATION_SCREEN = _Paths.NOTIFICATION_SCREEN;
+	static const WISHLIST_CREATE = _Paths.WISHLIST_CREATE;
+	//static const WISHLIST = _Paths.WISHLIST;
+	static const CART_PAGE = _Paths.CART_PAGE;
   
   static const EDITPROFILE_SCREEN = _Paths.EDITPROFILE_SCREEN;
   static const EDITPICTRE_SCREEN = _Paths.EDITPICTRE_SCREEN;
@@ -37,10 +41,14 @@ abstract class _Paths {
 	static const RESET_PASSWORD_SCREEN = '/reset-password-screen';
 	static const SERACH_SCREEN = '/serach-screen';
 	static const HOME = '/home';
+	static const WALLPHOTO = '/wallphotoview';
 	static const NOTIFICATION_SCREEN = '/notification-screen';
 	static const SHOP_SCREEN = '/shop-screen';
 	static const PROFLIE_SCREEN = '/proflie-screen';
 	static const EDITPROFILE_SCREEN = '/editprofile-screen';
+	static const WISHLIST_CREATE = '/wishlist-create';
+	//static const WISHLIST = '/wishlist';
+	static const CART_PAGE = '/cart';
 
 	static const EDITPICTRE_SCREEN = '/editpictre-screen';
 	static const ACTIVITY_SCREEN = '/activity-screen';

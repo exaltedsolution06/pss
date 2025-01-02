@@ -71,8 +71,6 @@ Widget autoWidthTextField({
   );
 }
 
-
-
 Widget textFieldWithIconDynamic({
   required String text,
   required double width,
@@ -152,6 +150,101 @@ Widget textFieldWithIconDynamic({
           minHeight: 40,
         ),
       ),
+    ),
+  );
+}
+
+
+// Define a TextField for the textarea
+Widget textAreaFieldDynamic({
+  required String text,
+  required double width,
+  TextEditingController? controller,
+  FocusNode? focusNode,
+  FormFieldValidator<String>? validator,
+  void Function(String)? onChanged,
+}) {
+  // Use the provided controller or create a new one if not provided
+  final TextEditingController _controller = controller ?? TextEditingController();
+
+  // Clean up the controller if created internally
+  void _disposeController() {
+    if (controller == null) {
+      _controller.dispose();
+    }
+  }
+
+  return Container(
+    width: width,
+    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    child: TextFormField(
+		focusNode: focusNode,
+		controller: _controller,
+		maxLines: null, // Allows the TextField to be multiline and grow
+		minLines: 5, // Sets the minimum number of lines, increasing the default height
+		decoration: InputDecoration(
+        hintText: text,
+        alignLabelWithHint: true, // Align the hint text with the top
+        contentPadding: const EdgeInsets.only(left: 20, top: 20, right: 20), // Padding to keep text top-left
+        focusedBorder: OutlineInputBorder(
+			borderRadius: BorderRadius.circular(6),
+			borderSide: const BorderSide(color: Color(0xffE2E8F0)),
+		),
+		enabledBorder: OutlineInputBorder(
+			borderRadius: BorderRadius.circular(6),
+			borderSide: const BorderSide(color: Color(0xffE2E8F0)),
+		),
+		errorBorder: OutlineInputBorder(
+			borderRadius: BorderRadius.circular(6),
+			borderSide: const BorderSide(color: Colors.red),
+		),
+		focusedErrorBorder: OutlineInputBorder(
+			borderRadius: BorderRadius.circular(6),
+			borderSide: const BorderSide(color: Colors.red),
+		),
+      ),
+      keyboardType: TextInputType.multiline, // Ensure multiline input is supported
+      validator: validator,
+      onChanged: onChanged,
+    ),
+  );
+}
+
+
+// Date Field
+Widget autoWidthDateField({
+  required String text,
+  required double width,
+  IconData? icon,
+  IconData? subicon,
+  IconData? subicone,
+  String? defaultValue,
+  TextEditingController? controller,
+  void Function()? onTap,
+}) {
+  // If controller is not provided, create a new one with the default value
+  final TextEditingController effectiveController = controller ?? TextEditingController(text: defaultValue);
+
+  return SizedBox(
+    height: 40,
+    width: width,
+    child: TextField(
+      controller: effectiveController,
+      style: const TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+        hintText: text,
+        contentPadding: const EdgeInsets.only(left: 10, top: 20, right: 10),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(color: Color(0xffE2E8F0)),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(color: Color(0xffE2E8F0)),
+        ),
+      ),
+      onTap: onTap,
+      readOnly: onTap != null, // Make the field read-only if onTap is provided
     ),
   );
 }
@@ -239,60 +332,6 @@ Widget autoWidthTextFieldForComment({
 
 
 
-// Define a TextField for the textarea
-Widget textAreaFieldDynamic({
-  required String text,
-  required double width,
-  TextEditingController? controller,
-  FocusNode? focusNode,
-  FormFieldValidator<String>? validator,
-  void Function(String)? onChanged,
-}) {
-  // Use the provided controller or create a new one if not provided
-  final TextEditingController _controller = controller ?? TextEditingController();
-
-  // Clean up the controller if created internally
-  void _disposeController() {
-    if (controller == null) {
-      _controller.dispose();
-    }
-  }
-
-  return Container(
-    width: width,
-    padding: const EdgeInsets.symmetric(vertical: 8.0),
-    child: TextFormField(
-		focusNode: focusNode,
-		controller: _controller,
-		maxLines: null, // Allows the TextField to be multiline and grow
-		minLines: 5, // Sets the minimum number of lines, increasing the default height
-		decoration: InputDecoration(
-        hintText: text,
-        alignLabelWithHint: true, // Align the hint text with the top
-        contentPadding: const EdgeInsets.only(left: 20, top: 20, right: 20), // Padding to keep text top-left
-        focusedBorder: OutlineInputBorder(
-			borderRadius: BorderRadius.circular(35),
-			borderSide: const BorderSide(color: Color(0xffE2E8F0)),
-		),
-		enabledBorder: OutlineInputBorder(
-			borderRadius: BorderRadius.circular(35),
-			borderSide: const BorderSide(color: Color(0xffE2E8F0)),
-		),
-		errorBorder: OutlineInputBorder(
-			borderRadius: BorderRadius.circular(35),
-			borderSide: const BorderSide(color: Colors.red),
-		),
-		focusedErrorBorder: OutlineInputBorder(
-			borderRadius: BorderRadius.circular(35),
-			borderSide: const BorderSide(color: Colors.red),
-		),
-      ),
-      keyboardType: TextInputType.multiline, // Ensure multiline input is supported
-      validator: validator,
-      onChanged: onChanged,
-    ),
-  );
-}
 
 
 ///////////////////////////////////////////////
@@ -445,48 +484,6 @@ Widget textfield3(
   );
 }
 
-// Date Field
-Widget autoWidthDateField({
-  required String text,
-  required String text1,
-  required double width,
-  IconData? icon,
-  IconData? subicon,
-  IconData? subicone,
-  String? defaultValue,
-  TextEditingController? controller,
-  void Function()? onTap,
-}) {
-  // If controller is not provided, create a new one with the default value
-  final TextEditingController effectiveController = controller ?? TextEditingController(text: defaultValue);
-
-  return SizedBox(
-    height: 74,
-    width: width,
-    child: TextField(
-      controller: effectiveController,
-      style: const TextStyle(color: Colors.black),
-      decoration: InputDecoration(
-        labelText: text1,
-		labelStyle: TextStyle(
-          color: AppColor.black,  // Use the passed color or default to grey
-        ),
-        hintText: text,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(35),
-          borderSide: const BorderSide(color: Color(0xffE2E8F0)),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(35),
-          borderSide: const BorderSide(color: Color(0xffE2E8F0)),
-        ),
-      ),
-      onTap: onTap,
-      readOnly: onTap != null, // Make the field read-only if onTap is provided
-    ),
-  );
-}
 
 //Date Field with right side rounded corner
 Widget autoWidthDateFieldOneSideRounded({

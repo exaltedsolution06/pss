@@ -6,6 +6,7 @@ class Appcontent {
   static const String backgraund = "assets/Background.png";
 
   static const String google = "assets/google.png";
+  static const String orderSuccess = "assets/order_success.png";
 
   static const String forgot = "assets/forgot.png";
   static const String password = "assets/password.png";
@@ -69,4 +70,15 @@ class Appcontent {
   static const String signUpRetailerHeading = "Sign Up Retailer";
   //Home page
   static const String browse = "Browse";
+  //wish list create
+  static const String wish_list_creates = "wish list creates";
+  static const String relationship = "Relationship";
+  static const String placeholderRelationship = "Relationship";
+  static const String birthdates = "Birthdate";
+  static const String placeholderBirthdate = "Enter date";
+  static const String anniversary = "Anniversary";
+  
+	//common
+	static const String submit = "SUBMIT";
+	static const String placeOrder = "PLACE ORDER";
 }

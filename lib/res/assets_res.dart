@@ -11,6 +11,7 @@ class AssetsRes {
   static const String AVATAR = 'assets/avatar.png';
   static const String LIVE = 'assets/live.png';
   static const String LOGO_LONG = 'assets/logo-long.png';
+  static const String ORDER_SUCCESS = 'assets/order_success.png';
   static const String PSS1 = 'assets/pss1.png';
   static const String PSS2 = 'assets/pss2.png';
   static const String PSS3 = 'assets/pss3.png';

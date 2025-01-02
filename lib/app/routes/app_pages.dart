@@ -13,6 +13,7 @@ import '../modules/register/bindings/retailer_register_binding.dart';
 import '../modules/register/views/retailer_register_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/home/views/wall_photo_view.dart';
 import '../modules/shop_screen/bindings/shop_screen_binding.dart';
 import '../modules/shop_screen/views/shop_screen_view.dart';
 import '../modules/forgot_screen/views/forgot_screen_view.dart';
@@ -29,7 +30,10 @@ import '../modules/proflie_screen/bindings/proflie_screen_binding.dart';
 import '../modules/proflie_screen/views/proflie_screen_view.dart';
 import '../modules/editprofile_screen/bindings/editprofile_screen_binding.dart';
 import '../modules/editprofile_screen/views/editprofile_screen_view.dart';
-
+import '../modules/wish_list/bindings/wish_list_binding.dart';
+import '../modules/wish_list/views/wish_list_create.dart';
+import '../modules/order_screen/bindings/order_binding.dart';
+import '../modules/order_screen/views/cart.dart';
 
 import 'package:picturesourcesomerset/app/modules/activity_screen/activity_screen_binding.dart';
 import 'package:picturesourcesomerset/app/modules/activity_screen/activity_screen_view.dart';
@@ -99,6 +103,11 @@ class AppPages {
 	  //middlewares: [AuthGuard()], // After Login
     ),	
 	GetPage(
+		name: _Paths.WALLPHOTO, 
+		page: () => WallPhotoView(),
+		binding: HomeBinding(),
+	),
+	GetPage(
       name: _Paths.SHOP_SCREEN,
       page: () => ShopScreenView(),
       binding: ShopScreenBinding(),
@@ -126,6 +135,21 @@ class AppPages {
       page: () => EditprofileScreenView(),
       binding: EditprofileScreenBinding(),
 	  //middlewares: [AuthGuard()], // After Login
-    ),	
+    ),
+	GetPage(
+		name: _Paths.WISHLIST_CREATE, 
+		page: () => WishListCreateView(),
+		binding: WishListBinding(),
+	),	
+	/*GetPage(
+		name: _Paths.WISHLIST, 
+		page: () => WishListView(),
+		binding: WishListBinding(),
+	),*/
+	GetPage(
+		name: _Paths.CART_PAGE, 
+		page: () => CartPage(),
+		binding: OrderBinding(),
+	),	
   ];
 }

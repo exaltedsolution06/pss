@@ -404,7 +404,6 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 										),
 										autoWidthDateField(
 											text: 'Date of Birth',
-											text1: 'Choose',
 											width: screenWidth,
 											controller: dobController,
 											onTap: () {
