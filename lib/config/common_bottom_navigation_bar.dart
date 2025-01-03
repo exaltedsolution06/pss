@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:picturesourcesomerset/config/app_color.dart';
 import 'package:picturesourcesomerset/config/app_contents.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';
+//import 'package:picturesourcesomerset/app/order_screen/views/cart.dart';
 /*import 'home_page.dart';
 import 'search_page.dart';
 import 'notifications_page.dart';
@@ -30,10 +31,11 @@ class CommonBottomNavigationBar extends StatelessWidget {
         break;
       case 3:
         //Get.offAll(() => CartPage());
-		Get.toNamed(Routes.SHOP_SCREEN);
+		Get.toNamed(Routes.CART_PAGE);
         break;
       case 4:
         //Get.offAll(() => ProfilePage());
+		Get.toNamed(Routes.PROFLIE_SCREEN);
         break;
     }
   }

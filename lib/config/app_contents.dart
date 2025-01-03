@@ -78,7 +78,17 @@ class Appcontent {
   static const String placeholderBirthdate = "Enter date";
   static const String anniversary = "Anniversary";
   
+	//Add address modal
+	static const String addressType = "Address Type";
+	
+	//Thanks you page
+	static const String thankYou = "Thank You";
+	static const String thankYouDescFirst = "Your order will be delivered with invoice #";
+	static const String thankYouDescLast = "You can track the delivery in the order section.";
+  
 	//common
 	static const String submit = "SUBMIT";
 	static const String placeOrder = "PLACE ORDER";
+	static const String payNow = "PAY NOW";
+	static const String continueOrder = "CONTINUE ORDER";
 }

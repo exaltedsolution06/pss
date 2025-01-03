@@ -97,100 +97,22 @@ class ProflieScreenView extends StatelessWidget {
 									children: [
 									  // Banner Image
 									  Container(
-										height: 173,
-										width: screenWidth,
-										decoration: BoxDecoration(
-										  image: DecorationImage(
-											//image: AssetImage('assets/Banner.png'),
-											image: profileData.cover != null && profileData.cover.isNotEmpty
-											  ? NetworkImage(profileData.cover) as ImageProvider
-											  : AssetImage('assets/Banner.png'),
-												fit: BoxFit.fill,
-										  ),
-										  borderRadius: BorderRadius.only(
-											bottomLeft: Radius.circular(20),
-											bottomRight: Radius.circular(20),
-										  ),
-										),
-									  ),
-									  // New Section Below Banner Image
-									  Positioned(
-										bottom: 10,
-										left: 0,
-										right: 0,
-										child: InkWell(
-										  onTap: () {
-											//Get.toNamed(Routes.FOLLOW_SCREEN);
-										  },
-										  child: Container(
-											height: 77,
-											width: screenWidth,
-											//color: AppColor.BlackGreyscale[200],
-											child: Padding(
-											  padding: const EdgeInsets.symmetric(horizontal: 20),
-											  child: Container(
-												height: 77,
-												width: double.infinity,
-												decoration: BoxDecoration(
-												  borderRadius: BorderRadius.circular(15),
-												  color: Colors.white,
-												  border: Border.all(
-													width: 1,
-													color: const Color(0xffE2E8F0),
-												  ),
-												),
-											  ),
+										height: 100,
+										  width: 100,
+										  decoration: BoxDecoration(
+											color: Colors.indigo.shade300,
+											border: Border.all(color: Colors.white, width: 5),
+											shape: BoxShape.circle,
+											image: DecorationImage(
+											  image: profileData.avatar != null && profileData.avatar.isNotEmpty
+												  ? NetworkImage(profileData.avatar) as ImageProvider
+												  : AssetImage('assets/avatar.png'),
+											  //fit: BoxFit.cover, // Optional: to ensure the image covers the entire circle
 											),
-										  ),
 										),
 									  ),
 									  // Positioned Avatar and Details
-									  Positioned(
-										top: 150,
-										left: 20,
-										right: 0,
-										child: Row(
-										  children: [
-											Stack(
-											  children: [
-												Container(
-												  height: 100,
-												  width: 100,
-												  decoration: BoxDecoration(
-													color: Colors.indigo.shade300,
-													border: Border.all(color: Colors.white, width: 5),
-													shape: BoxShape.circle,
-													image: DecorationImage(
-													  image: profileData.avatar != null && profileData.avatar.isNotEmpty
-														  ? NetworkImage(profileData.avatar) as ImageProvider
-														  : AssetImage('assets/avatar.png'),
-													  //fit: BoxFit.cover, // Optional: to ensure the image covers the entire circle
-													),
-												  ),
-												),
-												Positioned(
-												  right: 0,
-												  bottom: 0,
-												  child: Container(
-													height: 32,
-													width: 32,
-													decoration: BoxDecoration(
-													  borderRadius: BorderRadius.circular(30),
-													  border: Border.all(color: Colors.white, width: 3),
-													   color: 	profileData.user_verify == 1 ? Colors.green : 
-																Colors.red, // Set icon color based on condition
-													),
-													child: Icon(
-														profileData.user_verify == 1 ? Icons.check : 
-														Icons.gpp_bad, // Default icon if user_verify is not 1
-														color: Colors.white,
-													  size: 20, // Adjust the size of the icon
-													),
-												  ),
-												),
-											  ],
-											),
-											const SizedBox(width: 1),
+									  
 											Expanded(
 											  child: Padding(
 												padding: const EdgeInsets.only(top: 16.0),
@@ -214,9 +136,7 @@ class ProflieScreenView extends StatelessWidget {
 												),
 											  ),
 											),
-										  ],
-										),
-									  ),
+											
 									],
 								),
 							),
@@ -264,51 +184,4 @@ class ProflieScreenView extends StatelessWidget {
   
 
 }
-  Widget _buildStatColumn(String number, String label) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            number,
-            style: TextStyle(
-              fontSize: 18,
-              fontFamily: 'Urbanist-semibold',
-            ),
-          ),
-          SizedBox(height: 5),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              color: Color(0xff64748B),
-              fontFamily: 'Urbanist-medium',
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-Widget _benefitRow(IconData icon, String text) {
-  return Row(
-    children: [
-      Icon(
-        icon,
-        size: 20.0,
-        color: Colors.green,
-      ),
-      const SizedBox(width: 8.0),
-      Expanded(
-        child: Text(
-          text,
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.black,
-            fontFamily: 'Urbanist-semibold',
-          ),
-        ),
-      ),
-    ],
-  );
-}
+  

@@ -336,15 +336,9 @@ class _CartPageState extends State<CartPage> {
 				  return autoWidthBtn(
 					text: orderController.isLoading.value ? 'Placing...' : Appcontent.placeOrder,
 					width: screenWidth,
-					onPress: orderController.isLoading.value
-						? null
-						: () {
-							if (_formKey.currentState!.validate()) {
-							  orderController.placeOrder(
-							  );
-							} else {
-							}
-						  },
+					onPress: () {
+						orderController.placeOrder();
+					},
 				  );
 				}),
 			  ),
