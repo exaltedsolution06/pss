@@ -21,12 +21,12 @@ class ResetPasswordScreenController extends GetxController {
 
   Future<void> resetPassword(String email, String password, String password_confirmation) async {
     isLoading.value = true;  // Use .value to update RxBool
-	Get.toNamed(Routes.LOGIN_SCREEN);
-	/*try {
+	//Get.toNamed(Routes.LOGIN_SCREEN);
+	try {
 		final response = await apiService.resetPassword(email, password, password_confirmation);
 		print('Response received: $response');
 		isLoading.value = false;  // Use .value to update RxBool
-		if (response['status'] == '200') {
+		if (response['status'] == 200) {
 			SnackbarHelper.showSuccessSnackbar(
 			  title: Appcontent.snackbarTitleSuccess, 
 			  message: response['message'],
@@ -34,7 +34,7 @@ class ResetPasswordScreenController extends GetxController {
 			);
 			Get.toNamed(Routes.LOGIN_SCREEN);
 			//Get.offAll(LoginScreenView());
-		} else if (response['status'] == '600') {
+		} else if (response['status'] == 600) {
 			// Extract OTP error messages
 			final otpErrors = response['errors']['password'] as List<dynamic>;
 			// Check if there are any error messages and use the first one
@@ -59,6 +59,6 @@ class ResetPasswordScreenController extends GetxController {
 		);
     } finally {
       isLoading.value = false;
-    }*/
+    }
   }
 }

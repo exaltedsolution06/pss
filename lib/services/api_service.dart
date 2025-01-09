@@ -5,18 +5,10 @@ import 'package:dio/dio.dart'; // Import Dio for FormData and MultipartFile
 import 'package:picturesourcesomerset/config/api_endpoints.dart';
 
 class ApiService extends BaseApiService {
-  ApiService() : super();
-  
-  //BaseApiService baseApiService = BaseApiService();
+	ApiService() : super();
 
-  
-  final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
-	
-	//Slider data for onboarding page
-	Future<Map<String, dynamic>> slider_data() {
-		return get(ApiEndpoints.slider_data, requiresAuth: false);
-	}
-	
+	final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
+		
 	//Login page
 	Future<Map<String, dynamic>> login(String username, String password) async {
 		final response = await post(ApiEndpoints.login, {'email': username, 'password': password});
@@ -114,48 +106,6 @@ class ApiService extends BaseApiService {
 		return response;
 	}
 	
-	//Edit Profile Cover Image Upload
-	/*Future<Map<String, dynamic>> profile_cover_image_upload(file) async {
-		// Construct the request body dynamically
-		final Map<String, dynamic> requestBody = {'file': file};
-		// Make the API request
-		final response = await post(ApiEndpoints.profile_cover_image_upload, requestBody, requiresAuth: true);
-
-		return response;
-	}*/
-
-	
-
-
-	Future<Map<String, dynamic>> profile_cover_image_upload(File file) async {
-		// Create Dio instance
-		Dio dio = Dio(BaseOptions(
-		  validateStatus: (status) => status != null && status < 500,
-		));
-
-		// Prepare FormData object
-		FormData formData = FormData.fromMap({
-		  'file': await MultipartFile.fromFile(file.path),
-		});
-
-		// Prepare Dio options with headers
-		Options options = Options(
-		  headers: await getHeaders(true) ?? {}, // Ensure headers are not null
-		);
-
-		// Make the API request
-		final response = await dio.post(
-		  '$baseUrl/${ApiEndpoints.profile_cover_image_upload}',
-		  data: formData,
-		  options: options,
-		);
-		//var dd = response.data;
-		//print("Response data : $dd");
-		// Ensure response data is not null before returning
-		//return response.data != null ? response.data : {'success': false};
-		return response.data;
-	}
-	
 	Future<Map<String, dynamic>> profile_avatar_image_upload(File file) async {
 		// Create Dio instance
 		Dio dio = Dio(BaseOptions(
@@ -188,11 +138,6 @@ class ApiService extends BaseApiService {
 	//Remove Avatar image
 	Future<Map<String, dynamic>> profile_avatar_image_delete() async {
 		final response = await post(ApiEndpoints.profile_avatar_image_delete, {}, requiresAuth: true);
-		return response;
-	}
-	//Remove Cover image
-	Future<Map<String, dynamic>> profile_cover_image_delete() async {
-		final response = await post(ApiEndpoints.profile_cover_image_delete, {}, requiresAuth: true);
 		return response;
 	}
 	
@@ -477,5 +422,10 @@ class ApiService extends BaseApiService {
 		print("user_id: $user_id, follow: $follow");
 		final response = await post(ApiEndpoints.follow_creator, {'user_id': user_id, 'follow': follow}, requiresAuth: true);
 		return response;
+	}
+	
+	//Slider data for onboarding page
+	Future<Map<String, dynamic>> slider_data() {
+		return get(ApiEndpoints.slider_data, requiresAuth: false);
 	}
 }

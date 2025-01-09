@@ -91,4 +91,5 @@ class Appcontent {
 	static const String placeOrder = "PLACE ORDER";
 	static const String payNow = "PAY NOW";
 	static const String continueOrder = "CONTINUE ORDER";
+	static const String edit = "EDIT";
 }

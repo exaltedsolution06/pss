@@ -99,138 +99,138 @@ class _CartPageState extends State<CartPage> {
 					],
 				),
 			),
-						Expanded(
-  child: ListView.builder(
-    itemCount: cartItems.length,
-    itemBuilder: (context, index) {
-      final item = cartItems[index];
-      return Stack(
-        children: [
-          // Main Card
-          Card(
-            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            elevation: 3,
-			color: AppColor.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  // Image
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      item["imageUrl"],
-                      width: 60,
-                      height: 60,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  // Item Details
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          item["name"],
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          item["description"],
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          "Rs. ${item["price"]}",
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Quantity Controls
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.remove_circle, color: Colors.red),
-                        onPressed: () {
-                          setState(() {
-                            if (item["quantity"] > 1) {
-                              item["quantity"]--;
-                            }
-                          });
-                        },
-                      ),
-                      Text(
-                        item["quantity"].toString(),
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.add_circle, color: Colors.green),
-                        onPressed: () {
-                          setState(() {
-                            item["quantity"]++;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          // Cross Icon Positioned at the Top Right Corner
-          Positioned(
-  top: 13,
-  right: 22,
-  child: GestureDetector(
-    onTap: () {
-      setState(() {
-        cartItems.removeAt(index); // Remove the item
-      });
-    },
-    child: Container(
-      width: 18,
-      height: 18,
-      decoration: BoxDecoration(
-        color: Colors.transparent, // Transparent background
-        shape: BoxShape.circle, // Circular shape
-        border: Border.all(
-          color: AppColor.BlackGreyscale, // Border color
-          width: 1, // Border width
-        ),
-      ),
-      child: const Icon(
-        Icons.close,
-        color: AppColor.BlackGreyscale,
-        size: 14,
-      ),
-    ),
-  ),
-),
+			Expanded(
+		  child: ListView.builder(
+			itemCount: cartItems.length,
+			itemBuilder: (context, index) {
+			  final item = cartItems[index];
+			  return Stack(
+				children: [
+				  // Main Card
+				  Card(
+					margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+					elevation: 3,
+					color: AppColor.white,
+					shape: RoundedRectangleBorder(
+					  borderRadius: BorderRadius.circular(12),
+					),
+					child: Padding(
+					  padding: const EdgeInsets.all(10),
+					  child: Row(
+						children: [
+						  // Image
+						  ClipRRect(
+							borderRadius: BorderRadius.circular(8),
+							child: Image.asset(
+							  item["imageUrl"],
+							  width: 60,
+							  height: 60,
+							  fit: BoxFit.cover,
+							),
+						  ),
+						  const SizedBox(width: 16),
+						  // Item Details
+						  Expanded(
+							child: Column(
+							  crossAxisAlignment: CrossAxisAlignment.start,
+							  children: [
+								Text(
+								  item["name"],
+								  style: const TextStyle(
+									fontWeight: FontWeight.bold,
+									fontSize: 16,
+								  ),
+								),
+								const SizedBox(height: 4),
+								Text(
+								  item["description"],
+								  style: const TextStyle(
+									fontSize: 14,
+									color: Colors.grey,
+								  ),
+								),
+								const SizedBox(height: 4),
+								Text(
+								  "Rs. ${item["price"]}",
+								  style: const TextStyle(
+									fontWeight: FontWeight.w500,
+									fontSize: 14,
+									color: Colors.red,
+								  ),
+								),
+							  ],
+							),
+						  ),
+						  // Quantity Controls
+						  Row(
+							children: [
+							  IconButton(
+								icon: const Icon(Icons.remove_circle, color: Colors.red),
+								onPressed: () {
+								  setState(() {
+									if (item["quantity"] > 1) {
+									  item["quantity"]--;
+									}
+								  });
+								},
+							  ),
+							  Text(
+								item["quantity"].toString(),
+								style: const TextStyle(
+								  fontSize: 16,
+								  fontWeight: FontWeight.bold,
+								),
+							  ),
+							  IconButton(
+								icon: const Icon(Icons.add_circle, color: Colors.green),
+								onPressed: () {
+								  setState(() {
+									item["quantity"]++;
+								  });
+								},
+							  ),
+							],
+						  ),
+						],
+					  ),
+					),
+				  ),
+				  // Cross Icon Positioned at the Top Right Corner
+				  Positioned(
+					  top: 13,
+					  right: 22,
+					  child: GestureDetector(
+						onTap: () {
+						  setState(() {
+							cartItems.removeAt(index); // Remove the item
+						  });
+						},
+						child: Container(
+						  width: 18,
+						  height: 18,
+						  decoration: BoxDecoration(
+							color: Colors.transparent, // Transparent background
+							shape: BoxShape.circle, // Circular shape
+							border: Border.all(
+							  color: AppColor.BlackGreyscale, // Border color
+							  width: 1, // Border width
+							),
+						  ),
+						  child: const Icon(
+							Icons.close,
+							color: AppColor.BlackGreyscale,
+							size: 14,
+						  ),
+						),
+					  ),
+					),
 
 
-        ],
-      );
-    },
-  ),
-),
+				],
+			  );
+			},
+		  ),
+		),
 
 		Padding(
 				padding: const EdgeInsets.only(bottom: 10, left: 16, right: 16),

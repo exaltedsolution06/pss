@@ -8,20 +8,19 @@ import 'package:picturesourcesomerset/app/modules/proflie_screen/models/profile_
 class ProflieScreenController extends GetxController {
 	final ApiService apiService;
 	var profileData = Rx<ProfileData>(ProfileData(
-		name: '',
-		username: '',
+		first_name: '',
+		last_name: '',
+		email: '',
 		avatar: '',
 		default_avatar: 0,
-		cover: '',
-		default_cover: 0,
-		bio: '',
+		company_name: '',
 		birthdate: '',
-		gender_pronoun: '',
-		location: '',
-		website: '',
-		country_id: 0,
+		address: '',
+		city: '',
+		state: '',
 		gender_id: 0,
-		user_verify: 0,
+		zipcode: '',
+		phone: '',
 	));
 	RxInt socialUserTotalPosts = 0.obs;
 	RxInt socialUserTotalFollowers = 0.obs;
@@ -44,14 +43,14 @@ class ProflieScreenController extends GetxController {
 
 	// Observable to track loading state
 	var isFetchingData = false.obs;
-	var isLoading = true.obs;
+	var isLoading = false.obs;
 
 	@override
 	void onReady() {
 		super.onReady();
-		fetchProfile();
+		//fetchProfile();
 		print("Profile fetch Profile screen");
-		loadInitialDataForFeed(); // Load initial feed data
+		//loadInitialDataForFeed(); // Load initial feed data
 	}
 	void loadInitialDataForFeed() {
 		if (feedData.isEmpty) loadMoreFeedData();
@@ -59,6 +58,10 @@ class ProflieScreenController extends GetxController {
 	// Helper function to determine if more data can be loaded
 	bool canLoadMoreFeed() {
 		return hasMoreFeedData.value && !isFetchingFeedData.value;
+	}
+	Future<void> editProfile() async {
+	  isLoading.value = true;
+	  Get.toNamed(Routes.EDITPROFILE_SCREEN);
 	}
 	// Load more feed data
 	Future<void> loadMoreFeedData() async {
@@ -107,7 +110,7 @@ class ProflieScreenController extends GetxController {
 			profileData.value = ProfileData.fromJson(response['user']);
 			//profileData.value = ProfileData.fromJson(response['user'] as Map<String, dynamic>);
 		} else {
-			profileData.value = ProfileData(name: ''); // Default value if data is not valid
+			profileData.value = ProfileData(first_name: ''); // Default value if data is not valid
 		}
 		// social count fetch
 		//print('API Response Social User1: ${response['social_user']['total_post']}');

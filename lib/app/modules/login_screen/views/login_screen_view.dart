@@ -14,9 +14,7 @@ import '../controllers/login_screen_controller.dart';
 class LoginScreenView extends GetView<LoginScreenController> {
   LoginScreenView({super.key});
 
-  final LoginScreenController loginScreenController = Get.find();
-  
-  
+  final LoginScreenController loginScreenController = Get.find();  
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -25,8 +23,6 @@ class LoginScreenView extends GetView<LoginScreenController> {
 
   final FocusNode _usernameFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
-  
-  
   
   GoogleSignIn signIn = GoogleSignIn();
   void googleSignin() async {

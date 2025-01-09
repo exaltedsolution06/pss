@@ -13,38 +13,30 @@ class EditprofileScreenController extends GetxController {
 	
 	var profileImageFile = Rx<File?>(null);
 	var isUploadedProfileImageFile = false.obs;
-	
-	var backgroundImageFile = Rx<File?>(null);
-	var isUploadedBackgroundImageFile = false.obs;
   
 	final ApiService apiService;
 	var profileData = Rx<ProfileData>(ProfileData(
-		name: '',
-		username: '',
+		first_name: '',
+		last_name: '',
+		email: '',
 		avatar: '',
 		default_avatar: 0,
-		cover: '',
-		default_cover: 0,
-		bio: '',
+		company_name: '',
 		birthdate: '',
-		gender_pronoun: '',
-		location: '',
-		website: '',
-		country_id: 0,
+		address: '',
+		city: '',
+		state: '',
 		gender_id: 0,
-		user_verify: 0,
+		zipcode: '',
+		phone: '',
 	));
   
 	EditprofileScreenController(this.apiService);  // Constructor accepting ApiService
 	
 	// Observable to track loading state
 	var isLoading = true.obs;
-	
 	// Declare observable lists
 	var genderList = <Gender>[].obs;
-	var countryList = <Country>[].obs;
-	
-	var selectedCountry = ''.obs;
 	var selectedGender = ''.obs;
 
 	@override
@@ -60,30 +52,78 @@ class EditprofileScreenController extends GetxController {
 		isLoading.value = true; // Start loading
 		try {
 			isFetchingData(true);
-			//final apiService = Get.find<ApiService>();
-			final responseData = await apiService.fetchProfileDataForEditProfilePage(1, 1, 1, 1);
-			final response = responseData['data'];
+			//final responseData = await apiService.fetchProfileDataForEditProfilePage(1, 1, 1, 1);
+			final Map<String, dynamic> responseData = {
+				"data": {
+					"user": {
+						"id": 4,
+						"first_name": "First Name",
+						"last_name": "Last Name",
+						"avatar": "https://exaltedsolution.com/defencestudent/public/img/default-avatar.jpg",
+						"default_avatar": 1,
+						"company_name": "tttttttttttttttttt",
+						"birthdate": null,
+						"address": "asdfghjkl",
+						"city": "ASDFGHJKL",
+						"state": "WB",
+						"gender_id": 1,
+						"zipcode": "123456",
+						"phone": "36963"
+					},
+					"genders": [
+						{
+							"id": 3,
+							"gender_name": "Couple"
+						},
+						{
+							"id": 2,
+							"gender_name": "Female"
+						},
+						{
+							"id": 1,
+							"gender_name": "Male"
+						},
+						{
+							"id": 4,
+							"gender_name": "Other"
+						}
+					],
+				},
+			};
+			
+			final Map<String, dynamic>? response = responseData['data'] as Map<String, dynamic>?;
 			// Ensure response['user'] is not null and is of the expected type
-			if (response['user'] != null && response['user'] is Map) {
-				profileData.value = ProfileData.fromJson(response['user']);
+			//if (response['user'] != null && response['user'] is Map) {
+			if (response != null && response['user'] is Map<String, dynamic>) {
+				profileData.value = ProfileData.fromJson(response['user'] as Map<String, dynamic>);
 			//profileData.value = ProfileData.fromJson(response['user'] as Map<String, dynamic>);
 			} else {
-				profileData.value = ProfileData(name: ''); // Default value if data is not valid
+				profileData.value = ProfileData(first_name: ''); // Default value if data is not valid
 			}
-		  
-			final List<Gender> fetchedGenderList = (response['genders'] as List).map((data) => Gender.fromJson(data)).toList();
+			// Handle the 'genders' list
+			if (response != null && response['genders'] is List) {
+			  final List<dynamic> gendersDynamic = response['genders'] as List<dynamic>;
+			  
+			  // Ensure each item is a Map<String, dynamic>
+			  final List<Gender> fetchedGenderList = gendersDynamic
+				  .where((data) => data is Map<String, dynamic>)
+				  .map((data) => Gender.fromJson(data as Map<String, dynamic>))
+				  .toList();
+			  
+			  genderList.assignAll(fetchedGenderList); // Update the observable list
+			} else {
+			  genderList.assignAll([]); // Assign an empty list if 'genders' is not valid
+			}
+
+			// Set the selected gender, ensuring it's a valid string
+			selectedGender.value = profileData.value.gender_id?.toString() ?? '';
+			/*final List<Gender> fetchedGenderList = (response['genders'] as List).map((data) => Gender.fromJson(data)).toList();
 			genderList.assignAll(fetchedGenderList); // Update the observable list
 			
 			// Ensure selectedGender is set based on the profile data
-			selectedGender.value = profileData.value.gender_id.toString();
-
-			final List<Country> fetchedCountryList = (response['countries'] as List).map((data) => Country.fromJson(data)).toList();
-			countryList.assignAll(fetchedCountryList); // Update the observable list
-			// Ensure selectedCountry is set based on the profile data
-			selectedCountry.value = profileData.value.country_id.toString();
+			selectedGender.value = profileData.value.gender_id.toString();*/
 
 			//print('Gender List2: ${genderList.map((g) => g.name).toList()}');
-			//print('Country List: ${countryList.map((c) => c.name).toList()}');
 			//print('API Response: $response');  // Print the full API response
 			// print('Profile Data: ${profileData.value}');  // Print the parsed profile data
 		} catch (e) {
@@ -101,51 +141,63 @@ class EditprofileScreenController extends GetxController {
 	
 	//submit profile data
 	Future<void> profileSubmit(
-	  String username, 
-	  String name, 
-	  String? bio, 
-	  String? birthdate, 
-	  int? gender_id, 
-	  String? gender_pronoun, 
-	  int? country_id, 
-	  String? location, 
-	  String? website
+		String first_name, 
+		String last_name, 
+		String email, 
+		String? company_name, 
+		String? birthdate, 
+		String? address, 
+		String? city, 
+		String? state, 
+		int? gender_id, 
+		String? zipcode, 
+		String? phone
 	) async {
 		isLoading.value = true;
-		/*print('username: $username');
-		print('name: $name');
-		print('bio: $bio');
+		/*print('first_name: $first_name');
+		print('last_name: $last_name');
+		print('email: $email');
+		print('company_name: $company_name');
 		print('birthdate: $birthdate');
+		print('address: $address');
+		print('city: $city');
+		print('state: $state');
 		print('gender_id: $gender_id');
-		print('gender_pronoun: $gender_pronoun');
-		print('country_id: $country_id');
-		print('location: $location');
-		print('website: $website');*/
+		print('zipcode: $zipcode');
+		print('phone: $phone');*/
 		try {
 			isSubmittingData(true);
-			final response = await apiService.profile_submit(
-			  username, 
-			  name, 
-			  bio ?? '', 
-			  birthdate ?? '', 
+			/*final response = await apiService.profile_submit(
+			  first_name, 
+			  last_name, 
+			  email, 
+			  company_name ?? '', 
+			  birthdate ?? '',  
+			  address ?? '', 
+			  city ?? ''
+			  state ?? ''
 			  gender_id ?? 0, 
-			  gender_pronoun ?? '', 
-			  country_id ?? 0, 
-			  location ?? '', 
-			  website ?? ''
-			);
+			  zipcode ?? '', 
+			  phone ?? '',
+			);*/
+			final response = {
+			  'status': 200,
+			  'message': 'Success'
+			};
 			//print('Status: $response');
 
-			if (response['status'] == '200') {
+			if (response['status'] == 200) {
 				SnackbarHelper.showSuccessSnackbar(
 				  title: Appcontent.snackbarTitleSuccess, 
-				  message: response['message'],
+				  //message: response['message'],
+				  message: 'success',
 				  position: SnackPosition.BOTTOM, // Custom position
 				);
 			} else {
 			  SnackbarHelper.showErrorSnackbar(
 				  title: Appcontent.snackbarTitleError,
-				  message: response['message'],
+				  //message: response['message'],
+				  message: 'error',
 				  position: SnackPosition.BOTTOM, // Custom position
 				);
 			}
@@ -160,50 +212,16 @@ class EditprofileScreenController extends GetxController {
 			isLoading.value = false;
 		}
 	}	
-
-	Future<void> uploadCoverImage(File image) async {
-	//print("Cover image selected Controller: $image");
-	  try {
-		// Call your API service to upload the image
-		
-		var response = await apiService.profile_cover_image_upload(image);
-
-		if (response['status']=='200') {
-			isUploadedBackgroundImageFile.value = true;
-			backgroundImageFile.value = image;
-		  // Handle successful upload
-			SnackbarHelper.showSuccessSnackbar(
-			  title: Appcontent.snackbarTitleSuccess, 
-			  message: response['message'],
-			  position: SnackPosition.BOTTOM, // Custom position
-			);
-		} else {
-		  // Handle upload error
-			SnackbarHelper.showErrorSnackbar(
-			  title: Appcontent.snackbarTitleError,
-			  message: response['message'],
-			  position: SnackPosition.BOTTOM, // Custom position
-			);
-		}
-	  } catch (e) {
-		//print('Error: $e');
-		// Handle exception
-		SnackbarHelper.showErrorSnackbar(
-		  title: Appcontent.snackbarTitleError, 
-		  message: Appcontent.snackbarCatchErrorMsg, 
-		  position: SnackPosition.BOTTOM, // Custom position
-		);
-	  }
-	}
 	
 	Future<void> uploadAvatarImage(File image) async {
 	//print("Cover image selected Controller: $image");
 	  try {
 		// Call your API service to upload the image
-		
-		var response = await apiService.profile_avatar_image_upload(image);
+		isUploadedProfileImageFile.value = true;
+		profileImageFile.value = image;
+		//var response = await apiService.profile_avatar_image_upload(image);
 
-		if (response['status']=='200') {
+		/*if (response['status']=='200') {
 			isUploadedProfileImageFile.value = true;
 			profileImageFile.value = image;
 		  // Handle successful upload
@@ -220,7 +238,7 @@ class EditprofileScreenController extends GetxController {
 			  message: response['message'],
 			  position: SnackPosition.BOTTOM, // Custom position
 			);
-		}
+		}*/
 	  } catch (e) {
 		//print('Error: $e');
 		// Handle exception
@@ -235,10 +253,13 @@ class EditprofileScreenController extends GetxController {
 	//Remove Avatar Image
 	Future<void> removeAvatar() async {
 		try {
+			profileImageFile.value = null;
+			isUploadedProfileImageFile.value = false;
+				
 			final response = await apiService.profile_avatar_image_delete();
 			//print('Status: $response');
 
-			if (response['status'] == '200') {
+			/*if (response['status'] == '200') {
 				// Reset the reactive variables
 				profileImageFile.value = null;
 				isUploadedProfileImageFile.value = false;
@@ -255,7 +276,7 @@ class EditprofileScreenController extends GetxController {
 					profileData.value = ProfileData.fromJson(responseF['user']);
 				//profileData.value = ProfileData.fromJson(responseF['user'] as Map<String, dynamic>);
 				} else {
-					profileData.value = ProfileData(name: ''); // Default value if data is not valid
+					profileData.value = ProfileData(first_name: ''); // Default value if data is not valid
 				}
 			} else {
 				SnackbarHelper.showErrorSnackbar(
@@ -263,7 +284,7 @@ class EditprofileScreenController extends GetxController {
 				  message: response['message'],
 				  position: SnackPosition.BOTTOM, // Custom position
 				);
-			}
+			}*/
 		} catch (e) {
 			SnackbarHelper.showErrorSnackbar(
 			  title: Appcontent.snackbarTitleError, 
@@ -272,72 +293,11 @@ class EditprofileScreenController extends GetxController {
 			);
 		}
 	}
-	
-	//Remove Cover Image
-	Future<void> removeCover() async {
-		try {
-			final response = await apiService.profile_cover_image_delete();
-			//print('Status: $response');
-
-			if (response['status'] == '200') {
-			isUploadedBackgroundImageFile.value = false;
-			backgroundImageFile.value = null;
-				SnackbarHelper.showSuccessSnackbar(
-				  title: Appcontent.snackbarTitleSuccess, 
-				  message: response['message'],
-				  position: SnackPosition.BOTTOM, // Custom position
-				);
-			  
-				final responseData = await apiService.fetchProfileDataForEditProfilePage(1, 1, 1, 1);
-				final responseF = responseData['data'];
-				// Ensure responseF['user'] is not null and is of the expected type
-				if (responseF['user'] != null && responseF['user'] is Map) {
-					profileData.value = ProfileData.fromJson(responseF['user']);
-				//profileData.value = ProfileData.fromJson(responseF['user'] as Map<String, dynamic>);
-				} else {
-					profileData.value = ProfileData(name: ''); // Default value if data is not valid
-				}
-			
-			} else {
-				SnackbarHelper.showErrorSnackbar(
-				  title: Appcontent.snackbarTitleError, 
-				  message: response['message'],
-				  position: SnackPosition.BOTTOM, // Custom position
-				);
-			}
-		} catch (e) {
-			SnackbarHelper.showErrorSnackbar(
-			  title: Appcontent.snackbarTitleError, 
-			  message: Appcontent.snackbarCatchErrorMsg, 
-			  position: SnackPosition.BOTTOM, // Custom position
-			);
-		}
-	}
-
-
-
-
-
-
-	final count = 0.obs;
-	void increment() => count.value++;
-  
-	
-	//var selectedCountry = Rxn<String>();
-	//var selectedGender = Rxn<String>();
-
 	
 	// Update methods for gender and country
-  void updateGender(int genderId) {
-	//print('Updating gender to: $genderId');
-    final selectedGenderItem = genderList.firstWhere((g) => g.id == genderId, orElse: () => Gender(id: -1, name: 'Unknown'));
-    selectedGender.value = selectedGenderItem.id.toString();
-  }
-  
-  void updateCountry(int countryId) {
-	//print('Updating country to: $countryId');
-    final selectedCountryItem = countryList.firstWhere((g) => g.id == countryId, orElse: () => Country(id: -1, name: 'Unknown'));
-    selectedCountry.value = selectedCountryItem.id.toString();
-  }
-
+	void updateGender(int genderId) {
+		//print('Updating gender to: $genderId');
+		final selectedGenderItem = genderList.firstWhere((g) => g.id == genderId, orElse: () => Gender(id: -1, name: 'Unknown'));
+		selectedGender.value = selectedGenderItem.id.toString();
+	}
 }

@@ -1,21 +1,25 @@
 class ApiEndpoints {
-  static const String baseUrl = "https://exaltedsolution.com/picturesourcesomerset/public/api";
-  static const String slider_data = 'home_slider';
-  static const String cms = 'cms';
+  //static const String baseUrl = "https://exaltedsolution.com/picturesourcesomerset/public/api";
+  static const String baseUrl = "https://jamesbrookit.com/pss/public/api";
+  
   static const String login = 'login';
   static const String googleLogin = 'google/callback';
   static const String forgotPassword = 'forgot-password';
-  static const String forgotPassword_verifyOtp = 'forgot-password/verify-otp';
+  static const String forgotPassword_verifyOtp = 'forgot-password-verify-otp';
   static const String resetPassword = 'reset-password';
+  
   static const String register = 'register';
   static const String register_verifyOtp = 'register/verify-otp';
   static const String profile = 'profile';
   static const String profile_submit = 'profile_submit';
-  static const String profile_cover_image_upload = 'profile_cover_image_upload';
-  static const String profile_cover_image_delete = 'profile_cover_image_delete';
   static const String profile_avatar_image_upload = 'profile_avatar_image_upload';
   static const String profile_avatar_image_delete = 'profile_avatar_image_delete';
   static const String account_update = 'account_update';
+  static const String notifications = 'notifications';
+  static const String search = 'search';
+  
+  static const String slider_data = 'home_slider';
+  static const String cms = 'cms';    
   static const String wallet_available_pending_balance = 'wallet_available_pending_balance';
   static const String wallet_deposit = 'wallet_deposit';
   static const String wallet_request_withdraw = 'wallet_request_withdraw';
@@ -33,15 +37,13 @@ class ApiEndpoints {
   static const String privacy_fetch = 'privacy_fetch';
   static const String privacy_update = 'privacy_update';
   static const String verify_email_birthdate = 'verify_email_birthdate';
-  static const String verify_Identity_check = 'verify_Identity_check';
-  static const String notifications = 'notifications';
+  static const String verify_Identity_check = 'verify_Identity_check';  
   static const String post_create_file = 'post_create_file';
   static const String post_create = 'post_create';
   static const String post_edit = 'post_edit';
   static const String post_delete = 'post_delete';
   static const String post_delete_files = 'post_delete_files';  
-  static const String fetch_post = 'fetch_post';
-  static const String search = 'search';
+  static const String fetch_post = 'fetch_post';  
   static const String feeds_post_like = 'feeds_post_like';
   static const String feeds_fetch_comments = 'feeds_fetch_comments';
   static const String feeds_post_comments = 'feeds_post_comments';

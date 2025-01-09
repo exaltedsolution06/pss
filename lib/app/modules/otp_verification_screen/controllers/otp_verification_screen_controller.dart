@@ -17,8 +17,8 @@ class OtpVerificationScreenController extends GetxController {
     required String context,
   }) async {
     isLoading.value = true;
-	Get.toNamed(Routes.RESET_PASSWORD_SCREEN, parameters: {'email': email});
-    /*try {
+	//Get.toNamed(Routes.RESET_PASSWORD_SCREEN, parameters: {'email': email});
+    try {
       late final Map<String, dynamic> response;
 	  
 	  //print('Navigating to CreatepinScreenView with context: $otp');
@@ -31,7 +31,7 @@ class OtpVerificationScreenController extends GetxController {
         throw Exception('Invalid context');
       }
 
-      if (response['status'] == '200') {
+      if (response['status'] == 200) {
         SnackbarHelper.showSuccessSnackbar(
 		  title: Appcontent.snackbarTitleSuccess, 
 		  message: response['message'],
@@ -65,7 +65,7 @@ class OtpVerificationScreenController extends GetxController {
 		);
     } finally {
       isLoading.value = false;
-    }*/
+    }
   }
 }
 

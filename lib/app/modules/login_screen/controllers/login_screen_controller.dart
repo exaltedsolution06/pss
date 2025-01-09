@@ -51,14 +51,10 @@ class LoginScreenController extends GetxController {
 		rememberMe.value = !rememberMe.value;
 	}
 	
-	
-
-
 	Future<void> login(String username, String password) async {
 	  isLoading.value = true;
-	  //Get.offAll(Bottom());
-	  Get.toNamed(Routes.HOME);
-	  /*final response = await apiService.login(username, password);
+	  //Get.toNamed(Routes.HOME);
+	  final response = await apiService.login(username, password);
 	  isLoading.value = false;
 
 	  if (response.containsKey('access_token')) {
@@ -71,9 +67,7 @@ class LoginScreenController extends GetxController {
 		  message: response['message'],
 		  position: SnackPosition.BOTTOM, // Custom position
 		);
-	  }*/
-	  
-		
+	  }
 	}
 	
 	// Method for Google login that takes the user object
@@ -112,7 +106,8 @@ class LoginScreenController extends GetxController {
 		homeController.loadInitialDataForFeed();
 			  
 		await Future.delayed(Duration(seconds: 3));
-		Get.offAll(Bottom());
+		//Get.offAll(Bottom());
+		Get.toNamed(Routes.HOME);
 	}
 
 }

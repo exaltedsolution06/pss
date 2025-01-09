@@ -29,7 +29,7 @@ class SnackbarHelper {
     Get.snackbar(
       title,
       message,
-      backgroundColor: Color(0xffd10037),
+      backgroundColor: Color(0xff357a04),
       colorText: Colors.white,
       snackPosition: position, // Dynamic position
       margin: EdgeInsets.all(16),

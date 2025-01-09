@@ -13,16 +13,16 @@ class ForgotScreenController extends GetxController {
 
   Future<void> forgotPassword(String email) async {
     isLoading.value = true;
-	Get.toNamed(
+	/*Get.toNamed(
 		Routes.OTP_VERIFICATION_SCREEN,
 		parameters: {
 			'email': 'test@test.com',
 			'context': 'forgotPassword', // or 'anotherContext'
 		},
-	);
-    /*try {
+	);*/
+    try {
       final response = await apiService.forgotPassword(email);
-      if (response['status'] == '200') {
+      if (response['status'] == 200) {
 		SnackbarHelper.showSuccessSnackbar(
 		  title: Appcontent.snackbarTitleSuccess, 
 		  message: response['message'],
@@ -53,6 +53,6 @@ class ForgotScreenController extends GetxController {
 		);
     } finally {
       isLoading.value = false;
-    }*/
+    }
   }
 }
