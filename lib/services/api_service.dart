@@ -44,20 +44,107 @@ class ApiService extends BaseApiService {
 		final response = await post(ApiEndpoints.resetPassword, {'email': email, 'password': password, 'password_confirmation': password_confirmation});
 		return response;
 	}
-	
-	//Register
-	Future<Map<String, dynamic>> register(String name, String email, String password, String password_confirmation) async {
-		final response = await post(ApiEndpoints.register, {'name': name, 'email': email, 'password': password, 'password_confirmation': password_confirmation});
+	//Customer Register
+	Future<Map<String, dynamic>> store_customer(String first_name, String last_name, String email, String password, String confirmed_password, String company_name, String address, String city, String state, String zipcode, String phone_number) async {
+		final response = await post(ApiEndpoints.storeCustomer, {'first_name': first_name, 'last_name': last_name, 'email': email, 'password': password, 'confirmed_password': confirmed_password, 'company_name': company_name, 'address': address, 'city': city, 'state': state, 'zipcode': zipcode, 'phone_number': phone_number});
 		if (response.containsKey('access_token')) {
 			saveToken(response['access_token']);
 		}
 		return response;
 	}
+	//Retailer Register
+	Future<Map<String, dynamic>> store_retailer(File file, {required String first_name, required String last_name, required String email, required String password, required String confirmed_password, required String company_name, required String address, required String city, required String state, required String zipcode, required String phone_number}) async {
+		// Create Dio instance
+		Dio dio = Dio(BaseOptions(
+			validateStatus: (status) => status != null && status < 500,
+		));
+	
+		print('First Name: $first_name');
+		print('Last Name: $last_name');
+		print('Email: $email');
+		print('Password: $password');
+		print('Confirm Password: $confirmed_password');
+		print('Company Name: $company_name');
+		print('Address: $address');
+		print('City: $city');
+		print('State: $state');
+		print('Zipcode: $zipcode');
+		print('Phone Number: $phone_number');
+		print('File: $file');
+
+		// Prepare FormData object
+		FormData formData = FormData.fromMap({
+			'first_name': first_name,
+			'last_name': last_name,
+			'email': email,
+			'password': password,
+			'confirmed_password': confirmed_password,
+			'company_name': company_name,
+			'address': address,
+			'city': city,
+			'state': state,
+			'zipcode': zipcode,
+			'phone_number': phone_number,
+			'upload_tax_lisence': await MultipartFile.fromFile(file.path), // File upload field
+		});
+
+		// Prepare Dio options with headers
+		Options options = Options(
+			headers: await getHeaders(true) ?? {}, // Ensure headers are not null
+		);
+
+		// Make the API request
+		final response = await dio.post(
+			'$baseUrl/${ApiEndpoints.storeRetailer}',
+			data: formData,
+			options: options,
+		);
+
+		var dd = response.data;
+		print("Response data : $dd");
+
+		// Ensure response data is not null before returning
+		return response.data != null ? response.data : {'success': false};
+	}
+	
 	//Register email Verify OTP page
 	Future<Map<String, dynamic>> register_verifyOtp(String email, String otp) async {
 		final response = await post(ApiEndpoints.register_verifyOtp, {'email': email, 'otp': otp}, requiresAuth: true);
 		return response;
 	}
+	
+	//Home page category list
+	Future<Map<String, dynamic>> homeCategoryList() {
+		return get(ApiEndpoints.homeCategoryList, requiresAuth: false);
+	}
+	//Home page artist list
+	Future<Map<String, dynamic>> homeArtistList() {
+		return get(ApiEndpoints.homeArtistList, requiresAuth: false);
+	}
+	//All category list
+	Future<Map<String, dynamic>> allCategoryList(int page) async {
+		final response = await post(ApiEndpoints.allCategoryList, {'page': page}, requiresAuth: true);
+		return response;
+	}
+	//All artist list
+	Future<Map<String, dynamic>> allArtistList(int page) async {
+		final response = await post(ApiEndpoints.allArtistList, {'page': page}, requiresAuth: true);
+		return response;
+	}
+	//Product search page
+	Future<Map<String, dynamic>> productSearch(String keyword, int page) async {
+		final response = await post(ApiEndpoints.productSearch, {'keyword': keyword, 'page': page}, requiresAuth: true);
+		return response;
+	}
+	//Fetch product data for product details page
+	Future<Map<String, dynamic>> productDetails(int product_id) async {
+		final response = await post(ApiEndpoints.productDetails, {'product_id': product_id}, requiresAuth: true);
+		return response;
+	}
+	
+	///////////////////////////////////////////////////
+	
+	
 	//Fetch profile data for profile page
 	Future<Map<String, dynamic>> fetchProfileDataForViewProfilePage(int user, int social_user, int feeds) async {
 		final response = await post(ApiEndpoints.profile, {'user': user, 'social_user': social_user, 'feeds': feeds}, requiresAuth: true);
@@ -324,11 +411,7 @@ class ApiService extends BaseApiService {
 		final response = await post(ApiEndpoints.post_create, {'text': text, 'price': price}, requiresAuth: true);
 		return response;
 	}
-	//Fetch post data for edit post page
-	Future<Map<String, dynamic>> fetchPostDataForEditPostPage(int post_id) async {
-		final response = await post(ApiEndpoints.fetch_post, {'post_id': post_id}, requiresAuth: true);
-		return response;
-	}
+	
 	//Function to edit a post
 	Future<Map<String, dynamic>> post_edit(int post_id, String text, int price) async {
 		final response = await post(ApiEndpoints.post_edit, {'post_id': post_id, 'text': text, 'price': price}, requiresAuth: true);

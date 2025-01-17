@@ -102,8 +102,8 @@ class LoginScreenController extends GetxController {
 		);
 		  
 		// Load home data after navigation and login verification
-		final homeController = Get.find<HomeController>();
-		homeController.loadInitialDataForFeed();
+		//final homeController = Get.find<HomeController>();
+		//homeController.loadInitialDataForFeed();
 			  
 		await Future.delayed(Duration(seconds: 3));
 		//Get.offAll(Bottom());

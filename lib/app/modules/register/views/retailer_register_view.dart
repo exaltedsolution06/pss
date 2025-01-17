@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:get/get.dart';
@@ -8,14 +9,29 @@ import 'package:picturesourcesomerset/config/app_color.dart';
 import 'package:picturesourcesomerset/config/app_contents.dart';
 import 'package:picturesourcesomerset/config/common_textfield.dart';
 import 'package:picturesourcesomerset/config/common_button.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+import 'package:file_picker/file_picker.dart';
 
 import '../controllers/register_controller.dart';
 
+class RetailerRegisterView extends StatefulWidget {
+  RetailerRegisterView({Key? key}) : super(key: key);
+
+  @override
+  _RetailerRegisterViewState createState() => _RetailerRegisterViewState();
+}
+
 // ignore: must_be_immutable
-class RetailerRegisterView extends GetView<RegisterController> {
+/*class RetailerRegisterView extends GetView<RegisterController> {
   RetailerRegisterView({super.key});
 
-  final RegisterController registerController = Get.find();
+  final RegisterController registerController = Get.find();*/
+  
+class _RetailerRegisterViewState extends State<RetailerRegisterView> {
+	final RegisterController registerController = Get.put(RegisterController(Get.find<ApiService>()));
 
   final TextEditingController firstnameController = TextEditingController();
   final TextEditingController lastnameController = TextEditingController();
@@ -42,7 +58,102 @@ class RetailerRegisterView extends GetView<RegisterController> {
   final FocusNode _stateFocusNode = FocusNode();
   final FocusNode _zipcodeFocusNode = FocusNode();
   final FocusNode _phoneFocusNode = FocusNode();
+  
+	List<File> selectedFiles = [];  // To hold multiple image/video files
+	final picker = ImagePicker();
+	
+	Future<void> _checkPermissions(BuildContext context) async {
+		Map<Permission, PermissionStatus> statuses = await [
+		Permission.camera,
+		//Permission.storage, // Request storage permission to access videos as well
+		].request();
 
+		if (statuses[Permission.camera]!.isGranted) {
+			_showImagePicker(context);
+		} else if (statuses.values.any((status) => status.isPermanentlyDenied)) {
+			_showPermissionPermanentlyDeniedDialog(context);
+		} else if (statuses.values.any((status) => status.isDenied)) {
+			_showPermissionDeniedDialog(context);
+		}
+	}
+	void _showPermissionDeniedDialog(BuildContext context) {
+		showDialog(
+		  context: context,
+		  builder: (BuildContext context) {
+			return AlertDialog(
+			  title: const Text('Permissions Denied'),
+			  content: const Text('Please enable storage and camera permissions to proceed.'),
+			  actions: [
+				TextButton(
+				  child: const Text('Retry'),
+				  onPressed: () {
+					Navigator.of(context).pop();
+					_checkPermissions(context);
+				  },
+				),
+				TextButton(
+				  child: const Text('Cancel'),
+				  onPressed: () {
+					Navigator.of(context).pop();
+				  },
+				),
+			  ],
+			);
+		  },
+		);
+	}
+	void _showPermissionPermanentlyDeniedDialog(BuildContext context) {
+		showDialog(
+		  context: context,
+		  builder: (BuildContext context) {
+			return AlertDialog(
+			  title: const Text('Permissions Permanently Denied'),
+			  content: const Text('Please enable storage and camera permissions in your device settings.'),
+			  actions: [
+				TextButton(
+				  child: const Text('Settings',
+					style: const TextStyle(
+						color: AppColor.purple,
+					),
+				),
+				  onPressed: () {
+					openAppSettings();
+					Navigator.of(context).pop();
+				  },
+				),
+				TextButton(
+				  child: const Text('Cancel',
+					style: const TextStyle(
+						color: AppColor.purple,
+					),
+				),
+				  onPressed: () {
+					Navigator.of(context).pop();
+				  },
+				),
+			  ],
+			);
+		  },
+		);
+	}
+	Future<void> _showImagePicker(BuildContext context) async {
+		final List<XFile>? pickedFiles = await picker.pickMultiImage(); // For picking multiple images
+		if (pickedFiles != null) {
+		  for (var pickedFile in pickedFiles) {
+			File file = File(pickedFile.path);
+			setState(() {
+			  selectedFiles.add(file);  // Add each file to the list
+			});
+		  }
+		}
+		// For videos, you can use a different picker logic
+		final pickedVideo = await picker.pickVideo(source: ImageSource.gallery); // Picking videos
+		if (pickedVideo != null) {
+		  setState(() {
+			selectedFiles.add(File(pickedVideo.path));  // Add video file to the list
+		  });
+		}
+	}
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
@@ -230,8 +341,8 @@ class RetailerRegisterView extends GetView<RegisterController> {
 								  if (value == null || value.isEmpty) {
 									return 'Password cannot be blank';
 								  }
-								  if (value.length < 6) {
-									return 'Password must be at least 6 characters';
+								  if (value.length < 8) {
+									return 'Password must be at least 8 characters';
 								  }
 								  return null;
 								},
@@ -284,8 +395,8 @@ class RetailerRegisterView extends GetView<RegisterController> {
 								  if (value == null || value.isEmpty) {
 									return 'Password cannot be blank';
 								  }
-								  if (value.length < 6) {
-									return 'Password must be at least 6 characters';
+								  if (value.length < 8) {
+									return 'Password must be at least 8 characters';
 								  }
 								  return null;
 								},
@@ -532,7 +643,10 @@ class RetailerRegisterView extends GetView<RegisterController> {
 					Padding(
 					  padding: const EdgeInsets.only(top: 20),
 					  child: GestureDetector(
-						onTap: registerController.pickFile,
+						//onTap: registerController.pickFile,
+						 onTap: () async {
+                            await _checkPermissions(context);
+                         },
 						child: Container(
 						  width: double.infinity, // Make the container full width
 						  padding: const EdgeInsets.symmetric(vertical: 16),
@@ -565,18 +679,19 @@ class RetailerRegisterView extends GetView<RegisterController> {
                               ? null
                               : () {
                                   if (_formKey.currentState!.validate()) {
-                                    registerController.register(
-                                      firstnameController.text.trim(),
-                                      lastnameController.text.trim(),
-                                      emailController.text.trim(),
-                                      passwordController.text.trim(),
-                                      passwordconfirmationController.text.trim(),
-                                      companynameController.text.trim(),
-                                      addressController.text.trim(),
-                                      cityController.text.trim(),
-                                      stateController.text.trim(),
-                                      zipcodeController.text.trim(),
-                                      phoneController.text.trim(),
+                                    registerController.store_retailer(
+										selectedFiles: selectedFiles, // Pass the image file
+										first_name: firstnameController.text.trim(),
+										last_name: lastnameController.text.trim(),
+										email: emailController.text.trim(),
+										password: passwordController.text.trim(),
+										confirmed_password: passwordconfirmationController.text.trim(),
+										company_name: companynameController.text.trim(),
+										address: addressController.text.trim(),
+										city: cityController.text.trim(),
+										state: stateController.text.trim(),
+										zipcode: zipcodeController.text.trim(),
+										phone_number: phoneController.text.trim(),
                                     );
                                   }
                                 },

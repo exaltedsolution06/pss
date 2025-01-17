@@ -7,9 +7,17 @@ class ApiEndpoints {
   static const String forgotPassword = 'forgot-password';
   static const String forgotPassword_verifyOtp = 'forgot-password-verify-otp';
   static const String resetPassword = 'reset-password';
+  static const String storeCustomer = 'store-customer';
+  static const String storeRetailer = 'store-retailer';
+  static const String register_verifyOtp = 'register-verify-otp';
+  static const String homeCategoryList = 'home-category-list';
+  static const String homeArtistList = 'home-artist-list';
+  static const String allCategoryList = 'category-list';
+  static const String allArtistList = 'get-artist-list';
+  static const String productSearch = 'product-search';
+  static const String productDetails = 'single-product';
   
-  static const String register = 'register';
-  static const String register_verifyOtp = 'register/verify-otp';
+  //static const String register = 'register';
   static const String profile = 'profile';
   static const String profile_submit = 'profile_submit';
   static const String profile_avatar_image_upload = 'profile_avatar_image_upload';

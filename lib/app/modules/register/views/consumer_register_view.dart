@@ -229,8 +229,8 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 								  if (value == null || value.isEmpty) {
 									return 'Password cannot be blank';
 								  }
-								  if (value.length < 6) {
-									return 'Password must be at least 6 characters';
+								  if (value.length < 8) {
+									return 'Password must be at least 8 characters';
 								  }
 								  return null;
 								},
@@ -283,8 +283,8 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 								  if (value == null || value.isEmpty) {
 									return 'Password cannot be blank';
 								  }
-								  if (value.length < 6) {
-									return 'Password must be at least 6 characters';
+								  if (value.length < 8) {
+									return 'Password must be at least 8 characters';
 								  }
 								  return null;
 								},
@@ -540,7 +540,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
                               ? null
                               : () {
                                   if (_formKey.currentState!.validate()) {
-                                    registerController.register(
+                                    registerController.store_customer(
                                       firstnameController.text.trim(),
                                       lastnameController.text.trim(),
                                       emailController.text.trim(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:convert';
 import 'package:picturesourcesomerset/services/api_service.dart';
 import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';
@@ -21,7 +22,6 @@ class SerachScreenController extends GetxController {
 
 	var productData = <dynamic>[].obs;
 	//var productData = <RxMap<String, dynamic>>[].obs;
-	
 
 	
 	// Method to update the keyword
@@ -57,14 +57,36 @@ class SerachScreenController extends GetxController {
 		isFetchingData.value = true;
 		try {
 			var response = await apiService.productSearch(keyword.value, currentPageProduct.value);
+			/*final response = {
+			  'data': [
+					{'name': 'Cityscapes', 'image': Appcontent.pss1, 'selected': false},
+					{'name': 'Coastal', 'image': Appcontent.pss2, 'selected': false},
+					{'name': 'Figurative', 'image': Appcontent.pss3, 'selected': false},
+					{'name': 'Florals', 'image': Appcontent.pss4, 'selected': false},
+					{'name': 'Landscape', 'image': Appcontent.pss5, 'selected': false},
+					{'name': 'Lodge & Farmhouse', 'image': Appcontent.pss6, 'selected': false},
+					{'name': 'Photography', 'image': Appcontent.pss7, 'selected': false},
+					{'name': 'Somerset Classics', 'image': Appcontent.pss8, 'selected': false},
+				],
+			};*/
 			//print("response: $response");
+			//var newData = response?['data'] ?? [];
 			var newData = response['data'];	
 			//print("newData: $newData");			
 			if (newData.isEmpty) {
 				hasMoreDataProduct.value = false;
 			} else {
 				//print("newData-----: $newData");			
-				productData.addAll(newData); 
+				productData.addAll(newData);
+				
+				/*productData.addAll(newData.map((item) {
+					return RxMap<String, dynamic>.from({
+					  'name': item['name'],
+					  'image': item['image'],
+					  //'selected': (item['selected'] ?? false).obs,  // Reactive selected field
+					});
+				}).toList());*/
+	  
 	  
 				currentPageProduct.value++;
 				

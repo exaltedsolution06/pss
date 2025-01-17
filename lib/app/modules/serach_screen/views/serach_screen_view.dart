@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:picturesourcesomerset/services/api_service.dart';
+import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 //import 'package:picturesourcesomerset/app/modules/filter_screen/views/filter_screen_view.dart';
 //import 'package:picturesourcesomerset/app/modules/view_proflie_screen/views/view_proflie_screen_view.dart';
 
@@ -11,8 +12,6 @@ import 'package:picturesourcesomerset/config/common_button.dart';
 import 'package:picturesourcesomerset/config/common_textfield.dart';
 import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
 import '../controllers/serach_screen_controller.dart';
-
-
 
 // ignore: must_be_immutable
 class SerachScreenView extends StatelessWidget {
@@ -82,7 +81,7 @@ class SerachScreenView extends StatelessWidget {
 									onPress: () {
 										// Pass the search query to the controller and trigger search
 										serachScreenController.onSearchQueryChanged(searchController.text);
-										serachScreenController.loadMoreDataTop();  // Trigger the top data search
+										serachScreenController.loadMoreDataProduct();  // Trigger the top data search
 									},
 								),
 							],
@@ -93,12 +92,12 @@ class SerachScreenView extends StatelessWidget {
           ),
         ),
         body: Obx(() {
-          if (serachScreenController.isFetchingData.value && serachScreenController.topData.isEmpty) {
+          if (serachScreenController.isFetchingData.value && serachScreenController.productData.isEmpty) {
             return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(AppColor.purple),));
           }
           return Column(
             children: [
-              buildSearchList(serachScreenController.topData),
+              buildSearchList(serachScreenController.productData),
             ],
           );
         }),
@@ -107,7 +106,7 @@ class SerachScreenView extends StatelessWidget {
     );
   }
 
-Widget buildSearchList(RxList<RxMap<String, dynamic>> data) {
+Widget buildSearchList(RxList data) {
   return Expanded(
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -146,9 +145,9 @@ Widget buildSearchList(RxList<RxMap<String, dynamic>> data) {
           itemCount: data.length,
           itemBuilder: (context, index) {
             // Each item in the list is an observable map
-            final RxMap<String, dynamic> feedData = data[index];
+			final RxMap<String, dynamic> feedData = RxMap<String, dynamic>.from(data[index]);
 
-            return buildSearchItem(feedData, context);
+			return buildSearchItem(feedData, index, context);
           },
         );
       }),
@@ -156,18 +155,19 @@ Widget buildSearchList(RxList<RxMap<String, dynamic>> data) {
   );
 }
 
-Widget buildSearchItem(RxMap<String, dynamic> feedData, BuildContext context) {
-  return Obx(() {
-    final isSelected = feedData['selected']?.value ?? false; // Get the reactive value of selected
+Widget buildSearchItem(RxMap<String, dynamic> feedData, int index, BuildContext context) {
+	return Obx(() {
+		return GestureDetector(
+			onTap: () {
+			  print('Edit clicked');
+			  final productId = feedData['product_id']?.toString() ?? '1';
+			  print('Navigating with Product ID: $productId');
+			  Get.toNamed(
+				Routes.PRODUCTVIEW_SCREEN,
+				arguments: {'productId': productId},
+			  );
+			},
 
-    return GestureDetector(
-      onTap: () {
-        feedData['selected']?.value = !(feedData['selected']?.value ?? false); // Toggle selection
-        feedData.refresh(); // Refresh this specific RxMap instance
-        serachScreenController.topData.refresh(); // Refresh the parent RxList if needed
-
-        print("Item selected: ${feedData['selected']?.value}");
-      },
 
       child: Stack(
         children: [
@@ -176,28 +176,16 @@ Widget buildSearchItem(RxMap<String, dynamic> feedData, BuildContext context) {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.0),
               image: DecorationImage(
-                image: AssetImage(feedData['image']),
+                image: NetworkImage(feedData['image']),
                 fit: BoxFit.cover,
               ),
             ),
           ),
           // Semi-transparent overlay for selected state
-          if (isSelected)
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16.0),
-                color: Colors.white.withOpacity(0.4),
-              ),
-            ),
-          // Tick icon
-          if (isSelected)
-            Positioned(
-              top: 8,
-              left: 8,
-              child: Icon(
-                Icons.check_circle,
-                color: Colors.black,
-                size: 24,
+                color: Colors.black.withOpacity(0.4),
               ),
             ),
           // Category name
@@ -211,12 +199,6 @@ Widget buildSearchItem(RxMap<String, dynamic> feedData, BuildContext context) {
                 color: Colors.white,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                shadows: [
-                  Shadow(
-                    color: Colors.black,
-                    blurRadius: 4.0,
-                  ),
-                ],
               ),
               textAlign: TextAlign.center,
             ),

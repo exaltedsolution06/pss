@@ -11,10 +11,205 @@ import 'package:picturesourcesomerset/config/app_contents.dart';
 class RegisterController extends GetxController {
   final ApiService apiService;  
   RegisterController(this.apiService);
+  
   var isLoading = false.obs;
   var isFetchingData = false.obs;
   var showPassword = true.obs;  // RxBool
   var showCPassword = true.obs;  // RxBool
+  
+  void changePasswordHideAndShow() {
+    showPassword.value = !showPassword.value;  // Use .value to update RxBool
+  }
+  void changeCPasswordHideAndShow() {
+    showCPassword.value = !showCPassword.value;  // Use .value to update RxBool
+  }
+  
+  Future<void> store_customer(first_name, last_name, email, password, confirmed_password, company_name, address, city, state, zipcode, phone_number) async {
+    isLoading.value = true;
+	print('First Name: $first_name');
+	print('Last Name: $last_name');
+	print('Email: $email');
+	print('Password: $password');
+	print('Confirm Password: $confirmed_password');
+	print('Company Name: $company_name');
+	print('Address: $address');
+	print('City: $city');
+	print('State: $state');
+	print('Zipcode: $zipcode');
+	print('Phone Number: $phone_number');
+    try {
+		final response = await apiService.store_customer(first_name, last_name, email, password, confirmed_password, company_name, address, city, state, zipcode, phone_number);
+		
+		//final otpErrorsEmail = response['errors']['email'] as List<dynamic>;
+		
+		//print('testtttt: $otpErrorsEmail');
+		if (response['status'] == 200) {
+			SnackbarHelper.showSuccessSnackbar(
+			  title: Appcontent.snackbarTitleSuccess, 
+			  message: response['message'],
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+			// Debug print to verify email and navigation
+			//print('Navigating to CreatepinScreenView with email: $email');
+			//Get.toNamed(Routes.HOME);
+			Get.toNamed(
+				Routes.OTP_VERIFICATION_SCREEN,
+				parameters: {
+					'email': email,
+					'context': 'register', // or 'anotherContext'
+				},
+			);
+		} else if (response['status'] == 600) {
+			// Extract OTP error messages
+			final otpErrorsEmail = (response['errors']['email'] as List<dynamic>?) ?? [];
+			final otpErrorsPass = (response['errors']['password'] as List<dynamic>?) ?? [];
+			final otpErrorsCPass = (response['errors']['confirmed_password'] as List<dynamic>?) ?? [];
+
+			// Default error messages
+			const defaultEmailError = 'The email has already been taken.';
+			const defaultPasswordError = 'The password confirmation does not match.';
+			const defaultCPasswordError = 'The password confirmation field is required.';
+
+			// Function to get the first error message if exists, otherwise return the default message
+			String getFirstErrorMessage(List<dynamic> errors, String defaultMessage) {
+			  return errors.isNotEmpty ? (errors.first as String?) ?? defaultMessage : defaultMessage;
+			}
+
+			// Determine the error message to display
+			final emailOtpErrorMessage = getFirstErrorMessage(otpErrorsEmail, defaultEmailError);
+			final passwordOtpErrorMessage = otpErrorsPass.isNotEmpty ? getFirstErrorMessage(otpErrorsPass, defaultPasswordError) : '';
+			final cpasswordOtpErrorMessage = otpErrorsCPass.isNotEmpty ? getFirstErrorMessage(otpErrorsCPass, defaultCPasswordError) : '';
+
+			// Display the first available error message in priority order
+			final displayErrorMessage = otpErrorsEmail.isNotEmpty
+				? emailOtpErrorMessage
+				: otpErrorsPass.isNotEmpty
+					? passwordOtpErrorMessage
+					: cpasswordOtpErrorMessage;
+
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: displayErrorMessage,
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+
+
+		} else {
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: response['message'],
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+		}
+    } catch (e) {
+		SnackbarHelper.showErrorSnackbar(
+		  title: Appcontent.snackbarTitleError, 
+		  message: Appcontent.snackbarCatchErrorMsg, 
+		  position: SnackPosition.BOTTOM, // Custom position
+		);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+  
+	Future<void> store_retailer({
+		required String first_name, 
+		required String last_name, 
+		required String email, 
+		required String password, 
+		required String confirmed_password, 
+		required String company_name, 
+		required String address, 
+		required String city, 
+		required String state, 
+		required String zipcode, 
+		required String phone_number,
+		List<File>? selectedFiles,
+	}) async {
+    isLoading.value = true;
+	//print('Navigating to CreatepinScreenView with name: $name');
+	//print('Navigating to CreatepinScreenView with email: $email');
+	//print('Navigating to CreatepinScreenView with password: $password');
+    try {
+		if (selectedFiles != null && selectedFiles.isNotEmpty) {
+			File imageFile = selectedFiles.first; // Get the first (and only) file
+			final response = await apiService.store_retailer(imageFile, first_name:first_name, last_name:last_name, email:email, password:password, confirmed_password:confirmed_password, company_name:company_name, address:address, city:city, state:state, zipcode:zipcode, phone_number:phone_number);
+			
+			//final otpErrorsEmail = response['errors']['email'] as List<dynamic>;
+		
+		//print('testtttt: $otpErrorsEmail');
+		if (response['status'] == 200) {
+			SnackbarHelper.showSuccessSnackbar(
+			  title: Appcontent.snackbarTitleSuccess, 
+			  message: response['message'],
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+			// Debug print to verify email and navigation
+			//print('Navigating to CreatepinScreenView with email: $email');
+			//Get.toNamed(Routes.HOME);
+			Get.toNamed(
+				Routes.OTP_VERIFICATION_SCREEN,
+				parameters: {
+					'email': email,
+					'context': 'register', // or 'anotherContext'
+				},
+			);
+		} else if (response['status'] == 600) {
+			// Extract OTP error messages
+			final otpErrorsEmail = (response['errors']['email'] as List<dynamic>?) ?? [];
+			final otpErrorsPass = (response['errors']['password'] as List<dynamic>?) ?? [];
+			final otpErrorsCPass = (response['errors']['confirmed_password'] as List<dynamic>?) ?? [];
+
+			// Default error messages
+			const defaultEmailError = 'The email has already been taken.';
+			const defaultPasswordError = 'The password confirmation does not match.';
+			const defaultCPasswordError = 'The password confirmation field is required.';
+
+			// Function to get the first error message if exists, otherwise return the default message
+			String getFirstErrorMessage(List<dynamic> errors, String defaultMessage) {
+			  return errors.isNotEmpty ? (errors.first as String?) ?? defaultMessage : defaultMessage;
+			}
+
+			// Determine the error message to display
+			final emailOtpErrorMessage = getFirstErrorMessage(otpErrorsEmail, defaultEmailError);
+			final passwordOtpErrorMessage = otpErrorsPass.isNotEmpty ? getFirstErrorMessage(otpErrorsPass, defaultPasswordError) : '';
+			final cpasswordOtpErrorMessage = otpErrorsCPass.isNotEmpty ? getFirstErrorMessage(otpErrorsCPass, defaultCPasswordError) : '';
+
+			// Display the first available error message in priority order
+			final displayErrorMessage = otpErrorsEmail.isNotEmpty
+				? emailOtpErrorMessage
+				: otpErrorsPass.isNotEmpty
+					? passwordOtpErrorMessage
+					: cpasswordOtpErrorMessage;
+
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: displayErrorMessage,
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+
+
+		} else {
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: response['message'],
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+		}
+	
+		}
+		
+		
+    } catch (e) {
+		SnackbarHelper.showErrorSnackbar(
+		  title: Appcontent.snackbarTitleError, 
+		  message: Appcontent.snackbarCatchErrorMsg, 
+		  position: SnackPosition.BOTTOM, // Custom position
+		);
+    } finally {
+      isLoading.value = false;
+    }
+  }
   
   // Flag to control whether fetchTermsPage should be called
 	//bool shouldFetchTermsPage = false;
@@ -101,12 +296,7 @@ class RegisterController extends GetxController {
 	
 
   
-  void changePasswordHideAndShow() {
-    showPassword.value = !showPassword.value;  // Use .value to update RxBool
-  }
-  void changeCPasswordHideAndShow() {
-    showCPassword.value = !showCPassword.value;  // Use .value to update RxBool
-  }
+  
   
   Future<void> pickFile() async {
 	  FilePickerResult? result = await FilePicker.platform.pickFiles();
@@ -152,83 +342,5 @@ Future<void> uploadFile(String filePath) async {
 
 
 
-  Future<void> register(String firstname, String lastname, String email, String password, String password_confirmation, String company_name, address, city, state, zipcode, phone) async {
-    isLoading.value = true;
-	//print('Navigating to CreatepinScreenView with name: $name');
-	//print('Navigating to CreatepinScreenView with email: $email');
-	//print('Navigating to CreatepinScreenView with password: $password');
-    /*try {
-		final response = await apiService.register(name, email, password, password_confirmation);
-		
-		//final otpErrorsEmail = response['errors']['email'] as List<dynamic>;
-		
-		//print('testtttt: $otpErrorsEmail');
-		if (response['status'] == '200') {
-			SnackbarHelper.showSuccessSnackbar(
-			  title: Appcontent.snackbarTitleSuccess, 
-			  message: response['message'],
-			  position: SnackPosition.BOTTOM, // Custom position
-			);
-			// Debug print to verify email and navigation
-			//print('Navigating to CreatepinScreenView with email: $email');
-			//Get.toNamed(Routes.HOME);
-			Get.toNamed(
-				Routes.OTP_VERIFICATION_SCREEN,
-				parameters: {
-					'email': email,
-					'context': 'register', // or 'anotherContext'
-				},
-			);
-		} else if (response['status'] == '600') {
-			// Extract OTP error messages
-			final otpErrorsEmail = (response['errors']['email'] as List<dynamic>?) ?? [];
-			final otpErrorsPass = (response['errors']['password'] as List<dynamic>?) ?? [];
-			final otpErrorsCPass = (response['errors']['password_confirmation'] as List<dynamic>?) ?? [];
-
-			// Default error messages
-			const defaultEmailError = 'The email has already been taken.';
-			const defaultPasswordError = 'The password confirmation does not match.';
-			const defaultCPasswordError = 'The password confirmation field is required.';
-
-			// Function to get the first error message if exists, otherwise return the default message
-			String getFirstErrorMessage(List<dynamic> errors, String defaultMessage) {
-			  return errors.isNotEmpty ? (errors.first as String?) ?? defaultMessage : defaultMessage;
-			}
-
-			// Determine the error message to display
-			final emailOtpErrorMessage = getFirstErrorMessage(otpErrorsEmail, defaultEmailError);
-			final passwordOtpErrorMessage = otpErrorsPass.isNotEmpty ? getFirstErrorMessage(otpErrorsPass, defaultPasswordError) : '';
-			final cpasswordOtpErrorMessage = otpErrorsCPass.isNotEmpty ? getFirstErrorMessage(otpErrorsCPass, defaultCPasswordError) : '';
-
-			// Display the first available error message in priority order
-			final displayErrorMessage = otpErrorsEmail.isNotEmpty
-				? emailOtpErrorMessage
-				: otpErrorsPass.isNotEmpty
-					? passwordOtpErrorMessage
-					: cpasswordOtpErrorMessage;
-
-			SnackbarHelper.showErrorSnackbar(
-			  title: Appcontent.snackbarTitleError, 
-			  message: displayErrorMessage,
-			  position: SnackPosition.BOTTOM, // Custom position
-			);
-
-
-		} else {
-			SnackbarHelper.showErrorSnackbar(
-			  title: Appcontent.snackbarTitleError, 
-			  message: response['message'],
-			  position: SnackPosition.BOTTOM, // Custom position
-			);
-		}
-    } catch (e) {
-		SnackbarHelper.showErrorSnackbar(
-		  title: Appcontent.snackbarTitleError, 
-		  message: Appcontent.snackbarCatchErrorMsg, 
-		  position: SnackPosition.BOTTOM, // Custom position
-		);
-    } finally {
-      isLoading.value = false;
-    }*/
-  }
+  
 }

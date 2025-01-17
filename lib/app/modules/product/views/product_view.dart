@@ -18,7 +18,8 @@ import 'package:picturesourcesomerset/app/modules/product/models/product_data.da
 class ProductView extends StatefulWidget {
   final String productId;
 
-  const ProductView({Key? key, required this.productId}) : super(key: key);
+  //const ProductView({Key? key, required this.productId}) : super(key: key);
+  ProductView({required this.productId});
   
 
   @override
@@ -28,8 +29,8 @@ class ProductView extends StatefulWidget {
 
 class _ProductViewState extends State<ProductView> {
 	
-	final ProductViewController productViewController = Get.put(ProductViewController());
-	//final ProductViewController productViewController = Get.find();
+	//final ProductController productController = Get.put(ProductController());
+	final ProductController productController = Get.find();
 	
 	final ImagePicker _picker = ImagePicker();
 	final TextEditingController reviewController = TextEditingController();
@@ -60,10 +61,12 @@ class _ProductViewState extends State<ProductView> {
 	@override
 	void initState() {
 		super.initState();
-		productViewController.fetchProductData(widget.productId);
+		//productController.fetchProductData(widget.productId);
 		// Initialize productData with appropriate values, e.g., from arguments or an API call
 		productData = ProductData(); // Initialize it according to your logic
 	}
+	
+
 	
 
 	@override
@@ -73,12 +76,12 @@ class _ProductViewState extends State<ProductView> {
 		super.dispose();
 	}
   
-	final List<String> imageUrls = [
+	/*final List<String> imageUrls = [
 		Appcontent.pss1,
 		Appcontent.pss2,
 		Appcontent.pss3,
 		Appcontent.pss4,
-	];
+	];*/
 	
 	int _selectedStars = 0; // Tracks the selected star rating
 	
@@ -90,19 +93,18 @@ class _ProductViewState extends State<ProductView> {
 				title: const Text("Product Details"),
 			),
 			body: Obx(() {
-				if (productViewController.isFetchingData.value) {
+				if (productController.isFetchingData.value) {
 					return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(AppColor.purple),));	
-				} else if (productViewController.productData.value == null) {
+				} else if (productController.productData.value == null) {
 					return Center(child: Text("Error loading product data."));					
 				} else {
-					final productData = productViewController.productData.value;
-					// Check if productData and its fields are not null or empty
-					if (productData == null || productData.fetchedFiles == null || productData.fetchedFiles.isEmpty) {
-					  return Center(child: Text("No product files available."));
-					}
+					final productData = productController.productData.value;
+					var imageUrls = productData.fetchedFiles;
 					
+					print("Product ID: ${productData}");
 					print("Files: ${productData.fetchedFiles}");
-					print("Total Files: ${productData.fetchedFiles.length}");
+					print("Total Files: ${productData.fetchedFiles?.length ?? 0}");
+
 					print("Category Name: ${productData.category_name}");
 					print("Artist Name: ${productData.artist_name}");
 					print("Size Name: ${productData.size_name}");
@@ -124,37 +126,41 @@ class _ProductViewState extends State<ProductView> {
 									crossAxisAlignment: CrossAxisAlignment.start,
 									children: [
 									  Text(
-										"057BU-F",
+										productData.product_code,
 										style: TextStyle(fontSize: 20, fontFamily: 'Urbanist-semibold'),
 									  ),
 									  Row(
 										mainAxisAlignment: MainAxisAlignment.spaceBetween,
 										children: [
-										  Text("DEER", style: TextStyle(fontSize: 14, fontFamily: 'Urbanist-Regular')),
-										  Text("Artist BUSTAMONTE", style: TextStyle(fontSize: 14, fontFamily: 'Urbanist-Regular')),
+										  Text(productData.category_name, style: TextStyle(fontSize: 14, fontFamily: 'Urbanist-Regular')),
+										  Text("Artist ${productData.artist_name}", style: TextStyle(fontSize: 14, fontFamily: 'Urbanist-Regular')),
 										],
 									  ),
 									],
 								  ),
 								),
+								if (productData.fetchedFiles != null && productData.fetchedFiles!.isNotEmpty)
 								CarouselSlider(
 								  options: CarouselOptions(
 									height: 300.0,
 									autoPlay: true,
 									enlargeCenterPage: true,
 								  ),
-								  items: imageUrls.map((imageUrl) {
-									return Builder(
-									  builder: (BuildContext context) {
-										return Image.asset(
-										  imageUrl,
-										  fit: BoxFit.cover,
-										  width: double.infinity,
+								  items: productData.fetchedFiles!
+									  .where((file) => file.filePath != null && file.filePath!.isNotEmpty) // Ensure non-null and non-empty filePath
+									  .map((file) {
+										return Builder(
+										  builder: (BuildContext context) {
+											return Image.network(
+											  file.filePath!, // Safe to use `!` after filtering
+											  fit: BoxFit.cover,
+											  width: double.infinity,
+											);
+										  },
 										);
-									  },
-									);
-								  }).toList(),
+									  }).toList(),
 								),
+
 								const SizedBox(height: 10),
 								Padding(
 								  padding: const EdgeInsets.all(16.0),
@@ -190,7 +196,7 @@ class _ProductViewState extends State<ProductView> {
 											  ),
 											),
 
-											Text("Rs. 25", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold')),
+											Text(productData.price, textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold')),
 											GestureDetector(
 											  onTap: () {
 												//Get.toNamed(Routes.YOUR_TARGET_PAGE); // Replace with your desired route
@@ -217,8 +223,8 @@ class _ProductViewState extends State<ProductView> {
 										],
 									  ),
 									  const SizedBox(height: 20),
-									  const Text(
-										"EXCLUSIVE SILK SCREEN ENHANCED w/GEL BRUSHSTROKES AND COLOR ACCENTS",
+									  Text(
+										productData.name,
 										style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', fontWeight: FontWeight.bold),
 									  ),
 									  const SizedBox(height: 10),
@@ -227,7 +233,11 @@ class _ProductViewState extends State<ProductView> {
 											child: Column(
 												crossAxisAlignment: CrossAxisAlignment.start,
 												children: [
-													customBulletList(
+													Text(
+														productData.moulding_description,
+														style: TextStyle(fontSize: 14, fontFamily: 'Urbanist-Regular'),
+													  ),
+													/*customBulletList(
 													  items: [
 														'Moulding: BW8004',
 														'Moulding Description: 2 DK KNOTTY PINE, ROUNDED w/STEPS (9) (B)',
@@ -238,7 +248,7 @@ class _ProductViewState extends State<ProductView> {
 													  bulletPadding: 12.0, // Adjust this value as needed
 													  bulletOffset: 7.0, // Fine-tune this value to align the bullet with the first line
 													  textStyle: TextStyle(fontSize: 14, color: AppColor.BlackGreyscale, fontFamily: 'Urbanist-Regular'),
-													),
+													),*/
 												],
 											),
 										),
@@ -263,7 +273,7 @@ class _ProductViewState extends State<ProductView> {
 														mainAxisSize: MainAxisSize.min, // Adjust the width of the row to fit its children
 														children: [
 															Text(
-															  "4.4",
+															  productData.average_rating,
 															  style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
 															),
 															SizedBox(width: 8), // Adds space between the icon and the text
@@ -275,8 +285,8 @@ class _ProductViewState extends State<ProductView> {
 														],
 													),
 													Text(
-														"923 Ratings\n"
-														"and 257 Reviews",
+														"${productData.total_rating} Ratings\n"
+														"and ${productData.total_reviews} Reviews",
 														style: TextStyle(color: Colors.grey),
 													),			
 												],
@@ -297,7 +307,7 @@ class _ProductViewState extends State<ProductView> {
 												  Column(
 													children: List.generate(5, (index) {
 													  final labels = ["5", "4", "3", "2", "1"];
-													  final percentages = [0.67, 0.20, 0.07, 0.00, 0.02];
+													  final percentages = [productData.percentage_rating_five/100, productData.percentage_rating_four/100, productData.percentage_rating_three/100, productData.percentage_rating_two/100, productData.percentage_rating_one/100];
 													  return Row(
 														children: [
 															Text(labels[index]),

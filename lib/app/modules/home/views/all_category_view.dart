@@ -5,34 +5,40 @@ import 'package:picturesourcesomerset/config/app_contents.dart';
 import 'package:picturesourcesomerset/config/app_color.dart';
 import 'package:picturesourcesomerset/config/category_card.dart';
 import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
-//import 'package:picturesourcesomerset/app/modules/home/views/selected_category.dart';
-import 'package:picturesourcesomerset/app/modules/home/views/all_category_view.dart';
-import 'package:picturesourcesomerset/app/modules/home/views/all_artist_view.dart';
 
 import 'package:picturesourcesomerset/app/modules/home/controllers/home_controller.dart';
 
-class HomeView extends StatefulWidget {
+class AllCategoryView extends StatefulWidget {
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<AllCategoryView> createState() => _AllCategoryViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
-  final HomeController homeController = Get.find<HomeController>();
-
-  @override
-  void initState() {
-    super.initState();
-    homeController.homeCategoryData();
-    homeController.homeArtistData();
-  }
+class _AllCategoryViewState extends State<AllCategoryView> {
+	final HomeController homeController = Get.find<HomeController>();
+	
+	// Scroll controllers for vertical and horizontal scrolling
+	final ScrollController _verticalScrollController = ScrollController();
+	
+	@override
+	void initState() {
+		super.initState();
+		homeController.loadInitialDataForCategory();
+	}
+	_AllCategoryViewState() {
+		// Vertical Scroll Listener
+		_verticalScrollController.addListener(() {
+			if (_verticalScrollController.position.pixels == _verticalScrollController.position.maxScrollExtent) {
+				homeController.loadMoreCategoryData();  // Load more data on vertical scroll
+			}
+		});
+	}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Picture Source Somerset'),
+        title: const Text('Categories'),
         centerTitle: true,
-		automaticallyImplyLeading: false, // Removes the back arrow
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -41,17 +47,7 @@ class _HomeViewState extends State<HomeView> {
           children: [
             // Categories Section
             _buildSection(
-              title: "Categories",
-              dataList: homeController.categoryData,
-              onViewAll: () => Get.to(() => AllCategoryView()),
-            ),
-            const SizedBox(height: 6.0),
-
-            // Artists Section
-            _buildSection(
-              title: "Artists",
-              dataList: homeController.artistData,
-              onViewAll: () => Get.to(() => AllArtistView()),
+              dataList: homeController.allCategoryData,
             ),
           ],
         ),
@@ -61,41 +57,12 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _buildSection({
-    required String title,
     required RxList<dynamic> dataList,
-    required VoidCallback onViewAll,
   }) {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Heading with "View All" button
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-              TextButton(
-                onPressed: onViewAll,
-                child: Text(
-                  "View All",
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: AppColor.purple,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16.0),
-
           // Dynamic GridView
           Expanded(
             child: Obx(() {
@@ -120,7 +87,7 @@ class _HomeViewState extends State<HomeView> {
                     image: item['image']!,
                     label: item['name']!,
                     onTap: () {
-                      //Get.to(() => productViewPage(id: item['id']!));
+                      //Get.to(() => SelectedCategory(title: item['name']!));
                     },
                   );
                 },

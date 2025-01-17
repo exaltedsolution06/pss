@@ -13,6 +13,9 @@ import '../modules/register/bindings/retailer_register_binding.dart';
 import '../modules/register/views/retailer_register_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import 'package:picturesourcesomerset/app/modules/product/bindings/product_binding.dart';
+import 'package:picturesourcesomerset/app/modules/product/views/product_view.dart';
+
 import '../modules/home/views/wall_photo_view.dart';
 import '../modules/shop_screen/bindings/shop_screen_binding.dart';
 import '../modules/shop_screen/views/shop_screen_view.dart';
@@ -100,8 +103,25 @@ class AppPages {
       name: _Paths.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
-	  //middlewares: [AuthGuard()], // After Login
+	  middlewares: [AuthGuard()], // After Login
     ),	
+    GetPage(
+      name: _Paths.SERACH_SCREEN,
+      page: () => SerachScreenView(),
+      binding: SerachScreenBinding(),
+	  middlewares: [AuthGuard()], // After Login
+    ),
+	GetPage(
+		name: _Paths.PRODUCTVIEW_SCREEN,
+		page: () {
+			final args = Get.arguments as Map<String, dynamic>?;
+			final productId = args?['productId'] ?? '';
+			print('Navigating to ProductView with productId: $productId');
+			return ProductView(productId: productId);
+		},
+		binding: ProductBinding(),
+		middlewares: [AuthGuard()], // After Login
+	),
 	GetPage(
 		name: _Paths.WALLPHOTO, 
 		page: () => WallPhotoView(),
@@ -116,12 +136,6 @@ class AppPages {
       name: _Paths.NOTIFICATION_SCREEN,
       page: () => NotificationScreenView(),
       binding: NotificationScreenBinding(),
-	  //middlewares: [AuthGuard()], // After Login
-    ),
-    GetPage(
-      name: _Paths.SERACH_SCREEN,
-      page: () => SerachScreenView(),
-      binding: SerachScreenBinding(),
 	  //middlewares: [AuthGuard()], // After Login
     ),
     GetPage(

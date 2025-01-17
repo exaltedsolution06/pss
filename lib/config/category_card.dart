@@ -26,7 +26,7 @@ class CategoryCard extends StatelessWidget {
             // Image in the background with rounded corners
             ClipRRect(
               borderRadius: BorderRadius.circular(16.0), // Apply rounded corners to the image
-              child: Image.asset(
+              child: Image.network(
                 image,
                 fit: BoxFit.cover,
                 width: double.infinity,

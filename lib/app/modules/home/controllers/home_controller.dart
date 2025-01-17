@@ -13,57 +13,110 @@ class HomeController extends GetxController {
 	var isLoading = false.obs;  // RxBool
 	HomeController(this.apiService);
 	
-	var feedData = <dynamic>[].obs;	
+	var categoryData = <dynamic>[].obs;	
+	var artistData = <dynamic>[].obs;	
+	var allCategoryData = <dynamic>[].obs;
+	var allArtistData = <dynamic>[].obs;
+
 	// Reset the page number
-	var currentPage = 1.obs;  
-	
-	var isFetchingFeedData = false.obs;
+	var currentCategoryPage = 1.obs;  
+	var currentArtistPage = 1.obs;  
+
+	var isFetchingCategoryData = false.obs;
+	var isFetchingArtistData = false.obs;	
 	
 	// Enable loading more data
-	var hasMoreFeedData = true.obs;
+	var hasMoreCategoryData = true.obs;
+	var hasMoreArtistData = true.obs;
 	
 	@override
 	void onInit() {
-		super.onInit();
-		loadInitialDataForFeed();  // Load data for user
+		//super.onInit();
+		//loadMoreCategoryData();  // Load data for home page
+		//loadMoreArtistData();  // Load data for home page
 	}
-	void loadInitialDataForFeed() {
-		if (feedData.isEmpty) loadMoreFeedData();
+	
+	void loadInitialDataForCategory() {
+		if (allCategoryData.isEmpty) loadMoreCategoryData();
+	}
+	void loadInitialDataForArtist() {
+		if (allArtistData.isEmpty) loadMoreArtistData();
 	}
 	// Helper function to determine if more data can be loaded
-	bool canLoadMoreFeed() {
-		return hasMoreFeedData.value && !isFetchingFeedData.value;
+	bool canLoadMoreCategory() {
+		return hasMoreCategoryData.value && !isFetchingCategoryData.value;
 	}
-	// Load more feed data
-	Future<void> loadMoreFeedData() async {
-		if (!canLoadMoreFeed()) return;
+	bool canLoadMoreArtist() {
+		return hasMoreArtistData.value && !isFetchingArtistData.value;
+	}
+	// Load more Category data
+	Future<void> loadMoreCategoryData() async {
+		if (!canLoadMoreCategory()) return;
 
-		isFetchingFeedData.value = true;
-		
-		
-				
-				
+		isFetchingCategoryData.value = true;
 		try {
-			//var response = await apiService.feed_all_user(currentPage.value);
-			final response = {
-			  'data': [
-				  {'image': Appcontent.pss1, 'name': 'Florals'},
-				  {'image': Appcontent.pss2, 'name': 'Photography'},
-				  {'image': Appcontent.pss3, 'name': 'Cityscapes'},
-				  {'image': Appcontent.pss4, 'name': 'Coastal'},
-				],
-			};
-			var newFeedData = response?['data'] ?? [];  
+			var response = await apiService.allCategoryList(currentCategoryPage.value);
+			var newFeedData = response['data'];		  
 			if (newFeedData.isEmpty) {
-				hasMoreFeedData.value = false;
+				hasMoreCategoryData.value = false;
 			} else {
-				feedData.addAll(newFeedData);
-				currentPage.value++;
+				allCategoryData.addAll(newFeedData);
+				currentCategoryPage.value++;
 			}
 		} catch (e) {
-			print('Error fetching All loadMoreFeedData - home controller: $e');
+			print('Error fetching All loadMoreCategoryData - home controller: $e');
 		} finally {
-			isFetchingFeedData.value = false;
+			isFetchingCategoryData.value = false;
+		}
+	}	
+	// Load more artist data
+	Future<void> loadMoreArtistData() async {
+		if (!canLoadMoreArtist()) return;  // Ensure query is not empty
+
+		isFetchingArtistData.value = true;
+		try {
+			var response = await apiService.allArtistList(currentArtistPage.value);			
+
+			var newArtistData = response['data'];	
+			//print("newArtistData: $newArtistData");			
+			if (newArtistData.isEmpty) {
+				hasMoreArtistData.value = false;
+			} else {
+				allArtistData.addAll(newArtistData);
+				currentArtistPage.value++;
+			}
+		} catch (e) {
+			print('Error fetching All loadMoreCourseUserData - home controller: $e');
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: Appcontent.snackbarCatchErrorMsg, 
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+		} finally {
+			isFetchingArtistData.value = false;
+		}
+	}
+	
+	// Home page category data
+	Future<void> homeCategoryData() async {
+		try {
+			var response = await apiService.homeCategoryList();
+			var newFeedData = response['data']; 
+			categoryData.addAll(newFeedData);
+			
+			//print(categoryData);
+		} catch (e) {
+			print('Error fetching All homeCategoryData - home controller: $e');
+		}
+	}	
+	// Home page artist data
+	Future<void> homeArtistData() async {
+		try {
+			var response = await apiService.homeArtistList();
+			var newFeedData = response['data']; 
+			artistData.addAll(newFeedData);
+		} catch (e) {
+			print('Error fetching All homeArtistData - home controller: $e');
 		}
 	}	
 	
@@ -75,16 +128,6 @@ class HomeController extends GetxController {
 	final count = 0.obs;
   
   void increment() => count.value++;
-
-  /*changeValue({int ? value}) {
-    if(selectIndex.contains(value)) {
-      selectIndex.remove(value);
-    }
-    else {
-      selectIndex.add(value);
-    }
-    update();
-  }*/
 
   changeValue1({int ? value}) {
     if(selectIndex1.contains(value)) {

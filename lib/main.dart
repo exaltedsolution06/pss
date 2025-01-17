@@ -58,8 +58,9 @@ class MyApp extends StatelessWidget {
               //Get.offAll(Bottom());
 				Get.toNamed(Routes.HOME);
               // Load home data after navigation and login verification
-              final homeController = Get.find<HomeController>();
-              homeController.loadInitialDataForFeed();
+				//final homeController = Get.find<HomeController>();
+				//homeController.loadInitialDataForCategory();  // Load data for user
+				//homeController.loadInitialDataForArtist();
             });
             return _buildSplashScreen();
           } else {

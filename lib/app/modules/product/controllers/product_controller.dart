@@ -1,0 +1,101 @@
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:picturesourcesomerset/config/snackbar_helper.dart';
+import 'package:picturesourcesomerset/services/api_service.dart';
+import 'package:picturesourcesomerset/app/routes/app_pages.dart';
+import 'package:picturesourcesomerset/config/app_contents.dart';
+import 'package:picturesourcesomerset/app/modules/product/models/product_data.dart';
+
+class ProductController extends GetxController {
+	//TODO: Implement ProductController
+	final ApiService apiService;
+	final String productId;  // Add a field to store postId
+	
+	var productData = Rx<ProductData>(ProductData(
+		fetchedFiles: [],
+		product_id: 0,
+		category_name: '',
+		artist_name: '',
+		size_name: '',
+		color_name: '',
+		name: '',
+		product_code: '',
+		price: '',
+		moulding_description: '',
+		total_rating: '',
+		total_reviews: '',
+		average_rating: '',
+		percentage_rating_one: 0.0,
+		percentage_rating_two: 0.0,
+		percentage_rating_three: 0.0,
+		percentage_rating_four: 0.0,
+		percentage_rating_five: 0.0,
+	));
+	ProductController(this.apiService, this.productId);  // Constructor accepting ApiService
+	
+	// Observable to track loading state
+	RxBool isLoading = false.obs; // For loading state
+	var isFetchingData = false.obs;
+
+	/*@override
+	void onInit() {
+		super.onInit();
+		int parsedProductId = int.parse(productId); // Parse productId to int
+		fetchProductData(parsedProductId); // Fetch user profile
+	}*/
+	@override
+	void onReady() {
+	  super.onReady();
+	  try {
+		int parsedProductId = int.parse(productId); // Parse productId to int
+		fetchProductData(parsedProductId); // Fetch user profile
+		//print("Product fetch product view screen: $parsedProductId");
+	  } catch (e) {
+		print("Invalid productId format: $productId. Error: $e");
+		// Handle error appropriately
+	  }
+	}
+	// Fetch user post data
+	Future<void> fetchProductData(int productId) async {
+	  isLoading.value = true; // Start loading
+	  print("Product ID: $productId");
+	  try {
+		print("Post fetch post screen1: $productId");
+		isFetchingData(true); // Set fetching flag to true
+
+		// Fetch the post data from API
+		final response = await apiService.productDetails(productId);
+		print('API Response: $response');  // Debugging the full API response
+
+		// Ensure response is not null and contains the 'data' key
+		if (response != null && response['data'] != null && response['data'] is Map) {
+		  // Parse the response data to ProductData model
+		  productData.value = ProductData.fromJson(response);
+		} else {
+		  // Handle unexpected response structure
+		  productData.value = ProductData(category_name: ''); // Default value if data is invalid
+		  
+		  SnackbarHelper.showErrorSnackbar(
+			title: Appcontent.snackbarTitleError,
+			message: "Invalid response structure",
+			position: SnackPosition.BOTTOM,
+		  );
+		}
+	  } catch (e) {
+		// Handle the error by showing a custom error snackbar
+		SnackbarHelper.showErrorSnackbar(
+		  title: Appcontent.snackbarTitleError,
+		  message: Appcontent.snackbarCatchErrorMsg, // Generic error message
+		  position: SnackPosition.BOTTOM, // Show the snackbar at the bottom
+		);
+		print('Error fetching post data: $e'); // Log the error for debugging
+	  } finally {
+		// Reset fetching and loading states
+		isFetchingData(false);
+		isLoading.value = false; // Stop loading
+	  }
+	}
+
+  
+}
