@@ -9,6 +9,7 @@ import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/services/base_api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:picturesourcesomerset/app/modules/home/controllers/home_controller.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/controllers/user_controller.dart';
 
 
 class LoginScreenController extends GetxController {
@@ -60,6 +61,11 @@ class LoginScreenController extends GetxController {
 	  if (response.containsKey('access_token')) {
 		// Save credentials if "Remember Me" is checked
 		await saveCredentials(username, password);
+		
+		// Save additional user data
+		await saveUserData(response['user']);
+		
+		// Navigate to the home screen
 		saveTokenAndNavigate(response['access_token'], response['message']);
 	  } else {
 		SnackbarHelper.showErrorSnackbar(
@@ -89,7 +95,29 @@ class LoginScreenController extends GetxController {
 		  );
 		}
 	}
-	  
+	Future<void> saveUserData(Map<String, dynamic> userData) async {
+		final prefs = await SharedPreferences.getInstance();
+		await prefs.setString('userId', userData['id'].toString());
+		await prefs.setString('name', userData['name'] ?? '');
+		await prefs.setString('firstName', userData['first_name'] ?? '');
+		await prefs.setString('lastName', userData['last_name'] ?? '');
+		await prefs.setString('email', userData['email'] ?? '');
+		await prefs.setString('companyName', userData['company_name'] ?? '');
+		await prefs.setInt('country', userData['country'] ?? 0);
+		await prefs.setInt('state', userData['state'] ?? 0);
+		await prefs.setInt('city', userData['city'] ?? 0);
+		await prefs.setString('address', userData['address'] ?? '');
+		await prefs.setString('zipcode', userData['zipcode'] ?? '');
+		await prefs.setString('phoneNumber', userData['phone_number'] ?? '');
+		await prefs.setString('dob', userData['dob'] ?? '');
+		await prefs.setInt('genderId', userData['gender_id'] ?? 0);
+		await prefs.setString('profilePicture', userData['profile_image'] ?? '');
+		
+		// Update UserController
+		final userController = Get.put(UserController());
+		userController.setUserData(userData);
+	}
+  
 	// Save token and navigate to Bottom view
 	void saveTokenAndNavigate(String token, String message) async {
 		final baseApiService = Get.find<BaseApiService>();

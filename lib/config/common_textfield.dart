@@ -27,7 +27,7 @@ Widget autoWidthTextField({
   }
 
   return SizedBox(
-    height: 60,
+    height: 68,
     width: width,
     child: TextFormField(
       controller: _controller,
@@ -37,15 +37,20 @@ Widget autoWidthTextField({
       obscureText: obscureText,
       style: const TextStyle(color: AppColor.formTextColor),
       decoration: InputDecoration(
+		/*labelText: text,
 		labelStyle: TextStyle(
           color: AppColor.formTextColor,  // Use the passed color or default to grey
-        ),
+		  fontSize: 14,
+		  fontFamily: 'Urbanist-regular'
+        ),*/
         hintText: text,
 		hintStyle: TextStyle(
-          //color: Colors.red,  // Use the passed color or default to grey
-        ),
+			color: AppColor.formTextColor, 
+			fontFamily: 'Urbanist-regular', 
+			fontSize: 14
+		),
         suffixIcon: suffixIcon,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6),
           borderSide: const BorderSide(color: AppColor.formBorder),
@@ -65,6 +70,7 @@ Widget autoWidthTextField({
         errorStyle: const TextStyle(
           color: Colors.red,
           fontSize: 12,
+		  fontFamily: 'Urbanist-regular'
         ),
       ),
     ),
@@ -100,10 +106,18 @@ Widget textFieldWithIconDynamic({
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(vertical: 0).copyWith(left: 50), // Shift text after icon
+        /*labelText: text,
+		labelStyle: TextStyle(
+          color: AppColor.formTextColor,  // Use the passed color or default to grey
+		  fontSize: 14,
+		  fontFamily: 'Urbanist-regular'
+        ),*/
         hintText: text,
-        labelStyle: TextStyle(
-          color: AppColor.black,
-        ),
+		hintStyle: TextStyle(
+			color: AppColor.formTextColor, 
+			fontFamily: 'Urbanist-regular', 
+			fontSize: 14
+		),
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         // Icon on the left
         prefixIcon: icon != null
@@ -143,6 +157,7 @@ Widget textFieldWithIconDynamic({
         errorStyle: const TextStyle(
           color: Colors.red,
           fontSize: 12,
+		  fontFamily: 'Urbanist-regular'
         ),
         // Adjust constraints for the icon to give it space from the label text
         prefixIconConstraints: BoxConstraints(
@@ -183,9 +198,20 @@ Widget textAreaFieldDynamic({
 		maxLines: null, // Allows the TextField to be multiline and grow
 		minLines: 5, // Sets the minimum number of lines, increasing the default height
 		decoration: InputDecoration(
+        /*labelText: text,
+		labelStyle: TextStyle(
+          color: AppColor.formTextColor,  // Use the passed color or default to grey
+		  fontSize: 14,
+		  fontFamily: 'Urbanist-regular'
+        ),*/
         hintText: text,
+		hintStyle: TextStyle(
+			color: AppColor.formTextColor, 
+			fontFamily: 'Urbanist-regular', 
+			fontSize: 14
+		),
         alignLabelWithHint: true, // Align the hint text with the top
-        contentPadding: const EdgeInsets.only(left: 20, top: 20, right: 20), // Padding to keep text top-left
+        contentPadding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 10),
         focusedBorder: OutlineInputBorder(
 			borderRadius: BorderRadius.circular(6),
 			borderSide: const BorderSide(color: Color(0xffE2E8F0)),
@@ -202,6 +228,11 @@ Widget textAreaFieldDynamic({
 			borderRadius: BorderRadius.circular(6),
 			borderSide: const BorderSide(color: Colors.red),
 		),
+		errorStyle: const TextStyle(
+          color: Colors.red,
+          fontSize: 12,
+		  fontFamily: 'Urbanist-regular'
+        ),
       ),
       keyboardType: TextInputType.multiline, // Ensure multiline input is supported
       validator: validator,
@@ -226,14 +257,26 @@ Widget autoWidthDateField({
   final TextEditingController effectiveController = controller ?? TextEditingController(text: defaultValue);
 
   return SizedBox(
-    height: 40,
+    height: 68,
     width: width,
     child: TextField(
       controller: effectiveController,
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
+        /*labelText: text,
+		labelStyle: TextStyle(
+          color: AppColor.formTextColor,  // Use the passed color or default to grey
+		  fontSize: 14,
+		  fontFamily: 'Urbanist-regular'
+        ),*/
         hintText: text,
-        contentPadding: const EdgeInsets.only(left: 10, top: 20, right: 10),
+		hintStyle: TextStyle(
+			color: AppColor.formTextColor, 
+			fontFamily: 'Urbanist-regular', 
+			fontSize: 14
+		),
+        //contentPadding: const EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 10),
+		contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6),
           borderSide: const BorderSide(color: Color(0xffE2E8F0)),
@@ -242,12 +285,75 @@ Widget autoWidthDateField({
           borderRadius: BorderRadius.circular(6),
           borderSide: const BorderSide(color: Color(0xffE2E8F0)),
         ),
+		errorStyle: const TextStyle(
+          color: Colors.red,
+          fontSize: 12,
+		  fontFamily: 'Urbanist-regular'
+        ),
       ),
       onTap: onTap,
       readOnly: onTap != null, // Make the field read-only if onTap is provided
     ),
   );
 }
+
+
+Widget dropdownFieldFinal({
+  Key? key,
+  required String text1,
+  required double width,
+  required String value,
+  required List<DropdownMenuItem<String>> items,
+  FormFieldValidator<String>? validator,
+  required ValueChanged<String?> onChanged,
+}) {
+  return SizedBox(
+    key: key,
+    height: 68,
+    width: width,
+    child: DropdownButtonFormField<String>(
+      value: value.isNotEmpty ? value : null, // Handle empty case
+      decoration: InputDecoration(
+        isDense: true, // Compact layout
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12), // Adjust padding for alignment
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(color: Color(0xffE2E8F0)),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(color: Colors.red),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(color: Color(0xffE2E8F0)),
+        ),
+        errorStyle: const TextStyle(
+          color: Colors.red,
+          fontSize: 12,
+          fontFamily: 'Urbanist-regular',
+        ),
+      ),
+      hint: Text(
+        text1,
+        style: const TextStyle(
+          color: Color(0xFF6B7280), // Replace with AppColor.formTextColor
+          fontFamily: 'Urbanist-regular',
+          fontSize: 16,
+        ),
+        textAlign: TextAlign.start, // Left alignment
+      ),
+      icon: const Icon(Icons.arrow_drop_down),
+      isExpanded: true,
+      validator: validator,
+      onChanged: onChanged,
+      items: items,
+    ),
+  );
+}
+
+
+
 
 ///////////////////////////////////////
 
@@ -661,42 +767,6 @@ Widget General({required String text,}) {
 
 
 
-Widget dropdownFieldFinal({
-  Key? key,
-  required String text1,
-  required double width,
-  required String value,
-  required List<DropdownMenuItem<String>> items,
-  required ValueChanged<String?> onChanged,
-}) {
-  return SizedBox(
-    key: key,
-    height: 74,
-    width: width,
-    child: DropdownButtonFormField<String>(
-      value: value.isNotEmpty ? value : null,  // Handle empty case
-      decoration: InputDecoration(
-        labelText: text1,
-		labelStyle: TextStyle(
-          color: AppColor.black,  // Use the passed color or default to grey
-        ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(35),
-          borderSide: const BorderSide(color: Color(0xffE2E8F0)),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(35),
-          borderSide: const BorderSide(color: Color(0xffE2E8F0)),
-        ),
-      ),
-      icon: Icon(Icons.arrow_drop_down),
-      isExpanded: true,
-      onChanged: onChanged,
-      items: items,
-    ),
-  );
-}
 
 
 

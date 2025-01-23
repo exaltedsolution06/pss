@@ -3,9 +3,9 @@ import 'package:picturesourcesomerset/services/api_service.dart';
 import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 import 'package:picturesourcesomerset/config/app_contents.dart';
-import 'package:picturesourcesomerset/app/modules/proflie_screen/models/profile_data.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/models/profile_data.dart';
 
-class ProflieScreenController extends GetxController {
+class ProfileScreenController extends GetxController {
 	final ApiService apiService;
 	var profileData = Rx<ProfileData>(ProfileData(
 		first_name: '',
@@ -26,7 +26,7 @@ class ProflieScreenController extends GetxController {
 	RxInt socialUserTotalFollowers = 0.obs;
 	RxInt socialUserTotalFollowing = 0.obs;
 	
-	ProflieScreenController(this.apiService);  // Constructor accepting ApiService
+	ProfileScreenController(this.apiService);  // Constructor accepting ApiService
 	var feedData = <dynamic>[].obs;
 	// Reset the page number
 	var currentPage = 1.obs;

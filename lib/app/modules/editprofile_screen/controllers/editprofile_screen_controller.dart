@@ -4,7 +4,10 @@ import 'package:picturesourcesomerset/services/api_service.dart';
 import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 import 'package:picturesourcesomerset/config/app_contents.dart';
-import 'package:picturesourcesomerset/app/modules/proflie_screen/models/profile_data.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/models/profile_data.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/models/country.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/models/state.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/models/city.dart';
 
 class EditprofileScreenController extends GetxController {
   //TODO: Implement EditprofileScreenController
@@ -38,6 +41,14 @@ class EditprofileScreenController extends GetxController {
 	// Declare observable lists
 	var genderList = <Gender>[].obs;
 	var selectedGender = ''.obs;
+	
+	// Declare observable lists
+	var countryList = <Country>[].obs; // Observable for the country list
+	var selectedCountry = Rxn<String>();
+	var stateList = <StateModel>[].obs; // Observable for the state list
+	var selectedState = Rxn<String>();
+	var cityList = <CityModel>[].obs; // Observable for the city list
+	var selectedCity = Rxn<String>();
 
 	@override
 	void onReady() {
@@ -45,7 +56,83 @@ class EditprofileScreenController extends GetxController {
 		fetchProfile();
 		print("Profile fetch EDIT Profile screen");
 	}
-	
+	//fetch country lists
+	Future<void> fetchCountryList() async {
+		try {
+			final response = await apiService.countryList();
+			print('Response: $response');
+			if (response['status'] == 200) {						
+				final List<Country> fetchedCountryList = 
+					(response['data'] as List)
+						.map((data) => Country.fromJson(data))
+						.toList();
+
+				countryList.assignAll(fetchedCountryList); // This will now work
+			} else {
+				SnackbarHelper.showErrorSnackbar(
+				  title: Appcontent.snackbarTitleError, 
+				  message: response['message'],
+				  position: SnackPosition.BOTTOM, // Custom position
+				);
+			}
+		} catch (e) {
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: Appcontent.snackbarCatchErrorMsg, 
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+		}
+	}
+	// Fetch the state list based on the selected country
+	Future<void> fetchStateList(int countryId) async {
+		try {
+		  final response = await apiService.stateList(countryId);
+		  
+		  if (response['status'] == 200) {
+			final List<StateModel> fetchedStateList = (response['data'] as List)
+				.map((data) => StateModel.fromJson(data))
+				.toList();
+			stateList.assignAll(fetchedStateList);
+		  } else {
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError,
+			  message: response['message'],
+			  position: SnackPosition.BOTTOM,
+			);
+		  }
+		} catch (e) {
+		  SnackbarHelper.showErrorSnackbar(
+			title: Appcontent.snackbarTitleError,
+			message: Appcontent.snackbarCatchErrorMsg,
+			position: SnackPosition.BOTTOM,
+		  );
+		}
+	}
+	// Fetch the city list based on the selected state
+	Future<void> fetchCityList(int stateId) async {
+		try {
+		  final response = await apiService.cityList(stateId);
+		  
+		  if (response['status'] == 200) {
+			final List<CityModel> fetchedCityList = (response['data'] as List)
+				.map((data) => CityModel.fromJson(data))
+				.toList();
+			stateList.assignAll(fetchedCityList);
+		  } else {
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError,
+			  message: response['message'],
+			  position: SnackPosition.BOTTOM,
+			);
+		  }
+		} catch (e) {
+		  SnackbarHelper.showErrorSnackbar(
+			title: Appcontent.snackbarTitleError,
+			message: Appcontent.snackbarCatchErrorMsg,
+			position: SnackPosition.BOTTOM,
+		  );
+		}
+	}
 	// Fetch user profile data
 	Future<void> fetchProfile() async {
 

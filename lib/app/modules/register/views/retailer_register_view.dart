@@ -25,11 +25,6 @@ class RetailerRegisterView extends StatefulWidget {
 }
 
 // ignore: must_be_immutable
-/*class RetailerRegisterView extends GetView<RegisterController> {
-  RetailerRegisterView({super.key});
-
-  final RegisterController registerController = Get.find();*/
-  
 class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 	final RegisterController registerController = Get.put(RegisterController(Get.find<ApiService>()));
 
@@ -41,7 +36,6 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
   final TextEditingController companynameController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
-  final TextEditingController stateController = TextEditingController();
   final TextEditingController zipcodeController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
@@ -55,7 +49,6 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
   final FocusNode _companynameFocusNode = FocusNode();
   final FocusNode _addressFocusNode = FocusNode();
   final FocusNode _cityFocusNode = FocusNode();
-  final FocusNode _stateFocusNode = FocusNode();
   final FocusNode _zipcodeFocusNode = FocusNode();
   final FocusNode _phoneFocusNode = FocusNode();
   
@@ -157,6 +150,8 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
+	// Fetch the country list when the view loads
+    registerController.fetchCountryList();
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -237,14 +232,6 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 								  }
 								},
 							  ),
-							],
-						),
-					),
-					Padding(
-						padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-						child: Column(
-						crossAxisAlignment: CrossAxisAlignment.start,
-							children: [
 							  // Label Above the TextField
 							  Text(
 								Appcontent.lastName,
@@ -273,15 +260,6 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 								  }
 								},
 							  ),
-							],
-						),
-					),
-
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-                    child: Column(
-						crossAxisAlignment: CrossAxisAlignment.start,
-						children: [
 							// Label Above the TextField
 							Text(
 								Appcontent.email,
@@ -313,14 +291,6 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 								}
 							  },
 							),
-						],
-					),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-                    child: Column(
-						crossAxisAlignment: CrossAxisAlignment.start,
-						children: [
 							// Label Above the TextField
 							Text(
 								Appcontent.passwordLbl,
@@ -367,14 +337,6 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 								),
 							  );
 							}),
-						],
-					),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-                    child: Column(
-						crossAxisAlignment: CrossAxisAlignment.start,
-						children: [
 							// Label Above the TextField
 							Text(
 								Appcontent.confirmPassword,
@@ -421,14 +383,6 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 								),
 							  );
 							}),
-						],
-					),
-                  ),
-					Padding(
-						padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-						child: Column(
-						crossAxisAlignment: CrossAxisAlignment.start,
-							children: [
 							  // Label Above the TextField
 							  Text(
 								Appcontent.companyName,
@@ -457,14 +411,146 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 								  }
 								},
 							  ),
-							],
-						),
-					),
-					Padding(
-						padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-						child: Column(
-						crossAxisAlignment: CrossAxisAlignment.start,
-							children: [
+							  
+							  // Label Above the TextField
+							  Text(
+								Appcontent.country,
+								style: TextStyle(
+								  fontSize: 16,
+								  color: AppColor.formLabelColor, // Or any color you prefer
+								),
+							  ),
+							  const SizedBox(height: 8), // Space between label and text field
+							Obx(() {
+							  return dropdownFieldFinal(
+								text1: Appcontent.placeholderCountry,
+								width: screenWidth,
+								value: registerController.selectedCountry.value ?? '',  // Provide a fallback value if currentCValue is null
+								items: registerController.countryList
+								.map<DropdownMenuItem<String>>((country) => DropdownMenuItem<String>(
+									  value: country.id.toString(), // Use ID as the value
+									  child: Text(country.name),    // Display name
+									))
+								.toList(),
+								validator: (value) {
+								  if (value == null || value.isEmpty) {
+									return 'Please choose country';
+								  }
+								  return null;
+								},
+								onChanged: (newCountry) {
+									if (newCountry != null && newCountry.isNotEmpty) {
+										registerController.selectedCountry.value = newCountry;
+										final selectedCountryId = int.parse(newCountry);
+										registerController.fetchStateList(selectedCountryId);
+										registerController.selectedState.value = null;
+										_formKey.currentState?.validate();  // Trigger form validation
+									} else {
+										_formKey.currentState?.validate();  // Trigger form validation
+									}
+								},
+							  );
+							}),
+							
+							// Label Above the TextField
+							  Text(
+								Appcontent.state,
+								style: TextStyle(
+								  fontSize: 16,
+								  color: AppColor.formLabelColor, // Or any color you prefer
+								),
+							  ),
+							  const SizedBox(height: 8), // Space between label and text field
+							Obx(() {
+							  return dropdownFieldFinal(
+								text1: Appcontent.placeholderState,
+								width: screenWidth,
+								value: registerController.selectedState.value ?? '',  // Provide a fallback value if currentCValue is null
+								items: registerController.stateList
+								.map<DropdownMenuItem<String>>((state) => DropdownMenuItem<String>(
+									  value: state.id.toString(), // Use ID as the value
+									  child: Text(state.name),    // Display name
+									))
+								.toList(),
+								validator: (value) {
+								  if (value == null || value.isEmpty) {
+									return 'Please choose state';
+								  }
+								  return null;
+								},
+								onChanged: (newState) {
+									if (newState != null && newState.isNotEmpty) {
+										registerController.selectedState.value = newState;
+										final selectedStateId = int.parse(newState);
+										registerController.fetchCityList(selectedStateId);
+										registerController.selectedCity.value = null;
+										_formKey.currentState?.validate();  // Trigger form validation
+									} else {
+										_formKey.currentState?.validate();  // Trigger form validation
+									}
+									/*if (newState != null) {
+										registerController.selectedState.value = newState;
+										_formKey.currentState?.validate();  // Trigger form validation
+									} else {
+										_formKey.currentState?.validate();  // Trigger form validation
+									}*/
+								},
+							  );
+							}),
+							  // Label Above the TextField
+							  Text(
+								Appcontent.city,
+								style: TextStyle(
+								  fontSize: 16,
+								  color: AppColor.formLabelColor, // Or any color you prefer
+								),
+							  ),
+							  const SizedBox(height: 8), // Space between label and text field
+							Obx(() {
+								return dropdownFieldFinal(
+									text1: Appcontent.placeholderCity,
+									width: screenWidth,
+									value: registerController.selectedCity.value ?? '',  // Provide a fallback value if currentCValue is null
+									items: registerController.cityList
+									.map<DropdownMenuItem<String>>((city) => DropdownMenuItem<String>(
+										  value: city.id.toString(), // Use ID as the value
+										  child: Text(city.name),    // Display name
+										))
+									.toList(),
+									validator: (value) {
+									  if (value == null || value.isEmpty) {
+										return 'Please choose city';
+									  }
+									  return null;
+									},
+									onChanged: (newCity) {
+										if (newCity != null) {
+											registerController.selectedCity.value = newCity;
+											_formKey.currentState?.validate();  // Trigger form validation
+										} else {
+											_formKey.currentState?.validate();  // Trigger form validation
+										}
+									},
+								);
+							}),
+							  // Text Field
+							  /*autoWidthTextField(
+								text: Appcontent.placeholderCity,
+								width: screenWidth,
+								controller: cityController,
+								focusNode: _cityFocusNode,
+								validator: (value) {
+								  if (value == null || value.isEmpty) {
+									return 'City cannot be blank';
+								  }
+								  return null;
+								},
+								onChanged: (value) {
+								  if (value.isNotEmpty) {
+									_formKey.currentState?.validate();
+								  }
+								},
+							  ),*/
 							  // Label Above the TextField
 							  Text(
 								Appcontent.address,
@@ -493,86 +579,6 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 								  }
 								},
 							  ),
-							],
-						),
-					),
-					Padding(
-						padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-						child: Column(
-						crossAxisAlignment: CrossAxisAlignment.start,
-							children: [
-							  // Label Above the TextField
-							  Text(
-								Appcontent.city,
-								style: TextStyle(
-								  fontSize: 16,
-								  color: AppColor.formLabelColor, // Or any color you prefer
-								),
-							  ),
-							  const SizedBox(height: 8), // Space between label and text field
-
-							  // Text Field
-							  autoWidthTextField(
-								text: Appcontent.placeholderCity,
-								width: screenWidth,
-								controller: cityController,
-								focusNode: _cityFocusNode,
-								validator: (value) {
-								  if (value == null || value.isEmpty) {
-									return 'City cannot be blank';
-								  }
-								  return null;
-								},
-								onChanged: (value) {
-								  if (value.isNotEmpty) {
-									_formKey.currentState?.validate();
-								  }
-								},
-							  ),
-							],
-						),
-					),
-					Padding(
-						padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-						child: Column(
-						crossAxisAlignment: CrossAxisAlignment.start,
-							children: [
-							  // Label Above the TextField
-							  Text(
-								Appcontent.state,
-								style: TextStyle(
-								  fontSize: 16,
-								  color: AppColor.formLabelColor, // Or any color you prefer
-								),
-							  ),
-							  const SizedBox(height: 8), // Space between label and text field
-
-							  // Text Field
-							  autoWidthTextField(
-								text: Appcontent.placeholderState,
-								width: screenWidth,
-								controller: stateController,
-								focusNode: _stateFocusNode,
-								validator: (value) {
-								  if (value == null || value.isEmpty) {
-									return 'State cannot be blank';
-								  }
-								  return null;
-								},
-								onChanged: (value) {
-								  if (value.isNotEmpty) {
-									_formKey.currentState?.validate();
-								  }
-								},
-							  ),
-							],
-						),
-					),
-					Padding(
-						padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-						child: Column(
-						crossAxisAlignment: CrossAxisAlignment.start,
-							children: [
 							  // Label Above the TextField
 							  Text(
 								Appcontent.zipCode,
@@ -601,14 +607,6 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 								  }
 								},
 							  ),
-							],
-						),
-					),
-					Padding(
-						padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-						child: Column(
-						crossAxisAlignment: CrossAxisAlignment.start,
-							children: [
 							  // Label Above the TextField
 							  Text(
 								Appcontent.phoneNumber,
@@ -672,6 +670,23 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
                     padding: const EdgeInsets.only(bottom: 16, top: 16),
                     child: Center(
                       child: Obx(() {
+						final selectedCountryValue = registerController.selectedCountry.value;
+						final selectedStateValue = registerController.selectedState.value;
+						final selectedCityValue = registerController.selectedCity.value;
+
+						// Handle potential parsing issues
+						final countryId = selectedCountryValue?.isNotEmpty ?? false
+						? int.tryParse(selectedCountryValue ?? '') // Handle null case
+						: null;
+
+						final stateId = selectedStateValue?.isNotEmpty ?? false
+						  ? int.tryParse(selectedStateValue ?? '')
+						  : null;
+						  
+						final cityId = selectedCityValue?.isNotEmpty ?? false
+						  ? int.tryParse(selectedCityValue ?? '')
+						  : null;
+						  
                         return autoWidthBtn(
                           text: registerController.isLoading.value ? 'Sign Up...' : 'Sign Up',
                           width: screenWidth,
@@ -679,19 +694,31 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
                               ? null
                               : () {
                                   if (_formKey.currentState!.validate()) {
+									final firstname = firstnameController.text.trim();
+									final lastname = lastnameController.text.trim();
+									final email = emailController.text.trim();
+									final password = passwordController.text.trim();
+									final passwordconfirmation = passwordconfirmationController.text.trim();
+									final companyname = companynameController.text.trim();
+									final address = addressController.text.trim();
+									//final city = cityController.text.trim();
+									final zipcode = zipcodeController.text.trim();
+									final phone = phoneController.text.trim();
+									
                                     registerController.store_retailer(
 										selectedFiles: selectedFiles, // Pass the image file
-										first_name: firstnameController.text.trim(),
-										last_name: lastnameController.text.trim(),
-										email: emailController.text.trim(),
-										password: passwordController.text.trim(),
-										confirmed_password: passwordconfirmationController.text.trim(),
-										company_name: companynameController.text.trim(),
-										address: addressController.text.trim(),
-										city: cityController.text.trim(),
-										state: stateController.text.trim(),
-										zipcode: zipcodeController.text.trim(),
-										phone_number: phoneController.text.trim(),
+										first_name: firstname,
+										last_name: lastname,
+										email: email,
+										password: password,
+										confirmed_password: passwordconfirmation,
+										company_name: companyname,
+										address: address,
+										city: cityId ?? 0,
+										state: stateId ?? 0,
+										country: countryId ?? 0,
+										zipcode: zipcode,
+										phone_number: phone,
                                     );
                                   }
                                 },

@@ -3,6 +3,7 @@ class Appcontent {
 
   static const String maillonglogo = "assets/logo-long.png";
   static const String splashlogo = "assets/splash-logo.png";
+  static const String defaultLogo = "assets/default-logo.png";
   static const String backgraund = "assets/Background.png";
 
   static const String google = "assets/google.png";
@@ -48,15 +49,17 @@ class Appcontent {
   static const String placeholderEmail = "Enter your email";
   static const String passwordLbl = "Password";
   static const String confirmPassword = "Confirm pssword";
-  static const String placeholderPassword = "Min. 6 characters...";
+  static const String placeholderPassword = "Min. 8 characters...";
   static const String companyName = "Company name";
   static const String placeholdercompanyName = "Enter your company name";
   static const String address = "Address";
   static const String placeholderAddress = "Enter your address";
   static const String city = "City";
   static const String placeholderCity = "Enter your city";
+  static const String country = "Country";
+  static const String placeholderCountry = "Choose Country";
   static const String state = "State";
-  static const String placeholderState = "Enter your state";
+  static const String placeholderState = "Choose State";
   static const String zipCode = "Zip code";
   static const String placeholderZipCode = "Enter your zip code";
   static const String phoneNumber = "Phone number";

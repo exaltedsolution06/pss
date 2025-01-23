@@ -9,6 +9,7 @@ class AssetsRes {
   static const String PLUGIN_NAME = 'picturesourcesomerset';
   static const String PLUGIN_VERSION = '1.0.0+1';
   static const String AVATAR = 'assets/avatar.png';
+  static const String DEFAULT_LOGO = 'assets/default-logo.png';
   static const String LIVE = 'assets/live.png';
   static const String LOGO_LONG = 'assets/logo-long.png';
   static const String ORDER_SUCCESS = 'assets/order_success.png';

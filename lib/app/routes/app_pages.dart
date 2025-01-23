@@ -29,8 +29,8 @@ import '../modules/serach_screen/bindings/serach_screen_binding.dart';
 import '../modules/serach_screen/views/serach_screen_view.dart';
 import '../modules/notification_screen/bindings/notification_screen_binding.dart';
 import '../modules/notification_screen/views/notification_screen_view.dart';
-import '../modules/proflie_screen/bindings/proflie_screen_binding.dart';
-import '../modules/proflie_screen/views/proflie_screen_view.dart';
+import '../modules/profile_screen/bindings/profile_screen_binding.dart';
+import '../modules/profile_screen/views/profile_screen_view.dart';
 import '../modules/editprofile_screen/bindings/editprofile_screen_binding.dart';
 import '../modules/editprofile_screen/views/editprofile_screen_view.dart';
 import '../modules/wish_list/bindings/wish_list_binding.dart';
@@ -139,16 +139,16 @@ class AppPages {
 	  //middlewares: [AuthGuard()], // After Login
     ),
     GetPage(
-      name: _Paths.PROFLIE_SCREEN,
-      page: () =>  ProflieScreenView(),
-      binding: ProflieScreenBinding(),
-	  //middlewares: [AuthGuard()], // After Login
+      name: _Paths.PROFILE_SCREEN,
+      page: () =>  ProfileScreenView(),
+      binding: ProfileScreenBinding(),
+	  middlewares: [AuthGuard()], // After Login
     ),
     GetPage(
       name: _Paths.EDITPROFILE_SCREEN,
       page: () => EditprofileScreenView(),
       binding: EditprofileScreenBinding(),
-	  //middlewares: [AuthGuard()], // After Login
+	  middlewares: [AuthGuard()], // After Login
     ),
 	GetPage(
 		name: _Paths.WISHLIST_CREATE, 

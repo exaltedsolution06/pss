@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:picturesourcesomerset/services/api_service.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 //import 'package:picturesourcesomerset/app/modules/filter_screen/views/filter_screen_view.dart';
-//import 'package:picturesourcesomerset/app/modules/view_proflie_screen/views/view_proflie_screen_view.dart';
+//import 'package:picturesourcesomerset/app/modules/view_profile_screen/views/view_profile_screen_view.dart';
 
 import 'package:picturesourcesomerset/config/app_color.dart';
 import 'package:picturesourcesomerset/config/app_contents.dart';

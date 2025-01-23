@@ -45,15 +45,15 @@ class ApiService extends BaseApiService {
 		return response;
 	}
 	//Customer Register
-	Future<Map<String, dynamic>> store_customer(String first_name, String last_name, String email, String password, String confirmed_password, String company_name, String address, String city, String state, String zipcode, String phone_number) async {
-		final response = await post(ApiEndpoints.storeCustomer, {'first_name': first_name, 'last_name': last_name, 'email': email, 'password': password, 'confirmed_password': confirmed_password, 'company_name': company_name, 'address': address, 'city': city, 'state': state, 'zipcode': zipcode, 'phone_number': phone_number});
+	Future<Map<String, dynamic>> store_customer(String first_name, String last_name, String email, String password, String confirmed_password, String company_name, String address, int city, int state, int country, String zipcode, String phone_number) async {
+		final response = await post(ApiEndpoints.storeCustomer, {'first_name': first_name, 'last_name': last_name, 'email': email, 'password': password, 'confirmed_password': confirmed_password, 'company_name': company_name, 'address': address, 'city': city, 'state': state, 'country': country, 'zipcode': zipcode, 'phone_number': phone_number});
 		if (response.containsKey('access_token')) {
 			saveToken(response['access_token']);
 		}
 		return response;
 	}
 	//Retailer Register
-	Future<Map<String, dynamic>> store_retailer(File file, {required String first_name, required String last_name, required String email, required String password, required String confirmed_password, required String company_name, required String address, required String city, required String state, required String zipcode, required String phone_number}) async {
+	Future<Map<String, dynamic>> store_retailer(File file, {required String first_name, required String last_name, required String email, required String password, required String confirmed_password, required String company_name, required String address, required int city, required int state, required int country, required String zipcode, required String phone_number}) async {
 		// Create Dio instance
 		Dio dio = Dio(BaseOptions(
 			validateStatus: (status) => status != null && status < 500,
@@ -68,6 +68,7 @@ class ApiService extends BaseApiService {
 		print('Address: $address');
 		print('City: $city');
 		print('State: $state');
+		print('Country: $country');
 		print('Zipcode: $zipcode');
 		print('Phone Number: $phone_number');
 		print('File: $file');
@@ -83,6 +84,7 @@ class ApiService extends BaseApiService {
 			'address': address,
 			'city': city,
 			'state': state,
+			'country': country,
 			'zipcode': zipcode,
 			'phone_number': phone_number,
 			'upload_tax_lisence': await MultipartFile.fromFile(file.path), // File upload field
@@ -141,7 +143,20 @@ class ApiService extends BaseApiService {
 		final response = await post(ApiEndpoints.productDetails, {'product_id': product_id}, requiresAuth: true);
 		return response;
 	}
-	
+	//Country List
+	Future<Map<String, dynamic>> countryList() {
+		return get(ApiEndpoints.countryList, requiresAuth: false);
+	}
+	//State List
+	Future<Map<String, dynamic>> stateList(int country_id) async{
+		final response = await post(ApiEndpoints.stateList, {'country_id': country_id}, requiresAuth: true);
+		return response;
+	}
+	//City List
+	Future<Map<String, dynamic>> cityList(int state_id) async{
+		final response = await post(ApiEndpoints.cityList, {'state_id': state_id}, requiresAuth: true);
+		return response;
+	}
 	///////////////////////////////////////////////////
 	
 	

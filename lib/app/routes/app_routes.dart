@@ -13,7 +13,7 @@ abstract class Routes {
 	static const FORGOT_SCREEN = _Paths.FORGOT_SCREEN;
 	static const OTP_VERIFICATION_SCREEN = _Paths.OTP_VERIFICATION_SCREEN;
 	static const RESET_PASSWORD_SCREEN = _Paths.RESET_PASSWORD_SCREEN;
-	static const PROFLIE_SCREEN = _Paths.PROFLIE_SCREEN;
+	static const PROFILE_SCREEN = _Paths.PROFILE_SCREEN;
 	static const HOME = _Paths.HOME;
 	static const PRODUCTVIEW_SCREEN = _Paths.PRODUCTVIEW_SCREEN;
 	static const WALLPHOTO = _Paths.WALLPHOTO;
@@ -46,7 +46,7 @@ abstract class _Paths {
 	static const WALLPHOTO = '/wallphotoview';
 	static const NOTIFICATION_SCREEN = '/notification-screen';
 	static const SHOP_SCREEN = '/shop-screen';
-	static const PROFLIE_SCREEN = '/proflie-screen';
+	static const PROFILE_SCREEN = '/profile-screen';
 	static const EDITPROFILE_SCREEN = '/editprofile-screen';
 	static const WISHLIST_CREATE = '/wishlist-create';
 	//static const WISHLIST = '/wishlist';

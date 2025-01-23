@@ -34,7 +34,7 @@ class _BottomState extends State<Bottom> {
 		Routes.SERACH_SCREEN,
 		Routes.NOTIFICATION_SCREEN,
 		Routes.SHOP_SCREEN,
-		Routes.PROFLIE_SCREEN,
+		Routes.PROFILE_SCREEN,
 	];
 	// And then in your onTap handler:
 	void _onTabTapped(int index) {

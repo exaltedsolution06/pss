@@ -117,7 +117,7 @@ class LoginScreenView extends GetView<LoginScreenController> {
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       child: Obx(() {
                         return autoWidthTextField(
-                          text: "Min. 6 characters...",
+                          text: Appcontent.placeholderPassword,
                           width: screenWidth,
                           controller: passwordController,
                           obscureText: loginScreenController.showPassword.value,
@@ -126,8 +126,8 @@ class LoginScreenView extends GetView<LoginScreenController> {
                             if (value == null || value.isEmpty) {
                               return 'Password cannot be blank';
                             }
-                            if (value.length < 6) {
-                              return 'Password must be at least 6 characters';
+                            if (value.length < 8) {
+                              return 'Password must be at least 8 characters';
                             }
                             return null;
                           },

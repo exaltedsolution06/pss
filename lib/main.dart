@@ -3,14 +3,42 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:picturesourcesomerset/config/app_color.dart';
 import 'package:picturesourcesomerset/app/modules/home/controllers/home_controller.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/controllers/user_controller.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 import 'package:picturesourcesomerset/services/base_api_service.dart';
 import 'package:picturesourcesomerset/services/api_service.dart';
 //import 'package:picturesourcesomerset/config/bottom_navigation.dart';
 
+Future<void> loadUserData() async {
+	final prefs = await SharedPreferences.getInstance();
+	final userController = Get.put(UserController());
+
+	userController.setUserData({
+		'id': prefs.getString('userId') ?? '',
+		'name': prefs.getString('name') ?? '',
+		'first_name': prefs.getString('firstName') ?? '',
+		'last_name': prefs.getString('lastName') ?? '',
+		'email': prefs.getString('email') ?? '',
+		'company_name': prefs.getString('companyName') ?? '',
+		'country': prefs.getInt('country') ?? 0,
+		'state': prefs.getInt('state') ?? 0,
+		'city': prefs.getInt('city') ?? 0,
+		'address': prefs.getString('address') ?? '',
+		'zipcode': prefs.getString('zipcode') ?? '',
+		'phone_number': prefs.getString('phoneNumber') ?? '',
+		'dob': prefs.getString('dob') ?? '',
+		'gender_id': prefs.getInt('genderId') ?? 0,
+		'profile_image': prefs.getString('profilePicture') ?? '',
+	});
+}
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
+  // Initialize UserController
+  //Get.put(UserController());
+  await loadUserData();
   // Initialize the ApiService
   final apiService = ApiService();
   

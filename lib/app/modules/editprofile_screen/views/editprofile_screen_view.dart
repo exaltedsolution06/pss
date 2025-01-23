@@ -12,6 +12,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:picturesourcesomerset/app/modules/activity_screen/activity_screen_view.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/controllers/user_controller.dart';
 import '../controllers/editprofile_screen_controller.dart';
 
 class EditprofileScreenView extends StatefulWidget {
@@ -27,6 +28,10 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
   final picker = ImagePicker();
   
   final EditprofileScreenController editprofileScreenController = Get.put(EditprofileScreenController(Get.find<ApiService>()));
+  
+  final userController = Get.find<UserController>();
+  
+  
   
   //editprofileScreenController.fetchProfile();
   
@@ -86,6 +91,11 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
+	
+	// Fetch the country list when the view loads
+    editprofileScreenController.fetchCountryList();
+	editprofileScreenController.fetchStateList(userController.country.value);
+	editprofileScreenController.fetchCityList(userController.state.value);
 
     // Method to show date picker
 	Future<void> _selectBdate(BuildContext context) async {
@@ -128,10 +138,10 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
         leading: InkWell(
           onTap: () {
 			Get.delete<EditprofileScreenController>(); // Deletes the controller
-			Get.toNamed(Routes.PROFLIE_SCREEN);
+			Get.toNamed(Routes.PROFILE_SCREEN);
             //Navigator.pop(context, true);
           },
-		  //onTap: ()  => Get.toNamed(Routes.PROFLIE_SCREEN),
+		  //onTap: ()  => Get.toNamed(Routes.PROFILE_SCREEN),
           child: const Icon(Icons.arrow_back, color: Colors.black),
         ),
         title: const Text('Edit Profile', style: TextStyle(fontSize: 18, color: Colors.black)),
@@ -157,37 +167,37 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
         if (editprofileScreenController.isFetchingData.value) {
           return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(AppColor.purple),));
         } else {
-          final profileData = editprofileScreenController.profileData.value;
+          //final profileData = editprofileScreenController.profileData.value;
 
           // Ensure that the controller is only set once
-          if (firstnameController.text.isEmpty && profileData.first_name != null) {
-            firstnameController.text = profileData.first_name!;
-          } if (firstnameController.text.isEmpty && profileData.last_name != null) {
-            firstnameController.text = profileData.last_name!;
+          if (firstnameController.text.isEmpty && userController.firstName.value != null) {
+            firstnameController.text = userController.firstName.value!;
+          } if (lastnameController.text.isEmpty && userController.lastName.value != null) {
+            lastnameController.text = userController.lastName.value!;
           }
-          if (emailController.text.isEmpty && profileData.email != null) {
-            emailController.text = profileData.email!;
+          if (emailController.text.isEmpty && userController.email.value != null) {
+            emailController.text = userController.email.value!;
           }
-          if (dobController.text.isEmpty && profileData.birthdate != null) {
-            dobController.text = profileData.birthdate!;
+          if (dobController.text.isEmpty && userController.dob.value != null) {
+            dobController.text = userController.dob.value!;
           }
-          if (companynameController.text.isEmpty && profileData.company_name != null) {
-            companynameController.text = profileData.company_name!;
+          if (companynameController.text.isEmpty && userController.companyName.value != null) {
+            companynameController.text = userController.companyName.value!;
           }
-          if (addressController.text.isEmpty && profileData.address != null) {
-            addressController.text = profileData.address!;
+          if (addressController.text.isEmpty && userController.address.value != null) {
+            addressController.text = userController.address.value!;
           }
-          if (cityController.text.isEmpty && profileData.city != null) {
-            cityController.text = profileData.city!;
+          if (cityController.text.isEmpty && userController.city.value != null) {
+            cityController.text = userController.city.value!;
           }
-          if (stateController.text.isEmpty && profileData.state != null) {
+          /*if (stateController.text.isEmpty && profileData.state != null) {
             stateController.text = profileData.state!;
+          }*/
+          if (zipcodeController.text.isEmpty && userController.zipcode.value != null) {
+            zipcodeController.text = userController.zipcode.value!;
           }
-          if (zipcodeController.text.isEmpty && profileData.zipcode != null) {
-            zipcodeController.text = profileData.zipcode!;
-          }
-          if (phoneController.text.isEmpty && profileData.phone != null) {
-            phoneController.text = profileData.phone!;
+          if (phoneController.text.isEmpty && userController.phoneNumber.value != null) {
+            phoneController.text = userController.phoneNumber.value!;
           }
           return SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -206,21 +216,21 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
                               border: Border.all(color: Colors.white, width: 5),
                               shape: BoxShape.circle,
 					  ),
-					  child: profileImageFile == null || editprofileScreenController.profileImageFile.value == null
+					  child: profileImageFile == null || (userController.profilePicture.value == null && userController.profilePicture.value.isEmpty)
 						  ? ClipRRect(
 								borderRadius: BorderRadius.circular(50.0),
 							  child: Stack(
 								children: [
 								  // Conditional Network Image
-								  if (profileData.avatar != null && profileData.avatar.isNotEmpty)
+								  if (userController.profilePicture.value != null && userController.profilePicture.value.isNotEmpty)
 									Image.network(
-									  profileData.avatar,
+									  userController.profilePicture.value,
 									  width: 110,
 									  height: 110,
 									  fit: BoxFit.cover,
 									),
 								  // Fallback Icon
-								  if (profileData.avatar == null || profileData.avatar.isEmpty)
+								  if (userController.profilePicture.value == null || userController.profilePicture.value.isEmpty)
 									Icon(Icons.account_circle, size: 90, color: Colors.white),
 								],
 							  ),
@@ -242,9 +252,8 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 					  right: (Get.size.width / 2) - 80,
 					  child: GestureDetector(
 						onTap: () async {
-						  if (((profileData.default_avatar == 0 || profileData.default_avatar == 1) &&
-								  editprofileScreenController.isUploadedProfileImageFile.value) ||
-							  (profileData.default_avatar == 0 && !editprofileScreenController.isUploadedProfileImageFile.value)) {
+						  if (userController.profilePicture.value != null && userController.profilePicture.value.isNotEmpty &&
+								  (editprofileScreenController.isUploadedProfileImageFile.value || !editprofileScreenController.isUploadedProfileImageFile.value)) {
 							editprofileScreenController.removeAvatar();
 						  } else {
 							await _checkPermissions(context, "avatar");
@@ -260,15 +269,13 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 						  ),
 						  child: Center(
 							child: Icon(
-							  ((profileData.default_avatar == 0 || profileData.default_avatar == 1) &&
-										  editprofileScreenController.isUploadedProfileImageFile.value) ||
-									  (profileData.default_avatar == 0 && !editprofileScreenController.isUploadedProfileImageFile.value)
+							  userController.profilePicture.value != null && userController.profilePicture.value.isNotEmpty &&
+								  (editprofileScreenController.isUploadedProfileImageFile.value || !editprofileScreenController.isUploadedProfileImageFile.value)
 								  ? Icons.delete
 								  : Icons.photo_camera,
 							  size: 18,
-							  color: ((profileData.default_avatar == 0 || profileData.default_avatar == 1) &&
-										  editprofileScreenController.isUploadedProfileImageFile.value) ||
-									  (profileData.default_avatar == 0 && !editprofileScreenController.isUploadedProfileImageFile.value)
+							  color: userController.profilePicture.value != null && userController.profilePicture.value.isNotEmpty &&
+								  (editprofileScreenController.isUploadedProfileImageFile.value || !editprofileScreenController.isUploadedProfileImageFile.value)
 								  ? Colors.red
 								  : Colors.white,
 							),
@@ -318,7 +325,6 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 											  }
 											},
 										),
-										const SizedBox(height: 8),
 										// Label Above the TextField
 										Text(
 											Appcontent.lastName,
@@ -346,7 +352,6 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 											  }
 											},
 										),
-										const SizedBox(height: 8),
 										// Label Above the TextField
 										Text(
 											Appcontent.email,
@@ -377,7 +382,6 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 											}
 										  },
 										),
-										const SizedBox(height: 8),
 										// Label Above the TextField
 										Text(
 											Appcontent.companyName,
@@ -385,24 +389,6 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 											  fontSize: 16,
 											  color: AppColor.formLabelColor, // Or any color you prefer
 											),
-										),
-										const SizedBox(height: 8), // Space between label and text field
-										// Label Above the TextField
-										Text(
-											Appcontent.birthdates,
-											style: TextStyle(
-											  fontSize: 16,
-											  color: AppColor.formLabelColor, // Or any color you prefer
-											),
-										),
-										const SizedBox(height: 8), // Space between label and text field
-										autoWidthDateField(
-											text: Appcontent.placeholderBirthdate,
-											width: screenWidth,
-											controller: dobController,
-											onTap: () {
-											  _selectBdate(context);
-											},
 										),
 										const SizedBox(height: 8), // Space between label and text field
 										// Text Field
@@ -423,7 +409,262 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 											  }
 											},
 										),
-										const SizedBox(height: 8),
+										// Label Above the TextField
+										Text(
+											Appcontent.birthdates,
+											style: TextStyle(
+											  fontSize: 16,
+											  color: AppColor.formLabelColor, // Or any color you prefer
+											),
+										),
+										const SizedBox(height: 8), // Space between label and text field
+										autoWidthDateField(
+											text: Appcontent.placeholderBirthdate,
+											width: screenWidth,
+											controller: dobController,
+											onTap: () {
+											  _selectBdate(context);
+											},
+										),
+										// Label Above the TextField
+							  Text(
+								Appcontent.country,
+								style: TextStyle(
+								  fontSize: 16,
+								  color: AppColor.formLabelColor, // Or any color you prefer
+								),
+							  ),
+							  const SizedBox(height: 8), // Space between label and text field
+							Obx(() {
+							  // Ensure the selected value is valid and matches one of the DropdownMenuItem values
+							  String? currentCValue;
+							  if (userController.country.value != null && userController.country.value != 0) {
+								currentCValue = userController.country.value.toString(); // Convert to String
+							  } else {
+								currentCValue = null;
+							  }
+
+							  // Check if the current value exists in the list
+							  bool isValidValue = editprofileScreenController.countryList
+								  .any((country) => country.id.toString() == currentCValue);
+
+							  if (!isValidValue) {
+								currentCValue = null; // Reset to null if the value is not valid
+							  }
+
+							  return dropdownFieldFinal(
+								text1: Appcontent.placeholderCountry,
+								width: screenWidth,
+								value: currentCValue ?? '0', // Provide a fallback value if currentCValue is null
+								items: editprofileScreenController.countryList
+									.map<DropdownMenuItem<String>>((country) => DropdownMenuItem<String>(
+										  value: country.id.toString(), // Convert ID to String
+										  child: Text(country.name), // Display name
+										))
+									.toList(),
+								validator: (value) {
+								  if (value == null || value.isEmpty) {
+									return 'Please choose a country';
+								  }
+								  return null;
+								},
+								onChanged: (newCountry) {
+								  if (newCountry != null && newCountry.isNotEmpty) {
+									editprofileScreenController.selectedCountry.value = newCountry;
+
+									// Parse the new country ID
+									final selectedCountryId = int.parse(newCountry);
+
+									// Fetch the state list for the selected country
+									editprofileScreenController.fetchStateList(selectedCountryId).then((_) {
+									  // Check if the currently selected state is in the new state list
+									  final currentSelectedState = editprofileScreenController.selectedState.value;
+									  final isValidState = editprofileScreenController.stateList
+										  .any((state) => state.id.toString() == currentSelectedState);
+
+									  if (!isValidState) {
+										// Reset selectedState if it's invalid
+										editprofileScreenController.selectedState.value = null;
+									  }
+
+									  // Trigger form validation
+									  _formKey.currentState?.validate();
+									});
+								  }
+								},
+
+							  );
+							}),
+
+							
+							// Label Above the TextField
+							  Text(
+								Appcontent.state,
+								style: TextStyle(
+								  fontSize: 16,
+								  color: AppColor.formLabelColor, // Or any color you prefer
+								),
+							  ),
+							  const SizedBox(height: 8), // Space between label and text field
+								Obx(() {
+								  // Use userController.state.value for the initial value
+								  String? currentSValue = userController.state.value != null && userController.state.value != 0
+									  ? userController.state.value.toString()
+									  : null;
+
+								  // Check if the current value exists in the latest state list
+								  bool isValidSValue = editprofileScreenController.stateList
+									  .any((state) => state.id.toString() == currentSValue);
+
+								  if (!isValidSValue) {
+									currentSValue = null; // Reset to null if the value is invalid
+								  }
+
+								  // Generate the dropdown items
+								  final dropdownItems = editprofileScreenController.stateList
+									  .map<DropdownMenuItem<String>>((state) => DropdownMenuItem<String>(
+											value: state.id.toString(),
+											child: Text(state.name),
+										  ))
+									  .toList();
+
+								  // Add a default "Select State" option
+								  if (!dropdownItems.any((item) => item.value == '0')) {
+									dropdownItems.insert(0, DropdownMenuItem<String>(
+									  value: '0',
+									  child: Text('Select State'),
+									));
+								  }
+
+								  return dropdownFieldFinal(
+									text1: Appcontent.placeholderState,
+									width: screenWidth,
+									value: currentSValue ?? '0', // Provide a fallback value
+									items: dropdownItems,
+									validator: (value) {
+									  if (value == null || value.isEmpty || value == '0') {
+										return 'Please choose a state';
+									  }
+									  return null;
+									},
+									onChanged: (newState) {
+										if (newState != null && newState.isNotEmpty) {
+											editprofileScreenController.selectedCountry.value = newState;
+
+											// Parse the new state ID
+											final selectedStateId = int.parse(newState);
+
+											// Fetch the city list for the selected state
+											editprofileScreenController.fetchCityList(selectedStateId).then((_) {
+											  // Check if the currently selected city is in the new city list
+											  final currentSelectedCity = editprofileScreenController.selectedCity.value;
+											  final isValidState = editprofileScreenController.cityList
+												  .any((city) => city.id.toString() == currentSelectedCity);
+
+											  if (!isValidState) {
+												// Reset selectedCity if it's invalid
+												editprofileScreenController.selectedCity.value = null;
+											  }
+
+											  // Trigger form validation
+											  _formKey.currentState?.validate();
+											});
+										}
+									  /*if (newState != null && newState.isNotEmpty) {
+										editprofileScreenController.selectedState.value = newState;
+
+										// Update userController.state.value as well
+										userController.state.value = int.parse(newState);
+
+										_formKey.currentState?.validate(); // Trigger form validation
+									  }*/
+									},
+								  );
+								}),
+
+
+
+
+										// Label Above the TextField
+										Text(
+											Appcontent.city,
+											style: TextStyle(
+											  fontSize: 16,
+											  color: AppColor.formLabelColor, // Or any color you prefer
+											),
+										),
+										  const SizedBox(height: 8), // Space between label and text field
+										  Obx(() {
+											  // Use userController.state.value for the initial value
+											  String? currentCTValue = userController.city.value != null && userController.city.value != 0
+												  ? userController.city.value.toString()
+												  : null;
+
+											  // Check if the current value exists in the latest city list
+											  bool isValidCTValue = editprofileScreenController.cityList
+												  .any((city) => city.id.toString() == currentSValue);
+
+											  if (!isValidCTValue) {
+												currentCTValue = null; // Reset to null if the value is invalid
+											  }
+
+											  // Generate the dropdown items
+											  final dropdownItems = editprofileScreenController.cityList
+												  .map<DropdownMenuItem<String>>((city) => DropdownMenuItem<String>(
+														value: city.id.toString(),
+														child: Text(city.name),
+													  ))
+												  .toList();
+
+											  // Add a default "Select city" option
+											  if (!dropdownItems.any((item) => item.value == '0')) {
+												dropdownItems.insert(0, DropdownMenuItem<String>(
+												  value: '0',
+												  child: Text('Select city'),
+												));
+											  }
+
+											  return dropdownFieldFinal(
+												text1: Appcontent.placeholderCity,
+												width: screenWidth,
+												value: currentCTValue ?? '0', // Provide a fallback value
+												items: dropdownItems,
+												validator: (value) {
+												  if (value == null || value.isEmpty || value == '0') {
+													return 'Please choose a city';
+												  }
+												  return null;
+												},
+												onChanged: (newCity) {
+												  if (newCity != null && newCity.isNotEmpty) {
+													editprofileScreenController.selectedCity.value = newCity;
+
+													// Update userController.state.value as well
+													userController.state.value = int.parse(newCity);
+
+													_formKey.currentState?.validate(); // Trigger form validation
+												  }
+												},
+											  );
+											}),
+										// Text Field
+										/*autoWidthTextField(
+											text: Appcontent.placeholderCity,
+											width: screenWidth,
+											controller: cityController,
+											focusNode: _cityFocusNode,
+											validator: (value) {
+											  if (value == null || value.isEmpty) {
+												return 'City cannot be blank';
+											  }
+											  return null;
+											},
+											onChanged: (value) {
+											  if (value.isNotEmpty) {
+												_formKey.currentState?.validate();
+											  }
+											},
+										),*/
 										// Label Above the TextField
 										Text(
 											Appcontent.address,
@@ -451,63 +692,6 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 											  }
 											},
 										),
-										const SizedBox(height: 8),
-										// Label Above the TextField
-										Text(
-											Appcontent.city,
-											style: TextStyle(
-											  fontSize: 16,
-											  color: AppColor.formLabelColor, // Or any color you prefer
-											),
-										),
-										  const SizedBox(height: 8), // Space between label and text field
-										// Text Field
-										autoWidthTextField(
-											text: Appcontent.placeholderCity,
-											width: screenWidth,
-											controller: cityController,
-											focusNode: _cityFocusNode,
-											validator: (value) {
-											  if (value == null || value.isEmpty) {
-												return 'City cannot be blank';
-											  }
-											  return null;
-											},
-											onChanged: (value) {
-											  if (value.isNotEmpty) {
-												_formKey.currentState?.validate();
-											  }
-											},
-										),
-										const SizedBox(height: 8),
-										// Label Above the TextField
-										Text(
-											Appcontent.state,
-											style: TextStyle(
-											  fontSize: 16,
-											  color: AppColor.formLabelColor, // Or any color you prefer
-											),
-										),
-										const SizedBox(height: 8), // Space between label and text field
-										// Text Field
-										autoWidthTextField(
-											text: Appcontent.placeholderState,
-											width: screenWidth,
-											controller: stateController,
-											focusNode: _stateFocusNode,
-											validator: (value) {
-											  if (value == null || value.isEmpty) {
-												return 'State cannot be blank';
-											  }
-											  return null;
-											},
-											onChanged: (value) {
-											  if (value.isNotEmpty) {
-												_formKey.currentState?.validate();
-											  }
-											},
-										),
-										const SizedBox(height: 8),
 										// Label Above the TextField
 										Text(
 											Appcontent.zipCode,
@@ -535,7 +719,6 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 											  }
 											},
 										),
-										const SizedBox(height: 8),
 										// Label Above the TextField
 										Text(
 											Appcontent.phoneNumber,
@@ -569,7 +752,7 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 										  // Ensure the selected value is valid and matches one of the DropdownMenuItem values
 										  String? currentGValue = editprofileScreenController.selectedGender.value.isNotEmpty
 											  ? editprofileScreenController.selectedGender.value
-											  : profileData.gender_id != 0 ? profileData.gender_id.toString() : null;
+											  : userController.genderId.value != 0 ? userController.genderId.value.toString() : null;
 
 										  // Check if the current value exists in the list
 										  bool isValidValue = editprofileScreenController.genderList

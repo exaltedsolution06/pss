@@ -1,4 +1,4 @@
-// lib/app/modules/proflie_screen/models/profile_data.dart
+// lib/app/modules/profile_screen/models/profile_data.dart
 class ProfileData {
 	final String first_name;
 	final String last_name;

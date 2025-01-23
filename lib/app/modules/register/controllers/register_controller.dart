@@ -3,114 +3,207 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 import 'package:picturesourcesomerset/services/api_service.dart';
-//import 'package:picturesourcesomerset/config/bottom_navigation.dart';
 import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 import 'package:picturesourcesomerset/config/app_contents.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/models/country.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/models/state.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/models/city.dart';
 
 class RegisterController extends GetxController {
-  final ApiService apiService;  
-  RegisterController(this.apiService);
+	final ApiService apiService;  
+	RegisterController(this.apiService);
   
-  var isLoading = false.obs;
-  var isFetchingData = false.obs;
-  var showPassword = true.obs;  // RxBool
-  var showCPassword = true.obs;  // RxBool
+	var isLoading = false.obs;
+	var isFetchingData = false.obs;
+	var showPassword = true.obs;  // RxBool
+	var showCPassword = true.obs;  // RxBool
   
-  void changePasswordHideAndShow() {
-    showPassword.value = !showPassword.value;  // Use .value to update RxBool
-  }
-  void changeCPasswordHideAndShow() {
-    showCPassword.value = !showCPassword.value;  // Use .value to update RxBool
-  }
+	// Declare observable lists
+	var countryList = <Country>[].obs; // Observable for the country list
+	var selectedCountry = Rxn<String>();
+	var stateList = <StateModel>[].obs; // Observable for the state list
+	var selectedState = Rxn<String>();
+	var cityList = <CityModel>[].obs; // Observable for the city list
+	var selectedCity = Rxn<String>();
   
-  Future<void> store_customer(first_name, last_name, email, password, confirmed_password, company_name, address, city, state, zipcode, phone_number) async {
-    isLoading.value = true;
-	print('First Name: $first_name');
-	print('Last Name: $last_name');
-	print('Email: $email');
-	print('Password: $password');
-	print('Confirm Password: $confirmed_password');
-	print('Company Name: $company_name');
-	print('Address: $address');
-	print('City: $city');
-	print('State: $state');
-	print('Zipcode: $zipcode');
-	print('Phone Number: $phone_number');
-    try {
-		final response = await apiService.store_customer(first_name, last_name, email, password, confirmed_password, company_name, address, city, state, zipcode, phone_number);
-		
-		//final otpErrorsEmail = response['errors']['email'] as List<dynamic>;
-		
-		//print('testtttt: $otpErrorsEmail');
-		if (response['status'] == 200) {
-			SnackbarHelper.showSuccessSnackbar(
-			  title: Appcontent.snackbarTitleSuccess, 
-			  message: response['message'],
-			  position: SnackPosition.BOTTOM, // Custom position
-			);
-			// Debug print to verify email and navigation
-			//print('Navigating to CreatepinScreenView with email: $email');
-			//Get.toNamed(Routes.HOME);
-			Get.toNamed(
-				Routes.OTP_VERIFICATION_SCREEN,
-				parameters: {
-					'email': email,
-					'context': 'register', // or 'anotherContext'
-				},
-			);
-		} else if (response['status'] == 600) {
-			// Extract OTP error messages
-			final otpErrorsEmail = (response['errors']['email'] as List<dynamic>?) ?? [];
-			final otpErrorsPass = (response['errors']['password'] as List<dynamic>?) ?? [];
-			final otpErrorsCPass = (response['errors']['confirmed_password'] as List<dynamic>?) ?? [];
+	void changePasswordHideAndShow() {
+		showPassword.value = !showPassword.value;  // Use .value to update RxBool
+	}
+	void changeCPasswordHideAndShow() {
+		showCPassword.value = !showCPassword.value;  // Use .value to update RxBool
+	}
+	//fetch country lists
+	Future<void> fetchCountryList() async {
+		try {
+			final response = await apiService.countryList();
+			print('Response: $response');
+			if (response['status'] == 200) {						
+				final List<Country> fetchedCountryList = 
+					(response['data'] as List)
+						.map((data) => Country.fromJson(data))
+						.toList();
 
-			// Default error messages
-			const defaultEmailError = 'The email has already been taken.';
-			const defaultPasswordError = 'The password confirmation does not match.';
-			const defaultCPasswordError = 'The password confirmation field is required.';
-
-			// Function to get the first error message if exists, otherwise return the default message
-			String getFirstErrorMessage(List<dynamic> errors, String defaultMessage) {
-			  return errors.isNotEmpty ? (errors.first as String?) ?? defaultMessage : defaultMessage;
+				countryList.assignAll(fetchedCountryList); // This will now work
+			} else {
+				SnackbarHelper.showErrorSnackbar(
+				  title: Appcontent.snackbarTitleError, 
+				  message: response['message'],
+				  position: SnackPosition.BOTTOM, // Custom position
+				);
 			}
-
-			// Determine the error message to display
-			final emailOtpErrorMessage = getFirstErrorMessage(otpErrorsEmail, defaultEmailError);
-			final passwordOtpErrorMessage = otpErrorsPass.isNotEmpty ? getFirstErrorMessage(otpErrorsPass, defaultPasswordError) : '';
-			final cpasswordOtpErrorMessage = otpErrorsCPass.isNotEmpty ? getFirstErrorMessage(otpErrorsCPass, defaultCPasswordError) : '';
-
-			// Display the first available error message in priority order
-			final displayErrorMessage = otpErrorsEmail.isNotEmpty
-				? emailOtpErrorMessage
-				: otpErrorsPass.isNotEmpty
-					? passwordOtpErrorMessage
-					: cpasswordOtpErrorMessage;
-
+		} catch (e) {
 			SnackbarHelper.showErrorSnackbar(
 			  title: Appcontent.snackbarTitleError, 
-			  message: displayErrorMessage,
-			  position: SnackPosition.BOTTOM, // Custom position
-			);
-
-
-		} else {
-			SnackbarHelper.showErrorSnackbar(
-			  title: Appcontent.snackbarTitleError, 
-			  message: response['message'],
+			  message: Appcontent.snackbarCatchErrorMsg, 
 			  position: SnackPosition.BOTTOM, // Custom position
 			);
 		}
-    } catch (e) {
-		SnackbarHelper.showErrorSnackbar(
-		  title: Appcontent.snackbarTitleError, 
-		  message: Appcontent.snackbarCatchErrorMsg, 
-		  position: SnackPosition.BOTTOM, // Custom position
-		);
-    } finally {
-      isLoading.value = false;
-    }
-  }
+	}
+	// Fetch the state list based on the selected country
+	Future<void> fetchStateList(int countryId) async {
+		try {
+		  final response = await apiService.stateList(countryId);
+		  
+		  if (response['status'] == 200) {
+			final List<StateModel> fetchedStateList = (response['data'] as List)
+				.map((data) => StateModel.fromJson(data))
+				.toList();
+			stateList.assignAll(fetchedStateList);
+		  } else {
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError,
+			  message: response['message'],
+			  position: SnackPosition.BOTTOM,
+			);
+		  }
+		} catch (e) {
+		  SnackbarHelper.showErrorSnackbar(
+			title: Appcontent.snackbarTitleError,
+			message: Appcontent.snackbarCatchErrorMsg,
+			position: SnackPosition.BOTTOM,
+		  );
+		}
+	}
+	// Fetch the city list based on the selected state
+	Future<void> fetchCityList(int stateId) async {
+		try {
+		  final response = await apiService.cityList(stateId);
+		  
+		  if (response['status'] == 200) {
+			final List<CityModel> fetchedCityList = (response['data'] as List)
+				.map((data) => CityModel.fromJson(data))
+				.toList();
+			stateList.assignAll(fetchedCityList);
+		  } else {
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError,
+			  message: response['message'],
+			  position: SnackPosition.BOTTOM,
+			);
+		  }
+		} catch (e) {
+		  SnackbarHelper.showErrorSnackbar(
+			title: Appcontent.snackbarTitleError,
+			message: Appcontent.snackbarCatchErrorMsg,
+			position: SnackPosition.BOTTOM,
+		  );
+		}
+	}
+  
+	void updateCountry(int countryId) {
+		print('Updating country to: $countryId');
+		//final selectedCountryItem = countryList.firstWhere((g) => g.id == countryId, orElse: () => Country(id: -1, name: 'Unknown'));
+		//selectedCountry.value = selectedCountryItem.id.toString();
+	}
+	Future<void> store_customer(first_name, last_name, email, password, confirmed_password, company_name, address, city, state, country, zipcode, phone_number) async {
+		isLoading.value = true;
+		print('First Name: $first_name');
+		print('Last Name: $last_name');
+		print('Email: $email');
+		print('Password: $password');
+		print('Confirm Password: $confirmed_password');
+		print('Company Name: $company_name');
+		print('Address: $address');
+		print('City: $city');
+		print('State: $state');
+		print('Country: $country');
+		print('Zipcode: $zipcode');
+		print('Phone Number: $phone_number');
+		try {
+			final response = await apiService.store_customer(first_name, last_name, email, password, confirmed_password, company_name, address, city, state, country, zipcode, phone_number);
+			
+			//final otpErrorsEmail = response['errors']['email'] as List<dynamic>;
+			
+			//print('testtttt: $otpErrorsEmail');
+			if (response['status'] == 200) {
+				SnackbarHelper.showSuccessSnackbar(
+				  title: Appcontent.snackbarTitleSuccess, 
+				  message: response['message'],
+				  position: SnackPosition.BOTTOM, // Custom position
+				);
+				// Debug print to verify email and navigation
+				//print('Navigating to CreatepinScreenView with email: $email');
+				//Get.toNamed(Routes.HOME);
+				Get.toNamed(
+					Routes.OTP_VERIFICATION_SCREEN,
+					parameters: {
+						'email': email,
+						'context': 'register', // or 'anotherContext'
+					},
+				);
+			} else if (response['status'] == 600) {
+				// Extract OTP error messages
+				final otpErrorsEmail = (response['errors']['email'] as List<dynamic>?) ?? [];
+				final otpErrorsPass = (response['errors']['password'] as List<dynamic>?) ?? [];
+				final otpErrorsCPass = (response['errors']['confirmed_password'] as List<dynamic>?) ?? [];
+
+				// Default error messages
+				const defaultEmailError = 'The email has already been taken.';
+				const defaultPasswordError = 'The password confirmation does not match.';
+				const defaultCPasswordError = 'The password confirmation field is required.';
+
+				// Function to get the first error message if exists, otherwise return the default message
+				String getFirstErrorMessage(List<dynamic> errors, String defaultMessage) {
+				  return errors.isNotEmpty ? (errors.first as String?) ?? defaultMessage : defaultMessage;
+				}
+
+				// Determine the error message to display
+				final emailOtpErrorMessage = getFirstErrorMessage(otpErrorsEmail, defaultEmailError);
+				final passwordOtpErrorMessage = otpErrorsPass.isNotEmpty ? getFirstErrorMessage(otpErrorsPass, defaultPasswordError) : '';
+				final cpasswordOtpErrorMessage = otpErrorsCPass.isNotEmpty ? getFirstErrorMessage(otpErrorsCPass, defaultCPasswordError) : '';
+
+				// Display the first available error message in priority order
+				final displayErrorMessage = otpErrorsEmail.isNotEmpty
+					? emailOtpErrorMessage
+					: otpErrorsPass.isNotEmpty
+						? passwordOtpErrorMessage
+						: cpasswordOtpErrorMessage;
+
+				SnackbarHelper.showErrorSnackbar(
+				  title: Appcontent.snackbarTitleError, 
+				  message: displayErrorMessage,
+				  position: SnackPosition.BOTTOM, // Custom position
+				);
+
+
+			} else {
+				SnackbarHelper.showErrorSnackbar(
+				  title: Appcontent.snackbarTitleError, 
+				  message: response['message'],
+				  position: SnackPosition.BOTTOM, // Custom position
+				);
+			}
+		} catch (e) {
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: Appcontent.snackbarCatchErrorMsg, 
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+		} finally {
+		  isLoading.value = false;
+		}
+	}
   
 	Future<void> store_retailer({
 		required String first_name, 
@@ -121,7 +214,8 @@ class RegisterController extends GetxController {
 		required String company_name, 
 		required String address, 
 		required String city, 
-		required String state, 
+		required int state, 
+		required int country, 
 		required String zipcode, 
 		required String phone_number,
 		List<File>? selectedFiles,
@@ -133,7 +227,7 @@ class RegisterController extends GetxController {
     try {
 		if (selectedFiles != null && selectedFiles.isNotEmpty) {
 			File imageFile = selectedFiles.first; // Get the first (and only) file
-			final response = await apiService.store_retailer(imageFile, first_name:first_name, last_name:last_name, email:email, password:password, confirmed_password:confirmed_password, company_name:company_name, address:address, city:city, state:state, zipcode:zipcode, phone_number:phone_number);
+			final response = await apiService.store_retailer(imageFile, first_name:first_name, last_name:last_name, email:email, password:password, confirmed_password:confirmed_password, company_name:company_name, address:address, city:city, state:state, country:country, zipcode:zipcode, phone_number:phone_number);
 			
 			//final otpErrorsEmail = response['errors']['email'] as List<dynamic>;
 		

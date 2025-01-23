@@ -6,11 +6,13 @@ import 'package:picturesourcesomerset/config/app_contents.dart';
 import 'package:picturesourcesomerset/config/common_button.dart';
 import 'package:picturesourcesomerset/config/app_color.dart';
 import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/controllers/user_controller.dart';
 
-import '../controllers/proflie_screen_controller.dart';
+import '../controllers/profile_screen_controller.dart';
 
-class ProflieScreenView extends StatelessWidget {
-	final ProflieScreenController proflieScreenController = Get.find();
+class ProfileScreenView extends StatelessWidget {
+	final ProfileScreenController profileScreenController = Get.find();
+	final userController = Get.find<UserController>();
   @override
   Widget build(BuildContext context) {
 	final double screenWidth = MediaQuery.of(context).size.width;
@@ -34,11 +36,13 @@ class ProflieScreenView extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage(Appcontent.pss1), // Replace with actual image
+                    backgroundImage: userController.profilePicture.value != null && userController.profilePicture.value.isNotEmpty
+					? NetworkImage(userController.profilePicture.value)
+					: AssetImage(Appcontent.defaultLogo) as ImageProvider,
                   ),
                   SizedBox(height: 8),
                   Text(
-                    '@James Brook',
+                    '@ ${userController.name.value}',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -50,10 +54,10 @@ class ProflieScreenView extends StatelessWidget {
 					  child: Center(
 						child: Obx(() {
 						  return autoWidthBtn(
-							text: proflieScreenController.isLoading.value ? 'Loading...' : Appcontent.edit,
+							text: profileScreenController.isLoading.value ? 'Loading...' : Appcontent.edit,
 							width: screenWidth,
 							onPress: () {
-								proflieScreenController.editProfile();
+								profileScreenController.editProfile();
 							},
 						  );
 						}),

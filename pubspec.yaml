@@ -57,6 +57,7 @@ flutter:
   assets:
     - assets/
     - assets/avatar.png
+    - assets/default-logo.png
     - assets/live.png
     - assets/logo-long.png
     - assets/order_success.png

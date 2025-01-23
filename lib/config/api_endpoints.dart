@@ -16,6 +16,9 @@ class ApiEndpoints {
   static const String allArtistList = 'get-artist-list';
   static const String productSearch = 'product-search';
   static const String productDetails = 'single-product';
+  static const String countryList = 'country_list';
+  static const String stateList = 'state_list';
+  static const String cityList = 'city_list';
   
   //static const String register = 'register';
   static const String profile = 'profile';

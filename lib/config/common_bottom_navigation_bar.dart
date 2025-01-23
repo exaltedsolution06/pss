@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:picturesourcesomerset/config/app_color.dart';
 import 'package:picturesourcesomerset/config/app_contents.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/controllers/user_controller.dart';
+
 //import 'package:picturesourcesomerset/app/order_screen/views/cart.dart';
 /*import 'home_page.dart';
 import 'search_page.dart';
@@ -12,6 +14,8 @@ import 'profile_page.dart';*/
 
 class CommonBottomNavigationBar extends StatelessWidget {
   final int currentIndex;
+  
+  final userController = Get.find<UserController>();
 
   CommonBottomNavigationBar({required this.currentIndex});
 
@@ -35,7 +39,7 @@ class CommonBottomNavigationBar extends StatelessWidget {
         break;
       case 4:
         //Get.offAll(() => ProfilePage());
-		Get.toNamed(Routes.PROFLIE_SCREEN);
+		Get.toNamed(Routes.PROFILE_SCREEN);
         break;
     }
   }
@@ -81,12 +85,14 @@ class CommonBottomNavigationBar extends StatelessWidget {
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: CircleAvatar(
-            radius: 15, // Adjust size of the profile picture
-            backgroundImage: AssetImage(Appcontent.pss1),
-            backgroundColor: Colors.transparent, // No background color
-          ),
-          label: '',
+			icon: CircleAvatar(
+				radius: 15, // Adjust size of the profile picture
+				backgroundImage: userController.profilePicture.value != null && userController.profilePicture.value.isNotEmpty
+					? NetworkImage(userController.profilePicture.value)
+					: AssetImage(Appcontent.defaultLogo) as ImageProvider,
+				backgroundColor: Colors.transparent, // No background color
+			),
+			label: '',
         ),
       ],
     );
