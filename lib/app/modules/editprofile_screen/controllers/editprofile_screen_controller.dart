@@ -8,6 +8,8 @@ import 'package:picturesourcesomerset/app/modules/profile_screen/models/profile_
 import 'package:picturesourcesomerset/app/modules/profile_screen/models/country.dart';
 import 'package:picturesourcesomerset/app/modules/profile_screen/models/state.dart';
 import 'package:picturesourcesomerset/app/modules/profile_screen/models/city.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/models/gender.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/controllers/user_controller.dart';
 
 class EditprofileScreenController extends GetxController {
   //TODO: Implement EditprofileScreenController
@@ -33,28 +35,72 @@ class EditprofileScreenController extends GetxController {
 		zipcode: '',
 		phone: '',
 	));
-  
+	final userController = Get.find<UserController>();
 	EditprofileScreenController(this.apiService);  // Constructor accepting ApiService
 	
 	// Observable to track loading state
-	var isLoading = true.obs;
+	var isLoading = false.obs;
+	var isFetchingStates = false.obs; // To track state list fetching
+	var isFetchingCities = false.obs; // To track city list fetching
+	
 	// Declare observable lists
 	var genderList = <Gender>[].obs;
-	var selectedGender = ''.obs;
+	var selectedGender = Rxn<String>();
 	
 	// Declare observable lists
 	var countryList = <Country>[].obs; // Observable for the country list
 	var selectedCountry = Rxn<String>();
+	
 	var stateList = <StateModel>[].obs; // Observable for the state list
 	var selectedState = Rxn<String>();
+	var loadingState = false.obs; // New observable for loading country
 	var cityList = <CityModel>[].obs; // Observable for the city list
 	var selectedCity = Rxn<String>();
+	var loadingCity = false.obs; // New observable for loading state
+	
+	//var selectedCountry = 0.obs; // Reactive country value
+	//var selectedState = 0.obs;   // Reactive state value
 
 	@override
-	void onReady() {
-		super.onReady();
-		fetchProfile();
-		print("Profile fetch EDIT Profile screen");
+	void onInit() {
+		super.onInit();
+		//fetchProfile();
+		// Fetch the gender list when the view loads
+		fetchGenderList();
+		// Fetch the country list when the view loads
+		fetchCountryList();
+		fetchStateList(userController.country.value);
+		fetchCityList(userController.state.value);
+		
+		print("Country Id: ${userController.country.value}");
+		print("State Id: ${userController.state.value}");
+	}
+	//fetch gender lists
+	Future<void> fetchGenderList() async {
+		try {
+			final response = await apiService.genderList();
+			print('Response: $response');
+			if (response['status'] == 200) {						
+				final List<Gender> fetchedGenderList = 
+					(response['data'] as List)
+						.map((data) => Gender.fromJson(data))
+						.toList();
+
+				genderList.assignAll(fetchedGenderList); // This will now work
+			} else {
+				SnackbarHelper.showErrorSnackbar(
+				  title: Appcontent.snackbarTitleError, 
+				  message: response['message'],
+				  position: SnackPosition.BOTTOM, // Custom position
+				);
+			}
+		} catch (e) {
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: Appcontent.snackbarCatchErrorMsg, 
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+		}
 	}
 	//fetch country lists
 	Future<void> fetchCountryList() async {
@@ -85,56 +131,70 @@ class EditprofileScreenController extends GetxController {
 	}
 	// Fetch the state list based on the selected country
 	Future<void> fetchStateList(int countryId) async {
+	
+		if (isFetchingStates.value) return; // Avoid duplicate fetching
+		isFetchingStates.value = true;
+	
 		try {
-		  final response = await apiService.stateList(countryId);
-		  
-		  if (response['status'] == 200) {
-			final List<StateModel> fetchedStateList = (response['data'] as List)
-				.map((data) => StateModel.fromJson(data))
-				.toList();
-			stateList.assignAll(fetchedStateList);
-		  } else {
-			SnackbarHelper.showErrorSnackbar(
-			  title: Appcontent.snackbarTitleError,
-			  message: response['message'],
-			  position: SnackPosition.BOTTOM,
-			);
-		  }
+			loadingState.value = true; // Set loading to true
+			final response = await apiService.stateList(countryId);
+
+			if (response['status'] == 200) {
+				final List<StateModel> fetchedStateList = (response['data'] as List)
+					.map((data) => StateModel.fromJson(data))
+					.toList();
+				stateList.assignAll(fetchedStateList);
+			} else {
+				SnackbarHelper.showErrorSnackbar(
+				  title: Appcontent.snackbarTitleError,
+				  message: response['message'],
+				  position: SnackPosition.BOTTOM,
+				);
+			}
 		} catch (e) {
-		  SnackbarHelper.showErrorSnackbar(
-			title: Appcontent.snackbarTitleError,
-			message: Appcontent.snackbarCatchErrorMsg,
-			position: SnackPosition.BOTTOM,
-		  );
+			SnackbarHelper.showErrorSnackbar(
+				title: Appcontent.snackbarTitleError,
+				message: Appcontent.snackbarCatchErrorMsg,
+				position: SnackPosition.BOTTOM,
+			);
+		} finally {
+			loadingState.value = false; // Set loading to false
+			isFetchingStates.value = false;
 		}
 	}
 	// Fetch the city list based on the selected state
 	Future<void> fetchCityList(int stateId) async {
+		if (isFetchingCities.value) return; // Avoid duplicate fetching
+		isFetchingCities.value = true;
 		try {
-		  final response = await apiService.cityList(stateId);
-		  
-		  if (response['status'] == 200) {
-			final List<CityModel> fetchedCityList = (response['data'] as List)
-				.map((data) => CityModel.fromJson(data))
-				.toList();
-			stateList.assignAll(fetchedCityList);
-		  } else {
-			SnackbarHelper.showErrorSnackbar(
-			  title: Appcontent.snackbarTitleError,
-			  message: response['message'],
-			  position: SnackPosition.BOTTOM,
-			);
-		  }
+			loadingCity.value = true; // Set loading to true
+			final response = await apiService.cityList(stateId);
+
+			if (response['status'] == 200) {
+				final List<CityModel> fetchedCityList = (response['data'] as List)
+					.map((data) => CityModel.fromJson(data))
+					.toList();
+				cityList.assignAll(fetchedCityList);
+			} else {
+				SnackbarHelper.showErrorSnackbar(
+					title: Appcontent.snackbarTitleError,
+					message: response['message'],
+					position: SnackPosition.BOTTOM,
+				);
+			}
 		} catch (e) {
-		  SnackbarHelper.showErrorSnackbar(
-			title: Appcontent.snackbarTitleError,
-			message: Appcontent.snackbarCatchErrorMsg,
-			position: SnackPosition.BOTTOM,
-		  );
+			SnackbarHelper.showErrorSnackbar(
+				title: Appcontent.snackbarTitleError,
+				message: Appcontent.snackbarCatchErrorMsg,
+				position: SnackPosition.BOTTOM,
+			);
+		} finally {
+			loadingCity.value = false; // Set loading to false
+			isFetchingCities.value = false;
 		}
 	}
 	// Fetch user profile data
-	Future<void> fetchProfile() async {
+	/*Future<void> fetchProfile() async {
 
 		isLoading.value = true; // Start loading
 		try {
@@ -157,18 +217,18 @@ class EditprofileScreenController extends GetxController {
 						"zipcode": "123456",
 						"phone": "36963"
 					},
-					"genders": [
+					"genders": [					
 						{
-							"id": 3,
-							"gender_name": "Couple"
+							"id": 1,
+							"gender_name": "Male"
 						},
 						{
 							"id": 2,
 							"gender_name": "Female"
 						},
 						{
-							"id": 1,
-							"gender_name": "Male"
+							"id": 3,
+							"gender_name": "Couple"
 						},
 						{
 							"id": 4,
@@ -204,11 +264,6 @@ class EditprofileScreenController extends GetxController {
 
 			// Set the selected gender, ensuring it's a valid string
 			selectedGender.value = profileData.value.gender_id?.toString() ?? '';
-			/*final List<Gender> fetchedGenderList = (response['genders'] as List).map((data) => Gender.fromJson(data)).toList();
-			genderList.assignAll(fetchedGenderList); // Update the observable list
-			
-			// Ensure selectedGender is set based on the profile data
-			selectedGender.value = profileData.value.gender_id.toString();*/
 
 			//print('Gender List2: ${genderList.map((g) => g.name).toList()}');
 			//print('API Response: $response');  // Print the full API response
@@ -224,7 +279,7 @@ class EditprofileScreenController extends GetxController {
 			isFetchingData(false);
 			isLoading.value = false; // Stop loading
 		}
-	}
+	}*/
 	
 	//submit profile data
 	Future<void> profileSubmit(
@@ -232,45 +287,65 @@ class EditprofileScreenController extends GetxController {
 		String last_name, 
 		String email, 
 		String? company_name, 
-		String? birthdate, 
+		String? dob,  
+		int? country, 
+		int? state,  
+		int? city,
 		String? address, 
-		String? city, 
-		String? state, 
-		int? gender_id, 
 		String? zipcode, 
-		String? phone
+		String? phone,
+		int? gender_id
 	) async {
 		isLoading.value = true;
 		/*print('first_name: $first_name');
 		print('last_name: $last_name');
 		print('email: $email');
 		print('company_name: $company_name');
-		print('birthdate: $birthdate');
+		print('dob: $dob');
 		print('address: $address');
 		print('city: $city');
 		print('state: $state');
+		print('country: $country');
 		print('gender_id: $gender_id');
 		print('zipcode: $zipcode');
 		print('phone: $phone');*/
 		try {
 			isSubmittingData(true);
-			/*final response = await apiService.profile_submit(
-			  first_name, 
-			  last_name, 
-			  email, 
-			  company_name ?? '', 
-			  birthdate ?? '',  
-			  address ?? '', 
-			  city ?? ''
-			  state ?? ''
-			  gender_id ?? 0, 
-			  zipcode ?? '', 
-			  phone ?? '',
-			);*/
-			final response = {
-			  'status': 200,
-			  'message': 'Success'
-			};
+			final response;
+			if(userController.userType.value == 1)
+			{
+				response = await apiService.customer_profile_submit(
+					first_name ?? '', 
+					last_name ?? '', 
+					email ?? '', 
+					company_name ?? '', 
+					dob ?? '',
+					country ?? 0,
+					state ?? 0,   
+					city ?? 0,
+					address ?? '', 
+					zipcode ?? '', 
+					phone ?? '',
+					gender_id ?? 0, 			 
+				);
+			}
+			else
+			{
+				response = await apiService.retailer_profile_submit(
+					first_name ?? '', 
+					last_name ?? '', 
+					email ?? '', 
+					company_name ?? '', 
+					dob ?? '',
+					country ?? 0,
+					state ?? 0,   
+					city ?? 0,
+					address ?? '', 
+					zipcode ?? '', 
+					phone ?? '',
+					gender_id ?? 0, 			 
+				);
+			}
 			//print('Status: $response');
 
 			if (response['status'] == 200) {

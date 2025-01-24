@@ -55,11 +55,13 @@ class Appcontent {
   static const String address = "Address";
   static const String placeholderAddress = "Enter your address";
   static const String city = "City";
-  static const String placeholderCity = "Enter your city";
+  static const String placeholderCity = "Choose city";
+  static const String loadingCities = "Loading cities...";
   static const String country = "Country";
   static const String placeholderCountry = "Choose Country";
   static const String state = "State";
   static const String placeholderState = "Choose State";
+  static const String loadingStates = "Loading states...";
   static const String zipCode = "Zip code";
   static const String placeholderZipCode = "Enter your zip code";
   static const String phoneNumber = "Phone number";

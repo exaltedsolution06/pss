@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 class UserController extends GetxController {
 	RxString userId = ''.obs;
+	RxInt userType = 0.obs;
 	RxString name = ''.obs;
 	RxString firstName = ''.obs;
 	RxString lastName = ''.obs;
@@ -19,6 +20,7 @@ class UserController extends GetxController {
 
 	void setUserData(Map<String, dynamic> data) {
 		userId.value = data['id'].toString();
+		userType.value = data['user_type'];
 		name.value = data['name'];
 		firstName.value = data['first_name'];
 		lastName.value = data['last_name'];

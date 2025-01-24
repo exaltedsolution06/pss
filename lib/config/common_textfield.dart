@@ -306,6 +306,7 @@ Widget dropdownFieldFinal({
   required List<DropdownMenuItem<String>> items,
   FormFieldValidator<String>? validator,
   required ValueChanged<String?> onChanged,
+  bool isEnabled = true, // Add a new parameter to control enabled state
 }) {
   return SizedBox(
     key: key,
@@ -346,8 +347,9 @@ Widget dropdownFieldFinal({
       icon: const Icon(Icons.arrow_drop_down),
       isExpanded: true,
       validator: validator,
-      onChanged: onChanged,
-      items: items,
+      onChanged: isEnabled ? onChanged : null, // Disable interaction if not enabled
+      items: isEnabled ? items : null, // Disable dropdown if not enabled
+      dropdownColor: isEnabled ? Colors.white : Colors.grey[200], // Optional: Change dropdown background when disabled
     ),
   );
 }

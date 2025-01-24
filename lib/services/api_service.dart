@@ -143,6 +143,10 @@ class ApiService extends BaseApiService {
 		final response = await post(ApiEndpoints.productDetails, {'product_id': product_id}, requiresAuth: true);
 		return response;
 	}
+	//Gender List
+	Future<Map<String, dynamic>> genderList() {
+		return get(ApiEndpoints.genderList, requiresAuth: false);
+	}
 	//Country List
 	Future<Map<String, dynamic>> countryList() {
 		return get(ApiEndpoints.countryList, requiresAuth: false);
@@ -155,6 +159,91 @@ class ApiService extends BaseApiService {
 	//City List
 	Future<Map<String, dynamic>> cityList(int state_id) async{
 		final response = await post(ApiEndpoints.cityList, {'state_id': state_id}, requiresAuth: true);
+		return response;
+	}
+	//Edit customer Profile
+	Future<Map<String, dynamic>> customer_profile_submit(
+		String first_name, 
+		String last_name, 
+		String email, 
+		String company_name, 
+		String dob,  
+		int country, 
+		int state, 
+		int city,
+		String address, 
+		String zipcode, 
+		String phone_number, 
+		int gender_id
+	) async {
+		// Construct the request body dynamically
+		final Map<String, dynamic> requestBody = {
+			'first_name': first_name,
+			'last_name': last_name,
+			'email': email,
+			'company_name': company_name,
+			'dob': dob,
+			'country': country,
+			'state': state,
+			'city': city,
+			'address': address,
+			'zipcode': zipcode,
+			'phone_number': phone_number,
+			'gender_id': gender_id,
+		};
+
+		// Include gender_id and country only if they are non-zero
+		if (gender_id != 0) { requestBody['gender_id'] = gender_id; }
+		if (city != 0) { requestBody['city'] = city; }
+		if (state != 0) { requestBody['state'] = state; }
+		if (country != 0) { requestBody['country'] = country; }
+
+		// Make the API request
+		final response = await post(ApiEndpoints.customer_profile_submit, requestBody, requiresAuth: true);
+
+		return response;
+	}
+	
+	//Edit retailer Profile
+	Future<Map<String, dynamic>> retailer_profile_submit(
+		String first_name, 
+		String last_name, 
+		String email, 
+		String company_name,
+		String dob,  
+		int country, 
+		int state, 
+		int city,
+		String address, 
+		String zipcode, 
+		String phone_number, 
+		int gender_id
+	) async {
+		// Construct the request body dynamically
+		final Map<String, dynamic> requestBody = {
+			'first_name': first_name,
+			'last_name': last_name,
+			'email': email,
+			'company_name': company_name,
+			'dob': dob,
+			'country': country,
+			'state': state,
+			'city': city,
+			'address': address,
+			'zipcode': zipcode,
+			'phone_number': phone_number,
+			'gender_id': gender_id,
+		};
+
+		// Include gender_id and country only if they are non-zero
+		if (gender_id != 0) { requestBody['gender_id'] = gender_id; }
+		if (city != 0) { requestBody['city'] = city; }
+		if (state != 0) { requestBody['state'] = state; }
+		if (country != 0) { requestBody['country'] = country; }
+
+		// Make the API request
+		final response = await post(ApiEndpoints.retailer_profile_submit, requestBody, requiresAuth: true);
+
 		return response;
 	}
 	///////////////////////////////////////////////////
@@ -170,43 +259,7 @@ class ApiService extends BaseApiService {
 		final response = await post(ApiEndpoints.profile, {'user': user, 'user_verify': user_verify, 'genders': genders, 'countries': countries}, requiresAuth: true);
 		return response;
 	}
-	//Edit Profile
-	Future<Map<String, dynamic>> profile_submit(
-		String username, 
-		String name, 
-		String bio, 
-		String birthdate, 
-		int gender_id, 
-		String gender_pronoun, 
-		int country_id, 
-		String location, 
-		String website
-	) async {
-		// Construct the request body dynamically
-		final Map<String, dynamic> requestBody = {
-			'username': username,
-			'name': name,
-			'bio': bio,
-			'birthdate': birthdate,
-			'gender_pronoun': gender_pronoun,
-			'location': location,
-			'website': website,
-		};
-
-		// Include gender_id and country_id only if they are non-zero
-		if (gender_id != 0) {
-			requestBody['gender_id'] = gender_id;
-		}
-
-		if (country_id != 0) {
-			requestBody['country_id'] = country_id;
-		}
-
-		// Make the API request
-		final response = await post(ApiEndpoints.profile_submit, requestBody, requiresAuth: true);
-
-		return response;
-	}
+	
 	
 	Future<Map<String, dynamic>> profile_avatar_image_upload(File file) async {
 		// Create Dio instance

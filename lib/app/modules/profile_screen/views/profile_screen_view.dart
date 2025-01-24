@@ -56,10 +56,12 @@ class ProfileScreenView extends StatelessWidget {
 						  return autoWidthBtn(
 							text: profileScreenController.isLoading.value ? 'Loading...' : Appcontent.edit,
 							width: screenWidth,
-							onPress: () {
-								profileScreenController.editProfile();
-							},
-						  );
+							onPress: profileScreenController.isLoading.value
+								? null
+								: () {
+									profileScreenController.editProfile();									
+								},
+							);
 						}),
 					  ),
 					),

@@ -332,9 +332,19 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 										onChanged: (newCountry) {
 											if (newCountry != null && newCountry.isNotEmpty) {
 												registerController.selectedCountry.value = newCountry;
+												
+												// Reset the city dropdown
+												registerController.cityList.clear(); // Clear all cities
+												registerController.selectedCity.value = null;
+												
+												// Load the states based on the selected country
 												final selectedCountryId = int.parse(newCountry);
 												registerController.fetchStateList(selectedCountryId);
+												
+												// Reset the state dropdown as well
 												registerController.selectedState.value = null;
+												registerController.stateList.clear(); // Clear all states if needed
+												
 												_formKey.currentState?.validate();  // Trigger form validation
 											} else {
 												_formKey.currentState?.validate();  // Trigger form validation
@@ -354,15 +364,25 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 									  const SizedBox(height: 8), // Space between label and text field
 									Obx(() {
 									  return dropdownFieldFinal(
-										text1: Appcontent.placeholderState,
+										text1:  registerController.loadingState.value
+											? Appcontent.loadingStates // Hint text while loading
+											: Appcontent.placeholderState, // Default hint text
 										width: screenWidth,
 										value: registerController.selectedState.value ?? '',  // Provide a fallback value if currentCValue is null
-										items: registerController.stateList
-										.map<DropdownMenuItem<String>>((state) => DropdownMenuItem<String>(
+										items: registerController.loadingState.value
+											? [
+												DropdownMenuItem<String>(
+												  value: '',
+												  child: Text(Appcontent.loadingStates),
+												)
+											  ]
+											: registerController.stateList
+											.map<DropdownMenuItem<String>>((state) => DropdownMenuItem<String>(
 											  value: state.id.toString(), // Use ID as the value
 											  child: Text(state.name),    // Display name
 											))
 										.toList(),
+										isEnabled: !registerController.loadingState.value,
 										validator: (value) {
 										  if (value == null || value.isEmpty) {
 											return 'Please choose state';
@@ -372,20 +392,18 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 										onChanged: (newState) {
 											if (newState != null && newState.isNotEmpty) {
 												registerController.selectedState.value = newState;
+												
 												final selectedStateId = int.parse(newState);
+											
 												registerController.fetchCityList(selectedStateId);
+												
+												registerController.cityList.clear(); // Clear all cities
 												registerController.selectedCity.value = null;
+												
 												_formKey.currentState?.validate();  // Trigger form validation
 											} else {
 												_formKey.currentState?.validate();  // Trigger form validation
 											}
-											
-											/*if (newState != null) {
-												registerController.selectedState.value = newState;
-												_formKey.currentState?.validate();  // Trigger form validation
-											} else {
-												_formKey.currentState?.validate();  // Trigger form validation
-											}*/
 										},
 									  );
 									}),
@@ -401,15 +419,25 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 									  const SizedBox(height: 8), // Space between label and text field
 									Obx(() {
 										return dropdownFieldFinal(
-											text1: Appcontent.placeholderCity,
+											text1: registerController.loadingCity.value
+												? Appcontent.loadingCities // Hint text while loading
+												: Appcontent.placeholderCity, // Default hint text
 											width: screenWidth,
-											value: registerController.selectedCity.value ?? '',  // Provide a fallback value if currentCValue is null
-											items: registerController.cityList
-											.map<DropdownMenuItem<String>>((city) => DropdownMenuItem<String>(
+											value: registerController.selectedCity.value ?? '',
+											items: registerController.loadingCity.value
+												? [
+													DropdownMenuItem<String>(
+													  value: '',
+													  child: Text(Appcontent.loadingCities),
+													)
+												  ]
+												: registerController.cityList
+												.map<DropdownMenuItem<String>>((city) => DropdownMenuItem<String>(
 												  value: city.id.toString(), // Use ID as the value
 												  child: Text(city.name),    // Display name
 												))
 											.toList(),
+											isEnabled: !registerController.loadingCity.value,
 											validator: (value) {
 											  if (value == null || value.isEmpty) {
 												return 'Please choose city';

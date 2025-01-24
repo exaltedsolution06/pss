@@ -15,6 +15,7 @@ Future<void> loadUserData() async {
 
 	userController.setUserData({
 		'id': prefs.getString('userId') ?? '',
+		'user_type': prefs.getInt('userType') ?? 0,
 		'name': prefs.getString('name') ?? '',
 		'first_name': prefs.getString('firstName') ?? '',
 		'last_name': prefs.getString('lastName') ?? '',
@@ -22,6 +23,7 @@ Future<void> loadUserData() async {
 		'company_name': prefs.getString('companyName') ?? '',
 		'country': prefs.getInt('country') ?? 0,
 		'state': prefs.getInt('state') ?? 0,
+		//'city': int.tryParse(prefs.getString('city') ?? '0') ?? 0,
 		'city': prefs.getInt('city') ?? 0,
 		'address': prefs.getString('address') ?? '',
 		'zipcode': prefs.getString('zipcode') ?? '',

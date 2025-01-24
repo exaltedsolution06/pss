@@ -16,13 +16,15 @@ class ApiEndpoints {
   static const String allArtistList = 'get-artist-list';
   static const String productSearch = 'product-search';
   static const String productDetails = 'single-product';
+  static const String genderList = 'gender_list';
   static const String countryList = 'country_list';
   static const String stateList = 'state_list';
   static const String cityList = 'city_list';
+  static const String customer_profile_submit = 'edit-customer-profile';
+  static const String retailer_profile_submit = 'edit-retailer-profile';
   
   //static const String register = 'register';
   static const String profile = 'profile';
-  static const String profile_submit = 'profile_submit';
   static const String profile_avatar_image_upload = 'profile_avatar_image_upload';
   static const String profile_avatar_image_delete = 'profile_avatar_image_delete';
   static const String account_update = 'account_update';

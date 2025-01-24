@@ -24,8 +24,10 @@ class RegisterController extends GetxController {
 	var selectedCountry = Rxn<String>();
 	var stateList = <StateModel>[].obs; // Observable for the state list
 	var selectedState = Rxn<String>();
+	var loadingState = false.obs; // New observable for loading country
 	var cityList = <CityModel>[].obs; // Observable for the city list
 	var selectedCity = Rxn<String>();
+	var loadingCity = false.obs; // New observable for loading state
   
 	void changePasswordHideAndShow() {
 		showPassword.value = !showPassword.value;  // Use .value to update RxBool
@@ -63,38 +65,42 @@ class RegisterController extends GetxController {
 	// Fetch the state list based on the selected country
 	Future<void> fetchStateList(int countryId) async {
 		try {
-		  final response = await apiService.stateList(countryId);
+			loadingState.value = true; // Set loading to true
+			final response = await apiService.stateList(countryId);
 		  
-		  if (response['status'] == 200) {
-			final List<StateModel> fetchedStateList = (response['data'] as List)
-				.map((data) => StateModel.fromJson(data))
-				.toList();
-			stateList.assignAll(fetchedStateList);
-		  } else {
-			SnackbarHelper.showErrorSnackbar(
-			  title: Appcontent.snackbarTitleError,
-			  message: response['message'],
-			  position: SnackPosition.BOTTOM,
-			);
-		  }
+			if (response['status'] == 200) {
+				final List<StateModel> fetchedStateList = (response['data'] as List)
+					.map((data) => StateModel.fromJson(data))
+					.toList();
+				stateList.assignAll(fetchedStateList);
+			} else {
+				SnackbarHelper.showErrorSnackbar(
+				  title: Appcontent.snackbarTitleError,
+				  message: response['message'],
+				  position: SnackPosition.BOTTOM,
+				);
+			}
 		} catch (e) {
 		  SnackbarHelper.showErrorSnackbar(
 			title: Appcontent.snackbarTitleError,
 			message: Appcontent.snackbarCatchErrorMsg,
 			position: SnackPosition.BOTTOM,
 		  );
+		} finally {
+			loadingState.value = false; // Set loading to false
 		}
 	}
 	// Fetch the city list based on the selected state
 	Future<void> fetchCityList(int stateId) async {
 		try {
-		  final response = await apiService.cityList(stateId);
+			loadingCity.value = true; // Set loading to true
+			final response = await apiService.cityList(stateId);
 		  
 		  if (response['status'] == 200) {
 			final List<CityModel> fetchedCityList = (response['data'] as List)
 				.map((data) => CityModel.fromJson(data))
 				.toList();
-			stateList.assignAll(fetchedCityList);
+			cityList.assignAll(fetchedCityList);
 		  } else {
 			SnackbarHelper.showErrorSnackbar(
 			  title: Appcontent.snackbarTitleError,
@@ -108,14 +114,16 @@ class RegisterController extends GetxController {
 			message: Appcontent.snackbarCatchErrorMsg,
 			position: SnackPosition.BOTTOM,
 		  );
+		} finally {
+			loadingCity.value = false; // Set loading to false
 		}
 	}
   
-	void updateCountry(int countryId) {
+	/*void updateCountry(int countryId) {
 		print('Updating country to: $countryId');
 		//final selectedCountryItem = countryList.firstWhere((g) => g.id == countryId, orElse: () => Country(id: -1, name: 'Unknown'));
 		//selectedCountry.value = selectedCountryItem.id.toString();
-	}
+	}*/
 	Future<void> store_customer(first_name, last_name, email, password, confirmed_password, company_name, address, city, state, country, zipcode, phone_number) async {
 		isLoading.value = true;
 		print('First Name: $first_name');
@@ -213,7 +221,7 @@ class RegisterController extends GetxController {
 		required String confirmed_password, 
 		required String company_name, 
 		required String address, 
-		required String city, 
+		required int city, 
 		required int state, 
 		required int country, 
 		required String zipcode, 

@@ -60,8 +60,19 @@ class ProfileScreenController extends GetxController {
 		return hasMoreFeedData.value && !isFetchingFeedData.value;
 	}
 	Future<void> editProfile() async {
-	  isLoading.value = true;
-	  Get.toNamed(Routes.EDITPROFILE_SCREEN);
+		isLoading.value = true;
+		try {
+			await Future.delayed(const Duration(seconds: 1)); // Adjust the duration as needed
+			Get.toNamed(Routes.EDITPROFILE_SCREEN);
+		} catch (e) {
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: Appcontent.snackbarCatchErrorMsg, 
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+		} finally {
+			isLoading.value = false;
+		}
 	}
 	// Load more feed data
 	Future<void> loadMoreFeedData() async {
