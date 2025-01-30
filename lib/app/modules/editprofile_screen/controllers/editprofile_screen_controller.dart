@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:picturesourcesomerset/services/api_service.dart';
 import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';
@@ -137,9 +138,12 @@ class EditprofileScreenController extends GetxController {
 	
 		try {
 			loadingState.value = true; // Set loading to true
+			print("Load fetchStateList from editcontroller: $countryId");
+			
 			final response = await apiService.stateList(countryId);
 
 			if (response['status'] == 200) {
+				//stateList = <StateModel>[].obs; // Observable for the state list
 				final List<StateModel> fetchedStateList = (response['data'] as List)
 					.map((data) => StateModel.fromJson(data))
 					.toList();
@@ -193,93 +197,6 @@ class EditprofileScreenController extends GetxController {
 			isFetchingCities.value = false;
 		}
 	}
-	// Fetch user profile data
-	/*Future<void> fetchProfile() async {
-
-		isLoading.value = true; // Start loading
-		try {
-			isFetchingData(true);
-			//final responseData = await apiService.fetchProfileDataForEditProfilePage(1, 1, 1, 1);
-			final Map<String, dynamic> responseData = {
-				"data": {
-					"user": {
-						"id": 4,
-						"first_name": "First Name",
-						"last_name": "Last Name",
-						"avatar": "https://exaltedsolution.com/defencestudent/public/img/default-avatar.jpg",
-						"default_avatar": 1,
-						"company_name": "tttttttttttttttttt",
-						"birthdate": null,
-						"address": "asdfghjkl",
-						"city": "ASDFGHJKL",
-						"state": "WB",
-						"gender_id": 1,
-						"zipcode": "123456",
-						"phone": "36963"
-					},
-					"genders": [					
-						{
-							"id": 1,
-							"gender_name": "Male"
-						},
-						{
-							"id": 2,
-							"gender_name": "Female"
-						},
-						{
-							"id": 3,
-							"gender_name": "Couple"
-						},
-						{
-							"id": 4,
-							"gender_name": "Other"
-						}
-					],
-				},
-			};
-			
-			final Map<String, dynamic>? response = responseData['data'] as Map<String, dynamic>?;
-			// Ensure response['user'] is not null and is of the expected type
-			//if (response['user'] != null && response['user'] is Map) {
-			if (response != null && response['user'] is Map<String, dynamic>) {
-				profileData.value = ProfileData.fromJson(response['user'] as Map<String, dynamic>);
-			//profileData.value = ProfileData.fromJson(response['user'] as Map<String, dynamic>);
-			} else {
-				profileData.value = ProfileData(first_name: ''); // Default value if data is not valid
-			}
-			// Handle the 'genders' list
-			if (response != null && response['genders'] is List) {
-			  final List<dynamic> gendersDynamic = response['genders'] as List<dynamic>;
-			  
-			  // Ensure each item is a Map<String, dynamic>
-			  final List<Gender> fetchedGenderList = gendersDynamic
-				  .where((data) => data is Map<String, dynamic>)
-				  .map((data) => Gender.fromJson(data as Map<String, dynamic>))
-				  .toList();
-			  
-			  genderList.assignAll(fetchedGenderList); // Update the observable list
-			} else {
-			  genderList.assignAll([]); // Assign an empty list if 'genders' is not valid
-			}
-
-			// Set the selected gender, ensuring it's a valid string
-			selectedGender.value = profileData.value.gender_id?.toString() ?? '';
-
-			//print('Gender List2: ${genderList.map((g) => g.name).toList()}');
-			//print('API Response: $response');  // Print the full API response
-			// print('Profile Data: ${profileData.value}');  // Print the parsed profile data
-		} catch (e) {
-			//print('Error: $e');  // Print the error if any occurs
-			SnackbarHelper.showErrorSnackbar(
-			  title: Appcontent.snackbarTitleError, 
-			  message: Appcontent.snackbarCatchErrorMsg, 
-			  position: SnackPosition.BOTTOM, // Custom position
-			);
-		} finally {
-			isFetchingData(false);
-			isLoading.value = false; // Stop loading
-		}
-	}*/
 	
 	//submit profile data
 	Future<void> profileSubmit(
@@ -349,6 +266,23 @@ class EditprofileScreenController extends GetxController {
 			//print('Status: $response');
 
 			if (response['status'] == 200) {
+				// Update user data
+				await updateUserData({
+					"name": "$first_name $last_name",
+					"first_name": first_name,
+					"last_name": last_name,
+					"email": email,
+					"company_name": company_name,
+					"address": address,
+					"city": city,
+					"country": country,
+					"state": state,
+					"zipcode": zipcode,
+					"phone_number": phone,
+					"dob": dob,
+					"gender_id": gender_id
+				});
+				
 				SnackbarHelper.showSuccessSnackbar(
 				  title: Appcontent.snackbarTitleSuccess, 
 				  //message: response['message'],
@@ -364,6 +298,7 @@ class EditprofileScreenController extends GetxController {
 				);
 			}
 		} catch (e) {
+			print('Error occurred: $e'); // Print the error if any occurs
 			SnackbarHelper.showErrorSnackbar(
 			  title: Appcontent.snackbarTitleError, 
 			  message: Appcontent.snackbarCatchErrorMsg, 
@@ -374,6 +309,36 @@ class EditprofileScreenController extends GetxController {
 			isLoading.value = false;
 		}
 	}	
+	
+	Future<void> updateUserData(Map<String, dynamic> userData) async {
+		print('User Data: $userData'); // Debugging
+
+		final prefs = await SharedPreferences.getInstance();
+
+		await prefs.setString('name', userData['name'] ?? '');
+		await prefs.setString('firstName', userData['first_name'] ?? '');
+		await prefs.setString('lastName', userData['last_name'] ?? '');
+		await prefs.setString('email', userData['email'] ?? '');
+		await prefs.setString('companyName', userData['company_name'] ?? '');
+
+		// Ensure country, state, city are integers before saving
+		await prefs.setInt('country', (userData['country'] as int?) ?? 0);
+		await prefs.setInt('state', (userData['state'] as int?) ?? 0);
+		await prefs.setInt('city', (userData['city'] as int?) ?? 0);
+
+		await prefs.setString('address', userData['address'] ?? '');
+		await prefs.setString('zipcode', userData['zipcode'] ?? '');
+		await prefs.setString('phoneNumber', userData['phone_number'] ?? '');
+		await prefs.setString('dob', userData['dob'] ?? '');
+
+		// Ensure gender_id is an integer before saving
+		await prefs.setInt('genderId', (userData['gender_id'] as int?) ?? 0);
+
+		// Update UserController
+		userController.setEditUserData(userData);
+	}
+
+
 	
 	Future<void> uploadAvatarImage(File image) async {
 	//print("Cover image selected Controller: $image");

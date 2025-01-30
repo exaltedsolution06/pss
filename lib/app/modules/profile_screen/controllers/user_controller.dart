@@ -36,4 +36,19 @@ class UserController extends GetxController {
 		genderId.value = data['gender_id'] ?? 0;
 		profilePicture.value = data['profile_image'] ?? '';	
 	}
+	void setEditUserData(Map<String, dynamic> data) {
+		name.value = data['name'];
+		firstName.value = data['first_name'];
+		lastName.value = data['last_name'];
+		email.value = data['email'];
+		companyName.value = data['company_name'];
+		country.value = data['country'];
+		state.value = data['state'];
+		city.value = data['city'];
+		address.value = data['address'];
+		zipcode.value = data['zipcode'];
+		phoneNumber.value = data['phone_number'];
+		dob.value = data['dob'] ?? '';
+		genderId.value = data['gender_id'] ?? 0;
+	}
 }

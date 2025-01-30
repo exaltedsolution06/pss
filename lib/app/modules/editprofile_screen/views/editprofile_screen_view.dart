@@ -433,91 +433,56 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 							  ),
 							  const SizedBox(height: 8), // Space between label and text field
 							Obx(() {
-							  // Ensure the selected value is valid and matches one of the DropdownMenuItem values
-								String? currentCValue;
-								if (userController.country.value != null && userController.country.value != 0) {
-									currentCValue = userController.country.value.toString(); // Convert to String
-								} else if (editprofileScreenController.selectedCountry.value != null &&
+								  String? currentCValue;
+
+								  if (userController.country.value != null && userController.country.value != 0) {
+									currentCValue = userController.country.value.toString();
+								  } else if (editprofileScreenController.selectedCountry.value != null &&
 									  editprofileScreenController.selectedCountry.value!.isNotEmpty) {
 									currentCValue = editprofileScreenController.selectedCountry.value;
-								} else {
-									currentCValue = null;
-								}
-
-							  // Check if the current value exists in the list
-							  bool isValidValue = editprofileScreenController.countryList
-								  .any((country) => country.id.toString() == currentCValue);
-
-							  if (!isValidValue) {
-								currentCValue = null; // Reset to null if the value is not valid
-							  }
-
-							  return dropdownFieldFinal(
-								text1: Appcontent.placeholderCountry,
-								width: screenWidth,
-								value: currentCValue ?? '0', // Provide a fallback value if currentCValue is null
-								items: editprofileScreenController.countryList
-									.map<DropdownMenuItem<String>>((country) => DropdownMenuItem<String>(
-										  value: country.id.toString(), // Convert ID to String
-										  child: Text(country.name), // Display name
-										))
-									.toList(),
-								validator: (value) {
-								  if (value == null || value.isEmpty || value == '0') {
-									return 'Please choose a country';
 								  }
-								  return null;
-								},
-								onChanged: (newCountry) {
-									if (newCountry != null && newCountry.isNotEmpty) {
-										editprofileScreenController.selectedCountry.value = newCountry;
-										
-										
-										
-										// Parse the new country ID
-										final selectedCountryId = int.parse(newCountry);
-										//if (selectedCountryId != 0) {
-											// Fetch the state list for the selected country
-											editprofileScreenController.fetchStateList(selectedCountryId).then((_) {
+
+								  // Convert country list to a map for quick lookup
+								  final countryMap = {
+									for (var country in editprofileScreenController.countryList)
+									  country.id.toString(): country.name
+								  };
+
+								  return dropdownFieldFinal(
+									text1: Appcontent.placeholderCountry,
+									width: screenWidth,
+									value: currentCValue ?? '0',
+									items: countryMap.entries
+										.map<DropdownMenuItem<String>>(
+										  (entry) => DropdownMenuItem<String>(
+											value: entry.key,
+											child: Text(entry.value),
+										  ),
+										)
+										.toList(),
+									validator: (value) {
+									  if (value == null || value.isEmpty) {
+										return 'Please choose a country';
+									  }
+									  return null;
+									},
+									onChanged: (newCountry) {
+										if (newCountry != null && newCountry.isNotEmpty) {
+											editprofileScreenController.selectedCountry.value = newCountry;
+											final selectedCountryId = int.parse(newCountry);
+												editprofileScreenController.selectedState.value = null;
+												editprofileScreenController.stateList.clear();
 												
-												// Check if the currently selected state is in the new state list
-												final currentSelectedState = editprofileScreenController.selectedState.value;
-												if (currentSelectedState != null && currentSelectedState.isNotEmpty) {
-													final isValidState = editprofileScreenController.stateList
-														  .any((state) => state.id.toString() == currentSelectedState);
-
-													if (!isValidState) {
-														print("isValidState isValidState isValidState: $currentSelectedState");
-														// Reset selectedState if it's invalid
-														editprofileScreenController.stateList.clear(); // Clear all states if needed
-														editprofileScreenController.selectedState.value = null;
-													}
-												}
-												// Check if the currently selected state is in the new state list
-												final currentSelectedCity = editprofileScreenController.selectedCity.value;
-												if (currentSelectedCity != null && currentSelectedCity.isNotEmpty) {
-													final isValidCity = editprofileScreenController.cityList
-														  .any((city) => city.id.toString() == currentSelectedCity);
-
-													if (!isValidCity) {
-														print("isValidCity isValidCity isValidCity: $currentSelectedCity");
-														
-														// Reset the city dropdown
-														editprofileScreenController.cityList.clear(); // Clear all cities
-														editprofileScreenController.selectedCity.value = null;
-													}
-												}
-												// Trigger form validation
+												editprofileScreenController.cityList.clear();
+												editprofileScreenController.selectedCity.value = null;
+												
+											editprofileScreenController.fetchStateList(selectedCountryId).then((_) {
 												_formKey.currentState?.validate();
 											});
-										//}
-									}
-								},
-
-							  );
-							}),
-
-							
+										}
+									},
+								  );
+								}),
 							// Label Above the TextField
 							  Text(
 								Appcontent.state,
@@ -529,12 +494,9 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 							  const SizedBox(height: 8), // Space between label and text field
 								Obx(() {
 								  // Use userController.state.value for the initial value
-								  /*String? currentSValue = userController.state.value != null && userController.state.value != 0
-									  ? userController.state.value.toString()
-									  : null;*/
-									  
+								
 									String? currentSValue;
-									if(userController.state.value != null && userController.state.value != 0) {
+									if(userController.state.value != null && userController.state.value != 0 && editprofileScreenController.selectedCountry.value == null) {
 										currentSValue = userController.state.value.toString();
 									} else if (editprofileScreenController.selectedState.value != null &&
 										  editprofileScreenController.selectedState.value!.isNotEmpty) {
@@ -543,86 +505,72 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 										currentSValue = null;
 									}
 
-								  // Check if the current value exists in the latest state list
-								  bool isValidSValue = editprofileScreenController.stateList
-									  .any((state) => state.id.toString() == currentSValue);
+									  // Check if the current value exists in the latest state list
+									  bool isValidSValue = editprofileScreenController.stateList
+										  .any((state) => state.id.toString() == currentSValue);
 
-								  if (!isValidSValue) {
-									currentSValue = null; // Reset to null if the value is invalid
-								  }
-
-								  // Generate the dropdown items
-								  final dropdownItems = editprofileScreenController.loadingState.value
-									? [
-										DropdownMenuItem<String>(
-										  value: '',
-										  child: Text(Appcontent.loadingStates),
-										)
-									  ]
-									: editprofileScreenController.stateList
-									  .map<DropdownMenuItem<String>>((state) => DropdownMenuItem<String>(
-											value: state.id.toString(),
-											child: Text(state.name),
-										  ))
-									  .toList();
-
-								  // Add a default "Select State" option
-								  if (!dropdownItems.any((item) => item.value == '0')) {
-									dropdownItems.insert(0, DropdownMenuItem<String>(
-									  value: '0',
-									  child: Text('Select State'),
-									));
-								  }
-
-								  return dropdownFieldFinal(
-									text1: editprofileScreenController.loadingState.value
-										? Appcontent.loadingStates // Hint text while loading
-										: Appcontent.placeholderState, // Default hint text
-									width: screenWidth,
-									value: currentSValue ?? '0', // Provide a fallback value
-									items: dropdownItems,
-									isEnabled: !editprofileScreenController.loadingState.value,
-									validator: (value) {
-									  if (value == null || value.isEmpty || value == '0') {
-										return 'Please choose a state';
+									  if (!isValidSValue) {
+										currentSValue = null; // Reset to null if the value is invalid
 									  }
-									  return null;
-									},
-									onChanged: (newState) {
-										if (newState != null && newState.isNotEmpty) {
-											editprofileScreenController.selectedState.value = newState;
 
-											editprofileScreenController.selectedCity.value = null;
-											editprofileScreenController.cityList.clear(); // Clear all cities
-												
-											// Parse the new state ID
-											final selectedStateId = int.parse(newState);
+									  // Generate the dropdown items
+									  final dropdownItems = editprofileScreenController.loadingState.value
+										? [
+											DropdownMenuItem<String>(
+											  value: '',
+											  child: Text(Appcontent.loadingStates),
+											)
+										  ]
+										: editprofileScreenController.stateList
+										  .map<DropdownMenuItem<String>>((state) => DropdownMenuItem<String>(
+												value: state.id.toString(),
+												child: Text(state.name),
+											  ))
+										  .toList();
 
-											// Fetch the city list for the selected state
-											editprofileScreenController.fetchCityList(selectedStateId).then((_) {
-												// Check if the currently selected city is in the new city list
-												final currentSelectedCity = editprofileScreenController.selectedCity.value;
-												if (currentSelectedCity != null && currentSelectedCity.isNotEmpty) {
-													final isValidState = editprofileScreenController.cityList
-													  .any((city) => city.id.toString() == currentSelectedCity);
+									  // Add a default "Select State" option
+									  if (!dropdownItems.any((item) => item.value == '0')) {
+										dropdownItems.insert(0, DropdownMenuItem<String>(
+										  value: '0',
+										  child: Text('Select State'),
+										));
+									  }
 
-													if (!isValidState) {
-														// Reset selectedCity if it's invalid
-														editprofileScreenController.selectedCity.value = null;
-														editprofileScreenController.cityList.clear(); // Clear all cities
-													}
-												}
-												// Trigger form validation
-												_formKey.currentState?.validate();
-											});
-										}
-									},
-								  );
-								}),
+									  return dropdownFieldFinal(
+										text1: editprofileScreenController.loadingState.value
+											? Appcontent.loadingStates // Hint text while loading
+											: Appcontent.placeholderState, // Default hint text
+										width: screenWidth,
+										value: currentSValue ?? '0', // Provide a fallback value
+										items: dropdownItems,
+										isEnabled: !editprofileScreenController.loadingState.value,
+										validator: (value) {
+										  if (value == null || value.isEmpty || value == '0') {
+											return 'Please choose a state';
+										  }
+										  return null;
+										},
+										onChanged: (newState) {
+											if (newState != null && newState.isNotEmpty) {
+												editprofileScreenController.selectedState.value = newState;
 
-
-
-
+												editprofileScreenController.selectedCity.value = null;
+												editprofileScreenController.cityList.clear(); // Clear all cities
+													
+												// Parse the new state ID
+												final selectedStateId = int.parse(newState);
+												// Reset selectedCity if it's invalid
+												editprofileScreenController.selectedCity.value = null;
+												editprofileScreenController.cityList.clear(); // Clear all cities
+												// Fetch the city list for the selected state
+												editprofileScreenController.fetchCityList(selectedStateId).then((_) {
+													// Trigger form validation
+													_formKey.currentState?.validate();
+												});
+											}
+										},
+									  );
+									}),
 										// Label Above the TextField
 										Text(
 											Appcontent.city,
@@ -633,13 +581,8 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 										),
 										  const SizedBox(height: 8), // Space between label and text field
 										  Obx(() {
-											  // Use userController.state.value for the initial value
-											  /*String? currentCTValue = userController.city.value != null && userController.city.value != 0
-												  ? userController.city.value.toString()
-												  : null;*/
-												  
 												String? currentCTValue;
-												if(userController.city.value != null && userController.city.value != 0) {
+												if(userController.city.value != null && userController.city.value != 0 && editprofileScreenController.selectedState.value == null) {
 													currentCTValue = userController.city.value.toString();
 												} else if (editprofileScreenController.selectedCity.value != null &&
 													  editprofileScreenController.selectedCity.value!.isNotEmpty) {
@@ -687,20 +630,9 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 												value: currentCTValue ?? '0', // Provide a fallback value
 												items: dropdownItems,
 												isEnabled: !editprofileScreenController.loadingCity.value,
-												validator: (value) {
-												  if (value == null || value.isEmpty || value == '0') {
-													return 'Please choose a city';
-												  }
-												  return null;
-												},
 												onChanged: (newCity) {
 												  if (newCity != null && newCity.isNotEmpty) {
 													editprofileScreenController.selectedCity.value = newCity;
-
-													// Update userController.state.value as well
-													//userController.state.value = int.parse(newCity);
-
-													_formKey.currentState?.validate(); // Trigger form validation
 												  }
 												},
 											  );
@@ -855,20 +787,20 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 											// Handle potential parsing issues
 											final countryId = selectedCountryValue?.isNotEmpty ?? false
 											? int.tryParse(selectedCountryValue ?? '') // Handle null case
-											: null;
+											: userController.country.value;
 
 											final stateId = selectedStateValue?.isNotEmpty ?? false
 											  ? int.tryParse(selectedStateValue ?? '')
-											  : null;
+											  : userController.state.value;
 											  
 											final cityId = selectedCityValue?.isNotEmpty ?? false
 											  ? int.tryParse(selectedCityValue ?? '')
-											  : null;
+											  : userController.city.value;
 											  
 											// Handle potential parsing issues
 											final genderId = selectedGenderValue?.isNotEmpty ?? false
 											  ? int.tryParse(selectedGenderValue ?? '')
-											  : null;
+											  : userController.genderId.value;
 
 										  return autoWidthBtn(
 											text: editprofileScreenController.isLoading.value ? 'UPDATING...' : 'UPDATE YOUR DETAILS',
