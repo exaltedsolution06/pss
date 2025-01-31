@@ -228,7 +228,8 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 									),
 								  // Fallback Icon
 								  if (userController.profilePicture.value == null || userController.profilePicture.value.isEmpty)
-									Icon(Icons.account_circle, size: 90, color: Colors.white),
+									Image.asset(Appcontent.defaultLogo)
+									//Icon(Icons.account_circle, size: 90, color: Colors.white),
 								],
 							  ),
 							)
@@ -248,9 +249,11 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 					  top: 10,
 					  right: (Get.size.width / 2) - 80,
 					  child: GestureDetector(
+						behavior: HitTestBehavior.opaque, // Ensures tap is detected
 						onTap: () async {
 						  if (userController.profilePicture.value != null && userController.profilePicture.value.isNotEmpty &&
 								  (editprofileScreenController.isUploadedProfileImageFile.value || !editprofileScreenController.isUploadedProfileImageFile.value)) {
+							print("Removing avatar...");
 							editprofileScreenController.removeAvatar();
 						  } else {
 							await _checkPermissions(context, "avatar");

@@ -337,20 +337,34 @@ class EditprofileScreenController extends GetxController {
 		// Update UserController
 		userController.setEditUserData(userData);
 	}
+	Future<void> updateProfilePictureData(Map<String, dynamic> userData) async {
+		print('User Data: $userData'); // Debugging
+
+		final prefs = await SharedPreferences.getInstance();
+		await prefs.setString('profilePicture', userData['profile_image'] ?? '');
+
+		// Update UserController
+		userController.setEditUserProfilePictureData(userData);
+	}
 
 
 	
 	Future<void> uploadAvatarImage(File image) async {
-	//print("Cover image selected Controller: $image");
+		print("Profile image selected Controller: $image");
 	  try {
 		// Call your API service to upload the image
 		isUploadedProfileImageFile.value = true;
 		profileImageFile.value = image;
-		//var response = await apiService.profile_avatar_image_upload(image);
+		var response = await apiService.profile_avatar_image_upload(image);
 
-		/*if (response['status']=='200') {
+		if (response['status']==200) {
 			isUploadedProfileImageFile.value = true;
 			profileImageFile.value = image;
+			// Update user data
+			await updateProfilePictureData({
+				"profile_image": response['image']
+			});
+				
 		  // Handle successful upload
 			SnackbarHelper.showSuccessSnackbar(
 			  title: Appcontent.snackbarTitleSuccess, 
@@ -365,9 +379,9 @@ class EditprofileScreenController extends GetxController {
 			  message: response['message'],
 			  position: SnackPosition.BOTTOM, // Custom position
 			);
-		}*/
+		}
 	  } catch (e) {
-		//print('Error: $e');
+		print('Error: $e');
 		// Handle exception
 		SnackbarHelper.showErrorSnackbar(
 		  title: Appcontent.snackbarTitleError, 
@@ -384,19 +398,25 @@ class EditprofileScreenController extends GetxController {
 			isUploadedProfileImageFile.value = false;
 				
 			final response = await apiService.profile_avatar_image_delete();
-			//print('Status: $response');
+			print('Status: $response');
 
-			/*if (response['status'] == '200') {
+			if (response['status'] == 200) {
 				// Reset the reactive variables
 				profileImageFile.value = null;
 				isUploadedProfileImageFile.value = false;
+				
+				// Update user data
+				await updateProfilePictureData({
+					"profile_image": ""
+				});
+				
 				SnackbarHelper.showSuccessSnackbar(
 				  title: Appcontent.snackbarTitleSuccess, 
 				  message: response['message'],
 				  position: SnackPosition.BOTTOM, // Custom position
 				);
 			  
-			  final responseData = await apiService.fetchProfileDataForEditProfilePage(1, 1, 1, 1);
+			  /*final responseData = await apiService.fetchProfileDataForEditProfilePage(1, 1, 1, 1);
 				final responseF = responseData['data'];
 				// Ensure responseF['user'] is not null and is of the expected type
 				if (responseF['user'] != null && responseF['user'] is Map) {
@@ -404,14 +424,14 @@ class EditprofileScreenController extends GetxController {
 				//profileData.value = ProfileData.fromJson(responseF['user'] as Map<String, dynamic>);
 				} else {
 					profileData.value = ProfileData(first_name: ''); // Default value if data is not valid
-				}
+				}*/
 			} else {
 				SnackbarHelper.showErrorSnackbar(
 				  title: Appcontent.snackbarTitleError,
 				  message: response['message'],
 				  position: SnackPosition.BOTTOM, // Custom position
 				);
-			}*/
+			}
 		} catch (e) {
 			SnackbarHelper.showErrorSnackbar(
 			  title: Appcontent.snackbarTitleError, 

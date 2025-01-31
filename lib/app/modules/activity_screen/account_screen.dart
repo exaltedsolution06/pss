@@ -89,7 +89,7 @@ class AccountScreenView extends GetView<ActivityScreenController> {
 						  //autoWidthTextField(text1: 'Password', text: 'Enter your Password', width: screenWidth),
 						  Obx(() {
 							return autoWidthTextField(
-							  text: "Min. 6 characters...",
+							  text: "Min. 8 characters...",
 							  width: screenWidth,
 							  controller: passwordController,
 							  obscureText: activityScreenController.showPassword.value,
@@ -98,8 +98,8 @@ class AccountScreenView extends GetView<ActivityScreenController> {
 								if (value == null || value.isEmpty) {
 								  return 'Password cannot be blank';
 								}
-								if (value.length < 6) {
-								  return 'Password must be at least 6 characters';
+								if (value.length < 8) {
+								  return 'Password must be at least 8 characters';
 								}
 								return null;
 							  },
@@ -127,7 +127,7 @@ class AccountScreenView extends GetView<ActivityScreenController> {
 						const SizedBox(height: 10),
 						Obx(() {
 							return autoWidthTextField(
-							  text: "Min. 6 characters...",
+							  text: "Min. 8 characters...",
 							  width: screenWidth,
 							  controller: newpasswordController,
 							  obscureText: activityScreenController.showNPassword.value,
@@ -136,8 +136,8 @@ class AccountScreenView extends GetView<ActivityScreenController> {
 								if (value == null || value.isEmpty) {
 								  return 'New Password cannot be blank';
 								}
-								if (value.length < 6) {
-								  return 'New password must be at least 6 characters';
+								if (value.length < 8) {
+								  return 'New password must be at least 8 characters';
 								}
 								return null;
 							  },
@@ -165,7 +165,7 @@ class AccountScreenView extends GetView<ActivityScreenController> {
 						const SizedBox(height: 10),
 						Obx(() {
 							return autoWidthTextField(
-							  text: "Min. 6 characters...",
+							  text: "Min. 8 characters...",
 							  width: screenWidth,
 							  controller: confirmpasswordController,
 							  obscureText: activityScreenController.showCPassword.value,
@@ -174,8 +174,8 @@ class AccountScreenView extends GetView<ActivityScreenController> {
 								if (value == null || value.isEmpty) {
 								  return 'Confirm Password cannot be blank';
 								}
-								if (value.length < 6) {
-								  return 'Confirm Password must be at least 6 characters';
+								if (value.length < 8) {
+								  return 'Confirm Password must be at least 8 characters';
 								}
 								return null;
 							  },

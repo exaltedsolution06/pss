@@ -51,4 +51,7 @@ class UserController extends GetxController {
 		dob.value = data['dob'] ?? '';
 		genderId.value = data['gender_id'] ?? 0;
 	}
+	void setEditUserProfilePictureData(Map<String, dynamic> data) {
+		profilePicture.value = data['profile_image'] ?? '';	
+	}
 }

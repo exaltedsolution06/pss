@@ -66,7 +66,7 @@ class ActivityScreenController extends GetxController {
 	@override
 	void onInit() {
 		super.onInit();
-		if (shouldFetchPaymentHistory) {
+		/*if (shouldFetchPaymentHistory) {
 			fetchPaymentHistory(); // Fetch data only if the flag is true
 		} if (shouldFetchInvoiceDetails) {
 			int paymentInvoiceId = Get.arguments['paymentInvoiceId'];
@@ -76,15 +76,15 @@ class ActivityScreenController extends GetxController {
 			fetchRatesData(); // Fetch data only if the flag is true
 		} if (shouldFetchSubscriptionData) {
 			fetchSubscriptionData(); // Fetch data only if the flag is true
-		} if (shouldFetchSettingsNotification) {
+		}*/ if (shouldFetchSettingsNotification) {
 			fetchSettingsNotificationData(); // Fetch data only if the flag is true
-		} if (shouldFetchSettingsPrivacy) {
+		}/* if (shouldFetchSettingsPrivacy) {
 			fetchSettingsPrivacyData(); // Fetch data only if the flag is true
 		} if (shouldFetchSettingsVerify) {
 			fetchSettingsVerifyData(); // Fetch data only if the flag is true
 		} if (shouldFetchFAQpageData) {
 			fetchFAQPage(); // Fetch data only if the flag is true
-		}
+		}*/
 	}
 	
 	

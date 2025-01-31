@@ -1,33 +1,36 @@
 class ApiEndpoints {
-  //static const String baseUrl = "https://exaltedsolution.com/picturesourcesomerset/public/api";
-  static const String baseUrl = "https://jamesbrookit.com/pss/public/api";
-  
-  static const String login = 'login';
-  static const String googleLogin = 'google/callback';
-  static const String forgotPassword = 'forgot-password';
-  static const String forgotPassword_verifyOtp = 'forgot-password-verify-otp';
-  static const String resetPassword = 'reset-password';
-  static const String storeCustomer = 'store-customer';
-  static const String storeRetailer = 'store-retailer';
-  static const String register_verifyOtp = 'register-verify-otp';
-  static const String homeCategoryList = 'home-category-list';
-  static const String homeArtistList = 'home-artist-list';
-  static const String allCategoryList = 'category-list';
-  static const String allArtistList = 'get-artist-list';
-  static const String productSearch = 'product-search';
-  static const String productDetails = 'single-product';
-  static const String genderList = 'gender_list';
-  static const String countryList = 'country_list';
-  static const String stateList = 'state_list';
-  static const String cityList = 'city_list';
-  static const String customer_profile_submit = 'edit-customer-profile';
-  static const String retailer_profile_submit = 'edit-retailer-profile';
+	//static const String baseUrl = "https://exaltedsolution.com/picturesourcesomerset/public/api";
+	static const String baseUrl = "https://jamesbrookit.com/pss/public/api";
+
+	static const String login = 'login';
+	static const String googleLogin = 'google/callback';
+	static const String forgotPassword = 'forgot-password';
+	static const String forgotPassword_verifyOtp = 'forgot-password-verify-otp';
+	static const String resetPassword = 'reset-password';
+	static const String storeCustomer = 'store-customer';
+	static const String storeRetailer = 'store-retailer';
+	static const String register_verifyOtp = 'register-verify-otp';
+	static const String homeCategoryList = 'home-category-list';
+	static const String homeArtistList = 'home-artist-list';
+	static const String allCategoryList = 'category-list';
+	static const String allArtistList = 'get-artist-list';
+	static const String productSearch = 'product-search';
+	static const String productDetails = 'single-product';
+	static const String genderList = 'gender_list';
+	static const String countryList = 'country_list';
+	static const String stateList = 'state_list';
+	static const String cityList = 'city_list';
+	static const String customer_profile_submit = 'edit-customer-profile';
+	static const String retailer_profile_submit = 'edit-retailer-profile';
+	static const String profile_avatar_image_upload = 'profile-image-upload';
+	static const String profile_avatar_image_delete = 'profile-image-delete';
+	static const String account_update = 'change-user-password';
+	
   
   //static const String register = 'register';
   static const String profile = 'profile';
-  static const String profile_avatar_image_upload = 'profile_avatar_image_upload';
-  static const String profile_avatar_image_delete = 'profile_avatar_image_delete';
-  static const String account_update = 'account_update';
+
+  
   static const String notifications = 'notifications';
   static const String search = 'search';
   

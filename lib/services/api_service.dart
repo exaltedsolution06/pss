@@ -246,21 +246,6 @@ class ApiService extends BaseApiService {
 
 		return response;
 	}
-	///////////////////////////////////////////////////
-	
-	
-	//Fetch profile data for profile page
-	Future<Map<String, dynamic>> fetchProfileDataForViewProfilePage(int user, int social_user, int feeds) async {
-		final response = await post(ApiEndpoints.profile, {'user': user, 'social_user': social_user, 'feeds': feeds}, requiresAuth: true);
-		return response;
-	}
-	//Fetch profile data for edit profile page
-	Future<Map<String, dynamic>> fetchProfileDataForEditProfilePage(int user, int user_verify, int genders, int countries) async {
-		final response = await post(ApiEndpoints.profile, {'user': user, 'user_verify': user_verify, 'genders': genders, 'countries': countries}, requiresAuth: true);
-		return response;
-	}
-	
-	
 	Future<Map<String, dynamic>> profile_avatar_image_upload(File file) async {
 		// Create Dio instance
 		Dio dio = Dio(BaseOptions(
@@ -289,18 +274,34 @@ class ApiService extends BaseApiService {
 		//return response.data != null ? response.data : {'success': false};
 		return response.data;
 	}
-	
 	//Remove Avatar image
 	Future<Map<String, dynamic>> profile_avatar_image_delete() async {
-		final response = await post(ApiEndpoints.profile_avatar_image_delete, {}, requiresAuth: true);
+		final response = await get(ApiEndpoints.profile_avatar_image_delete, requiresAuth: true);
+		return response;
+	}
+	//Account update from Settings menu
+	Future<Map<String, dynamic>> account_update(String password, String new_password, String confirm_password) async {
+		final response = await post(ApiEndpoints.account_update, {'old_password': password, 'new_password': new_password, 'confirm_password': confirm_password}, requiresAuth: true);
+		return response;
+	}
+	///////////////////////////////////////////////////
+	
+	
+	//Fetch profile data for profile page
+	Future<Map<String, dynamic>> fetchProfileDataForViewProfilePage(int user, int social_user, int feeds) async {
+		final response = await post(ApiEndpoints.profile, {'user': user, 'social_user': social_user, 'feeds': feeds}, requiresAuth: true);
+		return response;
+	}
+	//Fetch profile data for edit profile page
+	Future<Map<String, dynamic>> fetchProfileDataForEditProfilePage(int user, int user_verify, int genders, int countries) async {
+		final response = await post(ApiEndpoints.profile, {'user': user, 'user_verify': user_verify, 'genders': genders, 'countries': countries}, requiresAuth: true);
 		return response;
 	}
 	
-	//Account update from Settings menu
-	Future<Map<String, dynamic>> account_update(String password, String new_password, String confirm_password) async {
-		final response = await post(ApiEndpoints.account_update, {'password': password, 'new_password': new_password, 'confirm_password': confirm_password}, requiresAuth: true);
-		return response;
-	}
+	
+	
+	
+	
 	
 	//Wallet balance from Settings menu
 	Future<Map<String, dynamic>> wallet_available_pending_balance() {
