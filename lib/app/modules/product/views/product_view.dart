@@ -13,6 +13,7 @@ import 'package:picturesourcesomerset/config/common_textfield.dart';
 import 'package:picturesourcesomerset/config/bullet_list.dart';
 
 import '../controllers/product_controller.dart';
+import 'package:picturesourcesomerset/app/modules/order_screen/controllers/cart_controller.dart';
 import 'package:picturesourcesomerset/app/modules/product/models/product_data.dart';
 
 class ProductView extends StatefulWidget {
@@ -31,6 +32,7 @@ class _ProductViewState extends State<ProductView> {
 	
 	//final ProductController productController = Get.put(ProductController());
 	final ProductController productController = Get.find();
+	final CartController cartController = Get.put(CartController());
 	
 	final ImagePicker _picker = ImagePicker();
 	final TextEditingController reviewController = TextEditingController();
@@ -57,32 +59,22 @@ class _ProductViewState extends State<ProductView> {
 	  }
 	}
 	late ProductData productData; // Define your productData variable
-
+	
+	FileData? firstValidFile;
+	
 	@override
 	void initState() {
 		super.initState();
-		//productController.fetchProductData(widget.productId);
-		// Initialize productData with appropriate values, e.g., from arguments or an API call
 		productData = ProductData(); // Initialize it according to your logic
+		
+		
 	}
-	
-
-	
-
 	@override
 	void dispose() {
 		_reviewFocusNode.dispose();
 		reviewController.dispose();
 		super.dispose();
-	}
-  
-	/*final List<String> imageUrls = [
-		Appcontent.pss1,
-		Appcontent.pss2,
-		Appcontent.pss3,
-		Appcontent.pss4,
-	];*/
-	
+	}	
 	int _selectedStars = 0; // Tracks the selected star rating
 	
 	@override
@@ -100,6 +92,11 @@ class _ProductViewState extends State<ProductView> {
 				} else {
 					final productData = productController.productData.value;
 					var imageUrls = productData.fetchedFiles;
+					
+					firstValidFile = productData.fetchedFiles!.firstWhere(
+						(file) => file.filePath != null && file.filePath!.isNotEmpty,
+						orElse: () => FileData(filePath: ''), // Provide a default object
+					);
 					
 					print("Product ID: ${productData}");
 					print("Files: ${productData.fetchedFiles}");
@@ -200,6 +197,7 @@ class _ProductViewState extends State<ProductView> {
 											GestureDetector(
 											  onTap: () {
 												//Get.toNamed(Routes.YOUR_TARGET_PAGE); // Replace with your desired route
+												cartController.addToCart(firstValidFile?.filePath ?? '', productData.name, productData.price);
 											  },
 											  child: Row(
 												mainAxisSize: MainAxisSize.min, // Adjust the width of the row to fit its children
@@ -359,6 +357,7 @@ class _ProductViewState extends State<ProductView> {
 												setState(() {
 												  _selectedStars = index + 1; // Update selected star
 												});
+												productController.submitRating(_selectedStars); // Call API function
 											  },
 											  icon: Icon(
 												Icons.star,
@@ -412,22 +411,25 @@ class _ProductViewState extends State<ProductView> {
 											),
 										),
 										const SizedBox(height: 10),
-										autoWidthBtn(
-											text: 'Send Review',
-											width: screenWidth, // Ensure screenWidth is defined
-											onPress: () {},
-										),
-									  /*ElevatedButton(
-										onPressed: () {
-										  if (reviewController.text.isNotEmpty) {
-											// Submit review
-										  } else {
-											Get.snackbar("Error", "Please write a review before submitting.");
-										  }
-										},
-										style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-										child: const Text("Send Review"),
-									  ),*/
+										Obx(() {
+										  return autoWidthBtn(
+											text: productController.isLoading.value ? 'Sending...' : 'Send Review',
+											width: screenWidth,
+											onPress: productController.isLoading.value
+												? null
+												: () {
+													if (_formKey.currentState!.validate()) {
+														productController.giveReview(
+															reviewController.text.trim()
+														);
+													} else {
+														if (_reviewFocusNode.hasFocus) {
+															_reviewFocusNode.requestFocus();
+														}
+													}
+												  },
+										  );
+										}),
 									],
 								  ),
 								),

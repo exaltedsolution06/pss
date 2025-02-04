@@ -16,6 +16,7 @@ class ApiEndpoints {
 	static const String allArtistList = 'get-artist-list';
 	static const String productSearch = 'product-search';
 	static const String productDetails = 'single-product';
+	static const String giveReview = 'give-review';
 	static const String genderList = 'gender_list';
 	static const String countryList = 'country_list';
 	static const String stateList = 'state_list';
@@ -28,12 +29,9 @@ class ApiEndpoints {
 	
   
   //static const String register = 'register';
-  static const String profile = 'profile';
-
-  
+  static const String profile = 'profile';  
   static const String notifications = 'notifications';
-  static const String search = 'search';
-  
+  static const String search = 'search';  
   static const String slider_data = 'home_slider';
   static const String cms = 'cms';    
   static const String wallet_available_pending_balance = 'wallet_available_pending_balance';

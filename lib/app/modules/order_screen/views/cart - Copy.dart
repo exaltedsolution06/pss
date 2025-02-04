@@ -10,7 +10,7 @@ import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
 
 import '../controllers/order_controller.dart';
-import 'package:picturesourcesomerset/app/modules/order_screen/controllers/cart_controller.dart';
+import 'package:picturesourcesomerset/order_screen/controllers/cart_controller.dart';
 
 
 class CartPage extends StatefulWidget {
@@ -26,7 +26,7 @@ class _CartPageState extends State<CartPage> {
   
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   
-  /*List<Map<String, dynamic>> cartItems = [
+  List<Map<String, dynamic>> cartItems = [
     {
       "id": 1,
       "name": "Sugar Free Gold",
@@ -43,16 +43,15 @@ class _CartPageState extends State<CartPage> {
       "quantity": 1,
       "imageUrl": Appcontent.pss2, // Replace with your image URL
     },
-  ];*/
+  ];
 
-	/*double _calculateTotal() {
-		double total = 0.0;
-		cartController.cartItems.forEach((key, item) {
-			total += item["price"] * item["quantity"];
-		});
-		return total;
-	}*/
-
+  double _calculateTotal() {
+    double total = 0.0;
+    for (var item in cartItems) {
+      total += item["price"] * item["quantity"];
+    }
+    return total;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,120 +104,137 @@ class _CartPageState extends State<CartPage> {
 			),
 			Expanded(
 		  child: ListView.builder(
-  itemCount: cartController.cartItems.length,
-  itemBuilder: (context, index) {
-    final itemKey = cartController.cartItems.keys.toList()[index];
-    final item = cartController.cartItems[itemKey];
+			itemCount: cartItems.length,
+			itemBuilder: (context, index) {
+			  final item = cartItems[index];
+			  return Stack(
+				children: [
+				  // Main Card
+				  Card(
+					margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+					elevation: 3,
+					color: AppColor.white,
+					shape: RoundedRectangleBorder(
+					  borderRadius: BorderRadius.circular(12),
+					),
+					child: Padding(
+					  padding: const EdgeInsets.all(10),
+					  child: Row(
+						children: [
+						  // Image
+						  ClipRRect(
+							borderRadius: BorderRadius.circular(8),
+							child: Image.network(
+							  item["imageUrl"],
+							  width: 60,
+							  height: 60,
+							  fit: BoxFit.cover,
+							),
+						  ),
+						  const SizedBox(width: 16),
+						  // Item Details
+						  Expanded(
+							child: Column(
+							  crossAxisAlignment: CrossAxisAlignment.start,
+							  children: [
+								Text(
+								  item["name"],
+								  style: const TextStyle(
+									fontWeight: FontWeight.bold,
+									fontSize: 16,
+								  ),
+								),
+								/*const SizedBox(height: 4),
+								Text(
+								  item["description"],
+								  style: const TextStyle(
+									fontSize: 14,
+									color: Colors.grey,
+								  ),
+								),*/
+								const SizedBox(height: 4),
+								Text(
+								  "Rs. ${item["price"]}",
+								  style: const TextStyle(
+									fontWeight: FontWeight.w500,
+									fontSize: 14,
+									color: Colors.red,
+								  ),
+								),
+							  ],
+							),
+						  ),
+						  // Quantity Controls
+						  Row(
+							children: [
+							  IconButton(
+								icon: const Icon(Icons.remove_circle, color: Colors.red),
+								onPressed: () {
+								  setState(() {
+									if (item["quantity"] > 1) {
+									  item["quantity"]--;
+									}
+								  });
+								  cartController.updateQuantity(item['key'], item['quantity'] - 1),
+								},
+							  ),
+							  Text(
+								item["quantity"].toString(),
+								style: const TextStyle(
+								  fontSize: 16,
+								  fontWeight: FontWeight.bold,
+								),
+							  ),
+							  IconButton(
+								icon: const Icon(Icons.add_circle, color: Colors.green),
+								onPressed: () {
+								  setState(() {
+									item["quantity"]++;
+								  });
+								  cartController.updateQuantity(item['key'], item['quantity'] + 1),
+								},
+							  ),
+							],
+						  ),
+						],
+					  ),
+					),
+				  ),
+				  // Cross Icon Positioned at the Top Right Corner
+				  Positioned(
+					  top: 13,
+					  right: 22,
+					  child: GestureDetector(
+						onTap: () {
+						  setState(() {
+							cartItems.removeAt(index); // Remove the item
+						  });
+						},
+						child: Container(
+						  width: 18,
+						  height: 18,
+						  decoration: BoxDecoration(
+							color: Colors.transparent, // Transparent background
+							shape: BoxShape.circle, // Circular shape
+							border: Border.all(
+							  color: AppColor.BlackGreyscale, // Border color
+							  width: 1, // Border width
+							),
+						  ),
+						  child: const Icon(
+							Icons.close,
+							color: AppColor.BlackGreyscale,
+							size: 14,
+						  ),
+						),
+					  ),
+					),
 
-    return Stack(
-      children: [
-        // Main Card
-        Card(
-          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          elevation: 3,
-          color: AppColor.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Row(
-              children: [
-                // Image
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    item["imageUrl"],
-                    width: 60,
-                    height: 60,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                // Item Details
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        itemKey, // Product Name (Key)
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        "Rs. ${item["price"]}",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // Quantity Controls
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.remove_circle, color: Colors.red),
-                      onPressed: () {
-                        cartController.updateQuantity(itemKey, item["quantity"] - 1);
-                      },
-                    ),
-                    Text(
-                      item["quantity"].toString(),
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.add_circle, color: Colors.green),
-                      onPressed: () {
-                        cartController.updateQuantity(itemKey, item["quantity"] + 1);
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-        // Remove Item (Cross Icon)
-        Positioned(
-          top: 13,
-          right: 22,
-          child: GestureDetector(
-            onTap: () {
-              cartController.updateQuantity(itemKey, 0); // Removes item
-            },
-            child: Container(
-              width: 18,
-              height: 18,
-              decoration: BoxDecoration(
-                color: Colors.transparent, // Transparent background
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: AppColor.BlackGreyscale, // Border color
-                  width: 1, // Border width
-                ),
-              ),
-              child: const Icon(
-                Icons.close,
-                color: AppColor.BlackGreyscale,
-                size: 14,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  },
-),
 
+				],
+			  );
+			},
+		  ),
 		),
 
 		Padding(
@@ -240,8 +256,7 @@ class _CartPageState extends State<CartPage> {
 							children: [
 								Text("Order Total", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', color: AppColor.SecondaryGreyscale)),
 								Text(
-									//"Rs. ${cartController.totalPrice.toStringAsFixed(2)}",
-									"Rs. 0.00",
+									"Rs. ${_calculateTotal().toStringAsFixed(2)}",
 									textAlign: TextAlign.right,
 									style: TextStyle(
 									  fontSize: 16,
@@ -305,8 +320,7 @@ class _CartPageState extends State<CartPage> {
 							children: [
 								Text("Total", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', color: AppColor.black)),
 								Text(
-									//"Rs. ${cartController.totalPrice.toStringAsFixed(2)}",
-									"Rs. 1.00",
+									"Rs. ${_calculateTotal().toStringAsFixed(2)}",
 									textAlign: TextAlign.right,
 									style: TextStyle(
 									  fontSize: 16,

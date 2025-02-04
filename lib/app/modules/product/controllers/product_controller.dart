@@ -96,6 +96,67 @@ class ProductController extends GetxController {
 		isLoading.value = false; // Stop loading
 	  }
 	}
-
+	//sumit a review
+	Future<void> giveReview(String comment) async {
+		isLoading.value = true;
+		try {
+			final response = await apiService.giveReview(productId, 0, comment);
+			if (response['status'] == 200) {
+				SnackbarHelper.showSuccessSnackbar(
+					title: Appcontent.snackbarTitleSuccess, 
+					message: response['message'],
+					position: SnackPosition.BOTTOM, // Custom position
+				);
+			} else {
+				SnackbarHelper.showErrorSnackbar(
+				  title: Appcontent.snackbarTitleError, 
+				  message: response['message'],
+				  position: SnackPosition.BOTTOM, // Custom position
+				);
+			}
+		} catch (e) {
+			// Handle the error by showing a custom error snackbar
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError,
+			  message: Appcontent.snackbarCatchErrorMsg, // Generic error message
+			  position: SnackPosition.BOTTOM, // Show the snackbar at the bottom
+			);
+			print('Error fetching post data: $e'); // Log the error for debugging
+		} finally {
+			// Reset loading states
+			isLoading.value = false; // Stop loading
+		}
+	}
+	//sumit a review
+	Future<void> submitRating(int rating) async {
+		//isLoading.value = true;
+		try {
+			final response = await apiService.giveReview(productId, rating, '');
+			if (response['status'] == 200) {
+				SnackbarHelper.showSuccessSnackbar(
+					title: Appcontent.snackbarTitleSuccess, 
+					message: response['message'],
+					position: SnackPosition.BOTTOM, // Custom position
+				);
+			} else {
+				SnackbarHelper.showErrorSnackbar(
+				  title: Appcontent.snackbarTitleError, 
+				  message: response['message'],
+				  position: SnackPosition.BOTTOM, // Custom position
+				);
+			}
+		} catch (e) {
+			// Handle the error by showing a custom error snackbar
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError,
+			  message: Appcontent.snackbarCatchErrorMsg, // Generic error message
+			  position: SnackPosition.BOTTOM, // Show the snackbar at the bottom
+			);
+			print('Error fetching post data: $e'); // Log the error for debugging
+		} finally {
+			// Reset loading states
+			//isLoading.value = false; // Stop loading
+		}
+	}
   
 }

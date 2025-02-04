@@ -284,6 +284,11 @@ class ApiService extends BaseApiService {
 		final response = await post(ApiEndpoints.account_update, {'old_password': password, 'new_password': new_password, 'confirm_password': confirm_password}, requiresAuth: true);
 		return response;
 	}
+	//Give review from product details page
+	Future<Map<String, dynamic>> giveReview(String product_id, int rating, String comment) async {
+		final response = await post(ApiEndpoints.giveReview, {'product_id': product_id, 'rating': rating, 'comment': comment}, requiresAuth: true);
+		return response;
+	}
 	///////////////////////////////////////////////////
 	
 	
