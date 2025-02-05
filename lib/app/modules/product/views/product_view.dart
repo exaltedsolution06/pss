@@ -12,8 +12,8 @@ import 'package:picturesourcesomerset/config/common_button.dart';
 import 'package:picturesourcesomerset/config/common_textfield.dart';
 import 'package:picturesourcesomerset/config/bullet_list.dart';
 
-import '../controllers/product_controller.dart';
 import 'package:picturesourcesomerset/app/modules/order_screen/controllers/cart_controller.dart';
+import '../controllers/product_controller.dart';
 import 'package:picturesourcesomerset/app/modules/product/models/product_data.dart';
 
 class ProductView extends StatefulWidget {
@@ -65,9 +65,13 @@ class _ProductViewState extends State<ProductView> {
 	@override
 	void initState() {
 		super.initState();
-		productData = ProductData(); // Initialize it according to your logic
 		
-		
+		int parsedProductId = int.parse(widget.productId); // Parse productId to int
+		print("Product fetch product view screen: $parsedProductId");
+
+		productController.fetchProductData(parsedProductId); // Fetch product data
+	
+		productData = ProductData(); // Initialize it according to your logic		
 	}
 	@override
 	void dispose() {
@@ -197,7 +201,8 @@ class _ProductViewState extends State<ProductView> {
 											GestureDetector(
 											  onTap: () {
 												//Get.toNamed(Routes.YOUR_TARGET_PAGE); // Replace with your desired route
-												cartController.addToCart(firstValidFile?.filePath ?? '', productData.name, productData.price);
+												cartController.addToCart(productData.product_id, firstValidFile?.filePath ?? '', productData.name, productData.price);
+												print("Add to Cart: ${productData.product_id}");
 											  },
 											  child: Row(
 												mainAxisSize: MainAxisSize.min, // Adjust the width of the row to fit its children

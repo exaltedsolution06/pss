@@ -25,34 +25,6 @@ class _CartPageState extends State<CartPage> {
   final CartController cartController = Get.find<CartController>();
   
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  
-  /*List<Map<String, dynamic>> cartItems = [
-    {
-      "id": 1,
-      "name": "Sugar Free Gold",
-      "description": "bottle of 500 pellets",
-      "price": 25.0,
-      "quantity": 1,
-      "imageUrl": Appcontent.pss1, // Replace with your image URL
-    },
-    {
-      "id": 2,
-      "name": "Sugar Free Gold",
-      "description": "bottle of 500 pellets",
-      "price": 18.0,
-      "quantity": 1,
-      "imageUrl": Appcontent.pss2, // Replace with your image URL
-    },
-  ];*/
-
-	/*double _calculateTotal() {
-		double total = 0.0;
-		cartController.cartItems.forEach((key, item) {
-			total += item["price"] * item["quantity"];
-		});
-		return total;
-	}*/
-
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +34,8 @@ class _CartPageState extends State<CartPage> {
       appBar: AppBar(
         title: const Text("Cart"),
       ),
-      body: Form(
+      body: Obx(() {
+			return Form(
                 key: _formKey,
                 child: Column(
         children: [
@@ -109,7 +82,10 @@ class _CartPageState extends State<CartPage> {
   itemBuilder: (context, index) {
     final itemKey = cartController.cartItems.keys.toList()[index];
     final item = cartController.cartItems[itemKey];
-
+	
+	int quantity = item?['quantity'] ?? 0;
+	
+//print("cart List: cartItems");
     return Stack(
       children: [
         // Main Card
@@ -126,13 +102,16 @@ class _CartPageState extends State<CartPage> {
               children: [
                 // Image
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    item["imageUrl"],
-                    width: 60,
-                    height: 60,
-                    fit: BoxFit.cover,
-                  ),
+					borderRadius: BorderRadius.circular(8),
+					child: Image.network(
+						item["imageUrl"] ?? "https://via.placeholder.com/60",
+						width: 60,
+						height: 60,
+						fit: BoxFit.cover,
+						errorBuilder: (context, error, stackTrace) {
+							return Icon(Icons.image_not_supported, size: 60, color: Colors.grey);
+						},
+					),
                 ),
                 const SizedBox(width: 16),
                 // Item Details
@@ -140,8 +119,9 @@ class _CartPageState extends State<CartPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+						
                       Text(
-                        itemKey, // Product Name (Key)
+                        item["product_name"],
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -162,25 +142,52 @@ class _CartPageState extends State<CartPage> {
                 // Quantity Controls
                 Row(
                   children: [
+					IconButton(
+					  icon: const Icon(Icons.remove_circle, color: Colors.red),
+					  onPressed: () {
+						// Check if product_id and quantity are not null before calling the update
+						final productIdM = item["product_id"];
+						final quantityM = item["quantity"];
+						
+						if (productIdM != null && quantityM != null && quantityM > 1) {
+							cartController.updateQuantity(productIdM, quantityM - 1);
+						} else if (productIdM == null) {
+							print("Click Minus - Product ID is null");
+						} else if (quantityM == null) {
+							print("Click Minus - quantityM is null");
+						} else {
+							cartController.updateQuantity(productIdM, 0);
+							print("Click Minus - Product ID or quantityM is null");
+						}
+					  },
+					),
+					Text(
+						item["quantity"].toString(),
+						style: const TextStyle(
+							fontSize: 16,
+							fontWeight: FontWeight.bold,
+						),
+					),
                     IconButton(
-                      icon: const Icon(Icons.remove_circle, color: Colors.red),
-                      onPressed: () {
-                        cartController.updateQuantity(itemKey, item["quantity"] - 1);
-                      },
-                    ),
-                    Text(
-                      item["quantity"].toString(),
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.add_circle, color: Colors.green),
-                      onPressed: () {
-                        cartController.updateQuantity(itemKey, item["quantity"] + 1);
-                      },
-                    ),
+					  icon: const Icon(Icons.add_circle, color: Colors.green),
+					  onPressed: () {
+						// Check if product_id and quantity are not null before calling the update
+						final productId = item["product_id"];
+						final quantity = item["quantity"];
+						
+						if (productId != null && quantity != null) {
+						  cartController.updateQuantity(productId, quantity + 1);
+						} else if (productId == null) {
+						  print("Click Plus - Product ID is null");
+						} else if (quantity == null) {
+						  print("Click Plus - Quantity is null");
+						} else {
+						  print("Click Plus - Product ID or Quantity is null");
+						}
+					  },
+					),
+
+
                   ],
                 ),
               ],
@@ -193,7 +200,7 @@ class _CartPageState extends State<CartPage> {
           right: 22,
           child: GestureDetector(
             onTap: () {
-              cartController.updateQuantity(itemKey, 0); // Removes item
+              cartController.updateQuantity(item["product_id"], 0); // Removes item
             },
             child: Container(
               width: 18,
@@ -240,13 +247,12 @@ class _CartPageState extends State<CartPage> {
 							children: [
 								Text("Order Total", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', color: AppColor.SecondaryGreyscale)),
 								Text(
-									//"Rs. ${cartController.totalPrice.toStringAsFixed(2)}",
-									"Rs. 0.00",
+									"Rs. ${cartController.totalPrice.toStringAsFixed(2)}",
 									textAlign: TextAlign.right,
 									style: TextStyle(
-									  fontSize: 16,
-									  color: AppColor.black,
-									  fontFamily: 'Urbanist-semibold'
+										fontSize: 16,
+										color: AppColor.black,
+										fontFamily: 'Urbanist-semibold'
 									),
 								),
 							],
@@ -305,8 +311,7 @@ class _CartPageState extends State<CartPage> {
 							children: [
 								Text("Total", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', color: AppColor.black)),
 								Text(
-									//"Rs. ${cartController.totalPrice.toStringAsFixed(2)}",
-									"Rs. 1.00",
+									"Rs. ${cartController.totalPrice.toStringAsFixed(2)}",
 									textAlign: TextAlign.right,
 									style: TextStyle(
 									  fontSize: 16,
@@ -337,7 +342,8 @@ class _CartPageState extends State<CartPage> {
 					
         ],
       ),
-	  ),
+	  );
+	  }),
 	  bottomNavigationBar: CommonBottomNavigationBar(currentIndex: 3),
     );
   }

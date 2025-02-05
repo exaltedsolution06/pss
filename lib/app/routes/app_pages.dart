@@ -112,6 +112,15 @@ class AppPages {
 	  middlewares: [AuthGuard()], // After Login
     ),
 	GetPage(
+		name: Routes.PRODUCTVIEW_SCREEN,
+		page: () {
+			final args = Get.arguments as Map<String, dynamic>;
+			return ProductView(productId: args['productId']); // Pass userId to the view
+		},
+		binding: ProductBinding(),
+		middlewares: [AuthGuard()], // After Login
+    ),
+	/*GetPage(
 		name: _Paths.PRODUCTVIEW_SCREEN,
 		page: () {
 			final args = Get.arguments as Map<String, dynamic>?;
@@ -121,7 +130,7 @@ class AppPages {
 		},
 		binding: ProductBinding(),
 		middlewares: [AuthGuard()], // After Login
-	),
+	),*/
 	GetPage(
 		name: _Paths.WALLPHOTO, 
 		page: () => WallPhotoView(),

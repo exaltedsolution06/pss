@@ -42,6 +42,9 @@ class ProductController extends GetxController {
 	void onInit() {
 		super.onInit();
 		int parsedProductId = int.parse(productId); // Parse productId to int
+		
+		print("Product fetch product view screen: $parsedProductId");
+		
 		fetchProductData(parsedProductId); // Fetch user profile
 	}*/
 	@override
@@ -50,7 +53,7 @@ class ProductController extends GetxController {
 	  try {
 		int parsedProductId = int.parse(productId); // Parse productId to int
 		fetchProductData(parsedProductId); // Fetch user profile
-		//print("Product fetch product view screen: $parsedProductId");
+		print("Product fetch product view screen: $parsedProductId");
 	  } catch (e) {
 		print("Invalid productId format: $productId. Error: $e");
 		// Handle error appropriately

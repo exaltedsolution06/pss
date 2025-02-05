@@ -140,6 +140,8 @@ class ApiService extends BaseApiService {
 	}
 	//Fetch product data for product details page
 	Future<Map<String, dynamic>> productDetails(int product_id) async {
+		//return get(ApiEndpoints.productDetails, product_id: product_id, requiresAuth: true);
+		
 		final response = await post(ApiEndpoints.productDetails, {'product_id': product_id}, requiresAuth: true);
 		return response;
 	}
