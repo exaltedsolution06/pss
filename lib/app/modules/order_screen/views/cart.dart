@@ -47,10 +47,10 @@ class _CartPageState extends State<CartPage> {
 						Row(
 							mainAxisAlignment: MainAxisAlignment.spaceBetween,
 							children: [
-								Text("2 Items in your cart", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-Regular')),
+								Text("${cartController.cartItems.length} Items in your cart", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-Regular')),
 								GestureDetector(
 								  onTap: () {
-									//Get.toNamed(Routes.YOUR_TARGET_PAGE); // Replace with your desired route
+									Get.toNamed(Routes.HOME); // Replace with your desired route
 								  },
 								  child: Row(
 									mainAxisSize: MainAxisSize.min, // Adjust the width of the row to fit its children
@@ -129,7 +129,7 @@ class _CartPageState extends State<CartPage> {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        "Rs. ${item["price"]}",
+                        "\$${item["price"]}",
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 14,
@@ -247,7 +247,7 @@ class _CartPageState extends State<CartPage> {
 							children: [
 								Text("Order Total", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', color: AppColor.SecondaryGreyscale)),
 								Text(
-									"Rs. ${cartController.totalPrice.toStringAsFixed(2)}",
+									"\$${cartController.totalPrice.value.toStringAsFixed(2)}",
 									textAlign: TextAlign.right,
 									style: TextStyle(
 										fontSize: 16,
@@ -263,7 +263,7 @@ class _CartPageState extends State<CartPage> {
 							children: [
 								Text("Items Discount", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', color: AppColor.SecondaryGreyscale)),
 								Text(
-									"-Rs. 20",
+									"-\$. 20",
 									textAlign: TextAlign.right,
 									style: TextStyle(
 									  fontSize: 16,
@@ -279,7 +279,7 @@ class _CartPageState extends State<CartPage> {
 							children: [
 								Text("Coupon Discount", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', color: AppColor.SecondaryGreyscale)),
 								Text(
-									"-Rs. 0",
+									"-\$. 0",
 									textAlign: TextAlign.right,
 									style: TextStyle(
 									  fontSize: 16,
@@ -310,15 +310,15 @@ class _CartPageState extends State<CartPage> {
 							mainAxisAlignment: MainAxisAlignment.spaceBetween,
 							children: [
 								Text("Total", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', color: AppColor.black)),
-								Text(
-									"Rs. ${cartController.totalPrice.toStringAsFixed(2)}",
+								Obx(() => Text(
+									"\$${cartController.totalPrice.value.toStringAsFixed(2)}",
 									textAlign: TextAlign.right,
 									style: TextStyle(
 									  fontSize: 16,
 									  color: AppColor.black,
 									  fontFamily: 'Urbanist-semibold'
 									),
-								),
+								)),
 							],
 						),
 					],

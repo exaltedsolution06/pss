@@ -13,14 +13,40 @@ import 'package:picturesourcesomerset/config/common_textfield.dart';
 import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
 import '../controllers/serach_screen_controller.dart';
 
+class SerachScreenView extends StatefulWidget {
+  @override
+  _SerachScreenViewState createState() => _SerachScreenViewState();
+}
+
 // ignore: must_be_immutable
-class SerachScreenView extends StatelessWidget {
+//class SerachScreenView extends StatelessWidget {
+class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBindingObserver {
 	// Initialize the SerachScreenController
-	final SerachScreenController serachScreenController = Get.find<SerachScreenController>();
-	//final SerachScreenController serachScreenController = Get.put(SearchScreenController());
+	//final SerachScreenController serachScreenController = Get.find<SerachScreenController>();
+	final SerachScreenController serachScreenController = Get.put(SerachScreenController(Get.find<ApiService>()));
   
 	final ScrollController _scrollController = ScrollController();
+	
+	/*@override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    serachScreenController.loadMoreDataProduct(); // Call API or reload data
+  }
 
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      serachScreenController.loadMoreDataProduct();
+    }
+  }*/
+  
 	SerachScreenView() {
 		_scrollController.addListener(() {
 			if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
@@ -159,7 +185,7 @@ Widget buildSearchItem(RxMap<String, dynamic> feedData, int index, BuildContext 
 	return Obx(() {
 		return GestureDetector(
 			onTap: () {
-			  print('Edit clicked');
+			  print('Product clicked');
 			  final productId = feedData['product_id']?.toString() ?? '1';
 			  print('Navigating with Product ID: $productId');
 			  Get.toNamed(
@@ -208,17 +234,5 @@ Widget buildSearchItem(RxMap<String, dynamic> feedData, int index, BuildContext 
     );
   });
 }
-
-
-
-
-
-
-
-
-
-  
-
-
 
 }

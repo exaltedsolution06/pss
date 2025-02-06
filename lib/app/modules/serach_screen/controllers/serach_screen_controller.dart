@@ -39,11 +39,11 @@ class SerachScreenController extends GetxController {
 	}
 	
 	
-	@override
+	/*@override
 	void onInit() {
 		super.onInit();
 		if (productData.isEmpty) loadMoreDataProduct();
-	}
+	}*/
 	
 	// Helper function to determine if more data can be loaded
 	bool canLoadMore() {

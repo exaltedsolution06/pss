@@ -47,18 +47,18 @@ class ProductController extends GetxController {
 		
 		fetchProductData(parsedProductId); // Fetch user profile
 	}*/
-	@override
+	/*@override
 	void onReady() {
 	  super.onReady();
 	  try {
 		int parsedProductId = int.parse(productId); // Parse productId to int
 		fetchProductData(parsedProductId); // Fetch user profile
-		print("Product fetch product view screen: $parsedProductId");
+		print("Product fetch product view screen ONREADY--222--: $parsedProductId");
 	  } catch (e) {
 		print("Invalid productId format: $productId. Error: $e");
 		// Handle error appropriately
 	  }
-	}
+	}*/
 	// Fetch user post data
 	Future<void> fetchProductData(int productId) async {
 	  isLoading.value = true; // Start loading

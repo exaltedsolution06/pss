@@ -291,6 +291,15 @@ class ApiService extends BaseApiService {
 		final response = await post(ApiEndpoints.giveReview, {'product_id': product_id, 'rating': rating, 'comment': comment}, requiresAuth: true);
 		return response;
 	}
+	//Delivery Address page address list
+	Future<Map<String, dynamic>> deliveryAddressList() {
+		return get(ApiEndpoints.deliveryAddressList, requiresAuth: true);
+	}
+	//Delivery Address page add address
+	Future<Map<String, dynamic>> addDeliveryAddress(String address_type, String phone_number, String address) async {
+		final response = await post(ApiEndpoints.addDeliveryAddress, {'address_type': address_type, 'phone_number': phone_number, 'address': address}, requiresAuth: true);
+		return response;
+	}
 	///////////////////////////////////////////////////
 	
 	

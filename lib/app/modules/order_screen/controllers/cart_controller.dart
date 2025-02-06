@@ -1,20 +1,20 @@
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
-   var cartItems = <int, dynamic>{}.obs;
-   var quantity = 0.obs; // Example observable for quantity
+	var cartItems = <int, dynamic>{}.obs;
+	var totalPrice = 0.0.obs; // Make totalPrice observable
+	var itemCount = 0.obs; // Observable variable for the cart item count
 
   // Add to cart
   void addToCart(int product_id, String imageUrl, String product_name, String price) {
-    //double parsedPrice = double.tryParse(price) ?? 0.0; // Convert price to double
-
+	double parsedPrice = double.tryParse(price.replaceAll(RegExp(r'[^0-9.]'), '')) ?? 0.0; // Remove non-numeric characters
     if (cartItems.containsKey(product_id)) {
       cartItems.update(product_id, (existingItem) => {
             'product_id': existingItem['product_id'],
             'product_name': existingItem['product_name'],
             'imageUrl': existingItem['imageUrl'],
             'quantity': (existingItem['quantity'] as int) + 1,
-            'price': existingItem['price'], // Keep existing price
+            'price': existingItem['price'],
           });
     } else {
       cartItems[product_id] = {
@@ -22,46 +22,33 @@ class CartController extends GetxController {
         'product_name': product_name,
         'imageUrl': imageUrl,
         'quantity': 1,
-        'price': price, // Store price as double
+        'price': parsedPrice,
       };
+	  itemCount.value++; // Increment the item count whenever an item is added
     }
+    calculateTotalPrice(); // Update total price
   }
 
-	// Update quantity
-	void updateQuantity(int product_id, int quantity) {
-	  print("Update Quantity Called");
-	  print("Update Quantity product_id: $product_id");
-	  print("Update Quantity quantity: $quantity");
+  // Update quantity
+  void updateQuantity(int product_id, int quantity) {
+    if (cartItems.containsKey(product_id)) {
+      var existingItem = cartItems[product_id];
 
-	  if (cartItems.containsKey(product_id)) {
-		var existingItem = cartItems[product_id];
-
-		// Safely accessing fields to avoid null errors
-		String productName = existingItem?['product_name'] ?? "Unknown Product";
-		String imageUrl = existingItem?['imageUrl'] ?? "";
-		String price = existingItem?['price'] ?? '';
-		//double price = existingItem?['price'] ?? 0.0;
-
-		if (quantity > 0) {
-		  cartItems.update(product_id, (existingItem) => {
-			'product_id': product_id,
-			'product_name': productName,
-			'imageUrl': imageUrl,
-			'quantity': quantity,
-			'price': price,
-		  });
-		} else {
-		  cartItems.remove(product_id); // Remove item if quantity is 0
-		}
-
-		print("Cart Items: $cartItems");
-	  } else {
-		print("Product ID $product_id not found in cart");
-	  }
-	}
-
-
-
+      if (quantity > 0) {
+        cartItems.update(product_id, (existingItem) => {
+              'product_id': existingItem?['product_id'],
+              'product_name': existingItem?['product_name'],
+              'imageUrl': existingItem?['imageUrl'],
+              'quantity': quantity,
+              'price': existingItem?['price'],
+            });
+      } else {
+        cartItems.remove(product_id);
+		itemCount.value--; // Decreament the item count whenever an item is removed
+      }
+      calculateTotalPrice(); // Update total price
+    }
+  }
 
   // Remove from cart
   void removeFromCart(int product_id) {
@@ -72,19 +59,24 @@ class CartController extends GetxController {
               'quantity': (existingItem['quantity'] as int) - 1
             });
       } else {
-        cartItems.remove(product_id); // Remove item if quantity reaches 0
+        cartItems.remove(product_id);
+		itemCount.value--; // Decreament the item count whenever an item is removed
       }
+      calculateTotalPrice(); // Update total price
     }
   }
 
-	// Get total price
-	double get totalPrice => cartItems.entries.fold(
-	  0, 
-	  (sum, item) {
-		final price = double.tryParse(item.value['price'].toString()) ?? 0.0;
-		final quantity = item.value['quantity'] as int;
-		return sum + (quantity * price);
-	  }
-	);
+	// Calculate total price and update observable value
+	void calculateTotalPrice() {
+	  double total = 0.0;
+	  cartItems.forEach((key, item) {
+		print("Raw price: ${item['price']}"); // Debugging
+		double price = item['price'] is double ? item['price'] : double.tryParse(item['price'].toString()) ?? 0.0;
+		print("Parsed price: $price"); // Check the output
+		int quantity = item['quantity'] as int;
+		total += price * quantity;
+	  });
+	  totalPrice.value = total;
+	}
 
 }

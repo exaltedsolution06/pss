@@ -26,6 +26,8 @@ class ApiEndpoints {
 	static const String profile_avatar_image_upload = 'profile-image-upload';
 	static const String profile_avatar_image_delete = 'profile-image-delete';
 	static const String account_update = 'change-user-password';
+	static const String deliveryAddressList = 'list-delivery-address';
+	static const String addDeliveryAddress = 'add-delivery-address';
 	
   
   //static const String register = 'register';

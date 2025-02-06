@@ -11,6 +11,7 @@ import 'package:picturesourcesomerset/config/app_color.dart';
 import 'package:picturesourcesomerset/config/common_button.dart';
 import 'package:picturesourcesomerset/config/common_textfield.dart';
 import 'package:picturesourcesomerset/config/bullet_list.dart';
+import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 
 import 'package:picturesourcesomerset/app/modules/order_screen/controllers/cart_controller.dart';
 import '../controllers/product_controller.dart';
@@ -31,7 +32,8 @@ class ProductView extends StatefulWidget {
 class _ProductViewState extends State<ProductView> {
 	
 	//final ProductController productController = Get.put(ProductController());
-	final ProductController productController = Get.find();
+	//final ProductController productController = Get.find();
+	final ProductController productController = Get.find<ProductController>();
 	final CartController cartController = Get.put(CartController());
 	
 	final ImagePicker _picker = ImagePicker();
@@ -65,13 +67,13 @@ class _ProductViewState extends State<ProductView> {
 	@override
 	void initState() {
 		super.initState();
-		
-		int parsedProductId = int.parse(widget.productId); // Parse productId to int
-		print("Product fetch product view screen: $parsedProductId");
-
-		productController.fetchProductData(parsedProductId); // Fetch product data
-	
-		productData = ProductData(); // Initialize it according to your logic		
+		Future.delayed(Duration(milliseconds: 100), () {
+			int parsedProductId = int.tryParse(widget.productId) ?? 0;
+			print("Fetching product with ID: $parsedProductId");
+			productController.fetchProductData(parsedProductId);
+			
+			productData = ProductData(); // Initialize it according to your logic
+		});	
 	}
 	@override
 	void dispose() {
@@ -94,7 +96,7 @@ class _ProductViewState extends State<ProductView> {
 				} else if (productController.productData.value == null) {
 					return Center(child: Text("Error loading product data."));					
 				} else {
-					final productData = productController.productData.value;
+					final productData = productController.productData.value!;
 					var imageUrls = productData.fetchedFiles;
 					
 					firstValidFile = productData.fetchedFiles!.firstWhere(
@@ -148,12 +150,12 @@ class _ProductViewState extends State<ProductView> {
 									enlargeCenterPage: true,
 								  ),
 								  items: productData.fetchedFiles!
-									  .where((file) => file.filePath != null && file.filePath!.isNotEmpty) // Ensure non-null and non-empty filePath
+									  .where((file) => file.filePath?.isNotEmpty ?? false) // Ensure non-null and non-empty filePath
 									  .map((file) {
 										return Builder(
 										  builder: (BuildContext context) {
 											return Image.network(
-											  file.filePath!, // Safe to use `!` after filtering
+											  file.filePath ?? '', // Safe to use `!` after filtering
 											  fit: BoxFit.cover,
 											  width: double.infinity,
 											);
@@ -200,9 +202,14 @@ class _ProductViewState extends State<ProductView> {
 											Text(productData.price, textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold')),
 											GestureDetector(
 											  onTap: () {
-												//Get.toNamed(Routes.YOUR_TARGET_PAGE); // Replace with your desired route
 												cartController.addToCart(productData.product_id, firstValidFile?.filePath ?? '', productData.name, productData.price);
-												print("Add to Cart: ${productData.product_id}");
+												//print("Add to Cart: ${productData.product_id}");
+												
+												SnackbarHelper.showSuccessSnackbar(
+													title: Appcontent.snackbarTitleSuccess, 
+													message: "Item added to cart successfully.",
+													position: SnackPosition.BOTTOM, // Custom position
+												);
 											  },
 											  child: Row(
 												mainAxisSize: MainAxisSize.min, // Adjust the width of the row to fit its children
