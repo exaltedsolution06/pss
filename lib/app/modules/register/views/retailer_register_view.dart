@@ -12,10 +12,13 @@ import 'package:picturesourcesomerset/config/common_button.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 
 import 'package:file_picker/file_picker.dart';
 
 import '../controllers/register_controller.dart';
+import 'package:picturesourcesomerset/app/modules/login_screen/controllers/login_screen_controller.dart';
 
 class RetailerRegisterView extends StatefulWidget {
   RetailerRegisterView({Key? key}) : super(key: key);
@@ -28,6 +31,8 @@ class RetailerRegisterView extends StatefulWidget {
 class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 	final RegisterController registerController = Get.put(RegisterController(Get.find<ApiService>()));
 
+  final LoginScreenController loginScreenController = Get.put(LoginScreenController(Get.find<ApiService>()));
+  
   final TextEditingController firstnameController = TextEditingController();
   final TextEditingController lastnameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -147,6 +152,39 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 		  });
 		}
 	}
+	
+  GoogleSignIn signIn = GoogleSignIn();
+  void googleSignin(int flag) async {
+    try {
+      var user = await signIn.signIn();
+	  if (user != null) {
+		// Serialize the user object into a Map
+		Map<String, dynamic> userMap = {
+		'displayName': user.displayName ?? 'Unknown',
+		'email': user.email,
+		'id': user.id,
+		'photoUrl': user.photoUrl,
+		'userType': flag,
+		};
+
+		// Pass the entire serialized user object to the controller
+		loginScreenController.googleLogin(userMap);
+	  }else{
+		SnackbarHelper.showErrorSnackbar(
+		  title: Appcontent.snackbarTitleError, 
+		  message: "Sign-in cancelled by user",
+		  position: SnackPosition.BOTTOM, // Custom position
+		);
+	  }
+    } catch(error) {
+      SnackbarHelper.showErrorSnackbar(
+		title: Appcontent.snackbarTitleError, 
+		message: "$error",
+		position: SnackPosition.BOTTOM, // Custom position
+	  );
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
@@ -788,7 +826,7 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 							backgroundColor: Colors.white, // Optional: Add background color if needed
 						  ),
 						  onPressed: () {
-							// googleSignin();
+							googleSignin(2); // Passing flag 2 for Retailer
 						  },
 						  child: const Row(
 							mainAxisAlignment: MainAxisAlignment.center,

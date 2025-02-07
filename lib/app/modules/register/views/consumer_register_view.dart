@@ -7,13 +7,21 @@ import 'package:picturesourcesomerset/config/app_color.dart';
 import 'package:picturesourcesomerset/config/app_contents.dart';
 import 'package:picturesourcesomerset/config/common_textfield.dart';
 import 'package:picturesourcesomerset/config/common_button.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 
 import '../controllers/register_controller.dart';
+import 'package:picturesourcesomerset/app/modules/login_screen/controllers/login_screen_controller.dart';
 
 // ignore: must_be_immutable
 class ConsumerRegisterView extends GetView<RegisterController> {
   ConsumerRegisterView({super.key});
 
+  //final LoginScreenController loginScreenController = Get.find();
+  final ApiService apiService = Get.put(ApiService());
+  final LoginScreenController loginScreenController = Get.put(LoginScreenController(Get.find<ApiService>()));
+  
+  
   final RegisterController registerController = Get.find();
 
   final TextEditingController firstnameController = TextEditingController();
@@ -39,7 +47,39 @@ class ConsumerRegisterView extends GetView<RegisterController> {
   //final FocusNode _cityFocusNode = FocusNode();
   final FocusNode _zipcodeFocusNode = FocusNode();
   final FocusNode _phoneFocusNode = FocusNode();
+  
+  GoogleSignIn signIn = GoogleSignIn();
+  void googleSignin(int flag) async {
+    try {
+      var user = await signIn.signIn();
+	  if (user != null) {
+		// Serialize the user object into a Map
+		Map<String, dynamic> userMap = {
+		'displayName': user.displayName ?? 'Unknown',
+		'email': user.email,
+		'id': user.id,
+		'photoUrl': user.photoUrl,
+		'userType': flag,
+		};
 
+		// Pass the entire serialized user object to the controller
+		loginScreenController.googleLogin(userMap);
+	  }else{
+		SnackbarHelper.showErrorSnackbar(
+		  title: Appcontent.snackbarTitleError, 
+		  message: "Sign-in cancelled by user",
+		  position: SnackPosition.BOTTOM, // Custom position
+		);
+	  }
+    } catch(error) {
+      SnackbarHelper.showErrorSnackbar(
+		title: Appcontent.snackbarTitleError, 
+		message: "$error",
+		position: SnackPosition.BOTTOM, // Custom position
+	  );
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
@@ -657,7 +697,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 									backgroundColor: Colors.white, // Optional: Add background color if needed
 								  ),
 								  onPressed: () {
-									// googleSignin();
+									googleSignin(1); // Passing flag 1 for Consumer
 								  },
 								  child: const Row(
 									mainAxisAlignment: MainAxisAlignment.center,

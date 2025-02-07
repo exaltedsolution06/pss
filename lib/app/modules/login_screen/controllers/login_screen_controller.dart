@@ -86,6 +86,11 @@ class LoginScreenController extends GetxController {
 		isLoading.value = false;
 
 		if (response.containsKey('access_token')) {
+		  // Save additional user data
+		  //print(response['user']);
+		  await saveUserData(response['user']);
+		
+		  // Navigate to the home screen
 		  saveTokenAndNavigate(response['access_token'], response['message']);
 		} else {
 		  SnackbarHelper.showErrorSnackbar(

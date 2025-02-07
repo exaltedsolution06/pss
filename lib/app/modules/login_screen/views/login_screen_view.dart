@@ -25,11 +25,9 @@ class LoginScreenView extends GetView<LoginScreenController> {
   final FocusNode _passwordFocusNode = FocusNode();
   
   GoogleSignIn signIn = GoogleSignIn();
-  void googleSignin() async {
+  void googleSignin(int flag) async {
     try {
       var user = await signIn.signIn();
-	  //print(user);
-      //loginScreenController.googleLogin(user);
 	  if (user != null) {
 		// Serialize the user object into a Map
 		Map<String, dynamic> userMap = {
@@ -37,6 +35,7 @@ class LoginScreenView extends GetView<LoginScreenController> {
 		'email': user.email,
 		'id': user.id,
 		'photoUrl': user.photoUrl,
+		'userType': flag,
 		};
 
 		// Pass the entire serialized user object to the controller
@@ -70,6 +69,7 @@ class LoginScreenView extends GetView<LoginScreenController> {
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SafeArea(
+			child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(left: 8, right: 8),
               child: Form(
@@ -272,46 +272,89 @@ class LoginScreenView extends GetView<LoginScreenController> {
                     Padding(
                       padding: const EdgeInsets.only(top: 16, bottom: 16),
                       child: Center(
-                        child: OutlinedButton(
-						  style: OutlinedButton.styleFrom(
-							fixedSize: const Size(327, 56),
-							shape: RoundedRectangleBorder(
-							  borderRadius: BorderRadius.circular(100),
-							),
-							side: BorderSide.none, // Removes the border
-							backgroundColor: Colors.white, // Optional: Add background color if needed
-						  ),
-						  onPressed: () {
-							// googleSignin();
-						  },
-						  child: const Row(
-							mainAxisAlignment: MainAxisAlignment.center,
-							children: [
-							  SizedBox(
-								height: 24,
-								width: 24,
-								child: Image(image: AssetImage(Appcontent.google)),
-							  ),
-							  SizedBox(width: 10),
-							  Text(
-								"Google",
-								style: TextStyle(
-								  fontSize: 16,
-								  color: Colors.black,
-								  fontFamily: 'Urbanist-semibold',
+						child: Column(
+						  children: [
+						  
+							// Consumer Google Sign-In Button
+							OutlinedButton(
+							  style: OutlinedButton.styleFrom(
+								fixedSize: const Size(327, 56),
+								shape: RoundedRectangleBorder(
+								  borderRadius: BorderRadius.circular(100),
 								),
-								overflow: TextOverflow.ellipsis,
+								side: BorderSide.none, // Removes the border
+								backgroundColor: Colors.white, // Optional: Add background color if needed
 							  ),
-							],
-						  ),
+							  onPressed: () {
+								googleSignin(1); // Passing flag 1 for Consumer
+							  },
+							  child: const Row(
+								mainAxisAlignment: MainAxisAlignment.center,
+								children: [
+								  SizedBox(
+									height: 24,
+									width: 24,
+									child: Image(image: AssetImage(Appcontent.google)),
+								  ),
+								  SizedBox(width: 10),
+								  Text(
+									"Consumer Google",
+									style: TextStyle(
+									  fontSize: 16,
+									  color: Colors.black,
+									  fontFamily: 'Urbanist-semibold',
+									),
+									overflow: TextOverflow.ellipsis,
+								  ),
+								],
+							  ),
+							),
+							const SizedBox(height: 20),
+							
+							// Retailer Google Sign-In Button
+							OutlinedButton(
+							  style: OutlinedButton.styleFrom(
+								fixedSize: const Size(327, 56),
+								shape: RoundedRectangleBorder(
+								  borderRadius: BorderRadius.circular(100),
+								),
+								side: BorderSide.none, // Removes the border
+								backgroundColor: Colors.white, // Optional: Add background color if needed
+							  ),
+							  onPressed: () {
+								googleSignin(2); // Passing flag 2 for Retailer
+							  },
+							  child: const Row(
+								mainAxisAlignment: MainAxisAlignment.center,
+								children: [
+								  SizedBox(
+									height: 24,
+									width: 24,
+									child: Image(image: AssetImage(Appcontent.google)),
+								  ),
+								  SizedBox(width: 10),
+								  Text(
+									"Retailer Google",
+									style: TextStyle(
+									  fontSize: 16,
+									  color: Colors.black,
+									  fontFamily: 'Urbanist-semibold',
+									),
+									overflow: TextOverflow.ellipsis,
+								  ),
+								],
+							  ),
+							),
+							
+						  ],
 						),
-
                       ),
                     ),
                     const SizedBox(height: 20),
                   ],
                 ),
               ),
+            ),
             ),
           );
         },
