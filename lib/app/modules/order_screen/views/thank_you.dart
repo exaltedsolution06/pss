@@ -11,6 +11,10 @@ import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
 import '../controllers/order_controller.dart';
 
 class ThankYouPage extends StatefulWidget {
+  final String orderId; // Accept orderId as a parameter
+
+  const ThankYouPage({Key? key, required this.orderId}) : super(key: key);
+  
   @override
   _ThankYouPageState createState() => _ThankYouPageState();
 }
@@ -47,7 +51,7 @@ class _ThankYouPageState extends State<ThankYouPage> {
 								),
 								const SizedBox(height: 20),
 								Text(
-									Appcontent.thankYouDescFirst + '123456.' + Appcontent.thankYouDescLast,
+									"${Appcontent.thankYouDescFirst} ${widget.orderId}. ${Appcontent.thankYouDescLast}",
 									style: TextStyle(fontSize: 14, fontFamily: 'Urbanist-Regular'),
 								),
 								const SizedBox(height: 30),

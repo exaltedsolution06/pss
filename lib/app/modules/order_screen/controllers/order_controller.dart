@@ -60,11 +60,31 @@ class OrderController extends GetxController {
 			"payment_method": "cod", // Change based on user selection
 		};
 		
-		print('Order Data: $orderData');
-		var response = await apiService.placeOrder(orderData);
+		//print(orderData);
+		final response = await apiService.placeOrder(orderData);
 		
-		
-		
+		if (response['status'] == 200) {
+			SnackbarHelper.showSuccessSnackbar(
+			  title: "Order Placed",
+			  message: response['data'],
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+			
+			final orderId = response['order_id'].toString();
+			
+			// Clear cart after order placement
+			cartController.cartItems.clear();
+			cartController.totalPrice.value = 0.0;
+			cartController.itemCount.value = 0;
+			
+			Get.to(() => ThankYouPage(orderId: orderId));	
+		} else {
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: response['data'],
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+		}
 	  } catch (e) {
 		print('Error placing order: $e');
 		SnackbarHelper.showErrorSnackbar(
