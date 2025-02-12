@@ -47,6 +47,8 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 	final TextEditingController addressController = TextEditingController();
 	//final TextEditingController cityController = TextEditingController();
 	//final TextEditingController stateController = TextEditingController();
+	final TextEditingController latitudeController = TextEditingController();
+	final TextEditingController longitudeController = TextEditingController();
 	final TextEditingController zipcodeController = TextEditingController();
 	final TextEditingController phoneController = TextEditingController();
 
@@ -59,6 +61,8 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
   final FocusNode _addressFocusNode = FocusNode();
   //final FocusNode _cityFocusNode = FocusNode();
   //final FocusNode _stateFocusNode = FocusNode();
+  final FocusNode _latitudeFocusNode = FocusNode();
+  final FocusNode _longitudeFocusNode = FocusNode();
   final FocusNode _zipcodeFocusNode = FocusNode();
   final FocusNode _phoneFocusNode = FocusNode();
 
@@ -80,6 +84,10 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 	//_cityFocusNode.dispose();
     //stateController.dispose();
 	//_stateFocusNode.dispose();
+    latitudeController.dispose();
+	_latitudeFocusNode.dispose();
+    longitudeController.dispose();
+	_longitudeFocusNode.dispose();
     zipcodeController.dispose();
 	_zipcodeFocusNode.dispose();
     phoneController.dispose();
@@ -190,6 +198,12 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
           if (stateController.text.isEmpty && profileData.state != null) {
             stateController.text = profileData.state!;
           }*/
+          if (latitudeController.text.isEmpty && userController.latitude.value != null) {
+            latitudeController.text = userController.latitude.value!;
+          }
+          if (longitudeController.text.isEmpty && userController.longitude.value != null) {
+            longitudeController.text = userController.longitude.value!;
+          }
           if (zipcodeController.text.isEmpty && userController.zipcode.value != null) {
             zipcodeController.text = userController.zipcode.value!;
           }
@@ -685,6 +699,62 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 											  }
 											},
 										),
+										if (userController.userType.value == 2) ...[
+										// Label Above the TextField
+										Text(
+											Appcontent.latitude,
+											style: TextStyle(
+											  fontSize: 16,
+											  color: AppColor.formLabelColor, // Or any color you prefer
+											),
+										),
+										const SizedBox(height: 8), // Space between label and text field
+										// Text Field
+										autoWidthTextField(
+											text: Appcontent.placeholderLatitude,
+											width: screenWidth,
+											controller: latitudeController,
+											focusNode: _latitudeFocusNode,
+											validator: (value) {
+											  if (value == null || value.isEmpty) {
+												return 'Latitude cannot be blank';
+											  }
+											  return null;
+											},
+											onChanged: (value) {
+											  if (value.isNotEmpty) {
+												_formKey.currentState?.validate();
+											  }
+											},
+										),
+										// Label Above the TextField
+										Text(
+											Appcontent.longitude,
+											style: TextStyle(
+											  fontSize: 16,
+											  color: AppColor.formLabelColor, // Or any color you prefer
+											),
+										),
+										const SizedBox(height: 8), // Space between label and text field
+										// Text Field
+										autoWidthTextField(
+											text: Appcontent.placeholderLongitude,
+											width: screenWidth,
+											controller: longitudeController,
+											focusNode: _longitudeFocusNode,
+											validator: (value) {
+											  if (value == null || value.isEmpty) {
+												return 'Longitude cannot be blank';
+											  }
+											  return null;
+											},
+											onChanged: (value) {
+											  if (value.isNotEmpty) {
+												_formKey.currentState?.validate();
+											  }
+											},
+										),
+										],
 										// Label Above the TextField
 										Text(
 											Appcontent.zipCode,
@@ -821,6 +891,8 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 													  final address = addressController.text.trim();
 													  //final city = cityController.text.trim();
 													  //final state = stateController.text.trim();
+													  final latitude = latitudeController.text.trim();
+													  final longitude = longitudeController.text.trim();
 													  final zipcode = zipcodeController.text.trim();
 													  final phone = phoneController.text.trim();
 
@@ -835,6 +907,8 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 														stateId,
 														cityId,
 														address,
+														latitude,
+														longitude,
 														zipcode,
 														phone,
 														genderId,

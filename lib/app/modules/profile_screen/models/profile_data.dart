@@ -11,6 +11,8 @@ class ProfileData {
 	final String city;
 	final String state;
 	final int gender_id;
+	final String latitude;
+	final String longitude;
 	final String zipcode;
 	final String phone;
 	// Add other fields here if needed
@@ -27,6 +29,8 @@ class ProfileData {
 		this.city = '',
 		this.state = '',
 		this.gender_id = 0,
+		this.latitude = '',
+		this.longitude = '',
 		this.zipcode = '',
 		this.phone = '',
 	});
@@ -44,6 +48,8 @@ class ProfileData {
 		city: json['city'] as String? ?? '', // Default value if null
 		state: json['state'] as String? ?? '', // Default value if null
 		gender_id: json['gender_id'] as int? ?? 0, // Default value if null
+		latitude: json['latitude'] as String? ?? '', // Default value if null
+		longitude: json['longitude'] as String? ?? '', // Default value if null
 		zipcode: json['zipcode'] as String? ?? '', // Default value if null
 		phone: json['phone'] as String? ?? '', // Default value if null
       // Parse other fields here if needed
@@ -63,6 +69,8 @@ class ProfileData {
       'city': city,
       'state': state,
       'gender_id': gender_id,
+      'latitude': latitude,
+      'longitude': longitude,
       'zipcode': zipcode,
       'phone': phone,
       // Convert other fields here if needed

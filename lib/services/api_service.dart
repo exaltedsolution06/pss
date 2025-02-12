@@ -174,6 +174,8 @@ class ApiService extends BaseApiService {
 		int state, 
 		int city,
 		String address, 
+		String latitude, 
+		String longitude, 
 		String zipcode, 
 		String phone_number, 
 		int gender_id
@@ -189,6 +191,8 @@ class ApiService extends BaseApiService {
 			'state': state,
 			'city': city,
 			'address': address,
+			'latitude': latitude,
+			'longitude': longitude,
 			'zipcode': zipcode,
 			'phone_number': phone_number,
 			'gender_id': gender_id,
@@ -217,6 +221,8 @@ class ApiService extends BaseApiService {
 		int state, 
 		int city,
 		String address, 
+		String latitude, 
+		String longitude, 
 		String zipcode, 
 		String phone_number, 
 		int gender_id
@@ -232,6 +238,8 @@ class ApiService extends BaseApiService {
 			'state': state,
 			'city': city,
 			'address': address,
+			'latitude': latitude,
+			'longitude': longitude,
 			'zipcode': zipcode,
 			'phone_number': phone_number,
 			'gender_id': gender_id,
@@ -296,13 +304,13 @@ class ApiService extends BaseApiService {
 		return get(ApiEndpoints.deliveryAddressList, requiresAuth: true);
 	}
 	//Delivery Address page add address
-	Future<Map<String, dynamic>> addDeliveryAddress(String address_type, String phone_number, String address) async {
-		final response = await post(ApiEndpoints.addDeliveryAddress, {'address_type': address_type, 'phone_number': phone_number, 'address': address}, requiresAuth: true);
+	Future<Map<String, dynamic>> addDeliveryAddress(String address_type, String phone_number, String latitude, String longitude, String address) async {
+		final response = await post(ApiEndpoints.addDeliveryAddress, {'address_type': address_type, 'phone_number': phone_number, 'latitude': latitude, 'longitude': longitude, 'address': address}, requiresAuth: true);
 		return response;
 	}
 	//Delivery Address page edit address
-	Future<Map<String, dynamic>> editDeliveryAddress(int id, String address_type, String phone_number, String address) async {
-		final response = await post(ApiEndpoints.editDeliveryAddress, {'id': id, 'address_type': address_type, 'phone_number': phone_number, 'address': address}, requiresAuth: true);
+	Future<Map<String, dynamic>> editDeliveryAddress(int id, String address_type, String phone_number, String latitude, String longitude, String address) async {
+		final response = await post(ApiEndpoints.editDeliveryAddress, {'id': id, 'address_type': address_type, 'phone_number': phone_number, 'latitude': latitude, 'longitude': longitude, 'address': address}, requiresAuth: true);
 		return response;
 	}
 	//Delivery Address page delete address

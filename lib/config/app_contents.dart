@@ -54,6 +54,8 @@ class Appcontent {
   static const String placeholdercompanyName = "Enter your company name";
   static const String address = "Address";
   static const String placeholderAddress = "Enter your address";
+  static const String placeholderLatitude = "Enter your latitude";
+  static const String placeholderLongitude = "Enter your longitude";
   static const String city = "City";
   static const String placeholderCity = "Choose city";
   static const String loadingCities = "Loading cities...";
@@ -85,6 +87,8 @@ class Appcontent {
   
 	//Add address modal
 	static const String addressType = "Address Type";
+	static const String latitude = "Latitude";
+	static const String longitude = "Longitude";
 	
 	//Thanks you page
 	static const String thankYou = "Thank You";

@@ -33,6 +33,8 @@ class EditprofileScreenController extends GetxController {
 		city: '',
 		state: '',
 		gender_id: 0,
+		latitude: '',
+		longitude: '',
 		zipcode: '',
 		phone: '',
 	));
@@ -209,6 +211,8 @@ class EditprofileScreenController extends GetxController {
 		int? state,  
 		int? city,
 		String? address, 
+		String? latitude, 
+		String? longitude, 
 		String? zipcode, 
 		String? phone,
 		int? gender_id
@@ -241,6 +245,8 @@ class EditprofileScreenController extends GetxController {
 					state ?? 0,   
 					city ?? 0,
 					address ?? '', 
+					latitude ?? '', 
+					longitude ?? '', 
 					zipcode ?? '', 
 					phone ?? '',
 					gender_id ?? 0, 			 
@@ -258,6 +264,8 @@ class EditprofileScreenController extends GetxController {
 					state ?? 0,   
 					city ?? 0,
 					address ?? '', 
+					latitude ?? '', 
+					longitude ?? '', 
 					zipcode ?? '', 
 					phone ?? '',
 					gender_id ?? 0, 			 
@@ -277,6 +285,8 @@ class EditprofileScreenController extends GetxController {
 					"city": city,
 					"country": country,
 					"state": state,
+					"latitude": latitude,
+					"longitude": longitude,
 					"zipcode": zipcode,
 					"phone_number": phone,
 					"dob": dob,
@@ -327,6 +337,8 @@ class EditprofileScreenController extends GetxController {
 		await prefs.setInt('city', (userData['city'] as int?) ?? 0);
 
 		await prefs.setString('address', userData['address'] ?? '');
+		await prefs.setString('latitude', userData['latitude'] ?? '');
+		await prefs.setString('longitude', userData['longitude'] ?? '');
 		await prefs.setString('zipcode', userData['zipcode'] ?? '');
 		await prefs.setString('phoneNumber', userData['phone_number'] ?? '');
 		await prefs.setString('dob', userData['dob'] ?? '');

@@ -43,9 +43,13 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
 
 	final TextEditingController addressTypeController = TextEditingController();
 	final TextEditingController phoneController = TextEditingController();
+	final TextEditingController latitudeController = TextEditingController();
+	final TextEditingController longitudeController = TextEditingController();
 	final TextEditingController addressController = TextEditingController();
 	final FocusNode _addressTypeFocusNode = FocusNode();
 	final FocusNode _phoneFocusNode = FocusNode();
+	final FocusNode _latitudeFocusNode = FocusNode();
+	final FocusNode _longitudeFocusNode = FocusNode();
 	final FocusNode _addressFocusNode = FocusNode();
   
 	final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -70,10 +74,14 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
 	  // Clear previous form values
 	  addressTypeController.clear();
 	  phoneController.clear();
+	  latitudeController.clear();
+	  longitudeController.clear();
 	  addressController.clear();
 
 	  _addressTypeFocusNode.unfocus();
 	  _phoneFocusNode.unfocus();
+	  _latitudeFocusNode.unfocus();
+	  _longitudeFocusNode.unfocus();
 	  _addressFocusNode.unfocus();
 
 	  _showCustomModal(
@@ -124,6 +132,40 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
 						  }
 						},
 					  ),
+					  autoWidthTextField(
+						text: Appcontent.latitude,
+						width: MediaQuery.of(context).size.width,
+						controller: latitudeController,
+						focusNode: _latitudeFocusNode,
+						validator: (value) {
+						  if (value == null || value.isEmpty) {
+							return 'Latitude cannot be blank';
+						  }
+						  return null;
+						},
+						onChanged: (value) {
+						  if (value.isNotEmpty) {
+							_modalFormKey.currentState?.validate();
+						  }
+						},
+					  ),
+					  autoWidthTextField(
+						text: Appcontent.longitude,
+						width: MediaQuery.of(context).size.width,
+						controller: longitudeController,
+						focusNode: _longitudeFocusNode,
+						validator: (value) {
+						  if (value == null || value.isEmpty) {
+							return 'Longitude cannot be blank';
+						  }
+						  return null;
+						},
+						onChanged: (value) {
+						  if (value.isNotEmpty) {
+							_modalFormKey.currentState?.validate();
+						  }
+						},
+					  ),
 					  ConstrainedBox(
 						constraints: const BoxConstraints(minHeight: 74, maxHeight: 150),
 						child: textAreaFieldDynamic(
@@ -161,6 +203,8 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
 							  orderController.addDeliveryAddress(
 								addressTypeController.text.trim(),
 								phoneController.text.trim(),
+								latitudeController.text.trim(),
+								longitudeController.text.trim(),
 								addressController.text.trim(),
 							  );
 							  Navigator.pop(context);
@@ -182,6 +226,8 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
 	  // Pre-fill text fields
 	  addressTypeController.text = selectedAddress["address_type"];
 	  phoneController.text = selectedAddress["phone_number"];
+	  latitudeController.text = selectedAddress["latitude"];
+	  longitudeController.text = selectedAddress["longitude"];
 	  addressController.text = selectedAddress["address"];
 
 	  // Show the modal for editing
@@ -210,6 +256,18 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
 						controller: phoneController,
 						validator: (value) => value!.isEmpty ? 'Phone number cannot be blank' : null,
 					  ),
+					  autoWidthTextField(
+						text: Appcontent.latitude,
+						width: MediaQuery.of(context).size.width,
+						controller: latitudeController,
+						validator: (value) => value!.isEmpty ? 'Latitude cannot be blank' : null,
+					  ),
+					  autoWidthTextField(
+						text: Appcontent.longitude,
+						width: MediaQuery.of(context).size.width,
+						controller: longitudeController,
+						validator: (value) => value!.isEmpty ? 'Longitude cannot be blank' : null,
+					  ),
 					  textAreaFieldDynamic(
 						text: Appcontent.address,
 						width: MediaQuery.of(context).size.width,
@@ -235,6 +293,8 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
 								selectedAddress["id"],
 								addressTypeController.text.trim(),
 								phoneController.text.trim(),
+								latitudeController.text.trim(),
+								longitudeController.text.trim(),
 								addressController.text.trim(),
 							  );
 							  Navigator.pop(context); // Close modal

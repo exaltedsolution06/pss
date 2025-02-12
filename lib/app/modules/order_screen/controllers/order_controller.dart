@@ -91,13 +91,13 @@ class OrderController extends GetxController {
 		}
 	}
 	// DeliveryAddressPage add address data
-	Future<void> addDeliveryAddress(address_type, phone_number, address) async {
+	Future<void> addDeliveryAddress(address_type, phone_number, latitude, longitude, address) async {
 		isDAMLoading.value = true;
 		print("Address Type: $address_type");
 		print("Phone Number: $phone_number");
 		print("Address: $address");
 		try {
-			var response = await apiService.addDeliveryAddress(address_type, phone_number, address);
+			var response = await apiService.addDeliveryAddress(address_type, phone_number, latitude, longitude, address);
 			print("Response: $response");
 			if (response['status'] == 200) {
 				SnackbarHelper.showSuccessSnackbar(
@@ -142,10 +142,10 @@ class OrderController extends GetxController {
 		}
 	}
 	
-	void updateDeliveryAddress(int id, String type, String phone, String address) async {
+	void updateDeliveryAddress(int id, String type, String phone, String latitude, String longitude, String address) async {
 	  isDAMLoading.value = true;
 	  try {
-	    var response = await apiService.editDeliveryAddress(id, type, phone, address);
+	    var response = await apiService.editDeliveryAddress(id, type, phone, latitude, longitude, address);
 		
 		if (response['status'] == 200) {
 			SnackbarHelper.showSuccessSnackbar(

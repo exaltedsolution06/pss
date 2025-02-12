@@ -13,6 +13,8 @@ class UserController extends GetxController {
 	RxInt city = 0.obs;
 	RxString address = ''.obs;
 	RxString zipcode = ''.obs;
+	RxString latitude = ''.obs;
+	RxString longitude = ''.obs;
 	RxString phoneNumber = ''.obs;
 	RxString dob = ''.obs;
 	RxInt genderId = 0.obs;
@@ -31,6 +33,8 @@ class UserController extends GetxController {
 		state.value = data['state'] ?? 0;
 		city.value = data['city'] ?? 0;
 		address.value = data['address'] ?? '';
+		latitude.value = data['latitude'] ?? '';
+		longitude.value = data['longitude'] ?? '';
 		zipcode.value = data['zipcode'] ?? '';
 		phoneNumber.value = data['phone_number'] ?? '';
 		dob.value = data['dob'] ?? '';
@@ -50,6 +54,8 @@ class UserController extends GetxController {
 		state.value = data['state'] ?? 0;
 		city.value = data['city'] ?? 0;
 		address.value = data['address'] ?? '';
+		latitude.value = data['latitude'] ?? '';
+		longitude.value = data['longitude'] ?? '';
 		zipcode.value = data['zipcode'] ?? '';
 		phoneNumber.value = data['phone_number'] ?? '';
 		dob.value = data['dob'] ?? '';

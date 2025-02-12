@@ -28,6 +28,8 @@ Future<void> loadUserData() async {
 		//'city': int.tryParse(prefs.getString('city') ?? '0') ?? 0,
 		'city': prefs.getInt('city') ?? 0,
 		'address': prefs.getString('address') ?? '',
+		'latitude': prefs.getString('latitude') ?? '',
+		'longitude': prefs.getString('longitude') ?? '',
 		'zipcode': prefs.getString('zipcode') ?? '',
 		'phone_number': prefs.getString('phoneNumber') ?? '',
 		'dob': prefs.getString('dob') ?? '',
