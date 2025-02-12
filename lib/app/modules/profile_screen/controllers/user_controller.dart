@@ -16,6 +16,7 @@ class UserController extends GetxController {
 	RxString phoneNumber = ''.obs;
 	RxString dob = ''.obs;
 	RxInt genderId = 0.obs;
+	RxInt isProfileVerified = 0.obs;
 	RxString profilePicture = ''.obs;
 
 	void setUserData(Map<String, dynamic> data) {
@@ -34,7 +35,10 @@ class UserController extends GetxController {
 		phoneNumber.value = data['phone_number'] ?? '';
 		dob.value = data['dob'] ?? '';
 		genderId.value = data['gender_id'] ?? 0;
-		profilePicture.value = data['profile_image'] ?? '';	
+		isProfileVerified.value = data['profile_verified'] ?? 0;
+		profilePicture.value = data['profile_image'] ?? '';
+		
+		print(data);
 	}
 	void setEditUserData(Map<String, dynamic> data) {
 		name.value = data['name'] ?? '';
@@ -53,5 +57,8 @@ class UserController extends GetxController {
 	}
 	void setEditUserProfilePictureData(Map<String, dynamic> data) {
 		profilePicture.value = data['profile_image'] ?? '';	
+	}
+	void setEditUserProfilePaymentVerifyData() {
+		isProfileVerified.value = 1;
 	}
 }

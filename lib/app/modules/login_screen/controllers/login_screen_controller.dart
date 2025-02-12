@@ -116,6 +116,7 @@ class LoginScreenController extends GetxController {
 		await prefs.setString('phoneNumber', userData['phone_number'] ?? '');
 		await prefs.setString('dob', userData['dob'] ?? '');
 		await prefs.setInt('genderId', userData['gender_id'] ?? 0);
+		await prefs.setInt('isProfileVerified', userData['profile_verified'] ?? 0);
 		await prefs.setString('profilePicture', userData['profile_image'] ?? '');
 		
 		// Update UserController

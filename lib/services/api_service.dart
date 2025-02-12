@@ -300,6 +300,26 @@ class ApiService extends BaseApiService {
 		final response = await post(ApiEndpoints.addDeliveryAddress, {'address_type': address_type, 'phone_number': phone_number, 'address': address}, requiresAuth: true);
 		return response;
 	}
+	//Delivery Address page edit address
+	Future<Map<String, dynamic>> editDeliveryAddress(int id, String address_type, String phone_number, String address) async {
+		final response = await post(ApiEndpoints.editDeliveryAddress, {'id': id, 'address_type': address_type, 'phone_number': phone_number, 'address': address}, requiresAuth: true);
+		return response;
+	}
+	//Delivery Address page delete address
+	Future<Map<String, dynamic>> deleteDeliveryAddress(int id) async {
+		final response = await post(ApiEndpoints.deleteDeliveryAddress, {'id': id}, requiresAuth: true);
+		return response;
+	}
+	//Delivery Address page profile verification with card
+	Future<Map<String, dynamic>> profileVerified(String payment_method) async {
+		final response = await post(ApiEndpoints.profileVerified, {'payment_method': payment_method}, requiresAuth: true);
+		return response;
+	}
+	//Place order
+	Future<Map<String, dynamic>> placeOrder(order_data) async {
+		final response = await post(ApiEndpoints.placeOrder, order_data, requiresAuth: true);
+		return response;
+	}
 	///////////////////////////////////////////////////
 	
 	

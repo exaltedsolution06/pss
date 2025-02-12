@@ -28,6 +28,10 @@ class ApiEndpoints {
 	static const String account_update = 'change-user-password';
 	static const String deliveryAddressList = 'list-delivery-address';
 	static const String addDeliveryAddress = 'add-delivery-address';
+	static const String editDeliveryAddress = 'edit-delivery-address';
+	static const String deleteDeliveryAddress = 'delete-delivery-address';
+	static const String profileVerified = 'profile-verified';
+	static const String placeOrder = 'place-order';
 	
   
   //static const String register = 'register';

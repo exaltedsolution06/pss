@@ -227,7 +227,7 @@ class _CartPageState extends State<CartPage> {
 ),
 
 		),
-
+		if (cartController.cartItems.isNotEmpty) ...[
 		Padding(
 				padding: const EdgeInsets.only(bottom: 10, left: 16, right: 16),
 				child: Column(
@@ -258,7 +258,7 @@ class _CartPageState extends State<CartPage> {
 							],
 						),
 						const SizedBox(height: 5),
-						Row(
+						/*Row(
 							mainAxisAlignment: MainAxisAlignment.spaceBetween,
 							children: [
 								Text("Items Discount", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', color: AppColor.SecondaryGreyscale)),
@@ -306,6 +306,7 @@ class _CartPageState extends State<CartPage> {
 							],
 						),
 						const SizedBox(height: 5),
+						*/
 						Row(
 							mainAxisAlignment: MainAxisAlignment.spaceBetween,
 							children: [
@@ -326,20 +327,20 @@ class _CartPageState extends State<CartPage> {
 			),
 
 			Padding(
-			  padding: const EdgeInsets.only(bottom: 16, top: 16),
+			  padding: const EdgeInsets.all(10),
 			  child: Center(
 				child: Obx(() {
 				  return autoWidthBtn(
 					text: orderController.isLoading.value ? 'Placing...' : Appcontent.placeOrder,
 					width: screenWidth,
 					onPress: () {
-						orderController.placeOrder();
+						orderController.placeOrderPage();
 					},
 				  );
 				}),
 			  ),
 			),
-					
+			]		
         ],
       ),
 	  );

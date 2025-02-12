@@ -8,6 +8,8 @@ import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 import 'package:picturesourcesomerset/services/base_api_service.dart';
 import 'package:picturesourcesomerset/services/api_service.dart';
 //import 'package:picturesourcesomerset/config/bottom_navigation.dart';
+import 'package:picturesourcesomerset/consts.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 Future<void> loadUserData() async {
 	final prefs = await SharedPreferences.getInstance();
@@ -30,6 +32,7 @@ Future<void> loadUserData() async {
 		'phone_number': prefs.getString('phoneNumber') ?? '',
 		'dob': prefs.getString('dob') ?? '',
 		'gender_id': prefs.getInt('genderId') ?? 0,
+		'profile_verified': prefs.getInt('isProfileVerified') ?? 0,
 		'profile_image': prefs.getString('profilePicture') ?? '',
 	});
 }
@@ -38,6 +41,10 @@ Future<void> loadUserData() async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
+  //Assign publishable key to flutter_stripe
+  Stripe.publishableKey = stripePublishableKey;
+  await Stripe.instance.applySettings();
+	
   // Initialize UserController
   //Get.put(UserController());
   await loadUserData();

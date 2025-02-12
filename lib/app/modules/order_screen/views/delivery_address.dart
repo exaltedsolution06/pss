@@ -9,8 +9,10 @@ import 'package:picturesourcesomerset/config/common_button.dart';
 import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/config/custom_modal.dart';
 import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
+import 'package:picturesourcesomerset/app/modules/order_screen/views/card_payment_screen.dart';
 
 import 'package:picturesourcesomerset/app/modules/order_screen/controllers/cart_controller.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/controllers/user_controller.dart';
 import '../controllers/order_controller.dart';
 
 class DeliveryAddressPage extends StatefulWidget {
@@ -20,6 +22,7 @@ class DeliveryAddressPage extends StatefulWidget {
 
 class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
 
+	final userController = Get.find<UserController>();
 	final OrderController orderController = Get.find();
 	final CartController cartController = Get.find();
 	//final CartController cartController = Get.put(CartController());
@@ -28,6 +31,13 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
 	void initState() {
 		super.initState();
 		orderController.deliveryAddressData();
+		
+		// Listen for profile verification changes
+		  ever(userController.isProfileVerified, (value) {
+			if (value == 1) {
+			  Get.back(); // Close the dialog if it's open
+			}
+		  });
 	}
 
 
@@ -55,6 +65,188 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
 				);
 			},
 		);
+	}
+	void _addDeliveryAddress(BuildContext context) {
+	  // Clear previous form values
+	  addressTypeController.clear();
+	  phoneController.clear();
+	  addressController.clear();
+
+	  _addressTypeFocusNode.unfocus();
+	  _phoneFocusNode.unfocus();
+	  _addressFocusNode.unfocus();
+
+	  _showCustomModal(
+		context,
+		'Add New Address',
+		SingleChildScrollView(
+		  scrollDirection: Axis.vertical,
+		  child: Form(
+			key: _modalFormKey,
+			child: Column(
+			  children: [
+				Padding(
+				  padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
+				  child: Column(
+					crossAxisAlignment: CrossAxisAlignment.start,
+					children: [
+					  autoWidthTextField(
+						text: Appcontent.addressType,
+						width: MediaQuery.of(context).size.width,
+						controller: addressTypeController,
+						focusNode: _addressTypeFocusNode,
+						validator: (value) {
+						  if (value == null || value.isEmpty) {
+							return 'Address type cannot be blank';
+						  }
+						  return null;
+						},
+						onChanged: (value) {
+						  if (value.isNotEmpty) {
+							_modalFormKey.currentState?.validate();
+						  }
+						},
+					  ),
+					  autoWidthTextField(
+						text: Appcontent.phoneNumber,
+						width: MediaQuery.of(context).size.width,
+						controller: phoneController,
+						focusNode: _phoneFocusNode,
+						validator: (value) {
+						  if (value == null || value.isEmpty) {
+							return 'Phone number cannot be blank';
+						  }
+						  return null;
+						},
+						onChanged: (value) {
+						  if (value.isNotEmpty) {
+							_modalFormKey.currentState?.validate();
+						  }
+						},
+					  ),
+					  ConstrainedBox(
+						constraints: const BoxConstraints(minHeight: 74, maxHeight: 150),
+						child: textAreaFieldDynamic(
+						  text: Appcontent.address,
+						  width: MediaQuery.of(context).size.width,
+						  controller: addressController,
+						  focusNode: _addressFocusNode,
+						  validator: (value) {
+							if (value == null || value.isEmpty) {
+							  return 'Address cannot be blank';
+							}
+							if (value.length < 10) {
+							  return 'Your post must contain more than 10 characters.';
+							}
+							return null;
+						  },
+						  onChanged: (value) {
+							if (value.isNotEmpty) {
+							  _modalFormKey.currentState?.validate();
+							}
+						  },
+						),
+					  ),
+					],
+				  ),
+				),
+				const SizedBox(height: 15),
+				Obx(() {
+				  return product(
+					text: orderController.isDAMLoading.value ? 'SAVING...' : 'SUBMIT',
+					onPress: orderController.isDAMLoading.value
+						? null
+						: () {
+							if (_modalFormKey.currentState!.validate()) {
+							  orderController.addDeliveryAddress(
+								addressTypeController.text.trim(),
+								phoneController.text.trim(),
+								addressController.text.trim(),
+							  );
+							  Navigator.pop(context);
+							}
+						  },
+				  );
+				}),
+				const SizedBox(height: 10),
+			  ],
+			),
+		  ),
+		),
+	  );
+	}
+	void _editDeliveryAddress(int index) {
+	  // Get the selected address data
+	  var selectedAddress = orderController.deliveryAddressListData[index];
+
+	  // Pre-fill text fields
+	  addressTypeController.text = selectedAddress["address_type"];
+	  phoneController.text = selectedAddress["phone_number"];
+	  addressController.text = selectedAddress["address"];
+
+	  // Show the modal for editing
+	  _showCustomModal(
+		context,
+		'Edit Delivery Address',
+		SingleChildScrollView(
+		  child: Form(
+			key: _modalFormKey,
+			child: Column(
+			  children: [
+				Padding(
+				  padding: const EdgeInsets.all(10),
+				  child: Column(
+					crossAxisAlignment: CrossAxisAlignment.start,
+					children: [
+					  autoWidthTextField(
+						text: Appcontent.addressType,
+						width: MediaQuery.of(context).size.width,
+						controller: addressTypeController,
+						validator: (value) => value!.isEmpty ? 'Address type cannot be blank' : null,
+					  ),
+					  autoWidthTextField(
+						text: Appcontent.phoneNumber,
+						width: MediaQuery.of(context).size.width,
+						controller: phoneController,
+						validator: (value) => value!.isEmpty ? 'Phone number cannot be blank' : null,
+					  ),
+					  textAreaFieldDynamic(
+						text: Appcontent.address,
+						width: MediaQuery.of(context).size.width,
+						controller: addressController,
+						validator: (value) {
+						  if (value == null || value.isEmpty) return 'Address cannot be blank';
+						  if (value.length < 10) return 'Address must be at least 10 characters long.';
+						  return null;
+						},
+					  ),
+					],
+				  ),
+				),
+				const SizedBox(height: 15),
+				Obx(() {
+				  return product(
+					text: orderController.isDAMLoading.value ? 'UPDATING...' : 'UPDATE',
+					onPress: orderController.isDAMLoading.value
+						? null
+						: () {
+							if (_modalFormKey.currentState!.validate()) {
+							  orderController.updateDeliveryAddress(
+								selectedAddress["id"],
+								addressTypeController.text.trim(),
+								phoneController.text.trim(),
+								addressController.text.trim(),
+							  );
+							  Navigator.pop(context); // Close modal
+							}
+						  },
+				  );
+				}),
+			  ],
+			),
+		  ),
+		),
+	  );
 	}
   int? selectedId;
 
@@ -91,124 +283,7 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 8),
           child: GestureDetector(
-            onTap: () => _showCustomModal(
-              context,
-              'Add New Address',
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Form(
-                  key: _modalFormKey,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            autoWidthTextField(
-                              text: Appcontent.addressType,
-                              width: screenWidth,
-                              controller: addressTypeController,
-                              focusNode: _addressTypeFocusNode,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Address type cannot be blank';
-                                }
-                                return null;
-                              },
-                              onChanged: (value) {
-                                if (value.isNotEmpty) {
-                                  _modalFormKey.currentState?.validate();
-                                }
-                              },
-                            ),
-                            autoWidthTextField(
-                              text: Appcontent.phoneNumber,
-                              width: screenWidth,
-                              controller: phoneController,
-                              focusNode: _phoneFocusNode,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Phone number cannot be blank';
-                                }
-                                return null;
-                              },
-                              onChanged: (value) {
-                                if (value.isNotEmpty) {
-                                  _modalFormKey.currentState?.validate();
-                                }
-                              },
-                            ),
-                            ConstrainedBox(
-                              constraints: const BoxConstraints(minHeight: 74, maxHeight: 150),
-                              child: textAreaFieldDynamic(
-                                text: Appcontent.address,
-                                width: screenWidth,
-                                controller: addressController,
-                                focusNode: _addressFocusNode,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Address cannot be blank';
-                                  }
-                                  if (value.length < 10) {
-                                    return 'Your post must contain more than 10 characters.';
-                                  }
-                                  return null;
-                                },
-                                onChanged: (value) {
-                                  if (value.isNotEmpty) {
-                                    _modalFormKey.currentState?.validate();
-                                  }
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-	
-					  Obx(() {
-                          return product(
-                            text: orderController.isDAMLoading.value ? 'SAVING...' : 'SUBMIT',
-                            onPress: orderController.isDAMLoading.value
-                                ? null
-                                : () {
-                                    if (_modalFormKey.currentState!.validate()) {
-                                      orderController.addDeliveryAddress(
-                                        addressTypeController.text.trim(),
-                                        phoneController.text.trim(),
-                                        addressController.text.trim()
-                                      );
-									  Navigator.pop(context); // Close modal
-                                    } else {
-                                      if (_addressTypeFocusNode.hasFocus) {
-                                        _addressTypeFocusNode.requestFocus();
-                                      } else if (_phoneFocusNode.hasFocus) {
-                                        _phoneFocusNode.requestFocus();
-                                      } else if (_addressFocusNode.hasFocus) {
-                                        _addressFocusNode.requestFocus();
-                                      }
-                                    }
-                                  },
-							);
-                        }),
-						
-                      /*product(
-                        text: 'SUBMIT',
-                        onPress: () {
-                          if (_modalFormKey.currentState?.validate() ?? false) {
-                            Navigator.pop(context); // Close modal
-                          } else {
-                            print("Validation failed");
-                          }
-                        },
-                      ),*/
-                      const SizedBox(height: 10),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+		    onTap: () => _addDeliveryAddress(context),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -265,15 +340,27 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
             // Scrollable Middle Section (Delivery Address)
         Expanded(
           child: Obx(() {
-              if (orderController.deliveryAddressListData.isEmpty) {
+              /*if (orderController.deliveryAddressListData.isEmpty) {
                 return Center(
                   child: CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(AppColor.purple),
                   ),
                 );
-              }
-
-              return SingleChildScrollView(
+              }*/
+			if (orderController.deliveryAddressListData.isEmpty) {
+				return Center(
+					child: Text(
+					  "No delivery address found",
+					  style: TextStyle(
+						fontSize: 16,
+						color: AppColor.black,
+						fontFamily: 'Urbanist-semibold',
+					  ),
+					),
+				);
+			}
+  
+            return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -299,16 +386,14 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
                             child: Row(
                               children: [
                                 // Radio Button
-                                Radio(
-                                  value: item["id"],
-                                  groupValue: selectedId,
-                                  activeColor: AppColor.purple,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      selectedId = value; // Update selected address
-                                    });
-                                  },
-                                ),
+                                Obx(() => Radio(
+								  value: item["id"],
+								  groupValue: orderController.selectedId.value, // Get selected ID from OrderController
+								  activeColor: AppColor.purple,
+								  onChanged: (value) {
+									orderController.selectedId.value = value as int; // Update selected address
+								  },
+								)),
                                 const SizedBox(width: 16),
                                 // Address Details
                                 Expanded(
@@ -343,9 +428,7 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
                                 ),
                                 IconButton(
                                   icon: const Icon(Icons.edit, color: Colors.green),
-                                  onPressed: () {
-                                    // Logic for editing
-                                  },
+                                  onPressed: () => _editDeliveryAddress(index),
                                 ),
                               ],
                             ),
@@ -358,7 +441,7 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
-                                orderController.deliveryAddressListData.removeAt(index); // Remove item
+                                orderController.removeAddress(item["id"]); // Remove item
                               });
                             },
                             child: Container(
@@ -393,8 +476,8 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
 		  
 		  
         ),
-            
-            Padding(
+            Obx(() {
+            return Padding(
               padding: const EdgeInsets.only(bottom: 10, left: 16, right: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -426,23 +509,46 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
                             size: 24, color: Colors.black54),
                       ),
                       title: Text(
-                        'Credit/Debit Card',
+                        userController.isProfileVerified.value == 1
+						  ? 'Profile Verified'
+						  : 'Credit/Debit Card',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
+						  color: userController.isProfileVerified.value == 1
+							? Colors.green
+							: Colors.black, // Green color for verified
                         ),
                       ),
-                      trailing: Icon(Icons.arrow_forward_ios,
-                          size: 18, color: Colors.black54),
-                      onTap: () {
-                        // Handle onTap action
-                      },
+                      trailing: userController.isProfileVerified.value == 1
+						? null // No trailing icon when verified
+						: Icon(Icons.arrow_forward_ios, size: 18, color: Colors.black54),
+					  onTap: userController.isProfileVerified.value == 1
+						? null
+						: () {
+						  showDialog(
+							context: context,
+							builder: (context) => Dialog(
+							  shape: RoundedRectangleBorder(
+								borderRadius: BorderRadius.circular(15),
+							  ),
+							  child: Container(
+								padding: EdgeInsets.all(20),
+								width: MediaQuery.of(context).size.width * 0.8,
+								height: MediaQuery.of(context).size.height * 0.6, // Adjust size
+								child: CardVerificationScreen(),
+							  ),
+							),
+						  );
+						},
                     ),
                   ),
                   const SizedBox(height: 5),
                 ],
               ),
-            ),
+            );
+			}),
+			if (userController.isProfileVerified.value == 1) ...[
             Padding(
               padding: const EdgeInsets.all(10),
               child: Center(
@@ -464,6 +570,7 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
               ),
             ),
             const SizedBox(height: 10),
+			]
           ],
         ),
       ),
