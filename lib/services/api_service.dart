@@ -134,8 +134,23 @@ class ApiService extends BaseApiService {
 		return response;
 	}
 	//Product search page
-	Future<Map<String, dynamic>> productSearch(String keyword, int page) async {
-		final response = await post(ApiEndpoints.productSearch, {'keyword': keyword, 'page': page}, requiresAuth: true);
+	Future<Map<String, dynamic>> productSearch(String keyword, int page, {
+	  int? categoryId, 
+	  int? artistId
+	}) async {
+		//final response = await post(ApiEndpoints.productSearch, {'keyword': keyword, 'page': page}, requiresAuth: true);
+		// Prepare request payload
+		final Map<String, dynamic> requestBody = {
+			'keyword': keyword,
+			'page': page,
+		};
+
+		// Add category and artist filters if provided
+		if (categoryId != null) requestBody['category_id'] = categoryId;
+		if (artistId != null) requestBody['artist_id'] = artistId;
+
+		// Send POST request with the updated payload
+		final response = await post(ApiEndpoints.productSearch, requestBody, requiresAuth: true);
 		return response;
 	}
 	//Fetch product data for product details page

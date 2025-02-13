@@ -5,6 +5,7 @@ import 'package:picturesourcesomerset/config/app_contents.dart';
 import 'package:picturesourcesomerset/config/app_color.dart';
 import 'package:picturesourcesomerset/config/category_card.dart';
 import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
+import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 
 import 'package:picturesourcesomerset/app/modules/home/controllers/home_controller.dart';
 
@@ -87,7 +88,10 @@ class _AllArtistViewState extends State<AllArtistView> {
                     image: item['image']!,
                     label: item['name']!,
                     onTap: () {
-                      //Get.to(() => SelectedArtist(title: item['name']!));
+                      Get.toNamed(
+						Routes.SERACH_SCREEN,
+						arguments: {'categoryId': null, 'artistId': item['artist_id']},
+					  );
                     },
                   );
                 },

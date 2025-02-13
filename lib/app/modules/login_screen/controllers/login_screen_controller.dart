@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:picturesourcesomerset/services/api_service.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 import 'package:picturesourcesomerset/config/app_contents.dart';
-import 'package:picturesourcesomerset/config/bottom_navigation.dart';
+//import 'package:picturesourcesomerset/config/bottom_navigation.dart';
 import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/services/base_api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';

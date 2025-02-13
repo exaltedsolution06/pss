@@ -11,7 +11,7 @@ import 'package:picturesourcesomerset/app/modules/activity_screen/account_screen
 import 'package:picturesourcesomerset/app/modules/activity_screen/notifications_screen.dart';
 
 
-import 'package:picturesourcesomerset/config/bottom_navigation.dart';
+//import 'package:picturesourcesomerset/config/bottom_navigation.dart';
 
 import 'package:picturesourcesomerset/config/app_color.dart';
 import '../../../config/common_textfield.dart';
@@ -100,10 +100,7 @@ class ActivityScreenView extends GetView<ActivityScreenController> {
                     return InkWell(
                       onTap: () {
                         if (index == 0) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Bottom()));
+						  Get.toNamed(Routes.HOME);
                         } else if (index == 1) {
                           Navigator.push(
                               context,

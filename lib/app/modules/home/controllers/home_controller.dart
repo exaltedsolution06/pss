@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:picturesourcesomerset/config/bottom_navigation.dart';
+//import 'package:picturesourcesomerset/config/bottom_navigation.dart';
 import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/services/api_service.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';

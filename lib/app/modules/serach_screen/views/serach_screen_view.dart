@@ -27,6 +27,35 @@ class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBinding
   
 	final ScrollController _scrollController = ScrollController();
 	
+	int? categoryId;
+    int? artistId;
+	
+	@override
+	void initState() {
+		super.initState();
+
+		// Retrieve arguments from GetX
+		final arguments = Get.arguments as Map<String, dynamic>? ?? {};
+		categoryId = arguments["categoryId"];
+		artistId = arguments["artistId"];
+		
+		_scrollController.addListener(() {
+		  if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+			serachScreenController.loadMoreData();
+		  }
+		});
+
+		// 🔹 Automatically trigger search if coming from a category or artist
+		if (categoryId != null) {
+		  serachScreenController.onSearchQueryChanged("", categoryId: categoryId);
+		} else if (artistId != null) {
+		  serachScreenController.onSearchQueryChanged("", artistId: artistId);
+		}
+
+		// Fetch initial data
+		serachScreenController.loadMoreDataProduct();
+	}
+  
 	/*@override
   void initState() {
     super.initState();
@@ -106,7 +135,7 @@ class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBinding
 									width: 110,
 									onPress: () {
 										// Pass the search query to the controller and trigger search
-										serachScreenController.onSearchQueryChanged(searchController.text);
+										serachScreenController.onSearchQueryChanged(searchController.text, categoryId: categoryId, artistId: artistId,);
 										serachScreenController.loadMoreDataProduct();  // Trigger the top data search
 									},
 								),

@@ -8,6 +8,7 @@ import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
 //import 'package:picturesourcesomerset/app/modules/home/views/selected_category.dart';
 import 'package:picturesourcesomerset/app/modules/home/views/all_category_view.dart';
 import 'package:picturesourcesomerset/app/modules/home/views/all_artist_view.dart';
+import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 
 import 'package:picturesourcesomerset/app/modules/home/controllers/home_controller.dart';
 
@@ -44,6 +45,7 @@ class _HomeViewState extends State<HomeView> {
               title: "Categories",
               dataList: homeController.categoryData,
               onViewAll: () => Get.to(() => AllCategoryView()),
+			  routeType: "0",
             ),
             const SizedBox(height: 6.0),
 
@@ -52,6 +54,7 @@ class _HomeViewState extends State<HomeView> {
               title: "Artists",
               dataList: homeController.artistData,
               onViewAll: () => Get.to(() => AllArtistView()),
+			  routeType: "1",
             ),
           ],
         ),
@@ -64,6 +67,7 @@ class _HomeViewState extends State<HomeView> {
     required String title,
     required RxList<dynamic> dataList,
     required VoidCallback onViewAll,
+	required String routeType,
   }) {
     return Expanded(
       child: Column(
@@ -116,12 +120,27 @@ class _HomeViewState extends State<HomeView> {
                 itemCount: dataList.length,
                 itemBuilder: (context, index) {
                   final item = dataList[index];
+				  //print(item);
                   return CategoryCard(
                     image: item['image']!,
                     label: item['name']!,
-                    onTap: () {
+                    /*onTap: () {
+					  Get.toNamed(Routes.SERACH_SCREEN);
                       //Get.to(() => productViewPage(id: item['id']!));
-                    },
+                    },*/
+					onTap: () {
+						if (routeType == "0") {
+						  Get.toNamed(
+							Routes.SERACH_SCREEN,
+							arguments: {'categoryId': item['id'], 'artistId': null},
+						  );
+						} else if (routeType == "1") {
+						  Get.toNamed(
+							Routes.SERACH_SCREEN,
+							arguments: {'categoryId': null, 'artistId': item['artist_id']},
+						  );
+						}
+					},
                   );
                 },
               );
