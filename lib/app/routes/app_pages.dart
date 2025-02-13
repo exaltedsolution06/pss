@@ -17,8 +17,8 @@ import 'package:picturesourcesomerset/app/modules/product/bindings/product_bindi
 import 'package:picturesourcesomerset/app/modules/product/views/product_view.dart';
 
 import '../modules/home/views/wall_photo_view.dart';
-import '../modules/shop_screen/bindings/shop_screen_binding.dart';
-import '../modules/shop_screen/views/shop_screen_view.dart';
+//import '../modules/shop_screen/bindings/shop_screen_binding.dart';
+//import '../modules/shop_screen/views/shop_screen_view.dart';
 import '../modules/forgot_screen/views/forgot_screen_view.dart';
 import '../modules/otp_verification_screen/views/otp_verification_screen_view.dart';
 import '../modules/reset_password_screen/views/reset_password_screen_view.dart';
@@ -136,11 +136,11 @@ class AppPages {
 		page: () => WallPhotoView(),
 		binding: HomeBinding(),
 	),
-	GetPage(
+	/*GetPage(
       name: _Paths.SHOP_SCREEN,
       page: () => ShopScreenView(),
       binding: ShopScreenBinding(),
-    ),
+    ),*/
 	GetPage(
       name: _Paths.NOTIFICATION_SCREEN,
       page: () => NotificationScreenView(),

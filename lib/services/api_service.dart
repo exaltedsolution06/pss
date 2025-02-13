@@ -343,6 +343,11 @@ class ApiService extends BaseApiService {
 		final response = await post(ApiEndpoints.placeOrder, order_data, requiresAuth: true);
 		return response;
 	}
+	//Wishlist order
+	Future<Map<String, dynamic>> wishlistOrder(order_data) async {
+		final response = await post(ApiEndpoints.wishlistOrder, order_data, requiresAuth: true);
+		return response;
+	}
 	///////////////////////////////////////////////////
 	
 	

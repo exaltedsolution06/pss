@@ -78,7 +78,7 @@ class Appcontent {
   //Home page
   static const String browse = "Browse";
   //wish list create
-  static const String wish_list_creates = "wish list creates";
+  static const String wish_list_creates = "Wish List Creates";
   static const String relationship = "Relationship";
   static const String placeholderRelationship = "Relationship";
   static const String birthdates = "Birthdate";
@@ -92,6 +92,7 @@ class Appcontent {
 	
 	//Thanks you page
 	static const String thankYou = "Thank You";
+	static const String thankYouWishlist = "You have successfully wishlist an order with #";
 	static const String thankYouDescFirst = "Your order will be delivered with invoice #";
 	static const String thankYouDescLast = "You can track the delivery in the order section.";
   
@@ -99,6 +100,7 @@ class Appcontent {
 	static const String submit = "SUBMIT";
 	static const String placeOrder = "PLACE ORDER";
 	static const String payNow = "PAY NOW";
+	static const String wishlistNowBtn = "SUBMIT WISHLIST";
 	static const String continueOrder = "CONTINUE ORDER";
 	static const String edit = "EDIT";
 }

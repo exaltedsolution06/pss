@@ -154,6 +154,7 @@ class HomeController extends GetxController {
 	Future<void> wallPhotoOrder() async {
 	  isLoading.value = true;
 	  Get.toNamed(Routes.WISHLIST_CREATE);
+	  isLoading.value = false;
 	}
   
 }

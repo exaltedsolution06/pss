@@ -10,6 +10,7 @@ import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
 
 import '../controllers/order_controller.dart';
+import 'package:picturesourcesomerset/app/modules/home/controllers/home_controller.dart';
 import 'package:picturesourcesomerset/app/modules/order_screen/controllers/cart_controller.dart';
 
 
@@ -21,6 +22,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
 
 
+  final HomeController homeController = Get.find();
   final OrderController orderController = Get.find();
   final CartController cartController = Get.find<CartController>();
   
@@ -335,6 +337,20 @@ class _CartPageState extends State<CartPage> {
 					width: screenWidth,
 					onPress: () {
 						orderController.placeOrderPage();
+					},
+				  );
+				}),
+			  ),
+			),
+			Padding(
+			  padding: const EdgeInsets.all(10),
+			  child: Center(
+				child: Obx(() {
+				  return autoWidthBtn(
+					text: homeController.isLoading.value ? 'Submitting...' : Appcontent.wishlistNowBtn,
+					width: screenWidth,
+					onPress: () {
+						homeController.wallPhotoOrder();
 					},
 				  );
 				}),

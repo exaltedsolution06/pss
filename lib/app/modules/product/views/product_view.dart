@@ -49,10 +49,15 @@ class _ProductViewState extends State<ProductView> {
 	  if (photo != null) {
 		File photoFile = File(photo.path);
 		
+		int parsedProductId = int.tryParse(widget.productId) ?? 0;
+		
 		// Check if the file exists
 		if (photoFile.existsSync()) {
 		  // Navigate with the photo file
-		  Get.toNamed('/wallphotoview', arguments: photoFile);
+		  Get.toNamed('/wallphotoview', arguments: {
+			'photoFile': photoFile,
+			'productId': parsedProductId,
+		  });
 		} else {
 		  Get.snackbar("Error", "Captured photo does not exist.");
 		}
@@ -103,19 +108,6 @@ class _ProductViewState extends State<ProductView> {
 						(file) => file.filePath != null && file.filePath!.isNotEmpty,
 						orElse: () => FileData(filePath: ''), // Provide a default object
 					);
-					
-					print("Product ID: ${productData}");
-					print("Files: ${productData.fetchedFiles}");
-					print("Total Files: ${productData.fetchedFiles?.length ?? 0}");
-
-					print("Category Name: ${productData.category_name}");
-					print("Artist Name: ${productData.artist_name}");
-					print("Size Name: ${productData.size_name}");
-					print("Color Name: ${productData.color_name}");
-					print("Name: ${productData.name}");
-					print("Product Code: ${productData.product_code}");
-					print("Price: ${productData.price}");
-					print("Description: ${productData.moulding_description}");
 					
 					return SingleChildScrollView(
 						child: Form(
