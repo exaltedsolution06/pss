@@ -68,27 +68,28 @@ class NotificationScreenController extends GetxController {
     
     isFetchingData.value = true;
     try {
-		//var response = await apiService.notifications(1, 0, 0, currentPageAll.value);
-		final response = {
+		var response = await apiService.notifications(1, 0, 0, currentPageAll.value);
+		/*final response = {
 			'total': [
 				{"avatar": Appcontent.pss1, "message": "Dennisa Nedry requested access to Isla Nublar SOC2 compliance report", "created_at": "3 days ago"},
 				{"avatar": Appcontent.pss1, "message": "Someone unlocked your post.", "created_at": "3 days ago"},
 				{"avatar": Appcontent.pss1, "message": "Someone unlocked your post.", "created_at": "3 days ago"},
 				{"avatar": Appcontent.pss1, "message": "Someone unlocked your post.", "created_at": "3 days ago"},
 			],
-		};
-		var newData = response?['total'] ?? [];
+		};*/
+		//var newData = response?['total'] ?? [];
+		var newData = response['data']['all'];
 		if (newData.isEmpty) {
 			hasMoreDataAll.value = false;
 		} else {
-			//totalData.addAll(newData);
-			totalData.addAll(newData.map((item) {
+			totalData.addAll(newData);
+			/*totalData.addAll(newData.map((item) {
 				return RxMap<String, dynamic>.from({
 					'avatar': item['avatar'],
 					'message': item['message'],
 					'created_at': item['created_at'],
 				});
-			}).toList());
+			}).toList());*/
 			currentPageAll.value++;
 		}
     } catch (e) {
@@ -103,28 +104,28 @@ class NotificationScreenController extends GetxController {
     
     isFetchingData.value = true;
     try {
-		//var response = await apiService.notifications(0, 1, 0, currentPageUnread.value);
-		final response = {
+		var response = await apiService.notifications(0, 0, 1, currentPageUnread.value);
+		/*final response = {
 			'unread': [
 				{"avatar": Appcontent.pss1, "message": "Someone unlocked your post.", "created_at": "3 days ago"},
 				{"avatar": Appcontent.pss1, "message": "Someone unlocked your post.", "created_at": "3 days ago"},
 				{"avatar": Appcontent.pss1, "message": "Dennisa Nedry requested access to Isla Nublar SOC2 compliance report.", "created_at": "3 days ago"},
 				{"avatar": Appcontent.pss1, "message": "Someone unlocked your post.", "created_at": "3 days ago"},
 			],
-		};
-		var newData = response?['unread'] ?? [];
-		//var newData = response['data']['messages'];
+		};*/
+		//var newData = response?['unread'] ?? [];
+		var newData = response['data']['unread'];
 		if (newData.isEmpty) {
 			hasMoreDataUnread.value = false;
 		} else {
-			//unreadData.addAll(newData);
-			unreadData.addAll(newData.map((item) {
+			unreadData.addAll(newData);
+			/*unreadData.addAll(newData.map((item) {
 				return RxMap<String, dynamic>.from({
 					'avatar': item['avatar'],
 					'message': item['message'],
 					'created_at': item['created_at'],
 				});
-			}).toList());
+			}).toList());*/
 			currentPageUnread.value++;
 		}
     } catch (e) {
@@ -139,28 +140,28 @@ class NotificationScreenController extends GetxController {
     
     isFetchingData.value = true;
     try {
-      //var response = await apiService.notifications(0, 0, 1, currentPageRead.value);
-		final response = {
+		var response = await apiService.notifications(0, 1, 0, currentPageRead.value);
+		/*final response = {
 			'read': [
 				{"avatar": Appcontent.pss1, "message": "Dennisa Nedry requested access to Isla Nublar SOC2 compliance report", "created_at": "3 days ago"},
 				{"avatar": Appcontent.pss1, "message": "Someone unlocked your post.", "created_at": "3 days ago"},
 				{"avatar": Appcontent.pss1, "message": "Someone unlocked your post.", "created_at": "3 days ago"},
 				{"avatar": Appcontent.pss1, "message": "Dennisa Nedry requested access to Isla Nublar SOC2 compliance report.", "created_at": "3 days ago"},
 			],
-		};
-		var newData = response?['read'] ?? [];
-		//var newData = response['data']['likes'];
+		};*/
+		//var newData = response?['read'] ?? [];
+		var newData = response['data']['read'];
 		if (newData.isEmpty) {
 			hasMoreDataRead.value = false;
 		} else {
-			//readData.addAll(newData);
-			readData.addAll(newData.map((item) {
+			readData.addAll(newData);
+			/*readData.addAll(newData.map((item) {
 				return RxMap<String, dynamic>.from({
 					'avatar': item['avatar'],
 					'message': item['message'],
 					'created_at': item['created_at'],
 				});
-			}).toList());
+			}).toList());*/
 			currentPageRead.value++;
 		}
     } catch (e) {

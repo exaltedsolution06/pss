@@ -1,6 +1,7 @@
 class ApiEndpoints {
 	//static const String baseUrl = "https://exaltedsolution.com/picturesourcesomerset/public/api";
-	static const String baseUrl = "https://jamesbrookit.com/pss/public/api";
+	//static const String baseUrl = "https://jamesbrookit.com/pss/public/api";
+	static const String baseUrl = "https://exaltedsolution.com/picture-source/public/api";
 
 	static const String login = 'login';
 	static const String googleLogin = 'google/callback';
@@ -32,12 +33,14 @@ class ApiEndpoints {
 	static const String deleteDeliveryAddress = 'delete-delivery-address';
 	static const String profileVerified = 'profile-verified';
 	static const String placeOrder = 'place-order';
+	static const String fetchOrderDetails = 'view-order';
+	static const String fetchWishlistDetails = 'view-wishlist';
 	static const String wishlistOrder = 'create-wistlist';
+	static const String notifications = 'notifications';
 	
   
   //static const String register = 'register';
   static const String profile = 'profile';  
-  static const String notifications = 'notifications';
   static const String search = 'search';  
   static const String slider_data = 'home_slider';
   static const String cms = 'cms';    

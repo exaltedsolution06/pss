@@ -16,6 +16,8 @@ abstract class Routes {
 	static const PROFILE_SCREEN = _Paths.PROFILE_SCREEN;
 	static const HOME = _Paths.HOME;
 	static const PRODUCTVIEW_SCREEN = _Paths.PRODUCTVIEW_SCREEN;
+	static const ORDER_DETAILS = _Paths.ORDER_DETAILS;
+	static const WISHLIST_DETAILS = _Paths.WISHLIST_DETAILS;
 	static const WALLPHOTO = _Paths.WALLPHOTO;
 	//static const SHOP_SCREEN = _Paths.SHOP_SCREEN;	
 	static const SERACH_SCREEN = _Paths.SERACH_SCREEN;
@@ -43,6 +45,8 @@ abstract class _Paths {
 	static const SERACH_SCREEN = '/serach-screen';
 	static const HOME = '/home';
 	static const PRODUCTVIEW_SCREEN = '/product-view';
+	static const ORDER_DETAILS = '/order-details';
+	static const WISHLIST_DETAILS = '/wishlist-details';
 	static const WALLPHOTO = '/wallphotoview';
 	static const NOTIFICATION_SCREEN = '/notification-screen';
 	//static const SHOP_SCREEN = '/shop-screen';

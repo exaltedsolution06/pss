@@ -348,6 +348,50 @@ class ApiService extends BaseApiService {
 		final response = await post(ApiEndpoints.wishlistOrder, order_data, requiresAuth: true);
 		return response;
 	}
+	//Notification page from top right corner header (All)
+	Future<Map<String, dynamic>> notifications(int all, int read, int unread, int page) async {
+		final response = await post(ApiEndpoints.notifications, {'all': all, 'read': read, 'unread': unread, 'page': page}, requiresAuth: true);
+		return response;
+	}
+	//For Order details page
+	Future<Map<String, dynamic>> fetchOrderDetails(int orderId) async {
+		final response = await post(ApiEndpoints.fetchOrderDetails, {'order_id': orderId.toString()}, requiresAuth: true);
+		return response;
+	}
+	//For Wishlist details page
+	Future<Map<String, dynamic>> fetchWishlistDetails(int orderId) async {
+		final response = await post(ApiEndpoints.fetchWishlistDetails, {'wishlist_id': orderId.toString()}, requiresAuth: true);
+		return response;
+	}
+	/*Future<Map<String, dynamic>> fetchOrderDetails(int orderId) async {
+	  await Future.delayed(Duration(seconds: 1)); // Simulate network delay
+
+	  Map<String, dynamic> response = {
+		"order_id": orderId,
+		"customers_name": "John Doe",
+		"customers_phone": "+1 234 567 890",
+		"customers_email": "johndoe@example.com",
+		"customers_address": "123 Main Street, Springfield, USA",
+		"order_items": [
+		  {
+			"product_name": "Product A",
+			"quantity": 2,
+			"price": 49.99,
+			"image_url": "https://jamesbrookit.com/pss/public/uploads/product/7/gallery/thumbs/1736865063-avatar-05.jpg"
+		  },
+		  {
+			"product_name": "Product B",
+			"quantity": 1,
+			"price": 99.99,
+			"image_url": "https://jamesbrookit.com/pss/public/uploads/product/8/gallery/thumbs/1736865154-product-05.jpg"
+		  }
+		],
+		"total_price": 199.97,
+		"order_status": "Delivered"
+	  };
+
+	  return response;
+	}*/
 	///////////////////////////////////////////////////
 	
 	
@@ -493,11 +537,6 @@ class ApiService extends BaseApiService {
 	}
 	Future<Map<String, dynamic>> cms_faq_page(int val) async {
 		final response = await post(ApiEndpoints.cms, {'help_faq': val}, requiresAuth: false);
-		return response;
-	}
-	//Notification page from top right corner header (All)
-	Future<Map<String, dynamic>> notifications(int total, int messages, int likes, int subscriptions, int tips, int page) async {
-		final response = await post(ApiEndpoints.notifications, {'total': total, 'messages': messages, 'likes': likes, 'subscriptions': subscriptions, 'tips': tips, 'page': page}, requiresAuth: true);
 		return response;
 	}
 	//Follow screen page from view profile page sticker

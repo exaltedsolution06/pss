@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 import 'package:picturesourcesomerset/config/app_color.dart';
 import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
 import '../controllers/notification_screen_controller.dart';
@@ -148,61 +149,77 @@ Widget build(BuildContext context) {
 
   // Method to build a single notification item
   Widget buildNotificationItem(dynamic notification) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 0.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: SizedBox(
-			  height: 40,
-			  width: 40,
-			  child: Container(
-				decoration: BoxDecoration(
-				  shape: BoxShape.circle,
-				  color: Colors.grey[300], // Background color for the CircleAvatar
+	  return GestureDetector(
+		onTap: () {
+		  /*Get.toNamed(
+			Routes.ORDER_DETAILS,
+			arguments: {'order_id': notification['order_id']}, // Pass order_id
+		  );*/
+		  Get.toNamed(
+			  notification['wishlist_email'] == null 
+				  ? Routes.ORDER_DETAILS 
+				  : Routes.WISHLIST_DETAILS,
+			  arguments: notification['wishlist_email'] == null 
+				  ? {'order_id': notification['order_id']} 
+				  : {'wishlist_id': notification['order_id']},
+		  );
+		},
+		child: Container(
+		  margin: const EdgeInsets.symmetric(vertical: 0.0),
+		  child: Column(
+			crossAxisAlignment: CrossAxisAlignment.start,
+			children: [
+			  ListTile(
+				contentPadding: EdgeInsets.zero,
+				leading: SizedBox(
+				  height: 40,
+				  width: 40,
+				  child: Container(
+					decoration: BoxDecoration(
+					  shape: BoxShape.circle,
+					  color: Colors.grey[300], // Background color for the CircleAvatar
+					),
+					child: CircleAvatar(
+					  backgroundImage: NetworkImage(notification['image_url']),
+					  // Optionally handle errors and provide a default image
+					  onBackgroundImageError: (error, stackTrace) {
+						// You can log the error or handle it as needed
+					  },
+					),
+				  ),
 				),
-				child: CircleAvatar(
-				  backgroundImage: AssetImage(notification['avatar']),
-				  // Optionally handle errors and provide a default image
-				  onBackgroundImageError: (error, stackTrace) {
-					// You can log the error or handle it as needed
-				  },
+
+				title: Row(
+				  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+				  children: [
+					Expanded(
+					  child: Text(
+						notification['message'],
+						style: const TextStyle(
+						  fontSize: 14,
+						  fontFamily: 'Urbanist-medium',
+						  fontWeight: FontWeight.w500,
+						  //overflow: TextOverflow.ellipsis,
+						),
+					  ),
+					),
+				  ],
+				),
+				subtitle: Text(
+				  notification['created_at'],
+				  style: const TextStyle(
+					fontSize: 12,
+					color: Color(0xff64748B),
+					fontWeight: FontWeight.w400,
+					fontFamily: 'Urbanist-regular',
+					overflow: TextOverflow.ellipsis,
+				  ),
 				),
 			  ),
-			),
-
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    notification['message'],
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontFamily: 'Urbanist-medium',
-                      fontWeight: FontWeight.w500,
-                      //overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            subtitle: Text(
-              notification['created_at'],
-              style: const TextStyle(
-                fontSize: 12,
-                color: Color(0xff64748B),
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Urbanist-regular',
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+			],
+		  ),
+		)
+	  );
   }
 
 }

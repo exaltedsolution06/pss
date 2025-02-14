@@ -10,6 +10,9 @@ import 'package:picturesourcesomerset/app/modules/order_screen/views/delivery_ad
 import 'package:picturesourcesomerset/app/modules/order_screen/views/thank_you.dart';
 import 'package:picturesourcesomerset/app/modules/order_screen/controllers/cart_controller.dart';
 
+import 'package:picturesourcesomerset/app/modules/order_screen/models/order_details_model.dart';
+import 'package:picturesourcesomerset/app/modules/order_screen/models/wishlist_details_model.dart';
+
 class OrderController extends GetxController {
 	final ApiService apiService;
 	var isLoading = false.obs;  // RxBool
@@ -20,12 +23,54 @@ class OrderController extends GetxController {
 	
 	OrderController(this.apiService);
 	
+    var orderDetails = Rxn<OrderDetailsModel>();
+    var wishlistDetails = Rxn<WishlistDetailsModel>();
+	var isDetailsLoading = true.obs;
+	
 	final CartController cartController = Get.find<CartController>();
 	var selectedId = Rxn<int>();
 	
+	void fetchOrderDetails(int orderId) async {
+		try {
+		  isDetailsLoading(true);
+		  Map<String, dynamic> response = await apiService.fetchOrderDetails(orderId);
+			print('ORDER ID is $orderId');
+			print(response['data']);
+		  orderDetails.value = OrderDetailsModel.fromJson(response['data']);
+		} catch (e, stackTrace) {
+    print("Error: $e\nStackTrace: $stackTrace");
+		  SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: "Failed to fetch order details",
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+		} finally {
+		  isDetailsLoading(false);
+		}
+	}
+	void fetchWishlistDetails(int orderId) async {
+		try {
+		  isDetailsLoading(true);
+		  Map<String, dynamic> response = await apiService.fetchWishlistDetails(orderId);
+		  print('WISHLIST ID is $orderId');
+			print(response['data']);
+		  wishlistDetails.value = WishlistDetailsModel.fromJson(response['data']);
+		} catch (e, stackTrace) {
+    print("Error: $e\nStackTrace: $stackTrace");
+		  SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: "Failed to fetch order details",
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+		} finally {
+		  isDetailsLoading(false);
+		}
+	}
+  
 	Future<void> placeOrderPage() async {
 	  isLoading.value = true;
 	  Get.to(() => DeliveryAddressPage());
+	  isLoading.value = false;
 	}
 	Future<void> placeOrder() async {
 	  try {

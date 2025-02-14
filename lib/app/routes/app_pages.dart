@@ -37,6 +37,8 @@ import '../modules/wish_list/bindings/wish_list_binding.dart';
 import '../modules/wish_list/views/wish_list_create.dart';
 import '../modules/order_screen/bindings/order_binding.dart';
 import '../modules/order_screen/views/cart.dart';
+import '../modules/order_screen/views/order_details.dart';
+import '../modules/order_screen/views/wishlist_details.dart';
 
 import 'package:picturesourcesomerset/app/modules/activity_screen/activity_screen_binding.dart';
 import 'package:picturesourcesomerset/app/modules/activity_screen/activity_screen_view.dart';
@@ -172,6 +174,21 @@ class AppPages {
 	GetPage(
 		name: _Paths.CART_PAGE, 
 		page: () => CartPage(),
+		binding: OrderBinding(),
+	),
+	GetPage(
+		name: _Paths.CART_PAGE, 
+		page: () => CartPage(),
+		binding: OrderBinding(),
+	),	
+	GetPage(
+		name: Routes.ORDER_DETAILS, 
+		page: () => OrderDetailsPage(),
+		binding: OrderBinding(),
+	),	
+	GetPage(
+		name: Routes.WISHLIST_DETAILS, 
+		page: () => WishlistDetailsPage(),
 		binding: OrderBinding(),
 	),	
   ];
