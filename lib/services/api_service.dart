@@ -363,35 +363,18 @@ class ApiService extends BaseApiService {
 		final response = await post(ApiEndpoints.fetchWishlistDetails, {'wishlist_id': orderId.toString()}, requiresAuth: true);
 		return response;
 	}
-	/*Future<Map<String, dynamic>> fetchOrderDetails(int orderId) async {
-	  await Future.delayed(Duration(seconds: 1)); // Simulate network delay
-
-	  Map<String, dynamic> response = {
-		"order_id": orderId,
-		"customers_name": "John Doe",
-		"customers_phone": "+1 234 567 890",
-		"customers_email": "johndoe@example.com",
-		"customers_address": "123 Main Street, Springfield, USA",
-		"order_items": [
-		  {
-			"product_name": "Product A",
-			"quantity": 2,
-			"price": 49.99,
-			"image_url": "https://jamesbrookit.com/pss/public/uploads/product/7/gallery/thumbs/1736865063-avatar-05.jpg"
-		  },
-		  {
-			"product_name": "Product B",
-			"quantity": 1,
-			"price": 99.99,
-			"image_url": "https://jamesbrookit.com/pss/public/uploads/product/8/gallery/thumbs/1736865154-product-05.jpg"
-		  }
-		],
-		"total_price": 199.97,
-		"order_status": "Delivered"
-	  };
-
-	  return response;
-	}*/
+	Future<Map<String, dynamic>> viewProfileOrderWishlistData() async {
+		final response = await get(ApiEndpoints.view_profile_order_wishlist_data, requiresAuth: true);
+		return response;
+	}
+	Future<Map<String, dynamic>> fetchMyOrder() async {
+		final response = await get(ApiEndpoints.my_order, requiresAuth: true);
+		return response;
+	}
+	Future<Map<String, dynamic>> fetchMyWishlist() async {
+		final response = await get(ApiEndpoints.my_wishlist, requiresAuth: true);
+		return response;
+	}
 	///////////////////////////////////////////////////
 	
 	

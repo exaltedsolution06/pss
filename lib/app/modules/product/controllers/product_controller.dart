@@ -36,7 +36,7 @@ class ProductController extends GetxController {
 	
 	// Observable to track loading state
 	RxBool isLoading = false.obs; // For loading state
-	var isFetchingData = false.obs;
+	RxBool isFetchingData = false.obs;
 
 	/*@override
 	void onInit() {
@@ -61,11 +61,13 @@ class ProductController extends GetxController {
 	}*/
 	// Fetch user post data
 	Future<void> fetchProductData(int productId) async {
+	  if (isFetchingData.value) return; // Prevent multiple calls at the same time
+	  
 	  isLoading.value = true; // Start loading
+	  isFetchingData(true); // Set fetching flag to true
 	  print("Product ID: $productId");
 	  try {
 		print("Post fetch post screen1: $productId");
-		isFetchingData(true); // Set fetching flag to true
 
 		// Fetch the post data from API
 		final response = await apiService.productDetails(productId);

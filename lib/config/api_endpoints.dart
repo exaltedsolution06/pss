@@ -37,6 +37,9 @@ class ApiEndpoints {
 	static const String fetchWishlistDetails = 'view-wishlist';
 	static const String wishlistOrder = 'create-wistlist';
 	static const String notifications = 'notifications';
+	static const String view_profile_order_wishlist_data = 'view-profile-orders-wishlist';
+	static const String my_order = 'my-order';
+	static const String my_wishlist = 'my-wistlist';
 	
   
   //static const String register = 'register';

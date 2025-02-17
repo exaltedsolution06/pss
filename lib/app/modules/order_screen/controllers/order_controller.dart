@@ -21,6 +21,12 @@ class OrderController extends GetxController {
 	var isCOloading = false.obs;  // RxBool
 	var deliveryAddressListData = <dynamic>[].obs;	
 	
+	var orders = [].obs; // Store orders list
+	var wishlist = [].obs; // Store wishlist list
+	//var isLoading = false.obs;
+	var isOrderLoading = false.obs;
+	var isWishlistLoading = false.obs;
+	
 	OrderController(this.apiService);
 	
     var orderDetails = Rxn<OrderDetailsModel>();
@@ -30,6 +36,48 @@ class OrderController extends GetxController {
 	final CartController cartController = Get.find<CartController>();
 	var selectedId = Rxn<int>();
 	
+	@override
+	void onInit() {
+		fetchOrders();
+		fetchWishlists();
+		super.onInit();
+	}
+	
+	Future<void> fetchOrders() async {
+		try {
+		  isOrderLoading(true);
+		  var response = await apiService.fetchMyOrder();;
+
+		  if (response['status'] == 200) {
+			orders.assignAll(response['data']); // Assign only "data" list
+			print('load orders');
+		  } else {
+			Get.snackbar("Error", "Failed to load orders");
+		  }
+		} catch (e) {
+		  Get.snackbar("Error", "Something went wrong");
+		} finally {
+		  isOrderLoading(false);
+		}
+	}
+	Future<void> fetchWishlists() async {
+		try {
+		  isWishlistLoading(true);
+		  var response = await apiService.fetchMyWishlist();;
+
+		  if (response['status'] == 200) {
+			wishlist.assignAll(response['data']); // Assign only "data" list
+			print('load wishlist');
+		  } else {
+			Get.snackbar("Error", "Failed to load wishlist");
+		  }
+		} catch (e) {
+		  Get.snackbar("Error", "Something went wrong");
+		} finally {
+		  isWishlistLoading(false);
+		}
+	}
+  
 	void fetchOrderDetails(int orderId) async {
 		try {
 		  isDetailsLoading(true);
