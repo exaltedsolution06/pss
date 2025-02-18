@@ -368,7 +368,7 @@ class EditprofileScreenController extends GetxController {
 		isUploadedProfileImageFile.value = true;
 		profileImageFile.value = image;
 		var response = await apiService.profile_avatar_image_upload(image);
-
+print('image upload response are : $response');
 		if (response['status']==200) {
 			isUploadedProfileImageFile.value = true;
 			profileImageFile.value = image;

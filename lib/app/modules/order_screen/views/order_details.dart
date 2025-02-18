@@ -85,33 +85,32 @@ class OrderDetailsPage extends StatelessWidget {
 				SizedBox(height: 10),
 
 				// Wrapping ListView inside a `Container` with a fixed height
-				Container(
-				  height: 300, // Adjust the height as needed
-				  child: ListView.builder(
-					itemCount: order.items.length,
-					itemBuilder: (context, index) {
-					  final item = order.items[index];
-					  return Card(
-						elevation: 2,
-						margin: EdgeInsets.only(bottom: 10),
-						shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-						child: ListTile(
-						  leading: ClipRRect(
-							borderRadius: BorderRadius.circular(8),
-							child: Image.network(item.imageUrl, width: 60, height: 60, fit: BoxFit.cover),
-						  ),
-						  title: Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
-						  subtitle: Column(
-							crossAxisAlignment: CrossAxisAlignment.start,
-							children: [
-							  Text("\$${item.price}", style: TextStyle(color: Colors.green, fontSize: 16)),
-							  Text("Quantity: ${item.quantity}", style: TextStyle(fontSize: 14, color: Colors.black54)),
-							],
-						  ),
+				ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(), // Adjust the height as needed
+				  itemCount: order.items.length,
+				  itemBuilder: (context, index) {
+					final item = order.items[index];
+					return Card(
+					  elevation: 2,
+					  margin: EdgeInsets.only(bottom: 10),
+					  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+					  child: ListTile(
+						leading: ClipRRect(
+						  borderRadius: BorderRadius.circular(8),
+						  child: Image.network(item.imageUrl, width: 60, height: 60, fit: BoxFit.cover),
 						),
-					  );
-					},
-				  ),
+						title: Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
+						subtitle: Column(
+						  crossAxisAlignment: CrossAxisAlignment.start,
+						  children: [
+							Text("\$${item.price}", style: TextStyle(color: Colors.green, fontSize: 16)),
+							Text("Quantity: ${item.quantity}", style: TextStyle(fontSize: 14, color: Colors.black54)),
+						  ],
+						),
+					  ),
+					);
+				  }
 				),
 
 				SizedBox(height: 20),

@@ -7,6 +7,7 @@ import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/services/base_api_service.dart';
 import 'package:picturesourcesomerset/app/modules/order_screen/controllers/order_controller.dart';
 import 'package:picturesourcesomerset/app/modules/order_screen/views/delivery_address.dart';
+import 'package:picturesourcesomerset/app/modules/order_screen/views/wishlist_delivery_address.dart';
 import 'package:picturesourcesomerset/app/modules/order_screen/views/thank_you.dart';
 import 'package:picturesourcesomerset/app/modules/order_screen/controllers/cart_controller.dart';
 
@@ -36,21 +37,13 @@ class OrderController extends GetxController {
 	final CartController cartController = Get.find<CartController>();
 	var selectedId = Rxn<int>();
 	
-	@override
-	void onInit() {
-		fetchOrders();
-		fetchWishlists();
-		super.onInit();
-	}
-	
 	Future<void> fetchOrders() async {
 		try {
 		  isOrderLoading(true);
 		  var response = await apiService.fetchMyOrder();;
 
 		  if (response['status'] == 200) {
-			orders.assignAll(response['data']); // Assign only "data" list
-			print('load orders');
+			orders.addAll(response['data']);
 		  } else {
 			Get.snackbar("Error", "Failed to load orders");
 		  }
@@ -66,8 +59,7 @@ class OrderController extends GetxController {
 		  var response = await apiService.fetchMyWishlist();;
 
 		  if (response['status'] == 200) {
-			wishlist.assignAll(response['data']); // Assign only "data" list
-			print('load wishlist');
+			wishlist.addAll(response['data']);
 		  } else {
 			Get.snackbar("Error", "Failed to load wishlist");
 		  }
@@ -120,6 +112,12 @@ class OrderController extends GetxController {
 	  Get.to(() => DeliveryAddressPage());
 	  isLoading.value = false;
 	}
+	Future<void> placeWishlistOrderPage(int orderId) async {
+	  isLoading.value = true;
+	  //Get.to(() => WishlistDeliveryAddressPage());
+	  Get.to(() => WishlistDeliveryAddressPage(), arguments: {'wishlist_id': orderId});
+	  isLoading.value = false;
+	}
 	Future<void> placeOrder() async {
 	  try {
 	    isDAloading.value = true;
@@ -169,6 +167,47 @@ class OrderController extends GetxController {
 			cartController.cartItems.clear();
 			cartController.totalPrice.value = 0.0;
 			cartController.itemCount.value = 0;
+			
+			Get.to(() => ThankYouPage(orderId: orderId));	
+		} else {
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: response['data'],
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+		}
+	  } catch (e) {
+		print('Error placing order: $e');
+		SnackbarHelper.showErrorSnackbar(
+		  title: Appcontent.snackbarTitleError, 
+		  message: 'Error placing order: $e',
+		  position: SnackPosition.BOTTOM, // Custom position
+		);
+	  } finally {
+		isDAloading.value = false;
+	  }
+	}
+	Future<void> placeWishlistOrder(int orderId) async {
+	  try {
+	    isDAloading.value = true;
+		
+		final Map<String, dynamic> orderData = {
+			"address_id": selectedId.value, // Selected address ID
+			"wishlist_id": orderId, // order id
+			"payment_method": "cod", // Change based on user selection
+		};	
+		
+		//print(orderData);
+		final response = await apiService.placeWishlistOrder(orderData);
+		
+		if (response['status'] == 200) {
+			SnackbarHelper.showSuccessSnackbar(
+			  title: "Order Placed",
+			  message: response['data'],
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+			
+			final orderId = response['order_id'].toString();
 			
 			Get.to(() => ThankYouPage(orderId: orderId));	
 		} else {
@@ -322,6 +361,20 @@ class OrderController extends GetxController {
 	  //print("Proceeding with payment for address ID: $selectedId");
 	  //Get.toNamed(Routes.HOME); 
 	  //Get.to(() => ThankYouPage());	  
+	}
+	Future<void> payNowWishlist(int orderId) async {
+	  isDAloading.value = true;
+	  if (selectedId.value == null) {
+		SnackbarHelper.showErrorSnackbar(
+		  title: Appcontent.snackbarTitleError, 
+		  message: 'Please select a delivery address', 
+		  position: SnackPosition.BOTTOM, // Custom position
+		);
+	  }else{
+	    // Call the function to place order
+		await placeWishlistOrder(orderId);
+	  }
+	  isDAloading.value = false; 
 	}
 	Future<void> continueOrder() async {
 	  isCOloading.value = true;

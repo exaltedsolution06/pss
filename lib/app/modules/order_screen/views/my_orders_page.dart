@@ -5,9 +5,20 @@ import 'package:picturesourcesomerset/services/api_service.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
 
-class MyOrdersPage extends StatelessWidget {
+class MyOrdersPage extends StatefulWidget {
+  @override
+  State<MyOrdersPage> createState() => _MyOrdersState();
+}
+
+class _MyOrdersState extends State<MyOrdersPage> {
   final OrderController orderController = Get.put(OrderController(ApiService()));
 
+  @override
+  void initState() {
+    super.initState();
+    orderController.fetchOrders();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
