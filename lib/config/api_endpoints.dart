@@ -41,6 +41,8 @@ class ApiEndpoints {
 	static const String view_profile_order_wishlist_data = 'view-profile-orders-wishlist';
 	static const String my_order = 'my-order';
 	static const String my_wishlist = 'my-wistlist';
+	static const String fetch_colors = 'color-list';
+	static const String fetch_sizes = 'size-list';
 	
   
   //static const String register = 'register';

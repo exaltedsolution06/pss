@@ -105,7 +105,8 @@ Widget textFieldWithIconDynamic({
       obscureText: obscureText,
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(vertical: 0).copyWith(left: 50), // Shift text after icon
+        //contentPadding: const EdgeInsets.symmetric(vertical: 0).copyWith(left: 50), // Shift text after icon
+        contentPadding: const EdgeInsets.symmetric(vertical: 0).copyWith(left: 5), // Shift text after icon
         /*labelText: text,
 		labelStyle: TextStyle(
           color: AppColor.formTextColor,  // Use the passed color or default to grey
