@@ -25,6 +25,12 @@ class SerachScreenController extends GetxController {
 	// Added: Category and Artist Filters
 	var categoryId = Rxn<int>();
 	var artistId = Rxn<int>();
+	
+	var availableColors = <Map<String, dynamic>>[].obs; // Store color with id
+	var availableSizes = <Map<String, dynamic>>[].obs; // Store size with id
+
+	var selectedColors = <int>[].obs; // Store selected color IDs
+	var selectedSizes = <int>[].obs;  // Store selected size IDs
 
 	@override
 	void onInit() {
@@ -33,9 +39,75 @@ class SerachScreenController extends GetxController {
 		categoryId.value = arguments["categoryId"];
 		artistId.value = arguments["artistId"];
 
+		fetchAvailableColors(); //For fetch color
+		fetchAvailableSizes(); //For fetch size
+		
 		// Auto-load products if navigated from category or artist
 		if (categoryId.value != null || artistId.value != null) {
 		  fetchSearchResults();
+		}
+	}
+	
+	// Fetch available colors from the new API
+	Future<void> fetchAvailableColors() async {
+		try {
+		  // Call your new API that returns colors
+		  var response = await apiService.fetchAvailableColors();
+			if (response['status'] == 200 && response['data'] != null) {
+			  availableColors.assignAll(
+				response['data'].map<Map<String, dynamic>>((item) {
+				  return {
+					'id': item['id'],
+					'color': item['color'] ?? 'Unknown Color', // Ensure color is not null
+				  };
+				}).toList(),
+			  );
+			}
+		} catch (e) {
+		  SnackbarHelper.showErrorSnackbar(
+			title: Appcontent.snackbarTitleError, 
+			message: Appcontent.snackbarCatchErrorMsg, 
+			position: SnackPosition.BOTTOM, 
+		  );
+		}
+	}
+	
+	// Fetch available sizes from the new API
+	Future<void> fetchAvailableSizes() async {
+		try {
+		  // Call your new API that returns sizes
+		  var response = await apiService.fetchAvailableSizes();
+		  if (response['status'] == 200 && response['data'] != null) {
+			availableSizes.assignAll(
+			  response['data'].map<Map<String, dynamic>>((item) => {
+				'id': item['id'],
+				'size': item['size'] ?? 'Unknown Size',
+			  }).toList(),
+			);
+		  }
+		  
+		} catch (e) {
+		  SnackbarHelper.showErrorSnackbar(
+			title: Appcontent.snackbarTitleError, 
+			message: Appcontent.snackbarCatchErrorMsg, 
+			position: SnackPosition.BOTTOM, 
+		  );
+		}
+	}
+	
+	void toggleColorSelection(int colorId) {
+		if (selectedColors.contains(colorId)) {
+		  selectedColors.remove(colorId);
+		} else {
+		  selectedColors.add(colorId);
+		}
+	}
+
+	void toggleSizeSelection(int sizeId) {
+		if (selectedSizes.contains(sizeId)) {
+		  selectedSizes.remove(sizeId);
+		} else {
+		  selectedSizes.add(sizeId);
 		}
 	}
 	
@@ -74,7 +146,16 @@ class SerachScreenController extends GetxController {
 
 		isFetchingData.value = true;
 		try {
-			var response = await apiService.productSearch(keyword.value, currentPageProduct.value, categoryId: categoryId.value, artistId: artistId.value);
+			Map<String, dynamic> filters = {
+				'keyword': keyword.value,
+				'page': currentPageProduct.value,
+				'categoryId': categoryId.value,
+				'artistId': artistId.value,
+				'colors': selectedColors.isEmpty ? '' : selectedColors.join(','),
+				'sizes': selectedSizes.isEmpty ? '' : selectedSizes.join(','),
+			};
+			//var response = await apiService.productSearch(keyword.value, currentPageProduct.value, categoryId: categoryId.value, artistId: artistId.value);
+			var response = await apiService.productSearch(filters);
 			//print("response: $response");
 			var newData = response['data'];	
 			//print("newData: $newData");			

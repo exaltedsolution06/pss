@@ -33,10 +33,16 @@ class ApiEndpoints {
 	static const String deleteDeliveryAddress = 'delete-delivery-address';
 	static const String profileVerified = 'profile-verified';
 	static const String placeOrder = 'place-order';
+	static const String placeWishlistOrder = 'place-wishlist-order';
 	static const String fetchOrderDetails = 'view-order';
 	static const String fetchWishlistDetails = 'view-wishlist';
 	static const String wishlistOrder = 'create-wistlist';
 	static const String notifications = 'notifications';
+	static const String view_profile_order_wishlist_data = 'view-profile-orders-wishlist';
+	static const String my_order = 'my-order';
+	static const String my_wishlist = 'my-wistlist';
+	static const String fetch_colors = 'color-list';
+	static const String fetch_sizes = 'size-list';
 	
   
   //static const String register = 'register';

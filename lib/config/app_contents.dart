@@ -99,7 +99,7 @@ class Appcontent {
 	//common
 	static const String submit = "SUBMIT";
 	static const String placeOrder = "PLACE ORDER";
-	static const String payNow = "PAY NOW";
+	static const String payNow = "ORDER NOW";
 	static const String wishlistNowBtn = "SUBMIT WISHLIST";
 	static const String continueOrder = "CONTINUE ORDER";
 	static const String edit = "EDIT";

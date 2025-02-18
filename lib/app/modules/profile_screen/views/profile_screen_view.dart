@@ -93,46 +93,34 @@ class ProfileScreenView extends StatelessWidget {
                 ),
               ],
             ),
-            // Collage Section
+            // My Orders & Wishlist
             Padding(
 			  padding: const EdgeInsets.all(16.0),
-			  child: Column(
-				children: [
-				  Row(
+				child: Obx(() {
+				  if (profileScreenController.isLoading.value) {
+					return Center(child: CircularProgressIndicator());
+				  }
+
+				  return Row(
 					children: [
 					  Expanded(
 						child: _buildCategoryCard(
 						  title: 'My Orders',
-						  subtitle: '635 Pins',
-						  imageUrls: [
-							Appcontent.pss1,
-							Appcontent.pss2,
-							Appcontent.pss3,
-							 Appcontent.pss1,
-							Appcontent.pss2,
-							Appcontent.pss3,
-						  ],
+						  subtitle: '${profileScreenController.myOrderCount.value} Orders',
+						  imageUrls: profileScreenController.myOrderImages,
 						),
 					  ),
 					  SizedBox(width: 16),
 					  Expanded(
 						child: _buildCategoryCard(
 						  title: 'Your Wish List',
-						  subtitle: 'All products',
-						  imageUrls: [
-							Appcontent.pss1,
-							Appcontent.pss2,
-							Appcontent.pss3,
-							 Appcontent.pss1,
-							Appcontent.pss2,
-							Appcontent.pss3,
-						  ],
+						  subtitle: '${profileScreenController.myWishlistCount.value} Items',
+						  imageUrls: profileScreenController.myWishlistImages,
 						),
 					  ),
 					],
-				  ),
-				],
-			  ),
+				  );
+				}),
 			),
 
           ],
@@ -147,51 +135,60 @@ class ProfileScreenView extends StatelessWidget {
 	  required String subtitle,
 	  required List<String> imageUrls,
 	}) {
-	  return Column(
-		crossAxisAlignment: CrossAxisAlignment.start,
-		children: [
-		  // Overlapping Images (second image under first, third image under second, and so on)
-		  SizedBox(
-			height: 150, // Adjust the height to match your design
-			child: Stack(
-			  children: imageUrls.asMap().entries.map((entry) {
-				int index = entry.key;
-				String url = entry.value;
+	  return GestureDetector(
+		onTap: () {
+		  if (title == 'My Orders') {
+			Get.toNamed(Routes.MY_ORDERS);
+		  } else if (title == 'Your Wish List') {
+			Get.toNamed(Routes.MY_WISHLIST);
+		  }
+		},  
+		child: Column(
+			crossAxisAlignment: CrossAxisAlignment.start,
+			children: [
+			  // Overlapping Images (second image under first, third image under second, and so on)
+			  SizedBox(
+				height: 150, // Adjust the height to match your design
+				child: Stack(
+				  children: imageUrls.asMap().entries.map((entry) {
+					int index = entry.key;
+					String url = entry.value;
 
-				return Positioned(
-				  // Shift each image slightly to the right and downward
-				  left: index * 40.0,  // Adjust horizontal shift (overlap distance)
-				  child: ClipRRect(
-					borderRadius: BorderRadius.circular(8), // Optional rounded corners
-					child: Image.asset(
-					  url,
-					  fit: BoxFit.cover,
-					  width: 100, // Adjust width
-					  height: 150, // Adjust height
-					),
-				  ),
-				);
-			  }).toList(),
-			),
-		  ),
-		  SizedBox(height: 8),
-		  // Title
-		  Text(
-			title,
-			style: TextStyle(
-			  fontSize: 16,
-			  fontWeight: FontWeight.bold,
-			),
-		  ),
-		  // Subtitle
-		  Text(
-			subtitle,
-			style: TextStyle(
-			  fontSize: 12,
-			  color: Colors.grey,
-			),
-		  ),
-		],
+					return Positioned(
+					  // Shift each image slightly to the right and downward
+					  left: index * 40.0,  // Adjust horizontal shift (overlap distance)
+					  child: ClipRRect(
+						borderRadius: BorderRadius.circular(8), // Optional rounded corners
+						child: Image.network(
+						  url,
+						  fit: BoxFit.cover,
+						  width: 100, // Adjust width
+						  height: 150, // Adjust height
+						),
+					  ),
+					);
+				  }).toList(),
+				),
+			  ),
+			  SizedBox(height: 8),
+			  // Title
+			  Text(
+				title,
+				style: TextStyle(
+				  fontSize: 16,
+				  fontWeight: FontWeight.bold,
+				),
+			  ),
+			  // Subtitle
+			  Text(
+				subtitle,
+				style: TextStyle(
+				  fontSize: 12,
+				  color: Colors.grey,
+				),
+			  ),
+			],
+		),
 	  );
 	}
 

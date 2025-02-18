@@ -44,7 +44,18 @@ class ProfileScreenController extends GetxController {
 	// Observable to track loading state
 	var isFetchingData = false.obs;
 	var isLoading = false.obs;
-
+	
+	var myOrderCount = 0.obs;
+	var myWishlistCount = 0.obs;
+	var myOrderImages = <String>[].obs;
+	var myWishlistImages = <String>[].obs;
+	
+	@override
+	void onInit() {
+	  super.onInit();
+	  fetchProfileData();
+	}
+  
 	@override
 	void onReady() {
 		super.onReady();
@@ -58,6 +69,29 @@ class ProfileScreenController extends GetxController {
 	// Helper function to determine if more data can be loaded
 	bool canLoadMoreFeed() {
 		return hasMoreFeedData.value && !isFetchingFeedData.value;
+	}
+	Future<void> fetchProfileData() async {
+		isLoading.value = true;
+		try {
+		  var response = await apiService.viewProfileOrderWishlistData();  // Replace with your API call
+		  if (response['status'] == 200) {
+			  var data = response['data'];
+			  
+			  // Update orders
+			  myOrderCount.value = data['my_order']['count'];
+			  // Adjusting the mapping logic to correctly extract the URLs
+			  myOrderImages.value = List<String>.from(data['my_order']['image_url'].map((e) => e[0].toString()));
+
+			  // Update wishlist
+			  myWishlistCount.value = data['my_wishlist']['count'];
+			  // Adjusting the mapping logic to correctly extract the URLs
+			  myWishlistImages.value = List<String>.from(data['my_wishlist']['image_urls'].map((e) => e[0].toString()));
+			}
+		} catch (e) {
+		  print("Error fetching profile data: $e");
+		} finally {
+		  isLoading.value = false;
+		}
 	}
 	Future<void> editProfile() async {
 		isLoading.value = true;
