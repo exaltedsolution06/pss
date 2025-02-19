@@ -22,7 +22,10 @@ class _CardVerificationScreenState extends State<CardVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Card Verification")),
+	  appBar: AppBar(
+		title: Text("Card Verification", style: TextStyle(fontSize: 20)),
+		centerTitle: true,
+	  ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

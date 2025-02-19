@@ -18,14 +18,18 @@ class ProfileScreenView extends StatelessWidget {
 	final double screenWidth = MediaQuery.of(context).size.width;
 	final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {},
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-      ),
+      ),*/
+	  appBar: AppBar(
+		title: Text("Profile", style: TextStyle(fontSize: 20)),
+		centerTitle: true,
+	  ),
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -38,7 +38,7 @@ class _AllArtistViewState extends State<AllArtistView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Artists'),
+        title: const Text('Artists', style: TextStyle(fontSize: 20)),
         centerTitle: true,
       ),
       body: Padding(

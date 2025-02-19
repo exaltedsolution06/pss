@@ -86,14 +86,15 @@ class _ProductViewState extends State<ProductView> {
 		reviewController.dispose();
 		super.dispose();
 	}	
-	int _selectedStars = 0; // Tracks the selected star rating
+	//int _selectedStars = 0; // Tracks the selected star rating
 	
 	@override
 	Widget build(BuildContext context) {
 		final double screenWidth = MediaQuery.of(context).size.width;
 		return Scaffold(
 			appBar: AppBar(
-				title: const Text("Product Details"),
+				title: Text("Product Details", style: TextStyle(fontSize: 20)),
+				centerTitle: true,
 			),
 			body: Obx(() {
 				if (productController.isFetchingData.value) {
@@ -103,6 +104,9 @@ class _ProductViewState extends State<ProductView> {
 				} else {
 					final productData = productController.productData.value!;
 					var imageUrls = productData.fetchedFiles;
+					
+					// Set review text
+					reviewController.text = productData.my_review ?? "";
 					
 					firstValidFile = productData.fetchedFiles!.firstWhere(
 						(file) => file.filePath != null && file.filePath!.isNotEmpty,
@@ -358,23 +362,23 @@ class _ProductViewState extends State<ProductView> {
 											5,
 											(index) => IconButton(
 											  onPressed: () {
-												setState(() {
-												  _selectedStars = index + 1; // Update selected star
-												});
-												productController.submitRating(_selectedStars); // Call API function
+												/*setState(() {
+												  _selectedStars = ; // Update selected star
+												});*/
+												productController.submitRating(index + 1); // Call API function
 											  },
 											  icon: Icon(
 												Icons.star,
-												color: index < _selectedStars ? Colors.amber : Colors.grey,
+												color: index < productController.selectedStars.value ? Colors.amber : Colors.grey,
 												size: 32,
 											  ),
 											),
 										  ),
 										),
 										SizedBox(height: 6),
-										if (_selectedStars > 0)
+										if (productController.selectedStars.value > 0)
 										  Text(
-											"You selected $_selectedStars star(s)",
+											"You selected ${productController.selectedStars.value} star(s)",
 											style: TextStyle(fontSize: 16, color: Colors.black),
 										  ),
 									  ],

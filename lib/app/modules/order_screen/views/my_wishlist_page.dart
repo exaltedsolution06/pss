@@ -22,7 +22,10 @@ class _MyWishlistState extends State<MyWishlistPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("My Wishlist")),
+	  appBar: AppBar(
+		title: Text("My Wishlist", style: TextStyle(fontSize: 20)),
+		centerTitle: true,
+	  ),
       body: Obx(() {
         if (orderController.isWishlistLoading.value) {
           return Center(child: CircularProgressIndicator());

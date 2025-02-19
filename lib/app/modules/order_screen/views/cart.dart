@@ -33,9 +33,10 @@ class _CartPageState extends State<CartPage> {
 	final double screenWidth = MediaQuery.of(context).size.width;
 	final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Cart"),
-      ),
+	  appBar: AppBar(
+		title: Text("Cart", style: TextStyle(fontSize: 20)),
+		centerTitle: true,
+	  ),
       body: Obx(() {
 			return Form(
                 key: _formKey,
@@ -346,7 +347,7 @@ class _CartPageState extends State<CartPage> {
 			  padding: const EdgeInsets.all(10),
 			  child: Center(
 				child: Obx(() {
-				  return autoWidthBtn(
+				  return secondaryBtn(
 					text: homeController.isLoading.value ? 'Submitting...' : Appcontent.wishlistNowBtn,
 					width: screenWidth,
 					onPress: () {

@@ -25,10 +25,10 @@ Widget build(BuildContext context) {
     length: 3, // Number of tabs
     child: Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         leading: InkWell(
           onTap: () {
             Navigator.pop(context);

@@ -38,7 +38,7 @@ class _AllCategoryViewState extends State<AllCategoryView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Categories'),
+        title: const Text('Categories', style: TextStyle(fontSize: 20)),
         centerTitle: true,
       ),
       body: Padding(

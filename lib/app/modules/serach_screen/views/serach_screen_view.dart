@@ -95,10 +95,10 @@ class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBinding
       length: 5,  // Number of tabs
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Colors.white,
+          //backgroundColor: Colors.white,
           leading: InkWell(
             onTap: () {
               Navigator.pop(context);

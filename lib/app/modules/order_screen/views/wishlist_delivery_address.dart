@@ -318,9 +318,10 @@ class _WishlistDeliveryAddressPageState extends State<WishlistDeliveryAddressPag
 	//final order = orderController.wishlistDetails.value;
 	
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Address"),
-      ),
+	  appBar: AppBar(
+		title: Text("Address", style: TextStyle(fontSize: 20)),
+		centerTitle: true,
+	  ),
       body: Form(
         key: _formKey,
         child: Column(

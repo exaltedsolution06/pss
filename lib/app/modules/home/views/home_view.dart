@@ -31,7 +31,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Picture Source Somerset'),
+        title: const Text('Picture Source Somerset', style: TextStyle(fontSize: 20)),
         centerTitle: true,
 		automaticallyImplyLeading: false, // Removes the back arrow
       ),

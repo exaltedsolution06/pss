@@ -315,9 +315,10 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Address"),
-      ),
+	  appBar: AppBar(
+		title: Text("Address", style: TextStyle(fontSize: 20)),
+		centerTitle: true,
+	  ),
       body: Form(
         key: _formKey,
         child: Column(
