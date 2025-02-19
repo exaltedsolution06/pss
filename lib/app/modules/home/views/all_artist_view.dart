@@ -61,21 +61,24 @@ class _AllArtistViewState extends State<AllArtistView> {
     required RxList<dynamic> dataList,
   }) {
     return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Dynamic GridView
-          Expanded(
-            child: Obx(() {
-              if (dataList.isEmpty) {
+      child: SingleChildScrollView(
+        controller: _verticalScrollController,
+		child: ConstrainedBox(
+		  constraints: BoxConstraints(
+			minHeight: MediaQuery.of(context).size.height, // Ensures content height
+		  ),
+		  child: Obx(() {
+            if (dataList.isEmpty) {
                 return Center(
                   child: CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(AppColor.purple),
                   ),
                 );
-              }
+            }
 
-              return GridView.builder(
+            return GridView.builder(
+				shrinkWrap: true, // Important to prevent unbounded height error
+				physics: NeverScrollableScrollPhysics(), // Disable GridView scrolling
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 8.0,
@@ -95,10 +98,9 @@ class _AllArtistViewState extends State<AllArtistView> {
                     },
                   );
                 },
-              );
-            }),
-          ),
-        ],
+            );
+          }),
+        ),
       ),
     );
   }

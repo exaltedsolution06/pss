@@ -102,9 +102,7 @@ class HomeController extends GetxController {
 		try {
 			var response = await apiService.homeCategoryList();
 			var newFeedData = response['data']; 
-			categoryData.addAll(newFeedData);
-			
-			//print(categoryData);
+			categoryData.assignAll(newFeedData);
 		} catch (e) {
 			print('Error fetching All homeCategoryData - home controller: $e');
 		}
@@ -114,7 +112,7 @@ class HomeController extends GetxController {
 		try {
 			var response = await apiService.homeArtistList();
 			var newFeedData = response['data']; 
-			artistData.addAll(newFeedData);
+			artistData.assignAll(newFeedData);
 		} catch (e) {
 			print('Error fetching All homeArtistData - home controller: $e');
 		}
