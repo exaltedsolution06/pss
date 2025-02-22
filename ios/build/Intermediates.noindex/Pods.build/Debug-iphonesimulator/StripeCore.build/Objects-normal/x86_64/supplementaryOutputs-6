@@ -1,0 +1,48 @@
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/STPNumericStringValidator.swift":
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPNumericStringValidator.o"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPNumericStringValidator.swiftconstvalues"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPNumericStringValidator.d"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPNumericStringValidator.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPNumericStringValidator.dia"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API Bindings/STPMultipartFormDataPart.swift":
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPMultipartFormDataPart.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPMultipartFormDataPart.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPMultipartFormDataPart.o"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPMultipartFormDataPart.d"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPMultipartFormDataPart.swiftconstvalues"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Telemetry/STPTelemetryClient.swift":
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPTelemetryClient.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPTelemetryClient.o"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPTelemetryClient.swiftconstvalues"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPTelemetryClient.swiftdeps"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPTelemetryClient.d"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Localization/String+Localized.swift":
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/String+Localized.swiftconstvalues"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/String+Localized.d"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/String+Localized.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/String+Localized.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/String+Localized.o"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API Bindings/StripeAPI.swift":
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/StripeAPI.o"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/StripeAPI.swiftconstvalues"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/StripeAPI.swiftdeps"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/StripeAPI.d"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/StripeAPI.dia"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Categories/String+StripeCore.swift":
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/String+StripeCore.d"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/String+StripeCore.swiftconstvalues"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/String+StripeCore.o"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/String+StripeCore.dia"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/String+StripeCore.swiftdeps"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API Bindings/StripeAPIConfiguration.swift":
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/StripeAPIConfiguration.o"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/StripeAPIConfiguration.swiftconstvalues"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/StripeAPIConfiguration.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/StripeAPIConfiguration.dia"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/StripeAPIConfiguration.d"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/STPURLCallbackHandler.swift":
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPURLCallbackHandler.swiftconstvalues"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPURLCallbackHandler.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPURLCallbackHandler.o"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPURLCallbackHandler.d"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeCore.build/Objects-normal/x86_64/STPURLCallbackHandler.swiftdeps"

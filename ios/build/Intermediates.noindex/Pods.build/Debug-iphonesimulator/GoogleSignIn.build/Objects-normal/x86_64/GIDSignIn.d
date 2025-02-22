@@ -1,0 +1,26 @@
+dependencies: \
+  /Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/GTMAppAuth.build/module.modulemap \
+  /Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/GoogleSignIn.build/module.modulemap \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignIn.m \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDSignIn.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/Foundation.framework/Modules/module.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/include/TargetConditionals.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/UIKit.framework/Modules/module.modulemap \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignIn_Private.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDConfiguration.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDGoogleUser.h \
+  /Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/GTMSessionFetcher.build/module.modulemap \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDProfileData.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDSignInResult.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDEMMSupport.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignInInternalOptions.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignInPreferences.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDCallbackQueue.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDScopes.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignInCallbackSchemes.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDAuthStateMigration.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDEMMErrorHandler.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDGoogleUser_Private.h \
+  /Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/AppAuth.build/module.modulemap \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDProfileData_Private.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignInResult_Private.h

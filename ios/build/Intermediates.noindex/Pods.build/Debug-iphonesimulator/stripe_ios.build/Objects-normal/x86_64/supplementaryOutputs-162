@@ -1,0 +1,24 @@
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/Stripe Sdk/ApplePayUtils.swift":
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayUtils.swiftdeps"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayUtils.swiftconstvalues"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayUtils.d"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayUtils.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayUtils.o"
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/Stripe Sdk/ApplePayViewController.swift":
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayViewController.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayViewController.dia"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayViewController.swiftconstvalues"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayViewController.d"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayViewController.o"
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/Stripe Sdk/pushprovisioning/AddToWalletButtonView.swift":
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddToWalletButtonView.d"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddToWalletButtonView.swiftconstvalues"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddToWalletButtonView.dia"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddToWalletButtonView.swiftdeps"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddToWalletButtonView.o"
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/ApplePayButtonView.swift":
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayButtonView.swiftconstvalues"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayButtonView.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayButtonView.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayButtonView.o"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/ApplePayButtonView.d"

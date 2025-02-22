@@ -1,0 +1,29 @@
+dependencies: \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/include/Darwin.modulemap \
+  /Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/SDWebImage.build/module.modulemap \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDWebImagePrefetcher.m \
+  /Applications/Flutter-Projects/pss/ios/Pods/Target\ Support\ Files/SDWebImage/SDWebImage-prefix.pch \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/UIKit.framework/Modules/module.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/Foundation.framework/Modules/module.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/include/TargetConditionals.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/module.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/include/os.modulemap \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDWebImagePrefetcher.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDWebImageManager.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDWebImageCompat.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDWebImageOperation.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDImageCacheDefine.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDWebImageDefine.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDImageCoder.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/NSData+ImageContentType.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDImageFrame.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDImageLoader.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDImageTransformer.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/UIImage+Transform.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDWebImageCacheKeyFilter.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDWebImageCacheSerializer.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDWebImageOptionsProcessor.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Private/SDAsyncBlockOperation.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Core/SDCallbackQueue.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Private/SDInternalMacros.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/SDWebImage/SDWebImage/Private/SDmetamacros.h

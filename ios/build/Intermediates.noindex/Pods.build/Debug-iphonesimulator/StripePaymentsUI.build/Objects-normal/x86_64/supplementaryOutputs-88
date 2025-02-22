@@ -1,0 +1,42 @@
+"/Applications/Flutter-Projects/pss/ios/Pods/StripePaymentsUI/StripePaymentsUI/StripePaymentsUI/Source/UI Components/STPPaymentCardTextField+SwiftUI.swift":
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPPaymentCardTextField+SwiftUI.d"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPPaymentCardTextField+SwiftUI.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPPaymentCardTextField+SwiftUI.o"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPPaymentCardTextField+SwiftUI.swiftconstvalues"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPPaymentCardTextField+SwiftUI.swiftdeps"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripePaymentsUI/StripePaymentsUI/StripePaymentsUI/Source/Internal/UI/Views/STPLabeledMultiFormTextFieldView.swift":
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLabeledMultiFormTextFieldView.d"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLabeledMultiFormTextFieldView.dia"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLabeledMultiFormTextFieldView.swiftconstvalues"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLabeledMultiFormTextFieldView.o"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLabeledMultiFormTextFieldView.swiftdeps"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripePaymentsUI/StripePaymentsUI/StripePaymentsUI/Source/UI Components/STPMultiFormTextField.swift":
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPMultiFormTextField.swiftconstvalues"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPMultiFormTextField.d"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPMultiFormTextField.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPMultiFormTextField.o"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPMultiFormTextField.swiftdeps"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripePaymentsUI/StripePaymentsUI/StripePaymentsUI/Source/Internal/UI/Views/Inputs/STPNumericDigitInputTextFormatter.swift":
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPNumericDigitInputTextFormatter.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPNumericDigitInputTextFormatter.dia"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPNumericDigitInputTextFormatter.swiftconstvalues"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPNumericDigitInputTextFormatter.o"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPNumericDigitInputTextFormatter.d"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripePaymentsUI/StripePaymentsUI/StripePaymentsUI/Source/Internal/UI/Views/STPLabeledFormTextFieldView.swift":
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLabeledFormTextFieldView.d"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLabeledFormTextFieldView.dia"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLabeledFormTextFieldView.swiftdeps"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLabeledFormTextFieldView.o"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLabeledFormTextFieldView.swiftconstvalues"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripePaymentsUI/StripePaymentsUI/StripePaymentsUI/Source/Helpers/STPLocalizedString.swift":
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLocalizedString.swiftconstvalues"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLocalizedString.o"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLocalizedString.dia"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLocalizedString.swiftdeps"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPLocalizedString.d"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripePaymentsUI/StripePaymentsUI/StripePaymentsUI/Source/UI Components/STPPaymentCardTextField.swift":
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPPaymentCardTextField.d"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPPaymentCardTextField.swiftdeps"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPPaymentCardTextField.swiftconstvalues"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPPaymentCardTextField.o"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripePaymentsUI.build/Objects-normal/x86_64/STPPaymentCardTextField.dia"

@@ -1,0 +1,69 @@
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Analytics/Analytic.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Analytics/AnalyticLoggableError.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Analytics/AnalyticLoggableErrorV2.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Analytics/AnalyticsClientV2.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Analytics/AnalyticsHelper.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/Async.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/BundleLocatorProtocol.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Categories/Decimal+StripeCore.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Categories/Dictionary+Stripe.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API\ Bindings/Models/EmptyResponse.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Categories/Enums+CustomStringConvertible.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/FileDownloader.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Connections\ Bindings/FinancialConnectionsEvent.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Connections\ Bindings/FinancialConnectionsLinkedBank.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Connections\ Bindings/FinancialConnectionsSDKInterface.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Connections\ Bindings/FinancialConnectionsSDKResult.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Telemetry/FraudDetectionData.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/InstallMethod.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Connections\ Bindings/InstantDebitsLinkedBank.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Categories/Locale+StripeCore.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Analytics/NetworkDetector.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Categories/NSArray+Stripe.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Categories/NSBundle+Stripe_AppName.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Categories/NSCharacterSet+StripeCore.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Categories/NSError+Stripe.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Categories/NSError+StripeCore.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Categories/NSMutableURLRequest+Stripe.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Categories/NSURLComponents+Stripe.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/PaymentsSDKVariant.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Analytics/PluginDetector.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/Result+Extensions.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/ServerErrorMapper.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Analytics/STPAnalyticEvent.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Analytics/STPAnalyticsClient.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Analytics/STPAnalyticsClient+Error.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API\ Bindings/STPAPIClient.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API\ Bindings/STPAPIClient+FileUpload.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API\ Bindings/STPAppInfo.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/STPAssert.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/STPDeviceUtils.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/STPDispatchFunctions.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/STPError.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Localization/STPLocalizationUtils.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Localization/STPLocalizedString.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API\ Bindings/STPMultipartFormDataEncoder.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API\ Bindings/STPMultipartFormDataPart.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/STPNumericStringValidator.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Telemetry/STPTelemetryClient.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/STPURLCallbackHandler.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Localization/String+Localized.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Categories/String+StripeCore.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API\ Bindings/StripeAPI.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API\ Bindings/StripeAPIConfiguration.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API\ Bindings/StripeAPIConfiguration+Version.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Coder/StripeCodable.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/StripeCoreBundleLocator.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API\ Bindings/StripeError.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API\ Bindings/Models/StripeFile.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Coder/StripeJSONDecoder.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Coder/StripeJSONEncoder.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Coder/StripeJSONShared.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/API\ Bindings/StripeServiceError.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/UI/UIActivityIndicatorView+Stripe.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/UI/UIFont+Stripe.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Categories/UIImage+StripeCore.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Coder/UnknownFields.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/URLEncoder.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Helpers/URLSession+Retry.swift
+/Applications/Flutter-Projects/pss/ios/Pods/StripeCore/StripeCore/StripeCore/Source/Telemetry/UserDefaults+PaymentsCore.swift

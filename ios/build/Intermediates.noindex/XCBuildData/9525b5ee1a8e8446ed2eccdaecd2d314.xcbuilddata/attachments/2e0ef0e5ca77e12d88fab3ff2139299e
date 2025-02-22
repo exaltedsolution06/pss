@@ -1,0 +1,23 @@
+{
+  'version': 0,
+  'use-external-names': 'false',
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Applications/Flutter-Projects/pss/ios/Build/Products/Debug-iphonesimulator/StripeUICore/StripeUICore.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeUICore.build/unextended-module.modulemap",
+    }]
+    },
+    {
+    'type': 'directory',
+    'name': "/Applications/Flutter-Projects/pss/ios/Build/Products/Debug-iphonesimulator/StripeUICore/StripeUICore.framework/Headers"
+    'contents': [{
+      'type': 'file',
+      'name': "StripeUICore-Swift.h",
+      'external-contents': "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeUICore.build/unextended-interface-header.h",
+    }]
+    }]
+}

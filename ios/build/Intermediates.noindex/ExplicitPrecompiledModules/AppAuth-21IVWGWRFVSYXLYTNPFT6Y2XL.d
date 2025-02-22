@@ -1,0 +1,43 @@
+moduledependenciestarget: \
+  /Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/AppAuth.build/module.modulemap \
+  /Applications/Flutter-Projects/pss/ios/Pods/Target\ Support\ Files/AppAuth/AppAuth-umbrella.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.2.sdk/System/Library/Frameworks/UIKit.framework/Modules/module.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.2.sdk/System/Library/Frameworks/Foundation.framework/Modules/module.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.2.sdk/usr/include/TargetConditionals.modulemap \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDAuthState.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDAuthStateChangeDelegate.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDAuthStateErrorDelegate.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDAuthorizationRequest.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDExternalUserAgentRequest.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDResponseTypes.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDScopes.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDAuthorizationResponse.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDAuthorizationService.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDError.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDErrorUtilities.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDExternalUserAgent.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDExternalUserAgentSession.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDGrantTypes.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDIDToken.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDRegistrationRequest.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDRegistrationResponse.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDScopeUtilities.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDServiceConfiguration.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDServiceDiscovery.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDTokenRequest.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDTokenResponse.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDTokenUtilities.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDURLSessionProvider.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDEndSessionRequest.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDEndSessionResponse.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDClientMetadataParameters.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDDefines.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDFieldMapping.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuthCore/OIDURLQueryComponent.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuth.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuth/iOS/OIDAuthState+IOS.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuth/iOS/OIDAuthorizationService+IOS.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuth/iOS/OIDExternalUserAgentIOS.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuth/iOS/OIDExternalUserAgentIOSCustomBrowser.h \
+  /Applications/Flutter-Projects/pss/ios/Pods/AppAuth/Sources/AppAuth/iOS/OIDExternalUserAgentCatalyst.h
