@@ -30,7 +30,7 @@ class ResetPasswordScreenView extends GetView<ResetPasswordScreenController> {
 	final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SafeArea(

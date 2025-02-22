@@ -27,6 +27,8 @@ class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBinding
   
 	final ScrollController _scrollController = ScrollController();
 	
+	final TextEditingController searchController = TextEditingController();
+	
 	int? categoryId;
     int? artistId;
 	
@@ -86,7 +88,6 @@ class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBinding
 
   @override
   Widget build(BuildContext context) {
-	final TextEditingController searchController = TextEditingController();
   
 	final double screenWidth = MediaQuery.of(context).size.width;
 
@@ -94,10 +95,10 @@ class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBinding
       length: 5,  // Number of tabs
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Colors.white,
+          //backgroundColor: Colors.white,
           leading: InkWell(
             onTap: () {
               Navigator.pop(context);
@@ -121,7 +122,7 @@ class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBinding
 										children: [
 											textFieldWithIconDynamic(
 												text: 'Search...',
-												icon: Icons.search, // Pass the desired icon here
+												icon: null, // Pass the desired icon here
 												width: screenWidth,
 												controller: searchController,
 											),
@@ -130,13 +131,42 @@ class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBinding
 									),
 								),
 								const SizedBox(width: 15),
-								autoWidthSearchBtn(
-									text: 'SEARCH',
+								/*autoWidthSearchBtn(
+									text: '',
 									width: 110,
 									onPress: () {
 										// Pass the search query to the controller and trigger search
 										serachScreenController.onSearchQueryChanged(searchController.text, categoryId: categoryId, artistId: artistId,);
 										serachScreenController.loadMoreDataProduct();  // Trigger the top data search
+									},
+								),*/
+								Container(
+								  height: 40,
+								  decoration: BoxDecoration(
+									color: AppColor.purple, // Set your desired background color here
+									borderRadius: BorderRadius.circular(8), // Optional: Set rounded corners
+								  ),
+								  child: IconButton(
+									icon: Icon(Icons.search, color: Colors.white), // Search icon color
+									onPressed: () {
+									  // Trigger search logic
+									  serachScreenController.onSearchQueryChanged(
+										searchController.text,
+										categoryId: categoryId,
+										artistId: artistId,
+									  );
+									  serachScreenController.loadMoreDataProduct();  // Trigger the top data search
+									},
+									splashColor: Colors.blue, // Optional: Set splash color
+									padding: EdgeInsets.all(5), // Adjust padding if needed
+								  ),
+								),
+								const SizedBox(width: 10),
+								
+								IconButton(
+									icon: Icon(Icons.filter_list, color: AppColor.purple),
+									onPressed: () {
+									  openFilterBottomSheet(context);
 									},
 								),
 							],
@@ -190,20 +220,41 @@ Widget buildSearchList(RxList data) {
         }
 
         // Display grid of images
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Two images per row
-            mainAxisSpacing: 16.0,
-            crossAxisSpacing: 16.0,
-            childAspectRatio: 3 / 2, // Adjust for the image aspect ratio
-          ),
-          itemCount: data.length,
-          itemBuilder: (context, index) {
-            // Each item in the list is an observable map
-			final RxMap<String, dynamic> feedData = RxMap<String, dynamic>.from(data[index]);
+        return SingleChildScrollView(
+		  controller: _scrollController,
+		  child: GridView.builder(
+			shrinkWrap: true,  // Allows GridView to be scrollable inside SingleChildScrollView
+			physics: NeverScrollableScrollPhysics(), // Prevents internal scrolling issues
+			gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+				crossAxisCount: 2, // Two images per row
+				mainAxisSpacing: 16.0,
+				crossAxisSpacing: 16.0,
+				childAspectRatio: 3 / 2, // Adjust for the image aspect ratio
+			),
+			itemCount: data.length,
+			itemBuilder: (context, index) {
+				if (index == data.length) {
+				  // Show loading indicator at the bottom
+				  return Obx(() {
+					return serachScreenController.isFetchingData.value
+						? Center(
+							child: Padding(
+							  padding: const EdgeInsets.all(8.0),
+							  child: CircularProgressIndicator(
+								valueColor: AlwaysStoppedAnimation<Color>(AppColor.purple),
+							  ),
+							),
+						  )
+						: SizedBox(); // Return empty if not loading
+				  });
+				}
+				
+				// Each item in the list is an observable map
+				final RxMap<String, dynamic> feedData = RxMap<String, dynamic>.from(data[index]);
 
-			return buildSearchItem(feedData, index, context);
-          },
+				return buildSearchItem(feedData, index, context);
+			},
+		  ),
         );
       }),
     ),
@@ -263,5 +314,117 @@ Widget buildSearchItem(RxMap<String, dynamic> feedData, int index, BuildContext 
     );
   });
 }
+void openFilterBottomSheet(BuildContext context) {
+  Get.bottomSheet(
+    Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Header
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Filters", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () => Get.back(),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+
+          // 🔹 Color Selection Chips (No Checkmark)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text("Select Color:", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          ),
+          Obx(() => Wrap(
+            spacing: 8.0,
+            children: serachScreenController.availableColors.map((color) {
+              bool isSelected = serachScreenController.selectedColors.contains(color['id']);
+              return RawChip(
+                label: Text(color['color']),
+                selected: isSelected,
+                onSelected: (selected) {
+                  serachScreenController.toggleColorSelection(color['id']);
+                },
+                selectedColor: Colors.green,
+                backgroundColor: Colors.grey[200],
+                labelStyle: TextStyle(
+                  color: isSelected ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.normal,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  side: BorderSide(color: isSelected ? Colors.green : Colors.grey),
+                ),
+                showCheckmark: false,
+              );
+            }).toList(),
+          )),
+
+          const SizedBox(height: 15),
+
+          // Size Selection Chips (No Checkmark)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text("Select Size:", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          ),
+          Obx(() => Wrap(
+            spacing: 8.0,
+            children: serachScreenController.availableSizes.map((size) {
+              bool isSelected = serachScreenController.selectedSizes.contains(size['id']);
+              return RawChip(
+                label: Text(size['size']),
+                selected: isSelected,
+                onSelected: (selected) {
+                  serachScreenController.toggleSizeSelection(size['id']);
+                },
+                selectedColor: Colors.green,
+                backgroundColor: Colors.grey[200],
+                labelStyle: TextStyle(
+                  color: isSelected ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.normal,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  side: BorderSide(color: isSelected ? Colors.green : Colors.grey),
+                ),
+                showCheckmark: false,
+              );
+            }).toList(),
+          )),
+
+          const SizedBox(height: 20),
+
+          // 🔹 Apply Button
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColor.purple,
+              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 50),
+            ),
+            onPressed: () {
+              Get.back(); // Close bottom sheet
+              serachScreenController.onSearchQueryChanged(
+                searchController.text,
+                categoryId: categoryId,
+                artistId: artistId,
+              );
+              serachScreenController.loadMoreDataProduct();
+            },
+            child: Text("Apply Filters", style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    ),
+    isScrollControlled: true,
+  );
+}
+
 
 }

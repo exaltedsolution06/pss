@@ -31,12 +31,15 @@ class ProductController extends GetxController {
 		percentage_rating_three: 0.0,
 		percentage_rating_four: 0.0,
 		percentage_rating_five: 0.0,
+		my_rating: 0,
+		my_review: '',
 	));
 	ProductController(this.apiService, this.productId);  // Constructor accepting ApiService
 	
 	// Observable to track loading state
 	RxBool isLoading = false.obs; // For loading state
 	RxBool isFetchingData = false.obs;
+	var selectedStars = 0.obs;
 
 	/*@override
 	void onInit() {
@@ -77,6 +80,8 @@ class ProductController extends GetxController {
 		if (response != null && response['data'] != null && response['data'] is Map) {
 		  // Parse the response data to ProductData model
 		  productData.value = ProductData.fromJson(response);
+		  
+		  selectedStars.value = productData.value!.my_rating;
 		} else {
 		  // Handle unexpected response structure
 		  productData.value = ProductData(category_name: ''); // Default value if data is invalid
@@ -143,6 +148,7 @@ class ProductController extends GetxController {
 					message: response['message'],
 					position: SnackPosition.BOTTOM, // Custom position
 				);
+				selectedStars.value = rating;
 			} else {
 				SnackbarHelper.showErrorSnackbar(
 				  title: Appcontent.snackbarTitleError, 

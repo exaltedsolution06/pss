@@ -38,7 +38,7 @@ class _AllCategoryViewState extends State<AllCategoryView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Categories'),
+        title: const Text('Categories', style: TextStyle(fontSize: 20)),
         centerTitle: true,
       ),
       body: Padding(
@@ -61,45 +61,47 @@ class _AllCategoryViewState extends State<AllCategoryView> {
     required RxList<dynamic> dataList,
   }) {
     return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Dynamic GridView
-          Expanded(
-            child: Obx(() {
-              if (dataList.isEmpty) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(AppColor.purple),
-                  ),
-                );
-              }
+	  child: SingleChildScrollView(
+		controller: _verticalScrollController,
+		child: ConstrainedBox(
+		  constraints: BoxConstraints(
+			minHeight: MediaQuery.of(context).size.height, // Ensures content height
+		  ),
+		  child: Obx(() {
+			if (dataList.isEmpty) {
+			  return Center(
+				child: CircularProgressIndicator(
+				  valueColor: AlwaysStoppedAnimation<Color>(AppColor.purple),
+				),
+			  );
+			}
 
-              return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
-                ),
-                itemCount: dataList.length,
-                itemBuilder: (context, index) {
-                  final item = dataList[index];
-                  return CategoryCard(
-                    image: item['image']!,
-                    label: item['name']!,
-                    onTap: () {
-                      Get.toNamed(
-						Routes.SERACH_SCREEN,
-						arguments: {'categoryId': item['id'], 'artistId': null},
-					  );
-                    },
-                  );
-                },
-              );
-            }),
-          ),
-        ],
-      ),
-    );
+			return GridView.builder(
+			  shrinkWrap: true, // Important to prevent unbounded height error
+			  physics: NeverScrollableScrollPhysics(), // Disable GridView scrolling
+			  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+				crossAxisCount: 2,
+				crossAxisSpacing: 8.0,
+				mainAxisSpacing: 8.0,
+			  ),
+			  itemCount: dataList.length,
+			  itemBuilder: (context, index) {
+				final item = dataList[index];
+				return CategoryCard(
+				  image: item['image']!,
+				  label: item['name']!,
+				  onTap: () {
+					Get.toNamed(
+					  Routes.SERACH_SCREEN,
+					  arguments: {'categoryId': item['id'], 'artistId': null},
+					);
+				  },
+				);
+			  },
+			);
+		  }),
+		),
+	  ),
+	);
   }
 }

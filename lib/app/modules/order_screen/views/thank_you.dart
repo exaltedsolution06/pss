@@ -27,10 +27,11 @@ class _ThankYouPageState extends State<ThankYouPage> {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(Appcontent.thankYou),
-      ),
+    return Scaffold(	  
+	  appBar: AppBar(
+		title: Text(Appcontent.thankYou, style: TextStyle(fontSize: 20)),
+		centerTitle: true,
+	  ),
 		body: SingleChildScrollView(
             child: Column(
 				crossAxisAlignment: CrossAxisAlignment.start,

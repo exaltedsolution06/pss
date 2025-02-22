@@ -71,10 +71,10 @@ class ActivityScreenView extends GetView<ActivityScreenController> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          backgroundColor: Colors.white,
+          //backgroundColor: Colors.white,
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: Colors.white,
+            //backgroundColor: Colors.white,
             leading: InkWell(
               onTap: () => Navigator.pop(context),
               child: const Icon(

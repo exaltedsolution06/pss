@@ -69,9 +69,10 @@ class _WallPhotoViewState extends State<WallPhotoView> {
 	//print(imageUrls);
 	
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Wall Photo View'),
-      ),
+	  appBar: AppBar(
+		title: Text("Wall Photo View", style: TextStyle(fontSize: 20)),
+		centerTitle: true,
+	  ),
       body: Form(
         key: _formKey, // Assign the form key here
 			child: Column(

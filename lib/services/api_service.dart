@@ -133,25 +133,20 @@ class ApiService extends BaseApiService {
 		final response = await post(ApiEndpoints.allArtistList, {'page': page}, requiresAuth: true);
 		return response;
 	}
-	//Product search page
-	Future<Map<String, dynamic>> productSearch(String keyword, int page, {
-	  int? categoryId, 
-	  int? artistId
-	}) async {
-		//final response = await post(ApiEndpoints.productSearch, {'keyword': keyword, 'page': page}, requiresAuth: true);
-		// Prepare request payload
-		final Map<String, dynamic> requestBody = {
-			'keyword': keyword,
-			'page': page,
+	Future<Map<String, dynamic>> productSearch(Map<String, dynamic> filters) async {
+	  // Prepare request payload
+		final sanitizedFilters = {
+		  'keyword': filters['keyword'] ?? '',
+		  'page': filters['page'] ?? 1,
+		  'categoryId': filters['categoryId'] ?? 0, // or whatever your fallback should be
+		  'artistId': filters['artistId'] ?? 0, // same here
+		  'colors': filters['colors'] ?? '', // Avoid null
+		  'sizes': filters['sizes'] ?? '', // Avoid null
 		};
 
-		// Add category and artist filters if provided
-		if (categoryId != null) requestBody['category_id'] = categoryId;
-		if (artistId != null) requestBody['artist_id'] = artistId;
-
-		// Send POST request with the updated payload
-		final response = await post(ApiEndpoints.productSearch, requestBody, requiresAuth: true);
-		return response;
+	  // Send POST request with the updated payload
+	  final response = await post(ApiEndpoints.productSearch, sanitizedFilters, requiresAuth: true);
+	  return response;
 	}
 	//Fetch product data for product details page
 	Future<Map<String, dynamic>> productDetails(int product_id) async {
@@ -378,6 +373,14 @@ class ApiService extends BaseApiService {
 	}
 	Future<Map<String, dynamic>> fetchMyWishlist() async {
 		final response = await get(ApiEndpoints.my_wishlist, requiresAuth: true);
+		return response;
+	}
+	Future<Map<String, dynamic>> fetchAvailableColors() async {
+		final response = await get(ApiEndpoints.fetch_colors, requiresAuth: true);
+		return response;
+	}
+	Future<Map<String, dynamic>> fetchAvailableSizes() async {
+		final response = await get(ApiEndpoints.fetch_sizes, requiresAuth: true);
 		return response;
 	}
 	///////////////////////////////////////////////////

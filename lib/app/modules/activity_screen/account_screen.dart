@@ -31,11 +31,11 @@ class AccountScreenView extends GetView<ActivityScreenController> {
     final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         leading: InkWell(
           onTap: () {
             Navigator.pop(context);

@@ -22,7 +22,10 @@ class _MyOrdersState extends State<MyOrdersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("My Orders")),
+	  appBar: AppBar(
+		title: Text("My Orders", style: TextStyle(fontSize: 20)),
+		centerTitle: true,
+	  ),
       body: Obx(() {
         if (orderController.isOrderLoading.value) {
           return Center(child: CircularProgressIndicator());
