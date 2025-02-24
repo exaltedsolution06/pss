@@ -82,6 +82,7 @@ class NotificationScreenController extends GetxController {
 		if (newData.isEmpty) {
 			hasMoreDataAll.value = false;
 		} else {
+			print(newData);
 			totalData.addAll(newData);
 			/*totalData.addAll(newData.map((item) {
 				return RxMap<String, dynamic>.from({

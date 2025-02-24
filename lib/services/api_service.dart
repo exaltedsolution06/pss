@@ -367,12 +367,12 @@ class ApiService extends BaseApiService {
 		final response = await get(ApiEndpoints.view_profile_order_wishlist_data, requiresAuth: true);
 		return response;
 	}
-	Future<Map<String, dynamic>> fetchMyOrder() async {
-		final response = await get(ApiEndpoints.my_order, requiresAuth: true);
+	Future<Map<String, dynamic>> fetchMyOrder(int page) async {
+		final response = await post(ApiEndpoints.my_order, {'page': page}, requiresAuth: true);
 		return response;
 	}
-	Future<Map<String, dynamic>> fetchMyWishlist() async {
-		final response = await get(ApiEndpoints.my_wishlist, requiresAuth: true);
+	Future<Map<String, dynamic>> fetchMyWishlist(int page) async {
+		final response = await post(ApiEndpoints.my_wishlist, {'page': page}, requiresAuth: true);
 		return response;
 	}
 	Future<Map<String, dynamic>> fetchAvailableColors() async {

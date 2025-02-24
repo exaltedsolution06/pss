@@ -220,41 +220,20 @@ Widget buildSearchList(RxList data) {
         }
 
         // Display grid of images
-        return SingleChildScrollView(
-		  controller: _scrollController,
-		  child: GridView.builder(
-			shrinkWrap: true,  // Allows GridView to be scrollable inside SingleChildScrollView
-			physics: NeverScrollableScrollPhysics(), // Prevents internal scrolling issues
-			gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-				crossAxisCount: 2, // Two images per row
-				mainAxisSpacing: 16.0,
-				crossAxisSpacing: 16.0,
-				childAspectRatio: 3 / 2, // Adjust for the image aspect ratio
-			),
-			itemCount: data.length,
-			itemBuilder: (context, index) {
-				if (index == data.length) {
-				  // Show loading indicator at the bottom
-				  return Obx(() {
-					return serachScreenController.isFetchingData.value
-						? Center(
-							child: Padding(
-							  padding: const EdgeInsets.all(8.0),
-							  child: CircularProgressIndicator(
-								valueColor: AlwaysStoppedAnimation<Color>(AppColor.purple),
-							  ),
-							),
-						  )
-						: SizedBox(); // Return empty if not loading
-				  });
-				}
-				
-				// Each item in the list is an observable map
-				final RxMap<String, dynamic> feedData = RxMap<String, dynamic>.from(data[index]);
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, // Two images per row
+            mainAxisSpacing: 16.0,
+            crossAxisSpacing: 16.0,
+            childAspectRatio: 3 / 2, // Adjust for the image aspect ratio
+          ),
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            // Each item in the list is an observable map
+			final RxMap<String, dynamic> feedData = RxMap<String, dynamic>.from(data[index]);
 
-				return buildSearchItem(feedData, index, context);
-			},
-		  ),
+			return buildSearchItem(feedData, index, context);
+          },
         );
       }),
     ),

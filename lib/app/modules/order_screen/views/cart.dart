@@ -150,16 +150,17 @@ class _CartPageState extends State<CartPage> {
 					  onPressed: () {
 						// Check if product_id and quantity are not null before calling the update
 						final productIdM = item["product_id"];
+						final imageUrl = item["imageUrl"];
 						final quantityM = item["quantity"];
 						
-						if (productIdM != null && quantityM != null && quantityM > 1) {
-							cartController.updateQuantity(productIdM, quantityM - 1);
+						if (productIdM != null && imageUrl != null && quantityM != null && quantityM > 1) {
+							cartController.updateQuantity(productIdM, imageUrlM, quantityM - 1);
 						} else if (productIdM == null) {
 							print("Click Minus - Product ID is null");
 						} else if (quantityM == null) {
 							print("Click Minus - quantityM is null");
 						} else {
-							cartController.updateQuantity(productIdM, 0);
+							cartController.updateQuantity(productIdM, imageUrlM, 0);
 							print("Click Minus - Product ID or quantityM is null");
 						}
 					  },
@@ -176,10 +177,11 @@ class _CartPageState extends State<CartPage> {
 					  onPressed: () {
 						// Check if product_id and quantity are not null before calling the update
 						final productId = item["product_id"];
+						final imageUrl = item["imageUrl"];
 						final quantity = item["quantity"];
 						
-						if (productId != null && quantity != null) {
-						  cartController.updateQuantity(productId, quantity + 1);
+						if (productId != null && imageUrl != null && quantity != null) {
+						  cartController.updateQuantity(productId, imageUrl, quantity + 1);
 						} else if (productId == null) {
 						  print("Click Plus - Product ID is null");
 						} else if (quantity == null) {
@@ -203,7 +205,7 @@ class _CartPageState extends State<CartPage> {
           right: 22,
           child: GestureDetector(
             onTap: () {
-              cartController.updateQuantity(item["product_id"], 0); // Removes item
+              cartController.updateQuantity(item["product_id"], item["imageUrl"], 0); // Removes item
             },
             child: Container(
               width: 18,

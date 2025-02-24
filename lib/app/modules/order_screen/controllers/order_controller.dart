@@ -34,16 +34,39 @@ class OrderController extends GetxController {
     var wishlistDetails = Rxn<WishlistDetailsModel>();
 	var isDetailsLoading = true.obs;
 	
+	// Reset the page number
+	var currentOrderPage = 1.obs;
+	var currentWishlistPage = 1.obs;
+	
 	final CartController cartController = Get.find<CartController>();
 	var selectedId = Rxn<int>();
 	
+	// Enable loading more data
+	var hasMoreOrderData = true.obs;
+	var hasMoreWishlistData = true.obs;
+	
+	// Helper function to determine if more data can be loaded
+	bool canLoadMoreOrders() {
+		return hasMoreOrderData.value && !isOrderLoading.value;
+	}
+	bool canLoadMoreWishlists() {
+		return hasMoreWishlistData.value && !isWishlistLoading.value;
+	}
+	
 	Future<void> fetchOrders() async {
+		if (!canLoadMoreOrders()) return;
+		
 		try {
 		  isOrderLoading(true);
-		  var response = await apiService.fetchMyOrder();;
+		  var response = await apiService.fetchMyOrder(currentOrderPage.value);
 
 		  if (response['status'] == 200) {
-			orders.addAll(response['data']);
+			if (response['data'].isEmpty) {
+				hasMoreOrderData.value = false;
+			} else {
+				orders.addAll(response['data']);
+				currentOrderPage.value++;
+			}
 		  } else {
 			Get.snackbar("Error", "Failed to load orders");
 		  }
@@ -54,12 +77,19 @@ class OrderController extends GetxController {
 		}
 	}
 	Future<void> fetchWishlists() async {
+		if (!canLoadMoreWishlists()) return;
+		
 		try {
 		  isWishlistLoading(true);
-		  var response = await apiService.fetchMyWishlist();;
-
+		  var response = await apiService.fetchMyWishlist(currentWishlistPage.value);
+		  
 		  if (response['status'] == 200) {
-			wishlist.addAll(response['data']);
+			if (response['data'].isEmpty) {
+				hasMoreWishlistData.value = false;
+			} else {
+				wishlist.addAll(response['data']);
+				currentWishlistPage.value++;
+			}			
 		  } else {
 			Get.snackbar("Error", "Failed to load wishlist");
 		  }

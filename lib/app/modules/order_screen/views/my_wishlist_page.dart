@@ -13,10 +13,22 @@ class MyWishlistPage extends StatefulWidget {
 class _MyWishlistState extends State<MyWishlistPage> {
   final OrderController orderController = Get.put(OrderController(ApiService()));
 
+	// Scroll controllers for vertical and horizontal scrolling
+	final ScrollController _verticalScrollController = ScrollController();
+	
   @override
   void initState() {
     super.initState();
     orderController.fetchWishlists();
+  }
+  
+  _MyWishlistState() {
+		// Vertical Scroll Listener
+		_verticalScrollController.addListener(() {
+			if (_verticalScrollController.position.pixels == _verticalScrollController.position.maxScrollExtent) {
+				orderController.fetchWishlists();  // Load more data on vertical scroll
+			}
+		});
   }
   
   @override
@@ -27,7 +39,13 @@ class _MyWishlistState extends State<MyWishlistPage> {
 		centerTitle: true,
 	  ),
       body: Obx(() {
-        if (orderController.isWishlistLoading.value) {
+		WidgetsBinding.instance.addPostFrameCallback((_) {
+			if (_verticalScrollController.hasClients && _verticalScrollController.position.maxScrollExtent == 0) {
+			  orderController.fetchWishlists();
+			}
+		});
+		
+        if (orderController.isWishlistLoading.value && orderController.wishlist.isEmpty) {
           return Center(child: CircularProgressIndicator());
         }
 
@@ -36,8 +54,19 @@ class _MyWishlistState extends State<MyWishlistPage> {
         }
 
         return ListView.builder(
+		  controller: _verticalScrollController,
           itemCount: orderController.wishlist.length,
           itemBuilder: (context, index) {
+		    if (index == orderController.wishlist.length) {
+              // Show loader at bottom when more data is loading
+              return orderController.isWishlistLoading.value
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Center(child: CircularProgressIndicator()),
+                    )
+                  : SizedBox.shrink();
+            }
+			
             var wishlist = orderController.wishlist[index];
 			return GestureDetector(
 				onTap: () {
