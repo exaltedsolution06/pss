@@ -6,21 +6,24 @@ class CartController extends GetxController {
 	var itemCount = 0.obs; // Observable variable for the cart item count
 
   // Add to cart
-  void addToCart(int product_id, String imageUrl, String product_name, String price) {
+  void addToCart(int product_id, String imageUrl, String image_id, String product_name, String price) {
 	double parsedPrice = double.tryParse(price.replaceAll(RegExp(r'[^0-9.]'), '')) ?? 0.0; // Remove non-numeric characters
-    if (cartItems.containsKey(product_id)) {
-      cartItems.update(product_id, (existingItem) => {
+	int parsedImageId = int.tryParse(image_id.replaceAll(RegExp(r'[^0-9]'), '')) ?? 0;
+    if (cartItems.containsKey(parsedImageId)) {
+      cartItems.update(parsedImageId, (existingItem) => {
             'product_id': existingItem['product_id'],
             'product_name': existingItem['product_name'],
             'imageUrl': existingItem['imageUrl'],
+            'image_id': existingItem['image_id'],
             'quantity': (existingItem['quantity'] as int) + 1,
             'price': existingItem['price'],
           });
     } else {
-      cartItems[product_id] = {
+      cartItems[parsedImageId] = {
         'product_id': product_id,
         'product_name': product_name,
         'imageUrl': imageUrl,
+        'image_id': image_id,
         'quantity': 1,
         'price': parsedPrice,
       };
@@ -30,20 +33,22 @@ class CartController extends GetxController {
   }
 
   // Update quantity
-  void updateQuantity(int product_id, int quantity) {
-    if (cartItems.containsKey(product_id)) {
-      var existingItem = cartItems[product_id];
+  void updateQuantity(int product_id, String image_id, int quantity) {
+	int parsedImageId = int.tryParse(image_id.replaceAll(RegExp(r'[^0-9]'), '')) ?? 0;
+    if (cartItems.containsKey(parsedImageId)) {
+      var existingItem = cartItems[parsedImageId];
 
       if (quantity > 0) {
-        cartItems.update(product_id, (existingItem) => {
+        cartItems.update(parsedImageId, (existingItem) => {
               'product_id': existingItem?['product_id'],
               'product_name': existingItem?['product_name'],
               'imageUrl': existingItem?['imageUrl'],
+              'image_id': existingItem?['image_id'],
               'quantity': quantity,
               'price': existingItem?['price'],
             });
       } else {
-        cartItems.remove(product_id);
+        cartItems.remove(parsedImageId);
 		itemCount.value--; // Decreament the item count whenever an item is removed
       }
       calculateTotalPrice(); // Update total price

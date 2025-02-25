@@ -81,152 +81,154 @@ class _CartPageState extends State<CartPage> {
 			),
 			Expanded(
 		  child: ListView.builder(
-  itemCount: cartController.cartItems.length,
-  itemBuilder: (context, index) {
-    final itemKey = cartController.cartItems.keys.toList()[index];
-    final item = cartController.cartItems[itemKey];
-	
-	int quantity = item?['quantity'] ?? 0;
-	
-//print("cart List: cartItems");
-    return Stack(
-      children: [
-        // Main Card
-        Card(
-          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          elevation: 3,
-          color: AppColor.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Row(
-              children: [
-                // Image
-                ClipRRect(
-					borderRadius: BorderRadius.circular(8),
-					child: Image.network(
-						item["imageUrl"] ?? "https://via.placeholder.com/60",
-						width: 60,
-						height: 60,
-						fit: BoxFit.cover,
-						errorBuilder: (context, error, stackTrace) {
-							return Icon(Icons.image_not_supported, size: 60, color: Colors.grey);
-						},
-					),
-                ),
-                const SizedBox(width: 16),
-                // Item Details
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-						
-                      Text(
-                        item["product_name"],
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        "\$${item["price"]}",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // Quantity Controls
-                Row(
-                  children: [
-					IconButton(
-					  icon: const Icon(Icons.remove_circle, color: Colors.red),
-					  onPressed: () {
-						// Check if product_id and quantity are not null before calling the update
-						final productIdM = item["product_id"];
-						final quantityM = item["quantity"];
-						
-						if (productIdM != null && quantityM != null && quantityM > 1) {
-							cartController.updateQuantity(productIdM, quantityM - 1);
-						} else if (productIdM == null) {
-							print("Click Minus - Product ID is null");
-						} else if (quantityM == null) {
-							print("Click Minus - quantityM is null");
-						} else {
-							cartController.updateQuantity(productIdM, 0);
-							print("Click Minus - Product ID or quantityM is null");
-						}
-					  },
-					),
-					Text(
-						item["quantity"].toString(),
-						style: const TextStyle(
-							fontSize: 16,
-							fontWeight: FontWeight.bold,
+			  itemCount: cartController.cartItems.length,
+			  itemBuilder: (context, index) {
+				final itemKey = cartController.cartItems.keys.toList()[index];
+				final item = cartController.cartItems[itemKey];
+				
+				int quantity = item?['quantity'] ?? 0;
+				
+				//print("cart List: cartItems");
+				return Stack(
+				  children: [
+					// Main Card
+					Card(
+					  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+					  elevation: 3,
+					  color: AppColor.white,
+					  shape: RoundedRectangleBorder(
+						borderRadius: BorderRadius.circular(12),
+					  ),
+					  child: Padding(
+						padding: const EdgeInsets.all(10),
+						child: Row(
+						  children: [
+							// Image
+							ClipRRect(
+								borderRadius: BorderRadius.circular(8),
+								child: Image.network(
+									item["imageUrl"] ?? "https://via.placeholder.com/60",
+									width: 60,
+									height: 60,
+									fit: BoxFit.cover,
+									errorBuilder: (context, error, stackTrace) {
+										return Icon(Icons.image_not_supported, size: 60, color: Colors.grey);
+									},
+								),
+							),
+							const SizedBox(width: 16),
+							// Item Details
+							Expanded(
+							  child: Column(
+								crossAxisAlignment: CrossAxisAlignment.start,
+								children: [
+									
+								  Text(
+									item["product_name"],
+									style: const TextStyle(
+									  fontWeight: FontWeight.bold,
+									  fontSize: 16,
+									),
+								  ),
+								  const SizedBox(height: 4),
+								  Text(
+									"\$${item["price"]}",
+									style: const TextStyle(
+									  fontWeight: FontWeight.w500,
+									  fontSize: 14,
+									  color: Colors.red,
+									),
+								  ),
+								],
+							  ),
+							),
+							// Quantity Controls
+							Row(
+							  children: [
+								IconButton(
+								  icon: const Icon(Icons.remove_circle, color: Colors.red),
+								  onPressed: () {
+									// Check if product_id and quantity are not null before calling the update
+									final productIdM = item["product_id"];
+									final quantityM = item["quantity"];
+									final imageIdM = item["image_id"];
+									
+									if (productIdM != null && quantityM != null && quantityM > 1) {
+										cartController.updateQuantity(productIdM, imageIdM, quantityM - 1);
+									} else if (productIdM == null) {
+										print("Click Minus - Product ID is null");
+									} else if (quantityM == null) {
+										print("Click Minus - quantityM is null");
+									} else {
+										cartController.updateQuantity(productIdM, imageIdM, 0);
+										print("Click Minus - Product ID or quantityM is null");
+									}
+								  },
+								),
+								Text(
+									item["quantity"].toString(),
+									style: const TextStyle(
+										fontSize: 16,
+										fontWeight: FontWeight.bold,
+									),
+								),
+								IconButton(
+								  icon: const Icon(Icons.add_circle, color: Colors.green),
+								  onPressed: () {
+									// Check if product_id and quantity are not null before calling the update
+									final productId = item["product_id"];
+									final quantity = item["quantity"];
+									final image_id_a = item["image_id"];
+									
+									if (productId != null && quantity != null) {
+									  cartController.updateQuantity(productId, image_id_a, quantity + 1);
+									} else if (productId == null) {
+									  print("Click Plus - Product ID is null");
+									} else if (quantity == null) {
+									  print("Click Plus - Quantity is null");
+									} else {
+									  print("Click Plus - Product ID or Quantity is null");
+									}
+								  },
+								),
+
+
+							  ],
+							),
+						  ],
 						),
+					  ),
 					),
-                    IconButton(
-					  icon: const Icon(Icons.add_circle, color: Colors.green),
-					  onPressed: () {
-						// Check if product_id and quantity are not null before calling the update
-						final productId = item["product_id"];
-						final quantity = item["quantity"];
-						
-						if (productId != null && quantity != null) {
-						  cartController.updateQuantity(productId, quantity + 1);
-						} else if (productId == null) {
-						  print("Click Plus - Product ID is null");
-						} else if (quantity == null) {
-						  print("Click Plus - Quantity is null");
-						} else {
-						  print("Click Plus - Product ID or Quantity is null");
-						}
-					  },
+					// Remove Item (Cross Icon)
+					Positioned(
+					  top: 13,
+					  right: 22,
+					  child: GestureDetector(
+						onTap: () {
+						  cartController.updateQuantity(item["product_id"], item["image_id"], 0); // Removes item
+						},
+						child: Container(
+						  width: 18,
+						  height: 18,
+						  decoration: BoxDecoration(
+							color: Colors.transparent, // Transparent background
+							shape: BoxShape.circle,
+							border: Border.all(
+							  color: AppColor.BlackGreyscale, // Border color
+							  width: 1, // Border width
+							),
+						  ),
+						  child: const Icon(
+							Icons.close,
+							color: AppColor.BlackGreyscale,
+							size: 14,
+						  ),
+						),
+					  ),
 					),
-
-
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-        // Remove Item (Cross Icon)
-        Positioned(
-          top: 13,
-          right: 22,
-          child: GestureDetector(
-            onTap: () {
-              cartController.updateQuantity(item["product_id"], 0); // Removes item
-            },
-            child: Container(
-              width: 18,
-              height: 18,
-              decoration: BoxDecoration(
-                color: Colors.transparent, // Transparent background
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: AppColor.BlackGreyscale, // Border color
-                  width: 1, // Border width
-                ),
-              ),
-              child: const Icon(
-                Icons.close,
-                color: AppColor.BlackGreyscale,
-                size: 14,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  },
+				  ],
+				);
+			  },
 ),
 
 		),
@@ -260,56 +262,7 @@ class _CartPageState extends State<CartPage> {
 								),
 							],
 						),
-						const SizedBox(height: 5),
-						/*Row(
-							mainAxisAlignment: MainAxisAlignment.spaceBetween,
-							children: [
-								Text("Items Discount", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', color: AppColor.SecondaryGreyscale)),
-								Text(
-									"-\$. 20",
-									textAlign: TextAlign.right,
-									style: TextStyle(
-									  fontSize: 16,
-									  color: AppColor.black,
-									  fontFamily: 'Urbanist-semibold'
-									),
-								),
-							],
-						),
-						const SizedBox(height: 5),
-						Row(
-							mainAxisAlignment: MainAxisAlignment.spaceBetween,
-							children: [
-								Text("Coupon Discount", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', color: AppColor.SecondaryGreyscale)),
-								Text(
-									"-\$. 0",
-									textAlign: TextAlign.right,
-									style: TextStyle(
-									  fontSize: 16,
-									  color: AppColor.black,
-									  fontFamily: 'Urbanist-semibold'
-									),
-								),
-							],
-						),
-						const SizedBox(height: 5),
-						Row(
-							mainAxisAlignment: MainAxisAlignment.spaceBetween,
-							children: [
-								Text("Shipping", textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', color: AppColor.SecondaryGreyscale)),
-								Text(
-									"Free",
-									textAlign: TextAlign.right,
-									style: TextStyle(
-									  fontSize: 16,
-									  color: AppColor.black,
-									  fontFamily: 'Urbanist-semibold'
-									),
-								),
-							],
-						),
-						const SizedBox(height: 5),
-						*/
+						const SizedBox(height: 5),						
 						Row(
 							mainAxisAlignment: MainAxisAlignment.spaceBetween,
 							children: [

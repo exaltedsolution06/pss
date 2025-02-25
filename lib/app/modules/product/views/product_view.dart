@@ -198,7 +198,7 @@ class _ProductViewState extends State<ProductView> {
 											Text(productData.price, textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold')),
 											GestureDetector(
 											  onTap: () {
-												cartController.addToCart(productData.product_id, firstValidFile?.filePath ?? '', productData.name, productData.price);
+												cartController.addToCart(productData.product_id, firstValidFile?.filePath ?? '', firstValidFile?.id ?? '', productData.name, productData.price);
 												//print("Add to Cart: ${productData.product_id}");
 												
 												SnackbarHelper.showSuccessSnackbar(

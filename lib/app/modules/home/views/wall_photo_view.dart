@@ -26,6 +26,7 @@ class _WallPhotoViewState extends State<WallPhotoView> {
   //final File? imageFile = Get.arguments as File?;
 
   late String selectedPhoto;
+  late String selectedPhotoId;
   Offset position = Offset(150, 150); // Default position of photo on the wall
 
   // List of photo asset paths
@@ -43,8 +44,10 @@ class _WallPhotoViewState extends State<WallPhotoView> {
 	if (productController.productData.value?.fetchedFiles != null &&
 		  productController.productData.value!.fetchedFiles!.isNotEmpty) {
 		selectedPhoto = productController.productData.value!.fetchedFiles!.first.filePath ?? '';
+		selectedPhotoId = productController.productData.value!.fetchedFiles!.first.id ?? '';
 	} else {
 		selectedPhoto = ''; // Default if no images are available
+		selectedPhotoId = ''; // Default if no images are available
 	}
   }
   
@@ -136,6 +139,7 @@ class _WallPhotoViewState extends State<WallPhotoView> {
 					  onTap: () {
 						setState(() {
 						  selectedPhoto = imageUrls[index].filePath ?? '';
+						  selectedPhotoId = imageUrls[index].id ?? '';
 						});
 					  },
 					  child: Padding(
@@ -170,6 +174,7 @@ class _WallPhotoViewState extends State<WallPhotoView> {
 						  cartController.addToCart(
 							productId,
 							selectedPhoto, // Use the selected photo
+							selectedPhotoId, // Use the selected photo id
 							productData.name,
 							productData.price,
 						  );
