@@ -40,14 +40,6 @@ class _WallPhotoViewState extends State<WallPhotoView> {
   void initState() {
     super.initState();
     
-	final arguments = Get.arguments ?? {};
-    final int productId = arguments['productId'] ?? 0;
-
-    // Fetch product data if not already loaded
-    //if (productController.productData.value?.id != productId) {
-      productController.fetchProductData(productId);
-   // }
-	
 	// Initialize selectedPhoto with the first image from imageUrls if available
 	if (productController.productData.value?.fetchedFiles != null &&
 		  productController.productData.value!.fetchedFiles!.isNotEmpty) {
@@ -73,10 +65,10 @@ class _WallPhotoViewState extends State<WallPhotoView> {
 	final File? imageFile = arguments['photoFile'] as File?;
 
     // Fetch product images dynamically using productId
-    //productController.fetchProductData(productId);
+    productController.fetchProductData(productId);
 	
-	//final productData = productController.productData.value!;
-    //final imageUrls = productData.fetchedFiles ?? [];
+	final productData = productController.productData.value!;
+    final imageUrls = productData.fetchedFiles ?? [];
 	//print(imageUrls);
 	
     return Scaffold(
@@ -86,15 +78,7 @@ class _WallPhotoViewState extends State<WallPhotoView> {
 	  ),
       body: Form(
         key: _formKey, // Assign the form key here
-		child: Obx(() {
-		  final productData = productController.productData.value;
-          if (productData == null) {
-            return Center(child: CircularProgressIndicator());
-          }
-
-          final imageUrls = productData.fetchedFiles ?? [];
-		  
-		  return Column(
+			child: Column(
 			children: [
 			  // Wall with photo
 			  Expanded(
@@ -206,8 +190,7 @@ class _WallPhotoViewState extends State<WallPhotoView> {
 				),
 				const SizedBox(height: 20),
 			],
-		  );
-		}),  
+		  ),
 	  ),
 	  bottomNavigationBar: CommonBottomNavigationBar(currentIndex: 0),
     );

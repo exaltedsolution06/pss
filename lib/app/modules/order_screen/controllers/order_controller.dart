@@ -273,7 +273,7 @@ class OrderController extends GetxController {
 		}
 	}
 	// DeliveryAddressPage add address data
-	Future<void> addDeliveryAddress(address_type, phone_number, latitude, longitude, address) async {
+	Future<bool> addDeliveryAddress(address_type, phone_number, latitude, longitude, address) async {
 		isDAMLoading.value = true;
 		print("Address Type: $address_type");
 		print("Phone Number: $phone_number");
@@ -287,7 +287,8 @@ class OrderController extends GetxController {
 				  message: response['data'],
 				  position: SnackPosition.BOTTOM, // Custom position
 				);
-				deliveryAddressData();				
+				deliveryAddressData();
+				return true;
 			} else if (response['status'] == '600') {
 				final firstErrorMessages = <String>[];
 
@@ -305,12 +306,14 @@ class OrderController extends GetxController {
 				  message: firstPasswordError,
 				  position: SnackPosition.BOTTOM, // Custom position
 				);
+				return false;
 			} else {
 				SnackbarHelper.showErrorSnackbar(
 				  title: Appcontent.snackbarTitleError, 
 				  message: response['data'],
 				  position: SnackPosition.BOTTOM, // Custom position
 				);
+				return false;
 			}
 		} catch (e) {
 			print('Error add DeliveryAddressPage data - order controller: $e');
@@ -319,12 +322,13 @@ class OrderController extends GetxController {
 			  message: Appcontent.snackbarCatchErrorMsg, 
 			  position: SnackPosition.BOTTOM, // Custom position
 			);
+			return false;
 		} finally {
 			isDAMLoading.value = false;
 		}
 	}
 	
-	void updateDeliveryAddress(int id, String type, String phone, String latitude, String longitude, String address) async {
+	Future<bool> updateDeliveryAddress(int id, String type, String phone, String latitude, String longitude, String address) async {
 	  isDAMLoading.value = true;
 	  try {
 	    var response = await apiService.editDeliveryAddress(id, type, phone, latitude, longitude, address);
@@ -335,7 +339,8 @@ class OrderController extends GetxController {
 			  message: response['data'],
 			  position: SnackPosition.BOTTOM, // Custom position
 			);
-			deliveryAddressData();				
+			deliveryAddressData();
+			return true;
 		} else if (response['status'] == '600') {
 			final firstErrorMessages = <String>[];
 
@@ -353,12 +358,14 @@ class OrderController extends GetxController {
 			  message: firstPasswordError,
 			  position: SnackPosition.BOTTOM, // Custom position
 			);
+			return false;
 		} else {
 			SnackbarHelper.showErrorSnackbar(
 			  title: Appcontent.snackbarTitleError, 
 			  message: response['data'],
 			  position: SnackPosition.BOTTOM, // Custom position
 			);
+			return false;
 		}
 	  } catch (e) {
 		print('Error add DeliveryAddressPage data - order controller: $e');
@@ -367,6 +374,7 @@ class OrderController extends GetxController {
 		  message: Appcontent.snackbarCatchErrorMsg, 
 		  position: SnackPosition.BOTTOM, // Custom position
 		);
+		return false;
 	  } finally {
 		isDAMLoading.value = false;
 	  }

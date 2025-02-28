@@ -41,6 +41,8 @@ class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBinding
 		categoryId = arguments["categoryId"];
 		artistId = arguments["artistId"];
 		
+		serachScreenController.resetFilters();
+		
 		_scrollController.addListener(() {
 		  if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
 			serachScreenController.loadMoreData();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:convert';
 import 'package:picturesourcesomerset/services/api_service.dart';
 import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';
@@ -95,6 +96,11 @@ class SerachScreenController extends GetxController {
 		}
 	}
 	
+	void resetFilters() {
+		selectedColors.clear();
+		selectedSizes.clear();
+	}
+	
 	void toggleColorSelection(int colorId) {
 		if (selectedColors.contains(colorId)) {
 		  selectedColors.remove(colorId);
@@ -143,7 +149,7 @@ class SerachScreenController extends GetxController {
 	Future<void> loadMoreDataProduct() async {
 		//if (!canLoadMore() || keyword.value.isEmpty) return;  // Ensure keyword is not empty
 		if (!canLoadMore()) return;  // Ensure keyword is not empty
-
+		print('frrrrrrrrrrrffffffffffffffffffffffffff: $selectedColors');
 		isFetchingData.value = true;
 		try {
 			Map<String, dynamic> filters = {
@@ -158,11 +164,12 @@ class SerachScreenController extends GetxController {
 			var response = await apiService.productSearch(filters);
 			//print("response: $response");
 			var newData = response['data'];	
+			//print('frrrrrrrrrrrffffffffffffffffffffffffffK: $selectedColors');
 			//print("newData: $newData");			
 			if (newData.isEmpty) {
 				hasMoreDataProduct.value = false;
 			} else {
-				//print("newData-----: $newData");			
+				//print("newData-----: ${jsonEncode(newData)}");	
 				productData.addAll(newData); 
 	  
 				currentPageProduct.value++;
