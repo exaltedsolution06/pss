@@ -10,7 +10,7 @@ class UserController extends GetxController {
 	RxString companyName = ''.obs;
 	RxInt country = 0.obs;
 	RxInt state = 0.obs;
-	RxInt city = 0.obs;
+	RxString city = ''.obs;
 	RxString address = ''.obs;
 	RxString zipcode = ''.obs;
 	RxString latitude = ''.obs;
@@ -31,7 +31,7 @@ class UserController extends GetxController {
 		companyName.value = data['company_name'] ?? '';
 		country.value = data['country'] ?? 0;
 		state.value = data['state'] ?? 0;
-		city.value = data['city'] ?? 0;
+		city.value = data['city'] ?? '';
 		address.value = data['address'] ?? '';
 		latitude.value = data['latitude'] ?? '';
 		longitude.value = data['longitude'] ?? '';
@@ -52,7 +52,7 @@ class UserController extends GetxController {
 		companyName.value = data['company_name'] ?? '';
 		country.value = data['country'] ?? 0;
 		state.value = data['state'] ?? 0;
-		city.value = data['city'] ?? 0;
+		city.value = data['city'] ?? '';
 		address.value = data['address'] ?? '';
 		latitude.value = data['latitude'] ?? '';
 		longitude.value = data['longitude'] ?? '';

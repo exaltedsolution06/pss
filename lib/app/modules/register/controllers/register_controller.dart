@@ -8,7 +8,7 @@ import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 import 'package:picturesourcesomerset/config/app_contents.dart';
 import 'package:picturesourcesomerset/app/modules/profile_screen/models/country.dart';
 import 'package:picturesourcesomerset/app/modules/profile_screen/models/state.dart';
-import 'package:picturesourcesomerset/app/modules/profile_screen/models/city.dart';
+//import 'package:picturesourcesomerset/app/modules/profile_screen/models/city.dart';
 
 class RegisterController extends GetxController {
 	final ApiService apiService;  
@@ -21,12 +21,12 @@ class RegisterController extends GetxController {
   
 	// Declare observable lists
 	var countryList = <Country>[].obs; // Observable for the country list
-	var selectedCountry = Rxn<String>();
+	var selectedCountry = Rxn<String>('231');
 	var stateList = <StateModel>[].obs; // Observable for the state list
 	var selectedState = Rxn<String>();
 	var loadingState = false.obs; // New observable for loading country
-	var cityList = <CityModel>[].obs; // Observable for the city list
-	var selectedCity = Rxn<String>();
+	//var cityList = <CityModel>[].obs; // Observable for the city list
+	//var selectedCity = Rxn<String>();
 	var loadingCity = false.obs; // New observable for loading state
   
 	void changePasswordHideAndShow() {
@@ -34,6 +34,11 @@ class RegisterController extends GetxController {
 	}
 	void changeCPasswordHideAndShow() {
 		showCPassword.value = !showCPassword.value;  // Use .value to update RxBool
+	}
+	@override
+	void onInit() {
+	  super.onInit();
+	  fetchStateList(231); // Fetch states for country ID 231 on load
 	}
 	//fetch country lists
 	Future<void> fetchCountryList() async {
@@ -91,7 +96,7 @@ class RegisterController extends GetxController {
 		}
 	}
 	// Fetch the city list based on the selected state
-	Future<void> fetchCityList(int stateId) async {
+	/*Future<void> fetchCityList(int stateId) async {
 		try {
 			loadingCity.value = true; // Set loading to true
 			final response = await apiService.cityList(stateId);
@@ -117,7 +122,7 @@ class RegisterController extends GetxController {
 		} finally {
 			loadingCity.value = false; // Set loading to false
 		}
-	}
+	}*/
   
 	/*void updateCountry(int countryId) {
 		print('Updating country to: $countryId');
@@ -221,7 +226,7 @@ class RegisterController extends GetxController {
 		required String confirmed_password, 
 		required String company_name, 
 		required String address, 
-		required int city, 
+		required String city, 
 		required int state, 
 		required int country, 
 		required String zipcode, 

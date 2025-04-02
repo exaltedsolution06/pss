@@ -110,7 +110,7 @@ class LoginScreenController extends GetxController {
 		await prefs.setString('companyName', userData['company_name'] ?? '');
 		await prefs.setInt('country', userData['country'] ?? 0);
 		await prefs.setInt('state', userData['state'] ?? 0);
-		await prefs.setInt('city', userData['city'] ?? 0);
+		await prefs.setString('city', userData['city'] ?? '');
 		await prefs.setString('address', userData['address'] ?? '');
 		await prefs.setString('zipcode', userData['zipcode'] ?? '');
 		await prefs.setString('phoneNumber', userData['phone_number'] ?? '');

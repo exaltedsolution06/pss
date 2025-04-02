@@ -480,8 +480,8 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 									if (newCountry != null && newCountry.isNotEmpty) {
 										registerController.selectedCountry.value = newCountry;
 										// Reset the city dropdown
-										registerController.cityList.clear(); // Clear all cities
-										registerController.selectedCity.value = null;
+										//registerController.cityList.clear(); // Clear all cities
+										//registerController.selectedCity.value = null;
 										final selectedCountryId = int.parse(newCountry);
 										registerController.fetchStateList(selectedCountryId);
 										registerController.selectedState.value = null;
@@ -534,9 +534,9 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 									if (newState != null && newState.isNotEmpty) {
 										registerController.selectedState.value = newState;
 										final selectedStateId = int.parse(newState);
-										registerController.fetchCityList(selectedStateId);
-										registerController.cityList.clear(); // Clear all cities
-										registerController.selectedCity.value = null;
+										//registerController.fetchCityList(selectedStateId);
+										//registerController.cityList.clear(); // Clear all cities
+										//registerController.selectedCity.value = null;
 										_formKey.currentState?.validate();  // Trigger form validation
 									} else {
 										_formKey.currentState?.validate();  // Trigger form validation
@@ -553,7 +553,7 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 								),
 							  ),
 							  const SizedBox(height: 8), // Space between label and text field
-							Obx(() {
+							/*Obx(() {
 								return dropdownFieldFinal(
 									text1: registerController.loadingCity.value
 										? Appcontent.loadingCities // Hint text while loading
@@ -589,9 +589,9 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 										}
 									},
 								);
-							}),
+							}),*/
 							  // Text Field
-							  /*autoWidthTextField(
+							  autoWidthTextField(
 								text: Appcontent.placeholderCity,
 								width: screenWidth,
 								controller: cityController,
@@ -607,7 +607,7 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 									_formKey.currentState?.validate();
 								  }
 								},
-							  ),*/
+							  ),
 							  // Label Above the TextField
 							  Text(
 								Appcontent.address,
@@ -729,7 +729,7 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
                       child: Obx(() {
 						final selectedCountryValue = registerController.selectedCountry.value;
 						final selectedStateValue = registerController.selectedState.value;
-						final selectedCityValue = registerController.selectedCity.value;
+						//final selectedCityValue = registerController.selectedCity.value;
 
 						// Handle potential parsing issues
 						final countryId = selectedCountryValue?.isNotEmpty ?? false
@@ -740,9 +740,9 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 						  ? int.tryParse(selectedStateValue ?? '')
 						  : null;
 						  
-						final cityId = selectedCityValue?.isNotEmpty ?? false
+						/*final cityId = selectedCityValue?.isNotEmpty ?? false
 						  ? int.tryParse(selectedCityValue ?? '')
-						  : null;
+						  : null;*/
 						  
                         return autoWidthBtn(
                           text: registerController.isLoading.value ? 'Sign Up...' : 'Sign Up',
@@ -758,7 +758,7 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 									final passwordconfirmation = passwordconfirmationController.text.trim();
 									final companyname = companynameController.text.trim();
 									final address = addressController.text.trim();
-									//final city = cityController.text.trim();
+									final city = cityController.text.trim();
 									final zipcode = zipcodeController.text.trim();
 									final phone = phoneController.text.trim();
 									
@@ -771,7 +771,7 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 										confirmed_password: passwordconfirmation,
 										company_name: companyname,
 										address: address,
-										city: cityId ?? 0,
+										city: city,
 										state: stateId ?? 0,
 										country: countryId ?? 0,
 										zipcode: zipcode,

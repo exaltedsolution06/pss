@@ -31,7 +31,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
   final TextEditingController passwordconfirmationController = TextEditingController();
   final TextEditingController companynameController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
-  //final TextEditingController cityController = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
   final TextEditingController zipcodeController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
@@ -44,7 +44,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
   final FocusNode _passwordconfirmationFocusNode = FocusNode();
   final FocusNode _companynameFocusNode = FocusNode();
   final FocusNode _addressFocusNode = FocusNode();
-  //final FocusNode _cityFocusNode = FocusNode();
+  final FocusNode _cityFocusNode = FocusNode();
   final FocusNode _zipcodeFocusNode = FocusNode();
   final FocusNode _phoneFocusNode = FocusNode();
   
@@ -374,8 +374,8 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 												registerController.selectedCountry.value = newCountry;
 												
 												// Reset the city dropdown
-												registerController.cityList.clear(); // Clear all cities
-												registerController.selectedCity.value = null;
+												//registerController.cityList.clear(); // Clear all cities
+												//registerController.selectedCity.value = null;
 												
 												// Load the states based on the selected country
 												final selectedCountryId = int.parse(newCountry);
@@ -435,10 +435,10 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 												
 												final selectedStateId = int.parse(newState);
 											
-												registerController.fetchCityList(selectedStateId);
+												//registerController.fetchCityList(selectedStateId);
 												
-												registerController.cityList.clear(); // Clear all cities
-												registerController.selectedCity.value = null;
+												//registerController.cityList.clear(); // Clear all cities
+												//registerController.selectedCity.value = null;
 												
 												_formKey.currentState?.validate();  // Trigger form validation
 											} else {
@@ -457,7 +457,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 										),
 									  ),
 									  const SizedBox(height: 8), // Space between label and text field
-									Obx(() {
+									/*Obx(() {
 										return dropdownFieldFinal(
 											text1: registerController.loadingCity.value
 												? Appcontent.loadingCities // Hint text while loading
@@ -493,9 +493,9 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 												}
 											},
 										);
-									}),
+									}),*/
 									  // Text Field
-									  /*autoWidthTextField(
+									  autoWidthTextField(
 										text: Appcontent.placeholderCity,
 										width: screenWidth,
 										controller: cityController,
@@ -511,7 +511,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 											_formKey.currentState?.validate();
 										  }
 										},
-									  ),*/
+									  ),
 									  // Label Above the TextField
 									  Text(
 										Appcontent.address,
@@ -603,7 +603,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 						  Obx(() {
 								final selectedCountryValue = registerController.selectedCountry.value;
 								final selectedStateValue = registerController.selectedState.value;
-								final selectedCityValue = registerController.selectedCity.value;
+								//final selectedCityValue = registerController.selectedCity.value;
 
 								// Handle potential parsing issues
 								final countryId = selectedCountryValue?.isNotEmpty ?? false
@@ -614,9 +614,9 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 								  ? int.tryParse(selectedStateValue ?? '')
 								  : null;
 								  
-								 final cityId = selectedCityValue?.isNotEmpty ?? false
+								 /*final cityId = selectedCityValue?.isNotEmpty ?? false
 								  ? int.tryParse(selectedCityValue ?? '')
-								  : null;
+								  : null;*/
 								  
 								return autoWidthBtn(
 								  text: registerController.isLoading.value ? 'Sign Up...' : 'Sign Up',
@@ -632,7 +632,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 											final passwordconfirmation = passwordconfirmationController.text.trim();
 											final companyname = companynameController.text.trim();
 											final address = addressController.text.trim();
-											//final city = cityController.text.trim();
+											final city = cityController.text.trim();
 											final zipcode = zipcodeController.text.trim();
 											final phone = phoneController.text.trim();
 															  
@@ -644,7 +644,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 											  passwordconfirmation,
 											  companyname,
 											  address,
-											  cityId,
+											  city,
 											  stateId,
 											  countryId,
 											  zipcode,

@@ -8,7 +8,7 @@ import 'package:picturesourcesomerset/config/app_contents.dart';
 import 'package:picturesourcesomerset/app/modules/profile_screen/models/profile_data.dart';
 import 'package:picturesourcesomerset/app/modules/profile_screen/models/country.dart';
 import 'package:picturesourcesomerset/app/modules/profile_screen/models/state.dart';
-import 'package:picturesourcesomerset/app/modules/profile_screen/models/city.dart';
+//import 'package:picturesourcesomerset/app/modules/profile_screen/models/city.dart';
 import 'package:picturesourcesomerset/app/modules/profile_screen/models/gender.dart';
 import 'package:picturesourcesomerset/app/modules/profile_screen/controllers/user_controller.dart';
 
@@ -44,7 +44,7 @@ class EditprofileScreenController extends GetxController {
 	// Observable to track loading state
 	var isLoading = false.obs;
 	var isFetchingStates = false.obs; // To track state list fetching
-	var isFetchingCities = false.obs; // To track city list fetching
+	//var isFetchingCities = false.obs; // To track city list fetching
 	
 	// Declare observable lists
 	var genderList = <Gender>[].obs;
@@ -57,9 +57,9 @@ class EditprofileScreenController extends GetxController {
 	var stateList = <StateModel>[].obs; // Observable for the state list
 	var selectedState = Rxn<String>();
 	var loadingState = false.obs; // New observable for loading country
-	var cityList = <CityModel>[].obs; // Observable for the city list
-	var selectedCity = Rxn<String>();
-	var loadingCity = false.obs; // New observable for loading state
+	//var cityList = <CityModel>[].obs; // Observable for the city list
+	//var selectedCity = Rxn<String>();
+	//var loadingCity = false.obs; // New observable for loading state
 	
 	//var selectedCountry = 0.obs; // Reactive country value
 	//var selectedState = 0.obs;   // Reactive state value
@@ -73,7 +73,7 @@ class EditprofileScreenController extends GetxController {
 		// Fetch the country list when the view loads
 		fetchCountryList();
 		fetchStateList(userController.country.value);
-		fetchCityList(userController.state.value);
+		//fetchCityList(userController.state.value);
 		
 		print("Country Id: ${userController.country.value}");
 		print("State Id: ${userController.state.value}");
@@ -169,7 +169,7 @@ class EditprofileScreenController extends GetxController {
 		}
 	}
 	// Fetch the city list based on the selected state
-	Future<void> fetchCityList(int stateId) async {
+	/*Future<void> fetchCityList(int stateId) async {
 		if (isFetchingCities.value) return; // Avoid duplicate fetching
 		isFetchingCities.value = true;
 		try {
@@ -198,7 +198,7 @@ class EditprofileScreenController extends GetxController {
 			loadingCity.value = false; // Set loading to false
 			isFetchingCities.value = false;
 		}
-	}
+	}*/
 	
 	//submit profile data
 	Future<void> profileSubmit(
@@ -209,7 +209,7 @@ class EditprofileScreenController extends GetxController {
 		String? dob,  
 		int? country, 
 		int? state,  
-		int? city,
+		String? city,
 		String? address, 
 		String? latitude, 
 		String? longitude, 
@@ -243,7 +243,7 @@ class EditprofileScreenController extends GetxController {
 					dob ?? '',
 					country ?? 0,
 					state ?? 0,   
-					city ?? 0,
+					city ?? '',
 					address ?? '', 
 					latitude ?? '', 
 					longitude ?? '', 
@@ -262,7 +262,7 @@ class EditprofileScreenController extends GetxController {
 					dob ?? '',
 					country ?? 0,
 					state ?? 0,   
-					city ?? 0,
+					city ?? '',
 					address ?? '', 
 					latitude ?? '', 
 					longitude ?? '', 
@@ -334,7 +334,8 @@ class EditprofileScreenController extends GetxController {
 		// Ensure country, state, city are integers before saving
 		await prefs.setInt('country', (userData['country'] as int?) ?? 0);
 		await prefs.setInt('state', (userData['state'] as int?) ?? 0);
-		await prefs.setInt('city', (userData['city'] as int?) ?? 0);
+		//await prefs.setInt('city', (userData['city'] as int?) ?? 0);
+		await prefs.setString('city', userData['city'] ?? '');
 
 		await prefs.setString('address', userData['address'] ?? '');
 		await prefs.setString('latitude', userData['latitude'] ?? '');
