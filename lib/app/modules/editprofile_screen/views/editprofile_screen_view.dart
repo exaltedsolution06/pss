@@ -45,7 +45,7 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 	final TextEditingController dobController = TextEditingController();
 	final TextEditingController companynameController = TextEditingController();
 	final TextEditingController addressController = TextEditingController();
-	//final TextEditingController cityController = TextEditingController();
+	final TextEditingController cityController = TextEditingController();
 	//final TextEditingController stateController = TextEditingController();
 	final TextEditingController latitudeController = TextEditingController();
 	final TextEditingController longitudeController = TextEditingController();
@@ -59,7 +59,7 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _companynameFocusNode = FocusNode();
   final FocusNode _addressFocusNode = FocusNode();
-  //final FocusNode _cityFocusNode = FocusNode();
+  final FocusNode _cityFocusNode = FocusNode();
   //final FocusNode _stateFocusNode = FocusNode();
   final FocusNode _latitudeFocusNode = FocusNode();
   final FocusNode _longitudeFocusNode = FocusNode();
@@ -80,8 +80,8 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 	_companynameFocusNode.dispose();
     addressController.dispose();
 	_addressFocusNode.dispose();
-    //cityController.dispose();
-	//_cityFocusNode.dispose();
+    cityController.dispose();
+	_cityFocusNode.dispose();
     //stateController.dispose();
 	//_stateFocusNode.dispose();
     latitudeController.dispose();
@@ -135,11 +135,11 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 	}
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         leading: InkWell(
           onTap: () {
 			Get.delete<EditprofileScreenController>(); // Deletes the controller
@@ -192,10 +192,10 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
           if (addressController.text.isEmpty && userController.address.value != null) {
             addressController.text = userController.address.value!;
           }
-          /*if (cityController.text.isEmpty && userController.city.value != null) {
+          if (cityController.text.isEmpty && userController.city.value != null) {
             cityController.text = userController.city.value!;
           }
-          if (stateController.text.isEmpty && profileData.state != null) {
+          /*if (stateController.text.isEmpty && profileData.state != null) {
             stateController.text = profileData.state!;
           }*/
           if (latitudeController.text.isEmpty && userController.latitude.value != null) {
@@ -490,8 +490,8 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 												editprofileScreenController.selectedState.value = null;
 												editprofileScreenController.stateList.clear();
 												
-												editprofileScreenController.cityList.clear();
-												editprofileScreenController.selectedCity.value = null;
+												//editprofileScreenController.cityList.clear();
+												//editprofileScreenController.selectedCity.value = null;
 												
 											editprofileScreenController.fetchStateList(selectedCountryId).then((_) {
 												_formKey.currentState?.validate();
@@ -571,19 +571,19 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 											if (newState != null && newState.isNotEmpty) {
 												editprofileScreenController.selectedState.value = newState;
 
-												editprofileScreenController.selectedCity.value = null;
-												editprofileScreenController.cityList.clear(); // Clear all cities
+												//editprofileScreenController.selectedCity.value = null;
+												//editprofileScreenController.cityList.clear(); // Clear all cities
 													
 												// Parse the new state ID
 												final selectedStateId = int.parse(newState);
 												// Reset selectedCity if it's invalid
-												editprofileScreenController.selectedCity.value = null;
-												editprofileScreenController.cityList.clear(); // Clear all cities
+												//editprofileScreenController.selectedCity.value = null;
+												//editprofileScreenController.cityList.clear(); // Clear all cities
 												// Fetch the city list for the selected state
-												editprofileScreenController.fetchCityList(selectedStateId).then((_) {
+												/*editprofileScreenController.fetchCityList(selectedStateId).then((_) {
 													// Trigger form validation
 													_formKey.currentState?.validate();
-												});
+												});*/
 											}
 										},
 									  );
@@ -597,7 +597,7 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 											),
 										),
 										  const SizedBox(height: 8), // Space between label and text field
-										  Obx(() {
+										  /*Obx(() {
 												String? currentCTValue;
 												if(userController.city.value != null && userController.city.value != 0 && editprofileScreenController.selectedState.value == null) {
 													currentCTValue = userController.city.value.toString();
@@ -653,9 +653,9 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 												  }
 												},
 											  );
-											}),
+											}),*/
 										// Text Field
-										/*autoWidthTextField(
+										autoWidthTextField(
 											text: Appcontent.placeholderCity,
 											width: screenWidth,
 											controller: cityController,
@@ -671,7 +671,7 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 												_formKey.currentState?.validate();
 											  }
 											},
-										),*/
+										),
 										// Label Above the TextField
 										Text(
 											Appcontent.address,
@@ -855,7 +855,7 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 											final selectedGenderValue = editprofileScreenController.selectedGender.value;
 											final selectedCountryValue = editprofileScreenController.selectedCountry.value;
 											final selectedStateValue = editprofileScreenController.selectedState.value;
-											final selectedCityValue = editprofileScreenController.selectedCity.value;
+											//final selectedCityValue = editprofileScreenController.selectedCity.value;
 
 											// Handle potential parsing issues
 											final countryId = selectedCountryValue?.isNotEmpty ?? false
@@ -866,9 +866,9 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 											  ? int.tryParse(selectedStateValue ?? '')
 											  : userController.state.value;
 											  
-											final cityId = selectedCityValue?.isNotEmpty ?? false
+											/*final cityId = selectedCityValue?.isNotEmpty ?? false
 											  ? int.tryParse(selectedCityValue ?? '')
-											  : userController.city.value;
+											  : userController.city.value;*/
 											  
 											// Handle potential parsing issues
 											final genderId = selectedGenderValue?.isNotEmpty ?? false
@@ -889,7 +889,7 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 													  final dob = dobController.text.trim();
 													  final company_name = companynameController.text.trim();
 													  final address = addressController.text.trim();
-													  //final city = cityController.text.trim();
+													  final city = cityController.text.trim();
 													  //final state = stateController.text.trim();
 													  final latitude = latitudeController.text.trim();
 													  final longitude = longitudeController.text.trim();
@@ -905,7 +905,7 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 														dob,
 														countryId,
 														stateId,
-														cityId,
+														city,
 														address,
 														latitude,
 														longitude,

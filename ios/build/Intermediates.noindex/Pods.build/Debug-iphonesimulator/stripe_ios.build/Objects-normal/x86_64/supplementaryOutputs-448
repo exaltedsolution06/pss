@@ -1,0 +1,24 @@
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/AuBECSDebitFormFactory.swift":
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AuBECSDebitFormFactory.d"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AuBECSDebitFormFactory.o"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AuBECSDebitFormFactory.swiftconstvalues"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AuBECSDebitFormFactory.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AuBECSDebitFormFactory.dia"
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/CardFieldFactory.swift":
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFieldFactory.o"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFieldFactory.swiftdeps"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFieldFactory.d"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFieldFactory.swiftconstvalues"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFieldFactory.dia"
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/Stripe Sdk/CardFieldView.swift":
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFieldView.swiftdeps"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFieldView.o"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFieldView.d"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFieldView.dia"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFieldView.swiftconstvalues"
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/Stripe Sdk/AuBECSDebitFormView.swift":
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AuBECSDebitFormView.swiftdeps"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AuBECSDebitFormView.o"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AuBECSDebitFormView.dia"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AuBECSDebitFormView.swiftconstvalues"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AuBECSDebitFormView.d"

@@ -1,0 +1,24 @@
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/Stripe Sdk/AddressSheet/AddressSheetUtils.swift":
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetUtils.swiftdeps"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetUtils.swiftconstvalues"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetUtils.dia"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetUtils.d"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetUtils.o"
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/AddressSheetFactory.swift":
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetFactory.o"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetFactory.d"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetFactory.dia"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetFactory.swiftdeps"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetFactory.swiftconstvalues"
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/AddToWalletButtonFactory.swift":
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddToWalletButtonFactory.d"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddToWalletButtonFactory.dia"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddToWalletButtonFactory.swiftconstvalues"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddToWalletButtonFactory.o"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddToWalletButtonFactory.swiftdeps"
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/Stripe Sdk/AddressSheet/AddressSheetView.swift":
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetView.swiftdeps"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetView.swiftconstvalues"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetView.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetView.o"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/AddressSheetView.d"

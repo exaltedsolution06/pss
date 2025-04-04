@@ -41,6 +41,8 @@ class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBinding
 		categoryId = arguments["categoryId"];
 		artistId = arguments["artistId"];
 		
+		serachScreenController.resetFilters();
+		
 		_scrollController.addListener(() {
 		  if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
 			serachScreenController.loadMoreData();
@@ -95,10 +97,10 @@ class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBinding
       length: 5,  // Number of tabs
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Colors.white,
+          //backgroundColor: Colors.white,
           leading: InkWell(
             onTap: () {
               Navigator.pop(context);
@@ -180,11 +182,19 @@ class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBinding
           if (serachScreenController.isFetchingData.value && serachScreenController.productData.isEmpty) {
             return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(AppColor.purple),));
           }
-          return Column(
+          /*return Column(
             children: [
               buildSearchList(serachScreenController.productData),
             ],
-          );
+          );*/
+		  return Padding(
+			padding: const EdgeInsets.symmetric(horizontal: 16.0), // Add padding on both sides
+			child: Column(
+			  children: [
+				buildSearchList(serachScreenController.productData),
+			  ],
+			),
+		  );
         }),
 	  bottomNavigationBar: CommonBottomNavigationBar(currentIndex: 1),
       ),
@@ -193,49 +203,56 @@ class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBinding
 
 Widget buildSearchList(RxList data) {
   return Expanded(
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Obx(() {
-        // Check if data is still being fetched
-        if (serachScreenController.isFetchingData.value && data.isEmpty) {
-          return Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(AppColor.purple),
-            ),
-          );
-        }
+    child: SingleChildScrollView(
+	  controller: _scrollController,
+      child: ConstrainedBox(
+		constraints: BoxConstraints(
+			minHeight: MediaQuery.of(context).size.height, // Ensures content height
+		),
+		child: Obx(() {
+			// Check if data is still being fetched
+			if (serachScreenController.isFetchingData.value && data.isEmpty) {
+			  return Center(
+				child: CircularProgressIndicator(
+				  valueColor: AlwaysStoppedAnimation<Color>(AppColor.purple),
+				),
+			  );
+			}
 
-        // Check if the data is empty after loading
-        if (data.isEmpty) {
-          return Center(
-            child: Text(
-              'No data found',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-                fontFamily: 'Urbanist-regular',
-              ),
-            ),
-          );
-        }
+			// Check if the data is empty after loading
+			if (data.isEmpty) {
+			  return Center(
+				child: Text(
+				  'No data found',
+				  style: TextStyle(
+					fontSize: 16,
+					color: Colors.grey,
+					fontFamily: 'Urbanist-regular',
+				  ),
+				),
+			  );
+			}
 
-        // Display grid of images
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Two images per row
-            mainAxisSpacing: 16.0,
-            crossAxisSpacing: 16.0,
-            childAspectRatio: 3 / 2, // Adjust for the image aspect ratio
-          ),
-          itemCount: data.length,
-          itemBuilder: (context, index) {
-            // Each item in the list is an observable map
-			final RxMap<String, dynamic> feedData = RxMap<String, dynamic>.from(data[index]);
+			// Display grid of images
+			return GridView.builder(
+			  shrinkWrap: true, // Important to prevent unbounded height error
+			  physics: NeverScrollableScrollPhysics(), // Disable GridView scrolling
+			  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+				crossAxisCount: 2, // Two images per row
+				mainAxisSpacing: 16.0,
+				crossAxisSpacing: 16.0,
+				childAspectRatio: 3 / 2, // Adjust for the image aspect ratio
+			  ),
+			  itemCount: data.length,
+			  itemBuilder: (context, index) {
+				// Each item in the list is an observable map
+				final RxMap<String, dynamic> feedData = RxMap<String, dynamic>.from(data[index]);
 
-			return buildSearchItem(feedData, index, context);
-          },
-        );
-      }),
+				return buildSearchItem(feedData, index, context);
+			  },
+			);
+		}),
+	  ),
     ),
   );
 }

@@ -13,18 +13,39 @@ class MyOrdersPage extends StatefulWidget {
 class _MyOrdersState extends State<MyOrdersPage> {
   final OrderController orderController = Get.put(OrderController(ApiService()));
 
+	// Scroll controllers for vertical and horizontal scrolling
+	final ScrollController _verticalScrollController = ScrollController();
+	
   @override
   void initState() {
     super.initState();
     orderController.fetchOrders();
   }
   
+  _MyOrdersState() {
+		// Vertical Scroll Listener
+		_verticalScrollController.addListener(() {
+			if (_verticalScrollController.position.pixels == _verticalScrollController.position.maxScrollExtent) {
+				orderController.fetchOrders();  // Load more data on vertical scroll
+			}
+		});
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("My Orders")),
+	  appBar: AppBar(
+		title: Text("My Orders", style: TextStyle(fontSize: 20)),
+		centerTitle: true,
+	  ),
       body: Obx(() {
-        if (orderController.isOrderLoading.value) {
+		WidgetsBinding.instance.addPostFrameCallback((_) {
+			if (_verticalScrollController.hasClients && _verticalScrollController.position.maxScrollExtent == 0) {
+			  orderController.fetchOrders();
+			}
+		});
+			  
+        if (orderController.isOrderLoading.value && orderController.orders.isEmpty) {
           return Center(child: CircularProgressIndicator());
         }
 
@@ -33,8 +54,19 @@ class _MyOrdersState extends State<MyOrdersPage> {
         }
 
         return ListView.builder(
+		  controller: _verticalScrollController,
           itemCount: orderController.orders.length,
           itemBuilder: (context, index) {
+			if (index == orderController.orders.length) {
+              // Show loader at bottom when more data is loading
+              return orderController.isOrderLoading.value
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Center(child: CircularProgressIndicator()),
+                    )
+                  : SizedBox.shrink();
+            }
+			
             var order = orderController.orders[index];
 			return GestureDetector(
 				onTap: () {

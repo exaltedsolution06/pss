@@ -38,6 +38,8 @@ class ProductData {
   final double percentage_rating_three;
   final double percentage_rating_four;
   final double percentage_rating_five;
+  final int my_rating;
+  final String my_review;
 
   ProductData({
     this.fetchedFiles,
@@ -58,6 +60,8 @@ class ProductData {
     this.percentage_rating_three = 0.0,
     this.percentage_rating_four = 0.0,
     this.percentage_rating_five = 0.0,
+    this.my_rating = 0,
+    this.my_review = '',
   });
 
   factory ProductData.fromJson(Map<String, dynamic> json) {
@@ -104,6 +108,8 @@ class ProductData {
     double parsedPercentageRatingThree = (data['percentage_rating_three'] as num?)?.toDouble() ?? 0.0;
     double parsedPercentageRatingFour = (data['percentage_rating_four'] as num?)?.toDouble() ?? 0.0;
     double parsedPercentageRatingFive = (data['percentage_rating_five'] as num?)?.toDouble() ?? 0.0;
+	int parsedMyRating = data['my_rating'] as int? ?? 0;
+	String parsedMyReview = (data['my_review'] ?? '').toString();
 
     print("Parsed Product Id: $parsedProductId");
     print("Parsed Category Name: $parsedCategoryName");
@@ -142,6 +148,8 @@ class ProductData {
 		percentage_rating_three: parsedPercentageRatingThree,
 		percentage_rating_four: parsedPercentageRatingFour,
 		percentage_rating_five: parsedPercentageRatingFive,
+		my_rating: parsedMyRating,
+		my_review: parsedMyReview,
     );
   }
 
@@ -165,6 +173,8 @@ class ProductData {
 		'percentage_rating_three': percentage_rating_three,
 		'percentage_rating_four': percentage_rating_four,
 		'percentage_rating_five': percentage_rating_five,
+		'my_rating': my_rating,
+		'my_review': my_review,
     };
   }
 }

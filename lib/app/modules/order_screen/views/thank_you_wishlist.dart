@@ -29,8 +29,9 @@ class _ThankYouWishlistPageState extends State<ThankYouWishlistPage> {
     final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(Appcontent.thankYou),
-      ),
+		title: Text(Appcontent.thankYou, style: TextStyle(fontSize: 20)),
+		centerTitle: true,
+	  ),
 		body: SingleChildScrollView(
             child: Column(
 				crossAxisAlignment: CrossAxisAlignment.start,

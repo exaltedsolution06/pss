@@ -25,10 +25,10 @@ Widget build(BuildContext context) {
     length: 3, // Number of tabs
     child: Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         leading: InkWell(
           onTap: () {
             Navigator.pop(context);
@@ -104,6 +104,12 @@ Widget build(BuildContext context) {
     return Padding(
 		padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
 		child: Obx(() {
+			// Ensure we load more data if the screen is not scrollable
+			  WidgetsBinding.instance.addPostFrameCallback((_) {
+				if (_scrollController.hasClients && _scrollController.position.maxScrollExtent == 0) {
+				  notificationScreenController.loadMoreData();
+				}
+			  });
 		  // Check if data is still being fetched
 			if (notificationScreenController.isFetchingData.value && data.isEmpty) {
 				return Center(

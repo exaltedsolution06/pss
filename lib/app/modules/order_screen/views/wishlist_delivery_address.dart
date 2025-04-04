@@ -195,16 +195,18 @@ class _WishlistDeliveryAddressPageState extends State<WishlistDeliveryAddressPag
 					text: orderController.isDAMLoading.value ? 'SAVING...' : 'SUBMIT',
 					onPress: orderController.isDAMLoading.value
 						? null
-						: () {
+						: () async {
 							if (_modalFormKey.currentState!.validate()) {
-							  orderController.addDeliveryAddress(
+							  bool success = await orderController.addDeliveryAddress(
 								addressTypeController.text.trim(),
 								phoneController.text.trim(),
 								latitudeController.text.trim(),
 								longitudeController.text.trim(),
 								addressController.text.trim(),
 							  );
-							  Navigator.pop(context);
+							  if (success) {
+								Navigator.pop(context); //Close only if successful
+							  }
 							}
 						  },
 				  );
@@ -284,9 +286,9 @@ class _WishlistDeliveryAddressPageState extends State<WishlistDeliveryAddressPag
 					text: orderController.isDAMLoading.value ? 'UPDATING...' : 'UPDATE',
 					onPress: orderController.isDAMLoading.value
 						? null
-						: () {
+						: () async {
 							if (_modalFormKey.currentState!.validate()) {
-							  orderController.updateDeliveryAddress(
+							  bool success = await orderController.updateDeliveryAddress(
 								selectedAddress["id"],
 								addressTypeController.text.trim(),
 								phoneController.text.trim(),
@@ -294,7 +296,9 @@ class _WishlistDeliveryAddressPageState extends State<WishlistDeliveryAddressPag
 								longitudeController.text.trim(),
 								addressController.text.trim(),
 							  );
-							  Navigator.pop(context); // Close modal
+							  if (success) {
+								Navigator.pop(context); //Close only if successful
+							  }
 							}
 						  },
 				  );
@@ -318,9 +322,10 @@ class _WishlistDeliveryAddressPageState extends State<WishlistDeliveryAddressPag
 	//final order = orderController.wishlistDetails.value;
 	
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Address"),
-      ),
+	  appBar: AppBar(
+		title: Text("Address", style: TextStyle(fontSize: 20)),
+		centerTitle: true,
+	  ),
       body: Form(
         key: _formKey,
         child: Column(

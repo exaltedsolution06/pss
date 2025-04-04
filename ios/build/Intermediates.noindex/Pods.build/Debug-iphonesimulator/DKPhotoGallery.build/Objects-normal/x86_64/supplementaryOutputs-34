@@ -1,0 +1,24 @@
+"/Applications/Flutter-Projects/pss/ios/Pods/DKPhotoGallery/DKPhotoGallery/DKPhotoGalleryItem.swift":
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryItem.dia"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryItem.swiftdeps"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryItem.swiftconstvalues"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryItem.o"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryItem.d"
+"/Applications/Flutter-Projects/pss/ios/Pods/DKPhotoGallery/DKPhotoGallery/DKPhotoGallery.swift":
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGallery.d"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGallery.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGallery.o"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGallery.swiftconstvalues"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGallery.swiftdeps"
+"/Applications/Flutter-Projects/pss/ios/Pods/DKPhotoGallery/DKPhotoGallery/DKPhotoGalleryContentVC.swift":
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryContentVC.swiftconstvalues"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryContentVC.dia"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryContentVC.d"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryContentVC.o"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryContentVC.swiftdeps"
+"/Applications/Flutter-Projects/pss/ios/Pods/DKPhotoGallery/DKPhotoGallery/Transition/DKPhotoGalleryInteractiveTransition.swift":
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryInteractiveTransition.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryInteractiveTransition.dia"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryInteractiveTransition.d"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryInteractiveTransition.swiftconstvalues"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKPhotoGallery.build/Objects-normal/x86_64/DKPhotoGalleryInteractiveTransition.o"

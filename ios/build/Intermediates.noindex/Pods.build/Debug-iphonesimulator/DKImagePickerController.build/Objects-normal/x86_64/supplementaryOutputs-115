@@ -1,0 +1,18 @@
+"/Applications/Flutter-Projects/pss/ios/Pods/DKImagePickerController/Sources/DKImageDataManager/Model/DKAsset.swift":
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset.swiftconstvalues"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset.swiftdeps"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset.o"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset.d"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset.dia"
+"/Applications/Flutter-Projects/pss/ios/Pods/DKImagePickerController/Sources/DKImageDataManager/Model/DKAsset+Export.swift":
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset+Export.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset+Export.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset+Export.o"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset+Export.swiftconstvalues"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset+Export.d"
+"/Applications/Flutter-Projects/pss/ios/Pods/DKImagePickerController/Sources/DKImageDataManager/Model/DKAsset+Fetch.swift":
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset+Fetch.d"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset+Fetch.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset+Fetch.o"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset+Fetch.swiftconstvalues"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/DKImagePickerController.build/Objects-normal/x86_64/DKAsset+Fetch.swiftdeps"

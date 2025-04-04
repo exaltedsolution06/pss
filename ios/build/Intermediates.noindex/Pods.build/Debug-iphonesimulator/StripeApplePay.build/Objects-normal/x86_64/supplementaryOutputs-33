@@ -1,0 +1,24 @@
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/Extensions/BillingDetails+ApplePay.swift":
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails+ApplePay.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails+ApplePay.dia"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails+ApplePay.swiftconstvalues"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails+ApplePay.d"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails+ApplePay.o"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/Address.swift":
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Address.d"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Address.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Address.dia"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Address.swiftconstvalues"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Address.o"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/Blocks.swift":
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Blocks.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Blocks.o"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Blocks.d"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Blocks.swiftconstvalues"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Blocks.swiftdeps"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/BillingDetails.swift":
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails.swiftconstvalues"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails.o"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails.dia"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails.d"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails.swiftdeps"

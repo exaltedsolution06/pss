@@ -48,7 +48,8 @@ class Appcontent {
   static const String email = "E-mail";
   static const String placeholderEmail = "Enter your email";
   static const String passwordLbl = "Password";
-  static const String confirmPassword = "Confirm pssword";
+  static const String confirmPassword = "Confirm password";
+  static const String referringRetailer = "Referring retailer";
   static const String placeholderPassword = "Min. 8 characters...";
   static const String companyName = "Company name";
   static const String placeholdercompanyName = "Enter your company name";
@@ -61,6 +62,7 @@ class Appcontent {
   static const String loadingCities = "Loading cities...";
   static const String country = "Country";
   static const String placeholderCountry = "Choose Country";
+  static const String placeholderRetailer = "Choose Retailer";
   static const String state = "State";
   static const String placeholderState = "Choose State";
   static const String loadingStates = "Loading states...";

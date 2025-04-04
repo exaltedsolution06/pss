@@ -13,11 +13,11 @@ class NotificationsScreenView extends GetView<ActivityScreenController> {
 	final ActivityScreenController activityScreenController = Get.find();
 	activityScreenController.shouldFetchSettingsNotification = true;
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         leading: InkWell(
           onTap: () {
             Navigator.pop(context);

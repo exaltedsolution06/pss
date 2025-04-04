@@ -82,10 +82,10 @@ packages:
     dependency: "direct main"
     description:
       name: calendar_date_picker2
-      sha256: b5169b1e6aea0890ff4acaa037c81b697e985b149da64ae53e96afcfebb2e18e
+      sha256: "7b5f20f2a02768df70b3d1fb181c217ab9f8992f39fd6c3fc2ff95b0885820a2"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.8"
+    version: "1.1.9"
   carousel_slider:
     dependency: "direct main"
     description:
@@ -226,10 +226,10 @@ packages:
     dependency: transitive
     description:
       name: dart_webrtc
-      sha256: "3b3ff59c66cbc1577ed0f28d7005b5163555208fb1697a42207424ab8baa27c5"
+      sha256: "03df5b41b23bc185ebcf4b0ffc92d002e295bf56287fb5f9d2c321ddaf7760cc"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.5.1"
   dbus:
     dependency: transitive
     description:
@@ -286,14 +286,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
-  emoji_picker_flutter:
-    dependency: "direct main"
-    description:
-      name: emoji_picker_flutter
-      sha256: "08567e6f914d36c32091a96cf2f51d2558c47aa2bd47a590dc4f50e42e0965f6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.0"
   equatable:
     dependency: transitive
     description:
@@ -370,10 +362,10 @@ packages:
     dependency: transitive
     description:
       name: file_selector_windows
-      sha256: "8f5d2f6590d51ecd9179ba39c64f722edc15226cc93dcc8698466ad36a4a85a4"
+      sha256: "320fcfb6f33caa90f0b58380489fc5ac05d99ee94b61aa96ec2bff0ba81d3c2b"
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.3+3"
+    version: "0.9.3+4"
   fixnum:
     dependency: transitive
     description:
@@ -521,10 +513,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_webrtc
-      sha256: "572df3de6c828e571db4b75b4a96a15c2f34fa3d420a84438f44a3158b22e81a"
+      sha256: "9c4ca34ced1d1b780baf3776557f9edd0af18ce030969346f752e8df455faaab"
       url: "https://pub.dev"
     source: hosted
-    version: "0.12.9"
+    version: "0.12.10"
   freezed_annotation:
     dependency: transitive
     description:
@@ -601,10 +593,10 @@ packages:
     dependency: transitive
     description:
       name: google_sign_in_android
-      sha256: "3b96f9b6cf61915f73cbe1218a192623e296a9b8b31965702503649477761e36"
+      sha256: "7af72e5502c313865c729223b60e8ae7bce0a1011b250c24edcf30d3d7032748"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.34"
+    version: "6.1.35"
   google_sign_in_ios:
     dependency: transitive
     description:
@@ -657,10 +649,10 @@ packages:
     dependency: "direct main"
     description:
       name: image_cropper
-      sha256: "266760ed426d7121f0ada02c672bfe5c1b5c714e908328716aee756f045709dc"
+      sha256: "0c6ea3f96ccdcbe855fc86e9de582fdd6a94d578be8d817a05d9ecef9f1a258b"
       url: "https://pub.dev"
     source: hosted
-    version: "8.1.0"
+    version: "9.0.0"
   image_cropper_for_web:
     dependency: transitive
     description:
@@ -1221,14 +1213,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
-  rich_readmore:
-    dependency: "direct main"
-    description:
-      name: rich_readmore
-      sha256: "1c8a97f4a8268737f4e82beebd6137c6a0855cab72c4b3dd1133014e63536b62"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.1"
   rxdart:
     dependency: transitive
     description:
@@ -1454,18 +1438,18 @@ packages:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_charts
-      sha256: "4af5067ae82814e5aff430e390bee7f9f5921be262c33378c4646025473ced2b"
+      sha256: c91e9c48c14d2a947e3fd733bd7e2d9eddb2e67ffc60d8db5385b260f7df910d
       url: "https://pub.dev"
     source: hosted
-    version: "28.2.5+1"
+    version: "28.2.6"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
-      sha256: dafeebdf8673d6dd874191bf579bc17c76b4b84e09fc0e4ae5bc7e56c0c91f4b
+      sha256: "634adbc5c7d41e31513e9e3d60213bbc6aedff6e90ddb23b6495bfc0a23a260e"
       url: "https://pub.dev"
     source: hosted
-    version: "28.2.5"
+    version: "28.2.6"
   synchronized:
     dependency: transitive
     description:

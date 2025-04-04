@@ -9,6 +9,8 @@ class OrderDetailsModel {
   final String retailerAddress;
   final List<OrderItemModel> items;
   final double totalPrice;
+  final String deliveryAddress;
+  final String deliveryPhone;
 
   OrderDetailsModel({
     required this.orderId,
@@ -21,6 +23,8 @@ class OrderDetailsModel {
     required this.retailerAddress,
     required this.items,
     required this.totalPrice,
+    required this.deliveryAddress,
+    required this.deliveryPhone,
   });
 
   factory OrderDetailsModel.fromJson(Map<String, dynamic> json) {
@@ -37,6 +41,8 @@ class OrderDetailsModel {
       items: (json['order_items'] as List)
           .map((item) => OrderItemModel.fromJson(item))
           .toList(),
+      deliveryAddress: json['delivery_address_details'],
+      deliveryPhone: json['delivery_address_phone'],
     );
   }
 }

@@ -1,0 +1,18 @@
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/SetupIntent+API.swift":
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent+API.swiftconstvalues"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent+API.d"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent+API.o"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent+API.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent+API.dia"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/ShippingDetails.swift":
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/ShippingDetails.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/ShippingDetails.dia"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/ShippingDetails.d"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/ShippingDetails.o"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/ShippingDetails.swiftconstvalues"
+"/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/SetupIntentParams.swift":
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntentParams.swiftdeps"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntentParams.d"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntentParams.swiftconstvalues"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntentParams.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntentParams.o"

@@ -19,6 +19,7 @@ class ApiEndpoints {
 	static const String productDetails = 'single-product';
 	static const String giveReview = 'give-review';
 	static const String genderList = 'gender_list';
+	static const String retailerList = 'retailer_list';
 	static const String countryList = 'country_list';
 	static const String stateList = 'state_list';
 	static const String cityList = 'city_list';

@@ -1,0 +1,24 @@
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/CardFormFactory.swift":
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFormFactory.o"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFormFactory.swiftdeps"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFormFactory.dia"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFormFactory.d"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFormFactory.swiftconstvalues"
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/Stripe Sdk/CustomerSheet/CustomerSheetUtils.swift":
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CustomerSheetUtils.swiftdeps"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CustomerSheetUtils.d"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CustomerSheetUtils.o"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CustomerSheetUtils.swiftconstvalues"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CustomerSheetUtils.dia"
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/Stripe Sdk/Errors.swift":
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/Errors.swiftconstvalues"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/Errors.o"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/Errors.swiftdeps"
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/Errors.d"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/Errors.dia"
+"/Users/dibyendumandal/.pub-cache/hosted/pub.dev/stripe_ios-11.4.0/ios/stripe_ios/Sources/stripe_ios/Stripe Sdk/CardFormView.swift":
+  dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFormView.d"
+  const-values: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFormView.swiftconstvalues"
+  diagnostics: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFormView.dia"
+  object: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFormView.o"
+  swift-dependencies: "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/stripe_ios.build/Objects-normal/x86_64/CardFormView.swiftdeps"

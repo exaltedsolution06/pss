@@ -45,15 +45,15 @@ class ApiService extends BaseApiService {
 		return response;
 	}
 	//Customer Register
-	Future<Map<String, dynamic>> store_customer(String first_name, String last_name, String email, String password, String confirmed_password, String company_name, String address, int city, int state, int country, String zipcode, String phone_number) async {
-		final response = await post(ApiEndpoints.storeCustomer, {'first_name': first_name, 'last_name': last_name, 'email': email, 'password': password, 'confirmed_password': confirmed_password, 'company_name': company_name, 'address': address, 'city': city, 'state': state, 'country': country, 'zipcode': zipcode, 'phone_number': phone_number});
+	Future<Map<String, dynamic>> store_customer(String first_name, String last_name, String email, String password, String confirmed_password, int retailer, String address, String city, int state, int country, String zipcode, String phone_number) async {
+		final response = await post(ApiEndpoints.storeCustomer, {'first_name': first_name, 'last_name': last_name, 'email': email, 'password': password, 'confirmed_password': confirmed_password, 'retailer': retailer, 'address': address, 'city': city, 'state': state, 'country': country, 'zipcode': zipcode, 'phone_number': phone_number});
 		if (response.containsKey('access_token')) {
 			saveToken(response['access_token']);
 		}
 		return response;
 	}
 	//Retailer Register
-	Future<Map<String, dynamic>> store_retailer(File file, {required String first_name, required String last_name, required String email, required String password, required String confirmed_password, required String company_name, required String address, required int city, required int state, required int country, required String zipcode, required String phone_number}) async {
+	Future<Map<String, dynamic>> store_retailer(File file, {required String first_name, required String last_name, required String email, required String password, required String confirmed_password, required String company_name, required String address, required String city, required int state, required int country, required String zipcode, required String phone_number}) async {
 		// Create Dio instance
 		Dio dio = Dio(BaseOptions(
 			validateStatus: (status) => status != null && status < 500,
@@ -159,6 +159,10 @@ class ApiService extends BaseApiService {
 	Future<Map<String, dynamic>> genderList() {
 		return get(ApiEndpoints.genderList, requiresAuth: false);
 	}
+	//Retailer List
+	Future<Map<String, dynamic>> retailerList() {
+		return get(ApiEndpoints.retailerList, requiresAuth: false);
+	}
 	//Country List
 	Future<Map<String, dynamic>> countryList() {
 		return get(ApiEndpoints.countryList, requiresAuth: false);
@@ -182,7 +186,7 @@ class ApiService extends BaseApiService {
 		String dob,  
 		int country, 
 		int state, 
-		int city,
+		String city,
 		String address, 
 		String latitude, 
 		String longitude, 
@@ -210,7 +214,7 @@ class ApiService extends BaseApiService {
 
 		// Include gender_id and country only if they are non-zero
 		if (gender_id != 0) { requestBody['gender_id'] = gender_id; }
-		if (city != 0) { requestBody['city'] = city; }
+		//if (city != 0) { requestBody['city'] = city; }
 		if (state != 0) { requestBody['state'] = state; }
 		if (country != 0) { requestBody['country'] = country; }
 
@@ -229,7 +233,7 @@ class ApiService extends BaseApiService {
 		String dob,  
 		int country, 
 		int state, 
-		int city,
+		String city,
 		String address, 
 		String latitude, 
 		String longitude, 
@@ -257,7 +261,7 @@ class ApiService extends BaseApiService {
 
 		// Include gender_id and country only if they are non-zero
 		if (gender_id != 0) { requestBody['gender_id'] = gender_id; }
-		if (city != 0) { requestBody['city'] = city; }
+		//if (city != 0) { requestBody['city'] = city; }
 		if (state != 0) { requestBody['state'] = state; }
 		if (country != 0) { requestBody['country'] = country; }
 
@@ -367,12 +371,12 @@ class ApiService extends BaseApiService {
 		final response = await get(ApiEndpoints.view_profile_order_wishlist_data, requiresAuth: true);
 		return response;
 	}
-	Future<Map<String, dynamic>> fetchMyOrder() async {
-		final response = await get(ApiEndpoints.my_order, requiresAuth: true);
+	Future<Map<String, dynamic>> fetchMyOrder(int page) async {
+		final response = await post(ApiEndpoints.my_order, {'page': page}, requiresAuth: true);
 		return response;
 	}
-	Future<Map<String, dynamic>> fetchMyWishlist() async {
-		final response = await get(ApiEndpoints.my_wishlist, requiresAuth: true);
+	Future<Map<String, dynamic>> fetchMyWishlist(int page) async {
+		final response = await post(ApiEndpoints.my_wishlist, {'page': page}, requiresAuth: true);
 		return response;
 	}
 	Future<Map<String, dynamic>> fetchAvailableColors() async {

@@ -17,186 +17,223 @@ class WallPhotoView extends StatefulWidget {
 }
 
 class _WallPhotoViewState extends State<WallPhotoView> {
+  final HomeController homeController = Get.find();
+  final ProductController productController = Get.find<ProductController>();
+  final CartController cartController = Get.put(CartController());
 
-	final HomeController homeController = Get.find();
-	final ProductController productController = Get.find<ProductController>();
-	final CartController cartController = Get.put(CartController());
-	
-  // Retrieve the captured image from the arguments
-  //final File? imageFile = Get.arguments as File?;
-
-  late String selectedPhoto;
-  Offset position = Offset(150, 150); // Default position of photo on the wall
-
-  // List of photo asset paths
-  /*final List<String> photoList = [
-    Appcontent.pss1,
-    Appcontent.pss2,
-    Appcontent.pss3,
-  ];*/
+  List<String> selectedPhotos = [];
+  List<String> selectedPhotoIds = [];
+  Map<int, Offset> photoPositions = {}; // Stores individual positions for each image
 
   @override
   void initState() {
     super.initState();
     
-	// Initialize selectedPhoto with the first image from imageUrls if available
-	if (productController.productData.value?.fetchedFiles != null &&
-		  productController.productData.value!.fetchedFiles!.isNotEmpty) {
-		selectedPhoto = productController.productData.value!.fetchedFiles!.first.filePath ?? '';
-	} else {
-		selectedPhoto = ''; // Default if no images are available
-	}
+    final arguments = Get.arguments ?? {};
+    final int productId = arguments['productId'] ?? 0;
+
+    productController.fetchProductData(productId);
   }
   
-  // Define a GlobalKey for the form
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-	final double screenWidth = MediaQuery.of(context).size.width;
-	
-	// Retrieve arguments
+    final double screenWidth = MediaQuery.of(context).size.width;
     final arguments = Get.arguments ?? {};
     final int productId = arguments['productId'] ?? 0;
-    //final File? imageFile = Get.arguments as File?; // Keep the same name
-	final File? imageFile = arguments['photoFile'] as File?;
+    final File? imageFile = arguments['photoFile'] as File?;
 
-    // Fetch product images dynamically using productId
-    productController.fetchProductData(productId);
-	
-	final productData = productController.productData.value!;
-    final imageUrls = productData.fetchedFiles ?? [];
-	//print(imageUrls);
-	
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Wall Photo View'),
+        title: Text("Wall Photo View", style: TextStyle(fontSize: 20)),
+        centerTitle: true,
       ),
       body: Form(
-        key: _formKey, // Assign the form key here
-			child: Column(
-			children: [
-			  // Wall with photo
-			  Expanded(
-				flex: 3,
-				child: GestureDetector(
-				  onPanUpdate: (details) {
-					setState(() {
-					  // Update position based on relative position (localPosition)
-					  position = Offset(details.localPosition.dx, details.localPosition.dy);
-					});
-				  },
-				  child: Stack(
-					children: [
-					  // Wall background
-					  imageFile != null
-						  ? Container(
-							  decoration: BoxDecoration(
-								image: DecorationImage(
-								  image: FileImage(imageFile!), // Use the non-nullable File
-								  fit: BoxFit.cover, // Adjust the image to cover the container
-								),
-							  ),
-							  child: Center(
-								child: Text(
-								  'Your Wall',
-								  style: TextStyle(fontSize: 18, color: Colors.black54),
-								),
-							  ),
-							)
-						  : Container(
-							  color: Colors.grey[300], // Default color if no image is selected
-							  child: Center(
-								child: Text(
-								  'Your Wall',
-								  style: TextStyle(fontSize: 18, color: Colors.black54),
-								),
-							  ),
-							),
+        key: _formKey,
+        child: Obx(() {
+          final productData = productController.productData.value;
+          if (productData == null) {
+            return Center(child: CircularProgressIndicator());
+          }
 
-					  // Movable photo
-					  Positioned(
-						left: position.dx,
-						top: position.dy,
-						child: selectedPhotoWidget(),
-					  ),
-					],
-				  ),
-				),
-			  ),
-			  // Photo selection
-			  Expanded(
-				flex: 1,
-				child: ListView.builder(
-				  scrollDirection: Axis.horizontal,
-				  itemCount: imageUrls.length,
-				  itemBuilder: (context, index) {
-					return GestureDetector(
-					  onTap: () {
-						setState(() {
-						  selectedPhoto = imageUrls[index].filePath ?? '';
-						});
-					  },
-					  child: Padding(
-						padding: const EdgeInsets.all(8.0),
-						child: Image.network(
-						  imageUrls[index].filePath ?? '',
-						  width: 100,
-						  height: 100,
-						  fit: BoxFit.cover,
-						),
-					  ),
-					);
-				  },
-				),
-			  ),
-				Padding(
-				  padding: const EdgeInsets.all(10),
-				  child: Center(
-					child: autoWidthBtn(
-					  text: 'Add to cart',
-					  width: screenWidth,
-					  /*onPress: homeController.isLoading.value
-						? null
-						: () {
-							if (_formKey.currentState!.validate()) {
-							  homeController.wallPhotoOrder(
+          final imageUrls = productData.fetchedFiles ?? [];
+
+          return Column(
+            children: [
+              // Wall with selected photos
+              Expanded(
+                flex: 3,
+                child: Stack(
+                  children: [
+                    // Wall background
+                    Container(
+                      decoration: BoxDecoration(
+                        image: imageFile != null
+                            ? DecorationImage(
+                                image: FileImage(imageFile),
+                                fit: BoxFit.cover,
+                              )
+                            : null,
+                        color: imageFile == null ? Colors.grey[300] : null,
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Your Wall',
+                          style: TextStyle(fontSize: 18, color: Colors.black54),
+                        ),
+                      ),
+                    ),
+
+                    // Display selected images on the wall (each can move individually)
+                    for (int i = 0; i < selectedPhotos.length; i++)
+                      Positioned(
+                        left: photoPositions[i]?.dx ?? 150, // Default position
+                        top: photoPositions[i]?.dy ?? 150,
+                        child: Draggable(
+                          feedback: selectedPhotoWidget(selectedPhotos[i], i, isDragging: true),
+                          childWhenDragging: Opacity(
+                            opacity: 0.3,
+                            child: selectedPhotoWidget(selectedPhotos[i], i, isDragging: false),
+                          ),
+                          /*onDragEnd: (details) {
+                            setState(() {
+                              photoPositions[i] = Offset(
+                                details.offset.dx - MediaQuery.of(context).padding.left,
+                                details.offset.dy - AppBar().preferredSize.height,
+                              );
+                            });
+                          },*/
+						  onDragEnd: (details) {
+							RenderBox stackRenderBox = context.findRenderObject() as RenderBox;
+							Offset localPosition = stackRenderBox.globalToLocal(details.offset);
+
+							setState(() {
+							  photoPositions[i] = Offset(
+								localPosition.dx, 
+								localPosition.dy - AppBar().preferredSize.height - MediaQuery.of(context).padding.top,
 							  );
-							} else {
-							}
-						  },*/
-					  onPress: () async {
-						  cartController.addToCart(
-							productId,
-							selectedPhoto, // Use the selected photo
-							productData.name,
-							productData.price,
-						  );
-						  print("Add to Cart completed");
-						  SnackbarHelper.showSuccessSnackbar(
-							title: Appcontent.snackbarTitleSuccess, 
-							message: "Item added to cart successfully.",
-							position: SnackPosition.BOTTOM, // Custom position
-						  );
-					  },  
-					),
-				  ),
-				),
-				const SizedBox(height: 20),
-			],
-		  ),
-	  ),
-	  bottomNavigationBar: CommonBottomNavigationBar(currentIndex: 0),
+							});
+						  },
+
+                          child: selectedPhotoWidget(selectedPhotos[i], i, isDragging: false),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+
+              // Photo selection list
+              Expanded(
+                flex: 1,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: imageUrls.length,
+                  itemBuilder: (context, index) {
+                    final imagePath = imageUrls[index].filePath ?? '';
+                    final imageId = imageUrls[index].id ?? '';
+
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (selectedPhotos.contains(imagePath)) {
+                            int removeIndex = selectedPhotos.indexOf(imagePath);
+                            selectedPhotos.removeAt(removeIndex);
+                            selectedPhotoIds.removeAt(removeIndex);
+                            photoPositions.remove(removeIndex); // Remove position data
+                          } else {
+                            selectedPhotos.add(imagePath);
+                            selectedPhotoIds.add(imageId);
+                            photoPositions[selectedPhotos.length - 1] = Offset(150, 150);
+                          }
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Stack(
+                          children: [
+                            Image.network(
+                              imagePath,
+                              width: 100,
+                              height: 100,
+                              fit: BoxFit.cover,
+                            ),
+                            if (selectedPhotos.contains(imagePath))
+                              Positioned(
+                                top: 5,
+                                right: 5,
+                                child: Icon(Icons.check_circle, color: Colors.green, size: 20),
+                              ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+
+              // Add to Cart Button
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Center(
+                  child: autoWidthBtn(
+                    text: 'Add to cart',
+                    width: screenWidth,
+                    onPress: selectedPhotos.isNotEmpty
+                        ? () {
+                            for (int i = 0; i < selectedPhotos.length; i++) {
+                              cartController.addToCart(
+                                productId,
+                                selectedPhotos[i], // Image path
+                                selectedPhotoIds[i], // Image ID
+                                productData.name,
+                                productData.price,
+                              );
+                            }
+                            SnackbarHelper.showSuccessSnackbar(
+                              title: Appcontent.snackbarTitleSuccess,
+                              message: "All selected items added to cart successfully.",
+                              position: SnackPosition.BOTTOM,
+                            );
+                          }
+                        : null, // Disable button if no photo is selected
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          );
+        }),
+      ),
+      bottomNavigationBar: CommonBottomNavigationBar(currentIndex: 0),
     );
   }
 
-  // Widget to display the selected photo
-  Widget selectedPhotoWidget() {
-    return Image.network(
-      selectedPhoto,
-      width: 120,
-      height: 120,
-      fit: BoxFit.cover,
+  // Widget to display selected photo on the wall
+  Widget selectedPhotoWidget(String photo, int index, {bool isDragging = false}) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedPhotos.removeAt(index);
+          selectedPhotoIds.removeAt(index);
+          photoPositions.remove(index);
+        });
+      },
+      child: Stack(
+        children: [
+          Image.network(
+            photo,
+            width: isDragging ? 80 : 80,
+            height: isDragging ? 80 : 80,
+            fit: BoxFit.cover,
+          ),
+          Positioned(
+            top: 4,
+            right: 4,
+            child: Icon(Icons.cancel, color: Colors.red, size: 30), // Remove icon
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,0 +1,268 @@
+{
+  "" : {
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/StripeApplePay-master.dia",
+    "emit-module-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/StripeApplePay-master-emit-module.d",
+    "emit-module-diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/StripeApplePay-master-emit-module.dia",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/StripeApplePay-master.swiftdeps"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/ApplePayContext/STPAPIClient+ApplePay.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+ApplePay.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+ApplePay.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+ApplePay.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+ApplePay.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+ApplePay.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+ApplePay.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+ApplePay.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+ApplePay~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/ApplePayContext/STPApplePayContext+LegacySupport.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext+LegacySupport.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext+LegacySupport.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext+LegacySupport.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext+LegacySupport.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext+LegacySupport.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext+LegacySupport.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext+LegacySupport.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext+LegacySupport~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/ApplePayContext/STPApplePayContext.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPApplePayContext~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/Blocks.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Blocks.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Blocks.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Blocks.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Blocks.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Blocks.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Blocks.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Blocks.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Blocks~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/Extensions/BillingDetails+ApplePay.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails+ApplePay.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails+ApplePay.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails+ApplePay.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails+ApplePay.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails+ApplePay.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails+ApplePay.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails+ApplePay.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails+ApplePay~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/Extensions/PKContact+Stripe.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKContact+Stripe.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKContact+Stripe.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKContact+Stripe.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKContact+Stripe.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKContact+Stripe.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKContact+Stripe.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKContact+Stripe.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKContact+Stripe~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/Extensions/PKPayment+Stripe.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKPayment+Stripe.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKPayment+Stripe.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKPayment+Stripe.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKPayment+Stripe.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKPayment+Stripe.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKPayment+Stripe.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKPayment+Stripe.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PKPayment+Stripe~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/Address.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Address.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Address.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Address.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Address.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Address.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Address.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Address.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Address~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/BillingDetails.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/BillingDetails~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/CardBrand.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/CardBrand.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/CardBrand.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/CardBrand.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/CardBrand.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/CardBrand.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/CardBrand.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/CardBrand.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/CardBrand~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/PaymentIntent.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/PaymentIntentParams.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntentParams.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntentParams.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntentParams.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntentParams.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntentParams.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntentParams.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntentParams.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntentParams~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/PaymentMethod.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/PaymentMethodParams.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethodParams.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethodParams.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethodParams.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethodParams.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethodParams.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethodParams.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethodParams.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethodParams~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/SetupIntent.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/SetupIntentParams.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntentParams.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntentParams.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntentParams.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntentParams.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntentParams.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntentParams.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntentParams.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntentParams~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/ShippingDetails.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/ShippingDetails.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/ShippingDetails.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/ShippingDetails.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/ShippingDetails.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/ShippingDetails.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/ShippingDetails.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/ShippingDetails.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/ShippingDetails~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Models/Token.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/PaymentIntent+API.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent+API.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent+API.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent+API.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent+API.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent+API.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent+API.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent+API.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentIntent+API~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/PaymentMethod+API.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod+API.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod+API.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod+API.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod+API.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod+API.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod+API.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod+API.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/PaymentMethod+API~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/SetupIntent+API.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent+API.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent+API.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent+API.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent+API.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent+API.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent+API.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent+API.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/SetupIntent+API~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/API/Token+API.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token+API.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token+API.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token+API.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token+API.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token+API.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token+API.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token+API.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/Token+API~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/Analytics/STPAnalyticsClient+Payments.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+Payments.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+Payments.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+Payments.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+Payments.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+Payments.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+Payments.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+Payments.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+Payments~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/Analytics/STPAnalyticsClient+PaymentsAPI.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+PaymentsAPI.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+PaymentsAPI.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+PaymentsAPI.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+PaymentsAPI.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+PaymentsAPI.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+PaymentsAPI.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+PaymentsAPI.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAnalyticsClient+PaymentsAPI~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/PaymentsCore/Categories/STPAPIClient+PaymentsCore.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+PaymentsCore.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+PaymentsCore.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+PaymentsCore.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+PaymentsCore.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+PaymentsCore.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+PaymentsCore.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+PaymentsCore.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/STPAPIClient+PaymentsCore~partial.swiftmodule"
+  },
+  "/Applications/Flutter-Projects/pss/ios/Pods/StripeApplePay/StripeApplePay/StripeApplePay/Source/StripeCore+Import.swift" : {
+    "const-values" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/StripeCore+Import.swiftconstvalues",
+    "dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/StripeCore+Import.d",
+    "diagnostics" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/StripeCore+Import.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/StripeCore+Import.o",
+    "llvm-bc" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/StripeCore+Import.bc",
+    "object" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/StripeCore+Import.o",
+    "swift-dependencies" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/StripeCore+Import.swiftdeps",
+    "swiftmodule" : "/Applications/Flutter-Projects/pss/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/StripeApplePay.build/Objects-normal/x86_64/StripeCore+Import~partial.swiftmodule"
+  }
+}

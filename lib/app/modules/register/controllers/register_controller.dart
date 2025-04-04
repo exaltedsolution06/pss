@@ -6,9 +6,10 @@ import 'package:picturesourcesomerset/services/api_service.dart';
 import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 import 'package:picturesourcesomerset/config/app_contents.dart';
+import 'package:picturesourcesomerset/app/modules/profile_screen/models/retailer.dart';
 import 'package:picturesourcesomerset/app/modules/profile_screen/models/country.dart';
 import 'package:picturesourcesomerset/app/modules/profile_screen/models/state.dart';
-import 'package:picturesourcesomerset/app/modules/profile_screen/models/city.dart';
+//import 'package:picturesourcesomerset/app/modules/profile_screen/models/city.dart';
 
 class RegisterController extends GetxController {
 	final ApiService apiService;  
@@ -20,13 +21,15 @@ class RegisterController extends GetxController {
 	var showCPassword = true.obs;  // RxBool
   
 	// Declare observable lists
+	var retailerList = <Retailer>[].obs; // Observable for the retailer list
+	var selectedRetailer = Rxn<String>('1');
 	var countryList = <Country>[].obs; // Observable for the country list
-	var selectedCountry = Rxn<String>();
+	var selectedCountry = Rxn<String>('231');
 	var stateList = <StateModel>[].obs; // Observable for the state list
 	var selectedState = Rxn<String>();
 	var loadingState = false.obs; // New observable for loading country
-	var cityList = <CityModel>[].obs; // Observable for the city list
-	var selectedCity = Rxn<String>();
+	//var cityList = <CityModel>[].obs; // Observable for the city list
+	//var selectedCity = Rxn<String>();
 	var loadingCity = false.obs; // New observable for loading state
   
 	void changePasswordHideAndShow() {
@@ -34,6 +37,38 @@ class RegisterController extends GetxController {
 	}
 	void changeCPasswordHideAndShow() {
 		showCPassword.value = !showCPassword.value;  // Use .value to update RxBool
+	}
+	@override
+	void onInit() {
+	  super.onInit();
+	  fetchStateList(231); // Fetch states for country ID 231 on load
+	}
+	//fetch Retailer lists
+	Future<void> fetchRetailerList() async {
+		try {
+			final response = await apiService.retailerList();
+			print('Response0000000000000000000000000000: $response');
+			if (response['status'] == 200) {						
+				final List<Retailer> fetchedRetailerList = 
+					(response['data'] as List)
+						.map((data) => Retailer.fromJson(data))
+						.toList();
+
+				retailerList.assignAll(fetchedRetailerList); // This will now work
+			} else {
+				SnackbarHelper.showErrorSnackbar(
+				  title: Appcontent.snackbarTitleError, 
+				  message: response['message'],
+				  position: SnackPosition.BOTTOM, // Custom position
+				);
+			}
+		} catch (e) {
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: Appcontent.snackbarCatchErrorMsg, 
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+		}
 	}
 	//fetch country lists
 	Future<void> fetchCountryList() async {
@@ -91,7 +126,7 @@ class RegisterController extends GetxController {
 		}
 	}
 	// Fetch the city list based on the selected state
-	Future<void> fetchCityList(int stateId) async {
+	/*Future<void> fetchCityList(int stateId) async {
 		try {
 			loadingCity.value = true; // Set loading to true
 			final response = await apiService.cityList(stateId);
@@ -117,21 +152,21 @@ class RegisterController extends GetxController {
 		} finally {
 			loadingCity.value = false; // Set loading to false
 		}
-	}
+	}*/
   
 	/*void updateCountry(int countryId) {
 		print('Updating country to: $countryId');
 		//final selectedCountryItem = countryList.firstWhere((g) => g.id == countryId, orElse: () => Country(id: -1, name: 'Unknown'));
 		//selectedCountry.value = selectedCountryItem.id.toString();
 	}*/
-	Future<void> store_customer(first_name, last_name, email, password, confirmed_password, company_name, address, city, state, country, zipcode, phone_number) async {
+	Future<void> store_customer(first_name, last_name, email, password, confirmed_password, retailer, address, city, state, country, zipcode, phone_number) async {
 		isLoading.value = true;
 		print('First Name: $first_name');
 		print('Last Name: $last_name');
 		print('Email: $email');
 		print('Password: $password');
 		print('Confirm Password: $confirmed_password');
-		print('Company Name: $company_name');
+		//print('Company Name: $company_name');
 		print('Address: $address');
 		print('City: $city');
 		print('State: $state');
@@ -139,7 +174,7 @@ class RegisterController extends GetxController {
 		print('Zipcode: $zipcode');
 		print('Phone Number: $phone_number');
 		try {
-			final response = await apiService.store_customer(first_name, last_name, email, password, confirmed_password, company_name, address, city, state, country, zipcode, phone_number);
+			final response = await apiService.store_customer(first_name, last_name, email, password, confirmed_password, retailer, address, city, state, country, zipcode, phone_number);
 			
 			//final otpErrorsEmail = response['errors']['email'] as List<dynamic>;
 			
@@ -221,7 +256,7 @@ class RegisterController extends GetxController {
 		required String confirmed_password, 
 		required String company_name, 
 		required String address, 
-		required int city, 
+		required String city, 
 		required int state, 
 		required int country, 
 		required String zipcode, 

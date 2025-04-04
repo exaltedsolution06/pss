@@ -37,10 +37,10 @@ class _FollowrequestScreenState extends State<FollowrequestScreen> {
         builder: (context, constraints) {
           return Scaffold(
             resizeToAvoidBottomInset: false,
-            backgroundColor: Colors.white,
+            //backgroundColor: Colors.white,
             appBar: AppBar(
               elevation: 0,
-              backgroundColor: Colors.white,
+              //backgroundColor: Colors.white,
               leading: InkWell(
                 onTap: () => Navigator.pop(context),
                 child: const Icon(Icons.arrow_back, color: Colors.black,),
