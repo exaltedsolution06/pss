@@ -45,8 +45,8 @@ class ApiService extends BaseApiService {
 		return response;
 	}
 	//Customer Register
-	Future<Map<String, dynamic>> store_customer(String first_name, String last_name, String email, String password, String confirmed_password, String company_name, String address, String city, int state, int country, String zipcode, String phone_number) async {
-		final response = await post(ApiEndpoints.storeCustomer, {'first_name': first_name, 'last_name': last_name, 'email': email, 'password': password, 'confirmed_password': confirmed_password, 'company_name': company_name, 'address': address, 'city': city, 'state': state, 'country': country, 'zipcode': zipcode, 'phone_number': phone_number});
+	Future<Map<String, dynamic>> store_customer(String first_name, String last_name, String email, String password, String confirmed_password, int retailer, String address, String city, int state, int country, String zipcode, String phone_number) async {
+		final response = await post(ApiEndpoints.storeCustomer, {'first_name': first_name, 'last_name': last_name, 'email': email, 'password': password, 'confirmed_password': confirmed_password, 'retailer': retailer, 'address': address, 'city': city, 'state': state, 'country': country, 'zipcode': zipcode, 'phone_number': phone_number});
 		if (response.containsKey('access_token')) {
 			saveToken(response['access_token']);
 		}
@@ -158,6 +158,10 @@ class ApiService extends BaseApiService {
 	//Gender List
 	Future<Map<String, dynamic>> genderList() {
 		return get(ApiEndpoints.genderList, requiresAuth: false);
+	}
+	//Retailer List
+	Future<Map<String, dynamic>> retailerList() {
+		return get(ApiEndpoints.retailerList, requiresAuth: false);
 	}
 	//Country List
 	Future<Map<String, dynamic>> countryList() {

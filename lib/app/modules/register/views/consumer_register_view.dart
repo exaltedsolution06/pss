@@ -29,7 +29,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController passwordconfirmationController = TextEditingController();
-  final TextEditingController companynameController = TextEditingController();
+  //final TextEditingController companynameController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
   final TextEditingController zipcodeController = TextEditingController();
@@ -42,7 +42,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
   final FocusNode _passwordconfirmationFocusNode = FocusNode();
-  final FocusNode _companynameFocusNode = FocusNode();
+  //final FocusNode _companynameFocusNode = FocusNode();
   final FocusNode _addressFocusNode = FocusNode();
   final FocusNode _cityFocusNode = FocusNode();
   final FocusNode _zipcodeFocusNode = FocusNode();
@@ -85,6 +85,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
     final double screenWidth = MediaQuery.of(context).size.width;
 	// Fetch the country list when the view loads
     registerController.fetchCountryList();
+    registerController.fetchRetailerList();
 	
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -315,8 +316,8 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 										),
 									  );
 									}),
-									  // Label Above the TextField
-									  Text(
+									// Label Above the TextField
+									/*  Text(
 										Appcontent.companyName,
 										style: TextStyle(
 										  fontSize: 16,
@@ -342,7 +343,48 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 											_formKey.currentState?.validate();
 										  }
 										},
-									),
+									),*/
+									// Label Above the TextField
+									  Text(
+										Appcontent.referringRetailer,
+										style: TextStyle(
+										  fontSize: 16,
+										  color: AppColor.formLabelColor, // Or any color you prefer
+										),
+									  ),
+									  const SizedBox(height: 8), // Space between label and text field
+									  Obx(() {
+									  return dropdownFieldFinal(
+										text1: Appcontent.placeholderRetailer,
+										width: screenWidth,
+										value: registerController.selectedRetailer.value ?? '',  // Provide a fallback value if currentRValue is null
+										items: registerController.retailerList
+										.map<DropdownMenuItem<String>>((retailer) => DropdownMenuItem<String>(
+											  value: retailer.id.toString(), // Use ID as the value
+											  child: Text(retailer.name),    // Display name
+											))
+										.toList(),
+										validator: (value) {
+										  if (value == null || value.isEmpty) {
+											return 'Please choose retailer';
+										  }
+										  return null;
+										},
+										onChanged: (newRetailer) {
+											if (newRetailer != null && newRetailer.isNotEmpty) {
+												registerController.selectedRetailer.value = newRetailer;
+												
+												// Load the states based on the selected retailer
+												final selectedRetailerId = int.parse(newRetailer);
+												
+												_formKey.currentState?.validate();  // Trigger form validation
+											} else {
+												_formKey.currentState?.validate();  // Trigger form validation
+											}
+										},
+									  );
+									}),
+									  
 									// Label Above the TextField
 									  Text(
 										Appcontent.country,
@@ -601,10 +643,16 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 							),
 						  const SizedBox(height: 20),
 						  Obx(() {
+								final selectedRetailerValue = registerController.selectedRetailer.value;
 								final selectedCountryValue = registerController.selectedCountry.value;
 								final selectedStateValue = registerController.selectedState.value;
 								//final selectedCityValue = registerController.selectedCity.value;
 
+								// Handle potential parsing issues
+								final retailerId = selectedRetailerValue?.isNotEmpty ?? false
+								? int.tryParse(selectedRetailerValue ?? '') // Handle null case
+								: null;
+								
 								// Handle potential parsing issues
 								final countryId = selectedCountryValue?.isNotEmpty ?? false
 								? int.tryParse(selectedCountryValue ?? '') // Handle null case
@@ -630,7 +678,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 											final email = emailController.text.trim();
 											final password = passwordController.text.trim();
 											final passwordconfirmation = passwordconfirmationController.text.trim();
-											final companyname = companynameController.text.trim();
+											//final companyname = companynameController.text.trim();
 											final address = addressController.text.trim();
 											final city = cityController.text.trim();
 											final zipcode = zipcodeController.text.trim();
@@ -642,7 +690,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
 											  email,
 											  password,
 											  passwordconfirmation,
-											  companyname,
+											  retailerId,
 											  address,
 											  city,
 											  stateId,

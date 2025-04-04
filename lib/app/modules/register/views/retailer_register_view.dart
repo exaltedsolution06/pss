@@ -720,6 +720,18 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 						),
 					  ),
 					),
+					if (selectedFiles.isNotEmpty)
+					  Padding(
+						padding: const EdgeInsets.only(top: 10),
+						child: Text(
+						  "${selectedFiles.length} file(s) selected",
+						  style: TextStyle(
+							color: Colors.green.shade700,
+							fontSize: 14,
+							fontWeight: FontWeight.w500,
+						  ),
+						),
+					  ),
 
 
                   const SizedBox(height: 20),
