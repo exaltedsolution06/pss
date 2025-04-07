@@ -47,7 +47,7 @@ class RegisterController extends GetxController {
 	Future<void> fetchRetailerList() async {
 		try {
 			final response = await apiService.retailerList();
-			print('Response: $response');
+			print('Response0000000000000000000000000000: $response');
 			if (response['status'] == 200) {						
 				final List<Retailer> fetchedRetailerList = 
 					(response['data'] as List)
@@ -63,11 +63,11 @@ class RegisterController extends GetxController {
 				);
 			}
 		} catch (e) {
-			/*SnackbarHelper.showErrorSnackbar(
+			SnackbarHelper.showErrorSnackbar(
 			  title: Appcontent.snackbarTitleError, 
 			  message: Appcontent.snackbarCatchErrorMsg, 
 			  position: SnackPosition.BOTTOM, // Custom position
-			);*/
+			);
 		}
 	}
 	//fetch country lists
@@ -90,11 +90,11 @@ class RegisterController extends GetxController {
 				);
 			}
 		} catch (e) {
-			/*SnackbarHelper.showErrorSnackbar(
+			SnackbarHelper.showErrorSnackbar(
 			  title: Appcontent.snackbarTitleError, 
 			  message: Appcontent.snackbarCatchErrorMsg, 
 			  position: SnackPosition.BOTTOM, // Custom position
-			);*/
+			);
 		}
 	}
 	// Fetch the state list based on the selected country
