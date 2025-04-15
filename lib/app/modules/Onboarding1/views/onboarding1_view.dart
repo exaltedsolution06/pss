@@ -10,7 +10,7 @@ import '../controllers/onboarding1_controller.dart';
 class Onboarding1View extends GetView<Onboarding1Controller> {
   Onboarding1View({super.key});
 
-  final List<String> images = [
+  /*final List<String> images = [
 	Appcontent.pss1,
 	Appcontent.pss2,
 	Appcontent.pss3,
@@ -20,7 +20,7 @@ class Onboarding1View extends GetView<Onboarding1Controller> {
 	Appcontent.pss7,
 	Appcontent.pss8,
 	Appcontent.pss9,
-  ];
+  ];*/
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class Onboarding1View extends GetView<Onboarding1Controller> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(child: _buildMasonryGridWithBottomSection()),
+                    Expanded(child: _buildMasonryGridWithBottomSection(controller)),
                     _buildBottomSection(),
                   ],
                 );
@@ -46,11 +46,11 @@ class Onboarding1View extends GetView<Onboarding1Controller> {
     );
   }
 	
-	Widget _buildMasonryGridWithBottomSection() {
+	Widget _buildMasonryGridWithBottomSection(Onboarding1Controller controller) {
   return Stack(
     children: [
       // Masonry Grid
-      _buildMasonryGrid(),
+      _buildMasonryGrid(controller),
 
       // Bottom Section
       Positioned(
@@ -81,7 +81,7 @@ class Onboarding1View extends GetView<Onboarding1Controller> {
 
 
   /// Builds the Masonry Grid
-  Widget _buildMasonryGrid() {
+  Widget _buildMasonryGrid(Onboarding1Controller controller) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
     child: LayoutBuilder(
@@ -97,7 +97,7 @@ class Onboarding1View extends GetView<Onboarding1Controller> {
             crossAxisCount: 3,
             mainAxisSpacing: 12,
             crossAxisSpacing: 12,
-            itemCount: images.length,
+            itemCount: controller.images.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
@@ -128,8 +128,8 @@ class Onboarding1View extends GetView<Onboarding1Controller> {
 						images[index],
 						fit: BoxFit.cover,
 					),*/
-                    child: Image.asset(
-                      images[index],
+                    child: Image.network(
+                      controller.images[index],
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(

@@ -119,6 +119,10 @@ class ApiService extends BaseApiService {
 	Future<Map<String, dynamic>> homeCategoryList() {
 		return get(ApiEndpoints.homeCategoryList, requiresAuth: false);
 	}
+	//Home page category list
+	Future<Map<String, dynamic>> homeImageList() {
+		return get(ApiEndpoints.homeImageList, requiresAuth: false);
+	}
 	//Home page artist list
 	Future<Map<String, dynamic>> homeArtistList() {
 		return get(ApiEndpoints.homeArtistList, requiresAuth: false);
