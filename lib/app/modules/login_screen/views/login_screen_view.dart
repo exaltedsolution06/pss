@@ -64,7 +64,7 @@ class LoginScreenView extends GetView<LoginScreenController> {
 	// Load saved credentials
     loginScreenController.loadSavedCredentials(usernameController, passwordController);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       //backgroundColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraints) {

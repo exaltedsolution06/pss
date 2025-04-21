@@ -12,6 +12,7 @@ class ApiEndpoints {
 	static const String storeRetailer = 'store-retailer';
 	static const String register_verifyOtp = 'register-verify-otp';
 	static const String homeCategoryList = 'home-category-list';
+	static const String homeImageList = 'home-image-list';
 	static const String homeArtistList = 'home-artist-list';
 	static const String allCategoryList = 'category-list';
 	static const String allArtistList = 'get-artist-list';

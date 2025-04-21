@@ -4,6 +4,7 @@ import 'package:picturesourcesomerset/services/api_service.dart';
 import 'package:picturesourcesomerset/app/routes/app_pages.dart';
 import 'package:picturesourcesomerset/config/app_contents.dart';
 import 'package:picturesourcesomerset/config/snackbar_helper.dart';
+import 'package:picturesourcesomerset/services/api_service.dart';
 
 class Onboarding1Controller extends GetxController {
   var index = 0.obs; // Observable variable
@@ -23,13 +24,33 @@ class Onboarding1Controller extends GetxController {
   // PageController for the slider
   //late PageController pageController;
   final count = 0.obs;
+  
+  List<String> images = [];
 
-  /*@override
+  @override
   void onInit() {
     super.onInit();
-    pageController = PageController(viewportFraction: 0.8, keepPage: true);
-    fetchSliderData(); // Fetch data on initialization
-  }*/
+    //pageController = PageController(viewportFraction: 0.8, keepPage: true);
+    //fetchSliderData(); // Fetch data on initialization
+	
+	loadHomeImages();
+  }
+  
+  Future<void> loadHomeImages() async {
+    try {
+      final response = await apiService.homeImageList();
+      if (response['status'] == 200) {
+        final List data = response['data'];
+        images = data.map<String>((item) => item['image'] as String).toList();
+        update(); // to rebuild the UI
+      } else {
+        // Handle API error
+        print("API Error: ${response['status']}");
+      }
+    } catch (e) {
+      print("Error fetching home images: $e");
+    }
+  }
 
   /*@override
   void onClose() {
