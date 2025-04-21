@@ -25,18 +25,17 @@
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSCameraUsageDescription</key>
-    <string>We need access to your camera to take photos or connect to a call.</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>We need access to your photo library to select photos for your posts or we require microphone access to connect to a call</string>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>We need access to your photo library to save edited photos.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>We need access to your microphone to record videos.</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
+<string>This app needs access to your camera to take photos or videos.</string>
+
+<key>NSPhotoLibraryUsageDescription</key>
+<string>This app needs access to your photo library to pick images or videos.</string>
+
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>This app needs access to save media to your photo library.</string>
+
+<key>NSMicrophoneUsageDescription</key>
+<string>This app needs access to your microphone to record videos.</string>
+
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen</string>
     <key>UIMainStoryboardFile</key>
