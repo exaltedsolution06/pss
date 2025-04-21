@@ -24,18 +24,16 @@
     <string>$(FLUTTER_BUILD_NUMBER)</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
-    <key>NSCameraUsageDescription</key>
-<string>This app needs access to your camera to take photos or videos.</string>
-
-<key>NSPhotoLibraryUsageDescription</key>
-<string>This app needs access to your photo library to pick images or videos.</string>
-
-<key>NSPhotoLibraryAddUsageDescription</key>
-<string>This app needs access to save media to your photo library.</string>
-
-<key>NSMicrophoneUsageDescription</key>
-<string>This app needs access to your microphone to record videos.</string>
-
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs camera access to take photos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs photo library access to upload images.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app needs permission to save photos.</string>
+	<key>UIFileSharingEnabled</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen</string>
     <key>UIMainStoryboardFile</key>
