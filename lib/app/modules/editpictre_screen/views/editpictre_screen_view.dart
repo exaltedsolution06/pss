@@ -26,7 +26,7 @@ class EditpictreScreenView extends GetView<EditpictreScreenController> {
       builder: (context, constraints) {
         return Scaffold(
           //backgroundColor: Colors.white,
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           appBar: AppBar(
             elevation: 0,
             //backgroundColor: Colors.white,

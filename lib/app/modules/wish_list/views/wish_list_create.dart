@@ -97,7 +97,7 @@ class WishListCreateView extends GetView<WishListController> {
 	}
 	
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       //backgroundColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraints) {

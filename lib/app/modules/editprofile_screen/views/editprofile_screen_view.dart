@@ -136,7 +136,7 @@ class _EditprofileScreenViewState extends State<EditprofileScreenView> {
 
     return Scaffold(
       //backgroundColor: Colors.white,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         elevation: 0,
         //backgroundColor: Colors.white,

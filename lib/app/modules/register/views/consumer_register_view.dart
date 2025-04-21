@@ -88,7 +88,7 @@ class ConsumerRegisterView extends GetView<RegisterController> {
     registerController.fetchRetailerList();
 	
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
