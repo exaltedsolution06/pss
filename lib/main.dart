@@ -26,7 +26,6 @@ Future<void> loadUserData() async {
 		'country': prefs.getInt('country') ?? 0,
 		'state': prefs.getInt('state') ?? 0,
 		'city': prefs.getString('city') ?? '',
-		//'city': prefs.getInt('city') ?? 0,
 		'address': prefs.getString('address') ?? '',
 		'latitude': prefs.getString('latitude') ?? '',
 		'longitude': prefs.getString('longitude') ?? '',

@@ -189,7 +189,7 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
 	// Fetch the country list when the view loads
-    registerController.fetchCountryList();
+    //registerController.fetchCountryList();
 
     return Scaffold(
       resizeToAvoidBottomInset: true,

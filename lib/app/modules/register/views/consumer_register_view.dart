@@ -84,8 +84,8 @@ class ConsumerRegisterView extends GetView<RegisterController> {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
 	// Fetch the country list when the view loads
-    registerController.fetchCountryList();
-    registerController.fetchRetailerList();
+    //registerController.fetchCountryList();
+    //registerController.fetchRetailerList();
 	
     return Scaffold(
       resizeToAvoidBottomInset: false,
