@@ -15,7 +15,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:picturesourcesomerset/config/snackbar_helper.dart';
 
-import 'package:file_picker/file_picker.dart';
+//import 'package:file_picker/file_picker.dart';
 
 import '../controllers/register_controller.dart';
 import 'package:picturesourcesomerset/app/modules/login_screen/controllers/login_screen_controller.dart';
@@ -62,18 +62,35 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 	
 	Future<void> _checkPermissions(BuildContext context) async {
 		Map<Permission, PermissionStatus> statuses = await [
-		Permission.camera,
-		//Permission.storage, // Request storage permission to access videos as well
-		].request();
+          Permission.camera,
+          Permission.photos,
+    			Permission.photosAddOnly,
+    			Permission.mediaLibrary, // Optional but sometimes needed on iOS
+        ].request();
 
-		if (statuses[Permission.camera]!.isGranted) {
+        print('Camera: ${statuses[Permission.camera]}');
+			  print('Photos: ${statuses[Permission.photos]}');
+			  print('PhotosAddOnly: ${statuses[Permission.photosAddOnly]}');
+			  print('MediaLibrary: ${statuses[Permission.mediaLibrary]}');
+
+			  if (statuses[Permission.camera]?.isGranted == true &&
+      (statuses[Permission.photos]?.isGranted == true ||
+			       statuses[Permission.photosAddOnly]?.isGranted == true)) {
+			    _showImagePicker(context);
+			  } else if (statuses.values.any((status) => status.isPermanentlyDenied)) {
+			    _showPermissionPermanentlyDeniedDialog(context);
+			  } else if (statuses.values.any((status) => status.isDenied)) {
+			    _showPermissionDeniedDialog(context);
+			  }
+		/*if (statuses[Permission.camera]!.isGranted) {
 			_showImagePicker(context);
 		} else if (statuses.values.any((status) => status.isPermanentlyDenied)) {
 			_showPermissionPermanentlyDeniedDialog(context);
 		} else if (statuses.values.any((status) => status.isDenied)) {
 			_showPermissionDeniedDialog(context);
-		}
+		}*/
 	}
+
 	void _showPermissionDeniedDialog(BuildContext context) {
 		showDialog(
 		  context: context,
@@ -125,9 +142,10 @@ class _RetailerRegisterViewState extends State<RetailerRegisterView> {
 						color: AppColor.purple,
 					),
 				),
-				  onPressed: () {
-					Navigator.of(context).pop();
-				  },
+				  onPressed: () async {
+              Navigator.of(context).pop(); // Close the dialog first (optional order)
+              await openAppSettings();     // Await the settings opening
+            },
 				),
 			  ],
 			);

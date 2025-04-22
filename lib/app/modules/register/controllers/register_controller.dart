@@ -175,6 +175,7 @@ class RegisterController extends GetxController {
 		print('Phone Number: $phone_number');
 		try {
 			final response = await apiService.store_customer(first_name, last_name, email, password, confirmed_password, retailer, address, city, state, country, zipcode, phone_number);
+   print('Response Register customer: $response');
 			
 			//final otpErrorsEmail = response['errors']['email'] as List<dynamic>;
 			
@@ -238,6 +239,7 @@ class RegisterController extends GetxController {
 				);
 			}
 		} catch (e) {
+              print('Error occurred: $e'); // Print the error if any occurs
 			SnackbarHelper.showErrorSnackbar(
 			  title: Appcontent.snackbarTitleError, 
 			  message: Appcontent.snackbarCatchErrorMsg, 

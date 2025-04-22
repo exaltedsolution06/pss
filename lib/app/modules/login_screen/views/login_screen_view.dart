@@ -96,7 +96,7 @@ class LoginScreenView extends GetView<LoginScreenController> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 10),
                       child: autoWidthTextField(
-                        text: 'Enter your username',
+                        text: 'Enter your email',
                         width: screenWidth,
                         controller: usernameController,
                         focusNode: _usernameFocusNode,
