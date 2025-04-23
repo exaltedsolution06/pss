@@ -58,7 +58,7 @@ class Appcontent {
   static const String placeholderLatitude = "Enter your latitude";
   static const String placeholderLongitude = "Enter your longitude";
   static const String city = "City";
-  static const String placeholderCity = "Choose city";
+  static const String placeholderCity = "Enter city";
   static const String loadingCities = "Loading cities...";
   static const String country = "Country";
   static const String placeholderCountry = "Choose Country";
