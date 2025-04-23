@@ -1126,7 +1126,8 @@ class ActivityScreenController extends GetxController {
   Future<void> logout() async {
 	final BaseApiService _baseApiService = Get.find<BaseApiService>();  
 	_baseApiService.clearToken();
-	Get.toNamed(Routes.LOGIN_SCREEN);
+	//Get.toNamed(Routes.LOGIN_SCREEN);
+	Get.offAllNamed(Routes.LOGIN_SCREEN);
   }
 }
 

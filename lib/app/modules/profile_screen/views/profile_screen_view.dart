@@ -7,10 +7,13 @@ import 'package:picturesourcesomerset/config/common_button.dart';
 import 'package:picturesourcesomerset/config/app_color.dart';
 import 'package:picturesourcesomerset/config/common_bottom_navigation_bar.dart';
 import 'package:picturesourcesomerset/app/modules/profile_screen/controllers/user_controller.dart';
+import 'package:picturesourcesomerset/app/modules/activity_screen/activity_screen_controller.dart';
 
 import '../controllers/profile_screen_controller.dart';
 
 class ProfileScreenView extends StatelessWidget {
+	final ActivityScreenController controller = Get.put(ActivityScreenController(Get.find<ApiService>()));
+	
 	final ProfileScreenController profileScreenController = Get.find();
 	final userController = Get.find<UserController>();
   @override
@@ -53,7 +56,7 @@ class ProfileScreenView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 8),
-					Padding(
+				  /*Padding(
 					  padding: const EdgeInsets.only(bottom: 16, top: 16),
 					  child: Center(
 						child: Obx(() {
@@ -68,7 +71,45 @@ class ProfileScreenView extends StatelessWidget {
 							);
 						}),
 					  ),
+					),*/
+				  /// Row for Edit and Logout buttons
+				  Padding(
+					padding: const EdgeInsets.symmetric(horizontal: 16.0),
+					child: Row(
+					  mainAxisAlignment: MainAxisAlignment.center,
+					  children: [
+						/// Edit Button
+						Expanded(
+						  child: Obx(() {
+							return autoWidthBtn(
+							  text: profileScreenController.isLoading.value ? 'Loading...' : Appcontent.edit,
+							  width: screenWidth,
+							  onPress: profileScreenController.isLoading.value
+								? null
+								: () {
+									profileScreenController.editProfile();
+								  },
+							);
+						  }),
+						),
+
+						SizedBox(width: 12),
+
+						/// Logout Button
+						Expanded(
+						  child: secondaryBtn(
+							text: 'Logout',
+							width: screenWidth,
+							//backgroundColor: Colors.red,
+							//textColor: Colors.white,
+							onPress: () {
+							  controller.logout(); // implement this method
+							},
+						  ),
+						),
+					  ],
 					),
+				  ),
                   /*ElevatedButton(
 					  onPressed: () {},
 					  style: ElevatedButton.styleFrom(
@@ -84,7 +125,7 @@ class ProfileScreenView extends StatelessWidget {
               ),
             ),
             // Action Icons
-            Row(
+            /*Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
@@ -96,7 +137,7 @@ class ProfileScreenView extends StatelessWidget {
                   onPressed: () {},
                 ),
               ],
-            ),
+            ),*/
             // My Orders & Wishlist
             Padding(
 			  padding: const EdgeInsets.all(16.0),

@@ -41,6 +41,8 @@ class RegisterController extends GetxController {
 	@override
 	void onInit() {
 	  super.onInit();
+	  fetchCountryList();
+      fetchRetailerList();
 	  fetchStateList(231); // Fetch states for country ID 231 on load
 	}
 	//fetch Retailer lists
