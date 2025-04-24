@@ -68,11 +68,26 @@ class LoginScreenController extends GetxController {
 		// Navigate to the home screen
 		saveTokenAndNavigate(response['access_token'], response['message']);
 	  } else {
-		SnackbarHelper.showErrorSnackbar(
-		  title: Appcontent.snackbarTitleError, 
-		  message: response['message'],
-		  position: SnackPosition.BOTTOM, // Custom position
-		);
+		if(response['message'] == 'User is not verified'){
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: response['message'],
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+			Get.toNamed(
+				Routes.OTP_VERIFICATION_SCREEN,
+				parameters: {
+					'email': username,
+					'context': 'register', // or 'anotherContext'
+				},
+			);
+		}else{
+			SnackbarHelper.showErrorSnackbar(
+			  title: Appcontent.snackbarTitleError, 
+			  message: response['message'],
+			  position: SnackPosition.BOTTOM, // Custom position
+			);
+		}
 	  }
 	}
 	

@@ -210,7 +210,7 @@ class _WallPhotoViewState extends State<WallPhotoView> {
   }
 
   // Widget to display selected photo on the wall
-  Widget selectedPhotoWidget(String photo, int index, {bool isDragging = false}) {
+  /*Widget selectedPhotoWidget(String photo, int index, {bool isDragging = false}) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -223,17 +223,70 @@ class _WallPhotoViewState extends State<WallPhotoView> {
         children: [
           Image.network(
             photo,
-            width: isDragging ? 80 : 80,
-            height: isDragging ? 80 : 80,
+            width: isDragging ? 60 : 60,
+            height: isDragging ? 60 : 60,
             fit: BoxFit.cover,
           ),
           Positioned(
-            top: 4,
-            right: 4,
-            child: Icon(Icons.cancel, color: Colors.red, size: 30), // Remove icon
+            top: -5,
+            right: -5,
+            child: Icon(Icons.cancel, color: Colors.red, size: 20), // Remove icon
           ),
         ],
       ),
     );
+  }*/
+  Widget selectedPhotoWidget(String photo, int index, {bool isDragging = false}) {
+	  return GestureDetector(
+		onTap: () {
+		  setState(() {
+			selectedPhotos.removeAt(index);
+			selectedPhotoIds.removeAt(index);
+			photoPositions.remove(index);
+		  });
+		},
+		child: Container(
+		  // Padding so icon can overflow without clipping
+		  padding: const EdgeInsets.all(8.0),
+		  child: Stack(
+			clipBehavior: Clip.none, // Allow overflow
+			children: [
+			  Container(
+				width: 60,
+				height: 60,
+				decoration: BoxDecoration(
+				  borderRadius: BorderRadius.circular(4),
+				  image: DecorationImage(
+					image: NetworkImage(photo),
+					fit: BoxFit.cover,
+				  ),
+				),
+			  ),
+			  Positioned(
+				top: -8,
+				right: -8,
+				child: Container(
+				  decoration: BoxDecoration(
+					color: Colors.white,
+					shape: BoxShape.circle,
+					boxShadow: [
+					  BoxShadow(
+						color: Colors.black26,
+						blurRadius: 4,
+						offset: Offset(0, 2),
+					  )
+					],
+				  ),
+				  child: Icon(
+					Icons.cancel,
+					color: Colors.red,
+					size: 20,
+				  ),
+				),
+			  ),
+			],
+		  ),
+		),
+	  );
   }
 }
