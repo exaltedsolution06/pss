@@ -39,7 +39,8 @@ class WishListCreateView extends GetView<WishListController> {
 	  final DateTime? pickedDate = await showDatePicker(
 		context: context,
 		initialDate: DateTime.now(),
-		firstDate: DateTime(2000),
+		//firstDate: DateTime(2000),
+		firstDate: DateTime.now(),
 		lastDate: DateTime(2101),
 		builder: (BuildContext context, Widget? child) {
 		  return Theme(
@@ -69,7 +70,8 @@ class WishListCreateView extends GetView<WishListController> {
 	  final DateTime? pickedDate = await showDatePicker(
 		context: context,
 		initialDate: DateTime.now(),
-		firstDate: DateTime(2000),
+		//firstDate: DateTime(2000),
+		firstDate: DateTime.now(),
 		lastDate: DateTime(2101),
 		builder: (BuildContext context, Widget? child) {
 		  return Theme(
@@ -137,7 +139,7 @@ class WishListCreateView extends GetView<WishListController> {
 								const SizedBox(height: 8), // Space between label and text field
 						
 								autoWidthTextField(
-								  text: Appcontent.placeholderEmail,
+								  text: Appcontent.wishlistRecipientEmail,
 								  width: screenWidth,
 								  controller: emailController,
 								  focusNode: _emailFocusNode,

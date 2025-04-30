@@ -47,6 +47,7 @@ class Appcontent {
   static const String placeholderLastName = "Enter your last name";
   static const String email = "E-mail";
   static const String placeholderEmail = "Enter your email";
+  static const String wishlistRecipientEmail = "Wish list recipient email";
   static const String passwordLbl = "Password";
   static const String confirmPassword = "Confirm password";
   static const String referringRetailer = "Referring retailer";

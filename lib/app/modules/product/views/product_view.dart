@@ -142,7 +142,7 @@ class _ProductViewState extends State<ProductView> {
 								CarouselSlider(
 								  options: CarouselOptions(
 									height: 300.0,
-									autoPlay: true,
+									autoPlay: false,
 									enlargeCenterPage: true,
 								  ),
 								  items: productData.fetchedFiles!

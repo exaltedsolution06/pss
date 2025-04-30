@@ -92,7 +92,7 @@ class CommonBottomNavigationBar extends StatelessWidget {
             ),
             label: '',
           ),
-          BottomNavigationBarItem(
+          /*BottomNavigationBarItem(
             icon: CircleAvatar(
               radius: 15,
               backgroundImage: userController.profilePicture.value != null && userController.profilePicture.value.isNotEmpty
@@ -101,7 +101,24 @@ class CommonBottomNavigationBar extends StatelessWidget {
               backgroundColor: Colors.transparent,
             ),
             label: '',
-          ),
+          ),*/
+		  BottomNavigationBarItem(
+			  icon: Container(
+				padding: EdgeInsets.all(2), // Optional: to make border more visible
+				decoration: BoxDecoration(
+				  shape: BoxShape.circle,
+				  border: Border.all(color: AppColor.BlackGreyscale, width: 2),
+				),
+				child: CircleAvatar(
+				  radius: 15,
+				  backgroundImage: userController.profilePicture.value != null && userController.profilePicture.value.isNotEmpty
+					  ? NetworkImage(userController.profilePicture.value)
+					  : AssetImage(Appcontent.defaultLogo) as ImageProvider,
+				  backgroundColor: Colors.transparent,
+				),
+			  ),
+			  label: '',
+		  ),
         ],
       );
     });
