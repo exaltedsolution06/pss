@@ -102,7 +102,7 @@ class CommonBottomNavigationBar extends StatelessWidget {
             ),
             label: '',
           ),*/
-		  BottomNavigationBarItem(
+		  /*BottomNavigationBarItem(
 			  icon: Container(
 				padding: EdgeInsets.all(2), // Optional: to make border more visible
 				decoration: BoxDecoration(
@@ -118,7 +118,19 @@ class CommonBottomNavigationBar extends StatelessWidget {
 				),
 			  ),
 			  label: '',
+		  ),*/
+		  BottomNavigationBarItem(
+			  icon: Text(
+				'Account',
+				style: TextStyle(
+				  fontSize: 12,
+				  fontWeight: FontWeight.w600,
+				  color: currentIndex == 4 ? AppColor.purple : AppColor.BlackGreyscale,
+				),
+			  ),
+			  label: '',
 		  ),
+
         ],
       );
     });

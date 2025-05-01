@@ -58,6 +58,8 @@ class _WallPhotoViewState extends State<WallPhotoView> {
           }
 
           final imageUrls = productData.fetchedFiles ?? [];
+          final sizeHeight = productData.size_height ?? 0;
+          final sizeWidth = productData.size_width ?? 0;
 
           return Column(
             children: [
@@ -91,10 +93,10 @@ class _WallPhotoViewState extends State<WallPhotoView> {
                         left: photoPositions[i]?.dx ?? 150, // Default position
                         top: photoPositions[i]?.dy ?? 150,
                         child: Draggable(
-                          feedback: selectedPhotoWidget(selectedPhotos[i], i, isDragging: true),
+                          feedback: selectedPhotoWidget(selectedPhotos[i], i, isDragging: true, sizeHeight: sizeHeight, sizeWidth: sizeWidth),
                           childWhenDragging: Opacity(
                             opacity: 0.3,
-                            child: selectedPhotoWidget(selectedPhotos[i], i, isDragging: false),
+                            child: selectedPhotoWidget(selectedPhotos[i], i, isDragging: false, sizeHeight: sizeHeight, sizeWidth: sizeWidth),
                           ),
                           /*onDragEnd: (details) {
                             setState(() {
@@ -116,7 +118,7 @@ class _WallPhotoViewState extends State<WallPhotoView> {
 							});
 						  },
 
-                          child: selectedPhotoWidget(selectedPhotos[i], i, isDragging: false),
+                          child: selectedPhotoWidget(selectedPhotos[i], i, isDragging: false, sizeHeight: sizeHeight, sizeWidth: sizeWidth),
                         ),
                       ),
                   ],
@@ -236,7 +238,11 @@ class _WallPhotoViewState extends State<WallPhotoView> {
       ),
     );
   }*/
-  Widget selectedPhotoWidget(String photo, int index, {bool isDragging = false}) {
+  Widget selectedPhotoWidget(String photo, int index, {
+  bool isDragging = false,
+  required int sizeHeight,
+  required int sizeWidth,
+}) {
 	  return GestureDetector(
 		onTap: () {
 		  setState(() {
@@ -252,8 +258,8 @@ class _WallPhotoViewState extends State<WallPhotoView> {
 			clipBehavior: Clip.none, // Allow overflow
 			children: [
 			  Container(
-				width: 60,
-				height: 60,
+				width: sizeWidth.toDouble(),
+				height: sizeHeight.toDouble(),
 				decoration: BoxDecoration(
 				  borderRadius: BorderRadius.circular(4),
 				  image: DecorationImage(

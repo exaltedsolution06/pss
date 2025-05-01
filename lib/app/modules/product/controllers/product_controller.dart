@@ -18,6 +18,8 @@ class ProductController extends GetxController {
 		category_name: '',
 		artist_name: '',
 		size_name: '',
+		size_height: 0,
+		size_width: 0,
 		color_name: '',
 		name: '',
 		product_code: '',
