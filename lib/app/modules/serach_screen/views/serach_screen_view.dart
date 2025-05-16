@@ -366,6 +366,7 @@ void openFilterBottomSheet(BuildContext context) {
 
           const SizedBox(height: 15),
 
+		  /*
           // Size Selection Chips (No Checkmark)
           Align(
             alignment: Alignment.centerLeft,
@@ -394,7 +395,7 @@ void openFilterBottomSheet(BuildContext context) {
                 showCheckmark: false,
               );
             }).toList(),
-          )),
+          )),*/
 
           const SizedBox(height: 20),
 

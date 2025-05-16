@@ -234,6 +234,16 @@ class _ProductViewState extends State<ProductView> {
 										style: TextStyle(fontSize: 16, fontFamily: 'Urbanist-semibold', fontWeight: FontWeight.bold),
 									  ),
 									  const SizedBox(height: 10),
+									  Text(
+										'Orientation: ${productData.orientation}',
+										style: TextStyle(fontSize: 16, fontFamily: 'Urbanist', color: Colors.grey,),
+									  ),
+									  const SizedBox(height: 10),
+									  Text(
+										'Size (L x W x D): ${productData.adjust_size}',
+										style: TextStyle(fontSize: 16, fontFamily: 'Urbanist', color: Colors.grey,),
+									  ),
+									  const SizedBox(height: 10),
 										Padding(
 											padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 16),
 											child: Column(

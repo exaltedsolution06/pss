@@ -191,13 +191,16 @@ class RegisterController extends GetxController {
 				// Debug print to verify email and navigation
 				//print('Navigating to CreatepinScreenView with email: $email');
 				//Get.toNamed(Routes.HOME);
-				Get.toNamed(
+				/*Get.toNamed( // Comment for otp logic is off now
 					Routes.OTP_VERIFICATION_SCREEN,
 					parameters: {
 						'email': email,
 						'context': 'register', // or 'anotherContext'
 					},
-				);
+				);*/
+				Get.toNamed(Routes.LOGIN_SCREEN);
+				
+				
 			} else if (response['status'] == 600) {
 				// Extract OTP error messages
 				final otpErrorsEmail = (response['errors']['email'] as List<dynamic>?) ?? [];
@@ -288,13 +291,14 @@ class RegisterController extends GetxController {
 			// Debug print to verify email and navigation
 			//print('Navigating to CreatepinScreenView with email: $email');
 			//Get.toNamed(Routes.HOME);
-			Get.toNamed(
+			/*Get.toNamed( // Comment for otp logic is off now
 				Routes.OTP_VERIFICATION_SCREEN,
 				parameters: {
 					'email': email,
 					'context': 'register', // or 'anotherContext'
 				},
-			);
+			);*/
+			Get.toNamed(Routes.LOGIN_SCREEN);
 		} else if (response['status'] == 600) {
 			// Extract OTP error messages
 			final otpErrorsEmail = (response['errors']['email'] as List<dynamic>?) ?? [];

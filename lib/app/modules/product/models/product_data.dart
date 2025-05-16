@@ -25,6 +25,8 @@ class ProductData {
   final String category_name;
   final String artist_name;
   final String size_name;
+  final String orientation;
+  final String adjust_size;
   final int size_height;
   final int size_width;
   final String color_name;
@@ -49,6 +51,8 @@ class ProductData {
     this.category_name = '',
     this.artist_name = '',
     this.size_name = '',
+    this.orientation = '',
+    this.adjust_size = '',
     this.size_height = 0,
     this.size_width = 0,
     this.color_name = '',
@@ -98,6 +102,8 @@ class ProductData {
     String parsedCategoryName = (data['category_name'] ?? '').toString();
     String parsedArtistName = (data['artist_name'] ?? '').toString();
     String parsedSizeName = (data['size_name'] ?? '').toString();
+    String parsedOrientation = (data['orientation'] ?? '').toString();
+    String parsedAdjustSize = (data['adjust_size'] ?? '').toString();
 	int parsedSizeHeight = data['size_height'] as int? ?? 0;
 	int parsedSizeWidth = data['size_width'] as int? ?? 0;
     String parsedColorName = (data['color_name'] ?? '').toString();
@@ -141,6 +147,8 @@ class ProductData {
 		category_name: parsedCategoryName,
 		artist_name: parsedArtistName,
 		size_name: parsedSizeName,
+		orientation: parsedOrientation,
+		adjust_size: parsedAdjustSize,
 		size_height: parsedSizeHeight,
 		size_width: parsedSizeWidth,
 		color_name: parsedColorName,
@@ -168,6 +176,8 @@ class ProductData {
 		'category_name': category_name,
 		'artist_name': artist_name,
 		'size_name': size_name,
+		'orientation': orientation,
+		'adjust_size': adjust_size,
 		'size_height': size_height,
 		'size_width': size_width,
 		'color_name': color_name,
