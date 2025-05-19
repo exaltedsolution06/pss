@@ -40,6 +40,8 @@ class _WallPhotoViewState extends State<WallPhotoView> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     final arguments = Get.arguments ?? {};
     final int productId = arguments['productId'] ?? 0;
     final File? imageFile = arguments['photoFile'] as File?;
@@ -60,6 +62,10 @@ class _WallPhotoViewState extends State<WallPhotoView> {
           final imageUrls = productData.fetchedFiles ?? [];
           final sizeHeight = productData.size_height ?? 0;
           final sizeWidth = productData.size_width ?? 0;
+
+          // Calculate the center position for the images
+          final double centerX = screenWidth / 2 - sizeWidth / 2;
+          final double centerY = screenHeight / 2 - sizeHeight / 2;
 
           return Column(
             children: [
@@ -90,33 +96,25 @@ class _WallPhotoViewState extends State<WallPhotoView> {
                     // Display selected images on the wall (each can move individually)
                     for (int i = 0; i < selectedPhotos.length; i++)
                       Positioned(
-                        left: photoPositions[i]?.dx ?? 150, // Default position
-                        top: photoPositions[i]?.dy ?? 150,
+                        left: photoPositions[i]?.dx ?? centerX, // Use center position if not set
+                        top: photoPositions[i]?.dy ?? centerY,
                         child: Draggable(
                           feedback: selectedPhotoWidget(selectedPhotos[i], i, isDragging: true, sizeHeight: sizeHeight, sizeWidth: sizeWidth),
                           childWhenDragging: Opacity(
                             opacity: 0.3,
                             child: selectedPhotoWidget(selectedPhotos[i], i, isDragging: false, sizeHeight: sizeHeight, sizeWidth: sizeWidth),
                           ),
-                          /*onDragEnd: (details) {
+                          onDragEnd: (details) {
+                            RenderBox stackRenderBox = context.findRenderObject() as RenderBox;
+                            Offset localPosition = stackRenderBox.globalToLocal(details.offset);
+
                             setState(() {
                               photoPositions[i] = Offset(
-                                details.offset.dx - MediaQuery.of(context).padding.left,
-                                details.offset.dy - AppBar().preferredSize.height,
+                                localPosition.dx, 
+                                localPosition.dy - AppBar().preferredSize.height - MediaQuery.of(context).padding.top,
                               );
                             });
-                          },*/
-						  onDragEnd: (details) {
-							RenderBox stackRenderBox = context.findRenderObject() as RenderBox;
-							Offset localPosition = stackRenderBox.globalToLocal(details.offset);
-
-							setState(() {
-							  photoPositions[i] = Offset(
-								localPosition.dx, 
-								localPosition.dy - AppBar().preferredSize.height - MediaQuery.of(context).padding.top,
-							  );
-							});
-						  },
+                          },
 
                           child: selectedPhotoWidget(selectedPhotos[i], i, isDragging: false, sizeHeight: sizeHeight, sizeWidth: sizeWidth),
                         ),
@@ -137,6 +135,9 @@ class _WallPhotoViewState extends State<WallPhotoView> {
 
                     return GestureDetector(
                       onTap: () {
+                        final double centerX = screenWidth / 2 - sizeWidth / 2; // Center horizontally
+                        final double centerY = screenHeight / 2 - sizeHeight / 2; // Center vertically
+
                         setState(() {
                           if (selectedPhotos.contains(imagePath)) {
                             int removeIndex = selectedPhotos.indexOf(imagePath);
@@ -146,7 +147,7 @@ class _WallPhotoViewState extends State<WallPhotoView> {
                           } else {
                             selectedPhotos.add(imagePath);
                             selectedPhotoIds.add(imageId);
-                            photoPositions[selectedPhotos.length - 1] = Offset(150, 150);
+                            photoPositions[selectedPhotos.length - 1] = Offset(centerX, centerY); // Set to center
                           }
                         });
                       },
@@ -212,87 +213,61 @@ class _WallPhotoViewState extends State<WallPhotoView> {
   }
 
   // Widget to display selected photo on the wall
-  /*Widget selectedPhotoWidget(String photo, int index, {bool isDragging = false}) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedPhotos.removeAt(index);
-          selectedPhotoIds.removeAt(index);
-          photoPositions.remove(index);
-        });
-      },
-      child: Stack(
-        children: [
-          Image.network(
-            photo,
-            width: isDragging ? 60 : 60,
-            height: isDragging ? 60 : 60,
-            fit: BoxFit.cover,
-          ),
-          Positioned(
-            top: -5,
-            right: -5,
-            child: Icon(Icons.cancel, color: Colors.red, size: 20), // Remove icon
-          ),
-        ],
-      ),
-    );
-  }*/
   Widget selectedPhotoWidget(String photo, int index, {
   bool isDragging = false,
   required int sizeHeight,
   required int sizeWidth,
 }) {
-	  return GestureDetector(
-		onTap: () {
-		  setState(() {
-			selectedPhotos.removeAt(index);
-			selectedPhotoIds.removeAt(index);
-			photoPositions.remove(index);
-		  });
-		},
-		child: Container(
-		  // Padding so icon can overflow without clipping
-		  padding: const EdgeInsets.all(8.0),
-		  child: Stack(
-			clipBehavior: Clip.none, // Allow overflow
-			children: [
-			  Container(
-				width: sizeWidth.toDouble(),
-				height: sizeHeight.toDouble(),
-				decoration: BoxDecoration(
-				  borderRadius: BorderRadius.circular(4),
-				  image: DecorationImage(
-					image: NetworkImage(photo),
-					fit: BoxFit.cover,
-				  ),
-				),
-			  ),
-			  Positioned(
-				top: -8,
-				right: -8,
-				child: Container(
-				  decoration: BoxDecoration(
-					color: Colors.white,
-					shape: BoxShape.circle,
-					boxShadow: [
-					  BoxShadow(
-						color: Colors.black26,
-						blurRadius: 4,
-						offset: Offset(0, 2),
-					  )
-					],
-				  ),
-				  child: Icon(
-					Icons.cancel,
-					color: Colors.red,
-					size: 20,
-				  ),
-				),
-			  ),
-			],
-		  ),
-		),
-	  );
-  }
+  return GestureDetector(
+    onTap: () {
+      setState(() {
+        selectedPhotos.removeAt(index);
+        selectedPhotoIds.removeAt(index);
+        photoPositions.remove(index);
+      });
+    },
+    child: Container(
+      // Padding so icon can overflow without clipping
+      padding: const EdgeInsets.all(8.0),
+      child: Stack(
+        clipBehavior: Clip.none, // Allow overflow
+        children: [
+          Container(
+            width: sizeWidth.toDouble(),
+            height: sizeHeight.toDouble(),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              image: DecorationImage(
+                image: NetworkImage(photo),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Positioned(
+            top: -8,
+            right: -8,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 4,
+                    offset: Offset(0, 2),
+                  )
+                ],
+              ),
+              child: Icon(
+                Icons.cancel,
+                color: Colors.red,
+                size: 20,
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
 }

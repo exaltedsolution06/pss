@@ -94,7 +94,7 @@ class _WallPhotoViewState extends State<WallPhotoView> {
                     ),
 
                     // Display selected images on the wall (each can move individually)
-                    for (int i = 0; i < selectedPhotos.length; i++)
+                    for (int i = selectedPhotos.length - 1; i >= 0; i--)
                       Positioned(
                         left: photoPositions[i]?.dx ?? centerX, // Use center position if not set
                         top: photoPositions[i]?.dy ?? centerY,
@@ -137,6 +137,9 @@ class _WallPhotoViewState extends State<WallPhotoView> {
                       onTap: () {
                         final double centerX = screenWidth / 2 - sizeWidth / 2; // Center horizontally
                         final double centerY = screenHeight / 2 - sizeHeight / 2; // Center vertically
+						
+						final double topOffset = 20; // distance from the top of the wall container
+						final double leftOffset = screenWidth / 2 - sizeWidth / 2; // centered horizontally
 
                         setState(() {
                           if (selectedPhotos.contains(imagePath)) {
@@ -147,7 +150,8 @@ class _WallPhotoViewState extends State<WallPhotoView> {
                           } else {
                             selectedPhotos.add(imagePath);
                             selectedPhotoIds.add(imageId);
-                            photoPositions[selectedPhotos.length - 1] = Offset(centerX, centerY); // Set to center
+                            //photoPositions[selectedPhotos.length - 1] = Offset(centerX, centerY); // Set to center
+							photoPositions[selectedPhotos.length - 1] = Offset(leftOffset, topOffset);
                           }
                         });
                       },
