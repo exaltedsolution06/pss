@@ -12,6 +12,7 @@ import 'package:picturesourcesomerset/config/common_button.dart';
 import 'package:picturesourcesomerset/config/common_textfield.dart';
 import 'package:picturesourcesomerset/config/bullet_list.dart';
 import 'package:picturesourcesomerset/config/snackbar_helper.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 import 'package:picturesourcesomerset/app/modules/order_screen/controllers/cart_controller.dart';
 import '../controllers/product_controller.dart';
@@ -227,6 +228,38 @@ class _ProductViewState extends State<ProductView> {
 											  ),
 											),
 										],
+									  ),									  
+									  const SizedBox(height: 20),
+									  Row(
+										  mainAxisAlignment: MainAxisAlignment.end,
+										  children: [
+											GestureDetector(
+											  onTap: () {
+												cartController.addToCart(productData.product_id, firstValidFile?.filePath ?? '', firstValidFile?.id ?? '', productData.name, productData.price);
+												//print("Add to Cart: ${productData.product_id}");
+												
+												SnackbarHelper.showSuccessSnackbar(
+													title: Appcontent.snackbarTitleSuccess, 
+													message: "Item added to wishlist successfully.",
+													position: SnackPosition.BOTTOM, // Custom position
+												);
+											  },
+											  child: Row(
+												children: [
+												  Icon(Icons.favorite_border, color: AppColor.purple),
+												  SizedBox(width: 4),
+												  Text(
+													"Add to wishlist",
+													style: TextStyle(
+													  fontSize: 16,
+													  color: AppColor.purple,
+													  fontFamily: 'Urbanist',
+													),
+												  ),
+												],
+											  ),
+											),
+										  ],
 									  ),
 									  const SizedBox(height: 20),
 									  Text(
@@ -245,26 +278,24 @@ class _ProductViewState extends State<ProductView> {
 									  ),
 									  const SizedBox(height: 10),
 										Padding(
-											padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 16),
+											padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 0),
 											child: Column(
 												crossAxisAlignment: CrossAxisAlignment.start,
 												children: [
-													Text(
+													/*Text(
 														productData.moulding_description,
 														style: TextStyle(fontSize: 14, fontFamily: 'Urbanist-Regular'),
-													  ),
-													/*customBulletList(
-													  items: [
-														'Moulding: BW8004',
-														'Moulding Description: 2 DK KNOTTY PINE, ROUNDED w/STEPS (9) (B)',
-														'Dimensions: 75 3/8 x 49 3/8',
-													  ],
-													  bulletColor: AppColor.BlackGreyscale,
-													  bulletSize: 6.0,
-													  bulletPadding: 12.0, // Adjust this value as needed
-													  bulletOffset: 7.0, // Fine-tune this value to align the bullet with the first line
-													  textStyle: TextStyle(fontSize: 14, color: AppColor.BlackGreyscale, fontFamily: 'Urbanist-Regular'),
-													),*/
+													  ),*/
+													Html(
+													  data: productData.moulding_description,
+													  style: {
+														"body": Style(
+														  fontSize: FontSize(14),
+														  fontFamily: 'Urbanist-Regular',
+														  color: Colors.black87,
+														),
+													  },
+													),
 												],
 											),
 										),

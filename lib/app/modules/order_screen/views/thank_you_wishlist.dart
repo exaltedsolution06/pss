@@ -52,7 +52,8 @@ class _ThankYouWishlistPageState extends State<ThankYouWishlistPage> {
 								),
 								const SizedBox(height: 20),
 								Text(
-									"${Appcontent.thankYouWishlist} ${widget.orderId}",
+									//"${Appcontent.thankYouWishlist} ${widget.orderId}",
+									"${Appcontent.thankYouWishlist}",
 									style: TextStyle(fontSize: 14, fontFamily: 'Urbanist-Regular'),
 								),
 								const SizedBox(height: 30),

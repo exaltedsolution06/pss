@@ -95,7 +95,8 @@ class Appcontent {
 	
 	//Thanks you page
 	static const String thankYou = "Thank You";
-	static const String thankYouWishlist = "You have successfully wishlist an order with #";
+	//static const String thankYouWishlist = "You have successfully wishlist an order with #";
+	static const String thankYouWishlist = "You have successfully wishlist an order";
 	static const String thankYouDescFirst = "Your order will be delivered with invoice #";
 	static const String thankYouDescLast = "You can track the delivery in the order section.";
   

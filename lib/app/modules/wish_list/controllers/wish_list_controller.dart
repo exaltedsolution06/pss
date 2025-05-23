@@ -16,7 +16,8 @@ class WishListController extends GetxController {
 		
 	final CartController cartController = Get.find<CartController>();
 	
-	Future<void> wishListCreate(String email, String relationship, String birthday, String anniversary) async {
+	//Future<void> wishListCreate(String email, String relationship, String birthday, String anniversary) async {
+	Future<void> wishListCreate(String grandfatherEmail, String grandfatherPhone, String grandmotherEmail, String grandmotherPhone, String motherEmail, String motherPhone, String fatherEmail, String fatherPhone, String spouseEmail, String spousePhone, String brotherEmail, String brotherPhone, String sisterEmail, String sisterPhone, String sonEmail, String sonPhone, String daughterEmail, String daughterPhone, String grandsonEmail, String grandsonPhone, String granddaughterEmail, String granddaughterPhone, String friendEmail, String friendPhone, String birthday, String anniversary) async {
 	  try {
 		isLoading.value = true;
 		
@@ -28,6 +29,22 @@ class WishListController extends GetxController {
 		  );
 		  return;
 		}
+		
+		// Step 1: Create contact list
+		final List<Map<String, String>> contacts = [
+		  {"relation": "grandfather", "email": grandfatherEmail, "phone": grandfatherPhone},
+		  {"relation": "grandmother", "email": grandmotherEmail, "phone": grandmotherPhone},
+		  {"relation": "mother", "email": motherEmail, "phone": motherPhone},
+		  {"relation": "father", "email": fatherEmail, "phone": fatherPhone},
+		  {"relation": "spouse", "email": spouseEmail, "phone": spousePhone},
+		  {"relation": "brother", "email": brotherEmail, "phone": brotherPhone},
+		  {"relation": "sister", "email": sisterEmail, "phone": sisterPhone},
+		  {"relation": "son", "email": sonEmail, "phone": sonPhone},
+		  {"relation": "daughter", "email": daughterEmail, "phone": daughterPhone},
+		  {"relation": "grandson", "email": grandsonEmail, "phone": grandsonPhone},
+		  {"relation": "granddaughter", "email": granddaughterEmail, "phone": granddaughterPhone},
+		  {"relation": "friend", "email": friendEmail, "phone": friendPhone},
+		];
 		
 		// Prepare the order payload
 		final List<Map<String, dynamic>> cartData = cartController.cartItems.entries.map((entry) {
@@ -42,13 +59,14 @@ class WishListController extends GetxController {
 		}).toList();
 		
 		final Map<String, dynamic> orderData = {
-			"email_address": email, // Selected email
-			"relationship": relationship, // Selected relationship
+			// "email_address": email, // Selected email
+			// "relationship": relationship, // Selected relationship
 			"birthday": birthday, // Selected birthday
 			"anniversary": anniversary, // Selected anniversary
 			"cart_items": cartData, // Cart items list
 			"total_amount": cartController.totalPrice.value, // Total price of the cart
 			"payment_method": "cod", // Change based on user selection
+			"contacts": contacts,
 		};
 		
 		final response = await apiService.wishlistOrder(orderData);
