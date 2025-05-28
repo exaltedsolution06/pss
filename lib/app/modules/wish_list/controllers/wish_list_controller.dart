@@ -13,9 +13,13 @@ class WishListController extends GetxController {
 	final ApiService apiService;
 	var isLoading = false.obs;  // RxBool
 	WishListController(this.apiService);
-		
+	var wishListEntries = <Map<String, String>>[].obs;	
 	final CartController cartController = Get.find<CartController>();
 	
+	void addEntry(Map<String, String> entry) {
+		wishListEntries.add(entry);
+	}
+  
 	//Future<void> wishListCreate(String email, String relationship, String birthday, String anniversary) async {
 	Future<void> wishListCreate(String grandfatherEmail, String grandfatherPhone, String grandmotherEmail, String grandmotherPhone, String motherEmail, String motherPhone, String fatherEmail, String fatherPhone, String spouseEmail, String spousePhone, String brotherEmail, String brotherPhone, String sisterEmail, String sisterPhone, String sonEmail, String sonPhone, String daughterEmail, String daughterPhone, String grandsonEmail, String grandsonPhone, String granddaughterEmail, String granddaughterPhone, String friendEmail, String friendPhone, String birthday, String anniversary) async {
 	  try {
