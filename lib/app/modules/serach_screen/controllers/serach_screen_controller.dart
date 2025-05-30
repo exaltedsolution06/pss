@@ -149,7 +149,7 @@ class SerachScreenController extends GetxController {
 	Future<void> loadMoreDataProduct() async {
 		//if (!canLoadMore() || keyword.value.isEmpty) return;  // Ensure keyword is not empty
 		if (!canLoadMore()) return;  // Ensure keyword is not empty
-		print('frrrrrrrrrrrffffffffffffffffffffffffff: $selectedColors');
+		//print('frrrrrrrrrrrffffffffffffffffffffffffff: $categoryId');
 		isFetchingData.value = true;
 		try {
 			Map<String, dynamic> filters = {
@@ -161,6 +161,7 @@ class SerachScreenController extends GetxController {
 				'sizes': selectedSizes.isEmpty ? '' : selectedSizes.join(','),
 			};
 			//var response = await apiService.productSearch(keyword.value, currentPageProduct.value, categoryId: categoryId.value, artistId: artistId.value);
+			//print('frrrrrrrrrrrffffffffffffffffffffffffff1111: $filters');
 			var response = await apiService.productSearch(filters);
 			//print("response: $response");
 			var newData = response['data'];	

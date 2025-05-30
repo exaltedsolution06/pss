@@ -142,12 +142,12 @@ class ApiService extends BaseApiService {
 		final sanitizedFilters = {
 		  'keyword': filters['keyword'] ?? '',
 		  'page': filters['page'] ?? 1,
-		  'categoryId': filters['categoryId'] ?? 0, // or whatever your fallback should be
-		  'artistId': filters['artistId'] ?? 0, // same here
+		  'category_id': filters['categoryId'] ?? 0, // or whatever your fallback should be
+		  'artist_id': filters['artistId'] ?? 0, // same here
 		  'colors': filters['colors'] ?? '', // Avoid null
 		  'sizes': filters['sizes'] ?? '', // Avoid null
 		};
-
+		//print('frrrrrrrrrrrffffffffffffffffffffffffff222: $sanitizedFilters');
 	  // Send POST request with the updated payload
 	  final response = await post(ApiEndpoints.productSearch, sanitizedFilters, requiresAuth: true);
 	  return response;

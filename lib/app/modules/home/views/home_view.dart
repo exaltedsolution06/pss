@@ -30,7 +30,7 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Picture Source Somerset',
+          'View Art On Your Wall',
           style: TextStyle(fontSize: 20),
         ),
         centerTitle: true,
