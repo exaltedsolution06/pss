@@ -153,7 +153,7 @@ class _ProductViewState extends State<ProductView> {
 										  builder: (BuildContext context) {
 											return Image.network(
 											  file.filePath ?? '', // Safe to use `!` after filtering
-											  fit: BoxFit.cover,
+											  fit: BoxFit.fill,
 											  width: double.infinity,
 											);
 										  },

@@ -236,17 +236,21 @@ class _WallPhotoViewState extends State<WallPhotoView> {
       child: Stack(
         clipBehavior: Clip.none, // Allow overflow
         children: [
-          Container(
-            width: sizeWidth.toDouble(),
-            height: sizeHeight.toDouble(),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              image: DecorationImage(
-                image: NetworkImage(photo),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+		  Center(
+			child: Container(
+			  width: sizeWidth.toDouble(),
+			  height: sizeHeight.toDouble(),
+			  decoration: BoxDecoration(
+				borderRadius: BorderRadius.circular(4),
+				color: Colors.grey[200],
+			  ),
+			  clipBehavior: Clip.hardEdge,
+			  child: Image.network(
+				photo,
+				fit: BoxFit.fill, // show full image without crop
+			  ),
+			),
+		  ),
           Positioned(
             top: -8,
             right: -8,
