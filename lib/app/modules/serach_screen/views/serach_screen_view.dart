@@ -223,7 +223,7 @@ Widget buildSearchList(RxList data) {
 			if (data.isEmpty) {
 			  return Center(
 				child: Text(
-				  'No data found',
+				  'Please enter keyword for search product and press Search button',
 				  style: TextStyle(
 					fontSize: 16,
 					color: Colors.grey,
