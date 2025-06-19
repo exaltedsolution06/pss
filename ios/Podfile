@@ -46,6 +46,15 @@ post_install do |installer|
       # Workaround for https://github.com/flutter/flutter/issues/64502
       config.build_settings['ONLY_ACTIVE_ARCH'] = 'YES' # <= this line
       config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+      # Add permissions for camera and microphone
+      config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= [
+        '$(inherited)',
+        'PERMISSION_CAMERA=1',
+        'PERMISSION_PHOTOS=1',
+        'PERMISSION_PHOTOS_ADD_ONLY=1',
+        'PERMISSION_MEDIA_LIBRARY=1',
+        'PERMISSION_MICROPHONE=1'
+      ]
      end
   end
 end
