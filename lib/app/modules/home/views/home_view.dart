@@ -133,7 +133,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
                 child: const Text(
-                  "View All Artists",
+                  "View Art By Artist",
                   style: TextStyle(color: Colors.white, fontSize: 16.0),
                 ),
               ),
@@ -175,7 +175,7 @@ class _HomeViewState extends State<HomeView> {
                 TextButton(
                   onPressed: () => Get.to(() => AllArtistView()),
                   child: Text(
-                    "View All Artists",
+                    "View Art By Artist",
                     style: TextStyle(
                       fontSize: 16.0,
                       color: AppColor.purple,
