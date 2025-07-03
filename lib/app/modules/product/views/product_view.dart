@@ -87,6 +87,27 @@ class _ProductViewState extends State<ProductView> {
 		reviewController.dispose();
 		super.dispose();
 	}	
+	@override
+	void _showAlertBeforeCapture(BuildContext context) {
+	  showDialog(
+		context: context,
+		builder: (BuildContext dialogContext) {
+		  return AlertDialog(
+			title: Text("Get Ready to Capture"),
+			content: Text("Stand 6 feet from the wall, while you taking the picture."),
+			actions: [
+			  TextButton(
+				child: Text("OK"),
+				onPressed: () {
+				  Navigator.of(dialogContext).pop(); // Close the dialog
+				  _captureAndNavigate(context); // Proceed after dialog is dismissed
+				},
+			  ),
+			],
+		  );
+		},
+	  );
+	}
 	//int _selectedStars = 0; // Tracks the selected star rating
 	
 	@override
@@ -171,9 +192,9 @@ class _ProductViewState extends State<ProductView> {
 										mainAxisAlignment: MainAxisAlignment.spaceBetween,
 										children: [
 											GestureDetector(
-											  onTap: () => _captureAndNavigate(context),
+											  onTap: () => _showAlertBeforeCapture(context),
 											  child: Stack(
-												clipBehavior: Clip.none, // To allow the underline to be positioned outside the bounds of the text
+												clipBehavior: Clip.none,
 												children: [
 												  Text(
 													"View on Wall",
@@ -184,12 +205,12 @@ class _ProductViewState extends State<ProductView> {
 													),
 												  ),
 												  Positioned(
-													bottom: -1, // Adjust this value to control the space between text and underline
+													bottom: -1,
 													left: 0,
 													right: 0,
 													child: Container(
-													  height: 1, // Thickness of the underline
-													  color: AppColor.purple, // Same color as the text
+													  height: 1,
+													  color: AppColor.purple,
 													),
 												  ),
 												],
