@@ -12,20 +12,24 @@ class SplashScreenView extends GetView<SplashScreenController> {
   SplashScreenController controller = Get.put(SplashScreenController());
    @override
   Widget build(BuildContext context) {
-    return GetBuilder<SplashScreenController>(builder: (controller) => const Scaffold(
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 250,
-                width: 150,
-                child: Image(image: AssetImage(Appcontent.splashlogo))),
-            SizedBox(width: 10,),
-            //Text('Defende Student', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, fontFamily: 'Urbanist')),
-          ],
-        ),
-      ),
-    ));
+    return GetBuilder<SplashScreenController>(
+	  builder: (controller) => Scaffold(
+		backgroundColor: Colors.white, // 👈 Change this to any color you want
+		body: const Center(
+		  child: Row(
+			mainAxisAlignment: MainAxisAlignment.center,
+			children: [
+			  SizedBox(
+				height: 250,
+				width: 150,
+				child: Image(image: AssetImage(Appcontent.splashlogo)),
+			  ),
+			  SizedBox(width: 10),
+			  //Text('Defende Student', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, fontFamily: 'Urbanist')),
+			],
+		  ),
+		),
+	  ),
+	);
   }
 }
