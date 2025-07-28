@@ -1,7 +1,7 @@
 class ApiEndpoints {
-	//static const String baseUrl = "https://exaltedsolution.com/picturesourcesomerset/public/api";
 	//static const String baseUrl = "https://jamesbrookit.com/pss/public/api";
-	static const String baseUrl = "https://exaltedsolution.com/picture-source/public/api";
+	//static const String baseUrl = "https://exaltedsolution.com/picture-source/public/api";
+	static const String baseUrl = "https://www.theoreillyassociates.com/api";
 
 	static const String login = 'login';
 	static const String googleLogin = 'google/callback';
