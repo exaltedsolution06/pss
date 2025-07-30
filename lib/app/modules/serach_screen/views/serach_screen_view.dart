@@ -163,14 +163,14 @@ class _SerachScreenViewState extends State<SerachScreenView> with WidgetsBinding
 									padding: EdgeInsets.all(5), // Adjust padding if needed
 								  ),
 								),
-								const SizedBox(width: 10),
+								/*const SizedBox(width: 10),
 								
 								IconButton(
 									icon: Icon(Icons.filter_list, color: AppColor.purple),
 									onPressed: () {
 									  openFilterBottomSheet(context);
 									},
-								),
+								),*/
 							],
 						),
 					),
