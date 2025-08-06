@@ -52,8 +52,8 @@ class WishListCreateView extends GetView<WishListController> {
 	  final DateTime? pickedDate = await showDatePicker(
 		context: context,
 		initialDate: DateTime.now(),
+		firstDate: DateTime(1900),
 		//firstDate: DateTime(2000),
-		firstDate: DateTime.now(),
 		lastDate: DateTime(2101),
 		builder: (BuildContext context, Widget? child) {
 		  return Theme(
@@ -83,8 +83,8 @@ class WishListCreateView extends GetView<WishListController> {
 	  final DateTime? pickedDate = await showDatePicker(
 		context: context,
 		initialDate: DateTime.now(),
+		firstDate: DateTime(1900),
 		//firstDate: DateTime(2000),
-		firstDate: DateTime.now(),
 		lastDate: DateTime(2101),
 		builder: (BuildContext context, Widget? child) {
 		  return Theme(
@@ -227,7 +227,7 @@ class WishListCreateView extends GetView<WishListController> {
                       }
                     },
                     icon: const Icon(Icons.add),
-                    label: const Text("Add Another"),
+                    label: const Text("Add"),
                   ),
                   const SizedBox(height: 20),
                   if (controller.wishListEntries.isNotEmpty)
